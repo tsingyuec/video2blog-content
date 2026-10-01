@@ -24,8 +24,10 @@ content/
 
 | 系列 | 主题 | 视频数 | 入口 |
 | --- | --- | --- | --- |
+| cs336 | Stanford CS336 从零构建大语言模型 | 18 | [content/cs336](content/cs336/README.md) |
 | gpu | 显卡 / GPU 的工作原理 | 1 | [content/gpu](content/gpu/README.md) |
 | minimind | 从零手敲大模型（Minimind） | 25 | [content/minimind](content/minimind/README.md) |
+| vllm | 从零手撸 vLLM（推理引擎） | 15 | [content/vllm](content/vllm/README.md) |
 
 ## 安装 video2blog skill
 
