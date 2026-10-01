@@ -1,0 +1,20 @@
+# 只版本化「博客」与「视频演说图文稿」；视频、抽帧、字幕、元数据、工具等
+# 均由处理流程可再生，或属本地环境，不入库。
+
+# 1) 先忽略 content 下各系列的一切内容
+content/*/*
+
+# 2) 反向保留各系列的视频索引 README
+!content/*/README.md
+
+# 3) 反向保留「博客」（含配图 assets/）
+!content/*/blog/
+!content/*/blog/**
+
+# 4) 反向保留「视频演说图文稿」（含代表帧 img/）
+!content/*/transcripts/
+!content/*/transcripts/**
+
+# 项目内工具（多 P 封装等）与临时目录
+/tools/
+**/_work/
