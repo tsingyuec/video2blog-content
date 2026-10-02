@@ -28,6 +28,7 @@ content/
 | gpu | 显卡 / GPU 的工作原理 | 1 | [content/gpu](content/gpu/README.md) |
 | minimind | 从零手敲大模型（Minimind） | 25 | [content/minimind](content/minimind/README.md) |
 | vllm | 从零手撸 vLLM（推理引擎） | 15 | [content/vllm](content/vllm/README.md) |
+| vllm_class | vLLM 小课堂（vLLM 官方直播系列） | 21 | [content/vllm_class](content/vllm_class/README.md) |
 
 ## 安装 video2blog skill
 
