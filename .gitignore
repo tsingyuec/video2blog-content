@@ -16,8 +16,8 @@ content/**/*
 !content/**/blog/**
 
 # 5) 反向保留「视频演说图文稿」（含代表帧 img/）
-!content/**/transcripts/
-!content/**/transcripts/**
+# !content/**/transcripts/
+# !content/**/transcripts/**
 
 # 项目内工具（多 P 封装等）与临时目录
 /tools/
