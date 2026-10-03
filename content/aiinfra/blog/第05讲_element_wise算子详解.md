@@ -63,8 +63,6 @@ element-wise 算子指的是：**输出的第 i 个元素，只由输入中第 i
 
 **结论（很重要）**：element-wise 算子的瓶颈不在计算能力，而在显存带宽。因此，衡量一个 element-wise kernel 好坏的核心指标不是 TFLOPS，而是**它有没有跑满显存带宽**。[【跳转到 02:08】](https://www.bilibili.com/video/BV1L6oNBSEGc/?t=128)
 
-![优化方向的判断依据：计算访存比极低，瓶颈是带宽，所以目标是"跑满带宽"](assets/第05讲_element_wise算子详解/00208.webp)
-
 正因如此，后面的所有优化手段都只围绕两件事：**减少访存次数、提升单次访存效率**。最基础的模板代码如下：
 
 ```cuda
@@ -194,8 +192,6 @@ naive 版本一次只处理一个元素。向量化版本引入一个 **`VEC_WID
 - 用 `tl.arange(0, BLOCK_SIZE)` 生成每个 program 的偏移，再生成 `vec_offsets`（每个线程负责的向量位置），最后用 `tl.ravel` 展平成一维来做 load/store。
 - `grid` 也要同步改成 `triton.cdiv(N, meta['BLOCK_SIZE'] * meta['VEC_WIDTH'])`。
 
-![Triton 向量化：一次处理 4 个 float，配置空间里多了 VEC_WIDTH](assets/第05讲_element_wise算子详解/00427.webp)
-
 **实测结果**：Triton 1.853 ms、PyTorch 1.840 ms，带宽都在 434–438 GB/s；autotune 自动选出的最优配置是 **BLOCK_SIZE=4096、VEC_WIDTH=4、num_warps=8**。[【跳转到 08:47】](https://www.bilibili.com/video/BV1L6oNBSEGc/?t=527)
 
 ![autotune 自动选出的最优组合：BLOCK_SIZE=4096、VEC_WIDTH=4、num_warps=8](assets/第05讲_element_wise算子详解/00527.webp)
@@ -243,7 +239,7 @@ __global__ void add_kernel_v2(const float* a, const float* b, float* c, int N) {
 
 在 grid loop 的基础上，把"零散的小指令"合并成"一个大指令"——把 `float` 换成 `float4`，一次访问 4 个 float。[【跳转到 11:17】](https://www.bilibili.com/video/BV1L6oNBSEGc/?t=677)
 
-```cuda
+```c
 __global__ void add_kernel_v3(const float* a, const float* b, float* c, int N) {
     // 向量化：一次访问 4 个 float，减少内存访问次数
     const float4* a4 = reinterpret_cast<const float4*>(a);
