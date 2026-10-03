@@ -27,8 +27,9 @@ content/
 | cs336 | Stanford CS336 从零构建大语言模型 | 18 | [content/cs336](content/cs336/README.md) |
 | gpu | 显卡 / GPU 的工作原理 | 1 | [content/gpu](content/gpu/README.md) |
 | minimind | 从零手敲大模型（Minimind） | 25 | [content/minimind](content/minimind/README.md) |
-| vllm | 从零手撸 vLLM（推理引擎） | 15 | [content/vllm](content/vllm/README.md) |
-| vllm_class | vLLM 小课堂（vLLM 官方直播系列） | 21 | [content/vllm_class](content/vllm_class/README.md) |
+| vllm | 从零手撸 vLLM（推理引擎） | 15 | [content/vllm_group/vllm](content/vllm_group/vllm/README.md) |
+| vllm_class | vLLM 小课堂（vLLM 官方直播系列） | 21 | [content/vllm_group/vllm_class](content/vllm_group/vllm_class/README.md) |
+| vllm_meetup | vLLM Meetup 线下演讲 | 1 | [content/vllm_group/vllm_meetup](content/vllm_group/vllm_meetup/README.md) |
 | aiinfra | 手撕 AI Infra 算子（CUDA + Triton + PyTorch） | 5 | [content/aiinfra](content/aiinfra/README.md) |
 | flash_attention | Flash Attention 学习过程详解 | 7 | [content/flash_attention](content/flash_attention/README.md) |
 | protein_design | AI + 蛋白质设计（从经典力场到深度学习 / 实践操作） | 2 | [content/protein_design](content/protein_design/README.md) |
