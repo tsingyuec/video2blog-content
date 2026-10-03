@@ -30,6 +30,7 @@ content/
 | vllm | 从零手撸 vLLM（推理引擎） | 15 | [content/vllm](content/vllm/README.md) |
 | vllm_class | vLLM 小课堂（vLLM 官方直播系列） | 21 | [content/vllm_class](content/vllm_class/README.md) |
 | aiinfra | 手撕 AI Infra 算子（CUDA + Triton + PyTorch） | 5 | [content/aiinfra](content/aiinfra/README.md) |
+| protein_design | AI + 蛋白质设计（从经典力场到深度学习 / 实践操作） | 2 | [content/protein_design](content/protein_design/README.md) |
 
 ## 安装 video2blog skill
 
