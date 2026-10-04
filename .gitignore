@@ -19,6 +19,14 @@ content/**/*
 # !content/**/transcripts/
 # !content/**/transcripts/**
 
+# 6) 反向保留各系列「配套代码」目录 code/（虚拟环境与 Python 缓存仍忽略）
+!content/**/code/
+!content/**/code/**
+content/**/code/.venv/
+content/**/code/**/__pycache__/
+content/**/code/**/*.py[cod]
+content/**/code/**/*.cif
+
 # 项目内工具（多 P 封装等）与临时目录
 /tools/
 **/_work/
