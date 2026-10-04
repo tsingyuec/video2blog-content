@@ -3,7 +3,7 @@
 - **平台**：Bilibili
 - **UP 主**：比飞鸟贵重的多_HKL
 - **来源**：多 P 视频《Flash Attention 学习过程【详】解（已完成！）》（[BV1FM9XYoEQ5](https://www.bilibili.com/video/BV1FM9XYoEQ5/)）
-- **本系列已整理**：第02–08讲（p=2~8），共 7 集（约 117 分）
+- **本系列已整理**：第02–09讲（p=2~9），共 8 集（约 143 分）
 - **主题**：不只讲知识点，更讲「学习过程」——以 FlashAttention 为例，演示如何从零找到切入点、搭建可调试的 LibTorch 最小工程、逐步推导并实现 CUDA 算子
 
 ## 建议学习路线
@@ -16,7 +16,7 @@
 | softmax 基础 | 05 | naive & safe softmax：两次/三次遍历、exp 溢出、减最大值为何能防溢出 |
 | 核心推导 | 06–07 | online softmax（合并 max/sum 遍历）、online softmax 与 value 点积优化（免存 R） |
 | 代码实现 | 08 | CUDA 算子解析：并行划分、两层循环、分块与 SRAM、逐步拆解 kernel |
-| 答疑复盘 | 09 | 疑惑与思考（待整理） |
+| 答疑复盘 | 09 | 疑惑与思考：手写 CUDA 的痛点、优秀开源的标准、vLLM/llama.cpp/CUTLASS 的取舍 |
 
 ## 分讲索引
 
@@ -29,6 +29,7 @@
 | 06 | online softmax（重制版） | 17:38 | [文稿](transcripts/第06讲_online_softmax（重制版）.md) | [博客](blog/第06讲_online_softmax（重制版）.md) | 6 | [B站 p=6](https://www.bilibili.com/video/BV1FM9XYoEQ5/?p=6) |
 | 07 | online softmax 与 value 的点积优化 | 15:37 | [文稿](transcripts/第07讲_online_softmax与value的点积优化.md) | [博客](blog/第07讲_online_softmax与value的点积优化.md) | 6 | [B站 p=7](https://www.bilibili.com/video/BV1FM9XYoEQ5/?p=7) |
 | 08 | cuda 算子解析 | 18:00 | [文稿](transcripts/第08讲_cuda算子解析.md) | [博客](blog/第08讲_cuda算子解析.md) | 5 | [B站 p=8](https://www.bilibili.com/video/BV1FM9XYoEQ5/?p=8) |
+| 09 | 疑惑与思考（请认真听很关键！） | 26:24 | [文稿](transcripts/第09讲_疑惑与思考（请认真听很关键！）.md) | [博客](blog/第09讲_疑惑与思考（请认真听很关键！）.md) | 5 | [B站 p=9](https://www.bilibili.com/video/BV1FM9XYoEQ5/?p=9) |
 
 ## 系列全部分 P（来源：B 站投稿信息）
 
@@ -42,7 +43,7 @@
 | 6 | 【Flash Atten】5.online softmax（重制版） | 17:38 | ✅ 已整理 |
 | 7 | 【Flash Atten】6.online softmax 与 value 的点积优化 | 15:37 | ✅ 已整理 |
 | 8 | 【Flash Atten】7.cuda 算子解析 | 18:00 | ✅ 已整理 |
-| 9 | 【Flash Atten】8.疑惑与思考（请认真听很关键！） | 26:24 | 未整理 |
+| 9 | 【Flash Atten】8.疑惑与思考（请认真听很关键！） | 26:24 | ✅ 已整理 |
 
 ## 核心知识点速览
 
@@ -53,6 +54,7 @@
 - **第06讲**：Online Softmax。safe softmax 需三次遍历（求 max、求 sum、算输出）；用「**加减同一个数 + 指数拆分**」的技巧，把 `D` 改写成迭代式 `D_j = D_{j-1} · e^{M_{j-1} − M_j} + e^{x_j − M_j}`，从而把求 max 与求 sum 合并进**一次遍历**；代码里用 `pre_max_value` 保存上一轮最大值、`sum` 必须初始化为 0（否则 NaN）。
 - **第07讲**：Online Softmax × Value（FlashAttention 最核心）。把「softmax 结果乘 V」也做成在线迭代：`O_j = O_{j-1} · (D_{j-1}/D_j) · e^{M_{j-1} − M_j} + (e^{x_j − M_j}/D_j) · V_j`；于是 attention 可「边扫分数边累加输出」，块间只传 `M、D、O` 等小状态量，**无需存储中间权重矩阵 R**——这正是 FlashAttention 分块在线计算成立的根本。
 - **第08讲**：CUDA 算子解析。grid 按 (batch, head) 分 16 个 block、每块 32 线程；**外层循环 K/V（慢）、内层循环 Q（快）**，K 与 V 一起移动；分块 `Bc = ⌈M/(4d)⌉`、`Br = min(⌈M/(4d)⌉, d)`，`BC=BR=32`；kernel 流程：QKV 偏移 → 搬 K/V 到 SRAM → 算 QKᵀ（不转置、利于合并访存）→ 乘 `1/√d` → 行 max/exp/sum → 用 online 公式更新 O 与 L/M → 写回 L/M。中间矩阵不落 HBM，只落 L/M/O 等状态量。
+- **第09讲**：疑惑与思考。手写 CUDA 的四大痛点（索引多易错、无封装难复用、要惦记访存合并/边界/线程数统一、参考实现写死线程数只能当 demo）；优秀开源的标准；三家实现取舍——**vLLM 用 Triton**（编译器帮忙）、**llama.cpp 用 Tensor Core（WMMA）**（`-FA` 启用，V1/V2 仅调换循环顺序）、**其他开源用 CUTLASS**；核心方法论是**按需学习**（先有问题与需求再学工具），即「不止 FlashAttention」。
 
 ## 相关资源（来自视频）
 

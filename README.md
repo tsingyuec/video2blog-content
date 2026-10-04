@@ -32,7 +32,7 @@ content/
 | vllm_meetup | vLLM Meetup 线下演讲 | 1 | [content/vllm_group/vllm_meetup](content/vllm_group/vllm_meetup/README.md) |
 | aiinfra | 手撕 AI Infra 算子（CUDA + Triton + PyTorch） | 5 | [content/aiinfra](content/aiinfra/README.md) |
 | aiinfra_learning | AI INFRA 学习（vLLM 推理优化） | 5 | [content/aiinfra_learning](content/aiinfra_learning/README.md) |
-| flash_attention | Flash Attention 学习过程详解 | 7 | [content/flash_attention](content/flash_attention/README.md) |
+| flash_attention | Flash Attention 学习过程详解 | 8 | [content/flash_attention](content/flash_attention/README.md) |
 | protein_design | AI + 蛋白质设计（从经典力场到深度学习 / 实践操作） | 2 | [content/protein_design](content/protein_design/README.md) |
 | protein_ml_bootcamp | Rosetta ML Bootcamp：蛋白质建模与设计的机器学习方法 | 18（已整理 3） | [content/protein_ml_bootcamp](content/protein_ml_bootcamp/README.md) |
 
