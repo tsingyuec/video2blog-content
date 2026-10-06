@@ -20,7 +20,6 @@ _这些分子在模型中是如何表示的？又有哪些运算把它们转换�
 
 本文可能比大多数人想要的更详尽，但如果你想理解所有细节，并且喜欢通过图示学习，那它应该会帮到你 :)
 
-<a id="architecture-overview"></a>
 ### 架构总览
 首先我们要指出，这个模型的目标与之前的 AlphaFold 模型略有不同：它不再只是预测单个蛋白质序列（AF2）或蛋白质复合物（AF-multimer）的结构，而是仅凭序列就能预测一个蛋白质的结构——该蛋白质可以可选地与其他蛋白质、核酸或小分子形成复合物。所以，之前的 AF 模型只需表示标准氨基酸序列，而 AF3 必须表示更复杂的输入类型，也因此有了更复杂的特征化/分词（featurization/tokenization）方案。分词会在专门的一节中描述，但眼下只需知道，当我们说“token（词元）”时，它要么代表单个氨基酸（针对蛋白质）、核苷酸（针对 DNA/RNA），要么在某个原子不属于标准氨基酸/核苷酸时代表该原子本身。
 
@@ -40,7 +39,6 @@ _这些分子在模型中是如何表示的？又有哪些运算把它们转换�
 你可以通过此处的章节名称，或点击上方架构图中相应的部分，跳转到特定章节。
 
 我们还有一些额外章节，分别描述 4. [**损失函数、置信度头（confidence heads）以及其他相关的训练细节**](#4-loss-function-and-other-training-details)，以及 5. [**从 ML 趋势视角对模型的一些思考**](#ml-musings)。
-<a id="notes-on-the-variables-and-diagrams"></a>
 ### 关于变量与图示的说明
 在整个模型中，一个蛋白质复合物以两种主要形式来表示：“单体（single）”表示刻画我们蛋白质复合物中的所有 token；“配对（pair）”表示刻画复合物中所有氨基酸/原子两两之间的关系（例如距离、潜在相互作用）。这两者都可以在原子级别或 token 级别上表示，并且始终使用以下名称（如 AF3 论文中所确立的）和颜色来展示：
 
@@ -51,8 +49,13 @@ _这些分子在模型中是如何表示的？又有哪些运算把它们转换�
 * 在可行的情况下，该图（以及所有图）中张量上方的名称都与 AF3 补充材料中使用的张量名称一致。通常，一个张量在流经模型时保持其名称不变。但在某些情况下，我们会用不同的名称来区分同一张量在不同处理阶段的版本。例如，在原子级单体表示中，**<span style="color: #A056A7;">c</span>** 代表初始的原子级单体表示，而 **<span style="color: #A056A7;">q</span>** 代表该表示在流经 Atom Transformer 后更新得到的版本。
 * 为简洁起见，我们也忽略了大多数 LayerNorm，但它们其实_无处不在_。
 
+**一个具体例子：三肽 Ala–Gly–Ser**
+
+假设输入的是一条只有 3 个标准氨基酸的短肽（Ala–Gly–Ser）。在 token 级，**<span style="color: #F5ACFB;">s</span>** 是一个 3 × 384 的矩阵——一行一个残基；**<span style="color: #7CC9F4;">z</span>** 则是 3 × 3 × 128，每一对残基对应一条 128 维向量。到了原子级，若只算重原子（Ala 5 个 + Gly 4 个 + Ser 6 个，共 15 个），**<span style="color: #A056A7;">q</span>** 就是 15 × 128（一行一个原子），**<span style="color: #087CBE;">p</span>** 是 15 × 15 × 16（每一对原子一条 16 维向量）。可见：**单体（single）每个单元只占一行，配对（pair）则要行、列各一个索引**，所以一个是二维、一个是三维。
+
+那 **<span style="color: #A056A7;">q</span>** 的 128 维又是怎么来的？把每个单元的特征——原子是元素、原子名、电荷、局部参考坐标，残基则再加氨基酸类型、MSA 分布等——拼接后过一层**可学习线性层**即可。以 Ala 的 Cα 为例，它的 128 维向量就是把「元素 = C 的独热 ⊕ 电荷 = 0 ⊕ 原子名 “CA” 的编码 ⊕ 参考构象里的局部坐标 ⊕ 它所属的 token / 链 / 残基索引」拼起来、再过线性层的结果，也就是 **<span style="color: #A056A7;">q</span>** 中 Cα 对应的那一行。这些是特征**嵌入（embedding）**，不是坐标；序列长度只决定行数，384 / 128 是固定的通道宽度。至于同元素原子（比如一堆碳），靠原子名（CA / CB / C）与参考坐标区分即可：它们在 **<span style="color: #A056A7;">q</span>** 里是不同行、在 **<span style="color: #087CBE;">p</span>** 里是不同行列。
+
 ---
-<a id="1-input-preparation"></a>
 # 1. 输入准备（Input Preparation）
 
 ![](assets/AlphaFold3图解_The_Illustrated_AlphaFold/input_prep.png)
@@ -84,7 +87,6 @@ _这些分子在模型中是如何表示的？又有哪些运算把它们转换�
 
 因此，我们可以把某些 token（例如氨基酸对应的 token）视为与多个原子相关联，而另一些 token（例如配体中某个原子对应的 token）则只与单个原子相关联。所以，一个含 35 个标准氨基酸的蛋白质（可能超过 600 个原子）会由 35 个 token 表示，而一个含 35 个原子的配体同样也会由 35 个 token 表示。
 
-<a id="retrieval-create-msa-and-templates"></a>
 ## 检索（Retrieval，创建 MSA 与模板）
 
 ![](assets/AlphaFold3图解_The_Illustrated_AlphaFold/summaries/retrieval.png)
@@ -113,9 +115,14 @@ AF3 早期一个关键步骤，类似于语言模型中的检索增强生成（R
 
 ![](assets/AlphaFold3图解_The_Illustrated_AlphaFold/multi_chain_MSA.png)
 
-然后，对于每个蛋白质链，他们使用另一种基于 HMM 的方法（hmmsearch）在蛋白质数据库（Protein Data Bank，PDB）中寻找与所构建 MSA 相似的序列。选出质量最高的结构，并从中采样至多 4 个作为“模板”纳入。
+<details>
+<summary>等一下——MSA 的长度和链是怎么对齐的？</summary>
+
+所有同源序列都会被对齐到输入序列的相对位置上：msa序列种多出来的残基（插入）会被剔除，缺失的残基记为 gap，因此 **<span style="color: #FDC38D;">m</span>** 的每一行都与输入序列等长——列数等于 token 数。
 
 </details>
+
+然后，对于每个蛋白质链，他们使用另一种基于 HMM 的方法（hmmsearch）在蛋白质数据库（Protein Data Bank，PDB）中寻找与所构建 MSA 相似的序列。选出质量最高的结构，并从中采样至多 4 个作为“模板”纳入。
 
 与 AF-multimer 相比，这些检索步骤中唯一新增的部分是：我们现在除了蛋白质序列之外，还会对 RNA 序列做这种检索。请注意，这在传统上并不叫“检索”，因为用结构模板来指导蛋白质结构建模的做法，早在 RAG 这个术语出现之前就已是[同源建模](https://en.wikipedia.org/wiki/Homology_modeling)领域的常见实践。不过，尽管 AlphaFold 并未明确把这一过程称为检索，它确实与如今被广泛推广的 RAG 十分相似。
 
@@ -147,7 +154,6 @@ AF3 早期一个关键步骤，类似于语言模型中的检索增强生成（R
 
 最后，我们复制一份原子级单体表示，把这个副本称为 **<span style="color: #A056A7;">q</span>**。这个矩阵 **<span style="color: #A056A7;">q</span>** 就是之后我们会持续更新的对象，而 **<span style="color: #A056A7;">c</span>** 则会被保存下来，在之后使用。
 
-<a id="update-atom-level-representations-atom-transformer"></a>
 ## 更新原子级表示（Atom Transformer）
 
 ![](assets/AlphaFold3图解_The_Illustrated_AlphaFold/summaries/atom-transformer.png)
