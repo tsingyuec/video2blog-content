@@ -1,9 +1,9 @@
 # 系列：AI + 蛋白质设计
 
 - **平台**：Bilibili、YouTube
-- **来源**：BV1mkdwBoE6Z、BV1PudwBnEtq、BV1zu4y1J7MJ、o8JWPjSH1Ig、6z4XmUAwdNA、BV1VBdDYLE8i、YouTube c2kFHtuEt8s、8rePVA8rpoY、s75eFLYe3cc、BV1yzzjYZETU、BV11BzjYbEgD、BV1fm4y1D7Wz、BV1hA411V7UX
-- **视频数**：13
-- **主题**：第 1 课从蛋白质结构基础出发，依次讲透「经典力场设计」（统计势、Rosetta 打分函数、无先验知识的 RF binder 设计）与「深度学习设计」（ANN、GNN、MPNN、ProteinMPNN）；第 2 课是实践操作，讲 RosettaScripts 脚本编写与 ProteinMPNN 网页工具的完整使用流程；第 3 篇是 ProteinMPNN 原作者 Justas Dauparas 的论文精讲报告，系统讲清模型的动机、架构、消融、与 Rosetta 的对比、以及多状态设计等扩展；第 4 篇是 Ian Anderson 的实操讲解，从「图 / 局部注意力 / 消息传递」的概念入手，把 ProteinMPNN 与 ESM-IF、LigandMPNN 的发展脉络和输入特征讲清楚，并给出上手任务；第 5 篇是一节课程讲解，从「固定主链设计」讲到 Ingraham 2019 的 MPNN 与 ProteinMPNN 的架构、消融表和核心/表面性能分析；第 6 篇把视角从蛋白质扩展到 DNA/RNA，讲清如何把 FASTA 序列与原子坐标处理成图神经网络的输入（字母编码、Top-K 邻接图、二面角/RBF/方向等节点与边特征）。其后新增 AlphaFold3 官方文档讲解的「输入设置」两集（序列定义与整体结构、MSA/模板/共价键/CCD）。最新收录一篇「AlphaFold 的原理和展望」（钟博子韬，钰沐菡公益公开课）：从五大关键设计讲清 AlphaFold2 为什么准、AlphaFold-Multimer 复合物预测的改进与不足，并给出作者的高通量工程优化（POWERFOLD）与大量实测案例，重点回答「AlphaFold 到底学到了什么、能做什么、不能做什么」。另收录一篇 STRING 数据库入门：从数据库简介、数据下载与蛋白检索，讲到 PPI 网络的节点 / 证据视图 / 图例颜色、Settings 筛选、GO/KEGG/Reactome/UniProt/Pfam 功能富集、聚类与导出，并介绍多蛋白查询与「差异基因」新功能。
+- **来源**：BV1mkdwBoE6Z、BV1PudwBnEtq、BV1zu4y1J7MJ、o8JWPjSH1Ig、6z4XmUAwdNA、BV1VBdDYLE8i、YouTube c2kFHtuEt8s、8rePVA8rpoY、s75eFLYe3cc、BV1yzzjYZETU、BV11BzjYbEgD、BV1fm4y1D7Wz
+- **视频数**：12
+- **主题**：第 1 课从蛋白质结构基础出发，依次讲透「经典力场设计」（统计势、Rosetta 打分函数、无先验知识的 RF binder 设计）与「深度学习设计」（ANN、GNN、MPNN、ProteinMPNN）；第 2 课是实践操作，讲 RosettaScripts 脚本编写与 ProteinMPNN 网页工具的完整使用流程；第 3 篇是 ProteinMPNN 原作者 Justas Dauparas 的论文精讲报告，系统讲清模型的动机、架构、消融、与 Rosetta 的对比、以及多状态设计等扩展；第 4 篇是 Ian Anderson 的实操讲解，从「图 / 局部注意力 / 消息传递」的概念入手，把 ProteinMPNN 与 ESM-IF、LigandMPNN 的发展脉络和输入特征讲清楚，并给出上手任务；第 5 篇是一节课程讲解，从「固定主链设计」讲到 Ingraham 2019 的 MPNN 与 ProteinMPNN 的架构、消融表和核心/表面性能分析；第 6 篇把视角从蛋白质扩展到 DNA/RNA，讲清如何把 FASTA 序列与原子坐标处理成图神经网络的输入（字母编码、Top-K 邻接图、二面角/RBF/方向等节点与边特征）。其后新增 AlphaFold3 官方文档讲解的「输入设置」两集（序列定义与整体结构、MSA/模板/共价键/CCD）。最新收录一篇「AlphaFold 的原理和展望」（钟博子韬，钰沐菡公益公开课）：从五大关键设计讲清 AlphaFold2 为什么准、AlphaFold-Multimer 复合物预测的改进与不足，并给出作者的高通量工程优化（POWERFOLD）与大量实测案例，重点回答「AlphaFold 到底学到了什么、能做什么、不能做什么」。
 
 ## 视频索引
 
@@ -21,7 +21,6 @@
 | BV1yzzjYZETU | alphafold3官方文档讲解:01 输入设置:兼容性,整体结构,序列定义 | 10:57 | [文稿](transcripts/AlphaFold3官方文档讲解01_输入设置_序列定义与整体结构.md) | [博客](blog/AlphaFold3官方文档讲解01_输入设置_序列定义与整体结构.md) | 9 | [B站](https://www.bilibili.com/video/BV1yzzjYZETU/) |
 | BV11BzjYbEgD | alphafold3官方文档讲解:02 输入设置:MSA,模板,共价键,CCD定义 | 12:27 | [文稿](transcripts/AlphaFold3官方文档讲解02_输入设置_MSA模板共价键与CCD.md) | [博客](blog/AlphaFold3官方文档讲解02_输入设置_MSA模板共价键与CCD.md) | 11 | [B站](https://www.bilibili.com/video/BV11BzjYbEgD/) |
 | BV1fm4y1D7Wz | AlphaFold的原理和展望 - 钟博子韬 \| 钰沐菡 公益公开课 | 1:17:03 | [文稿](transcripts/AlphaFold的原理和展望.md) | [博客](blog/AlphaFold的原理和展望.md) | 18 | [B站](https://www.bilibili.com/video/BV1fm4y1D7Wz/) |
-| BV1hA411V7UX | 【string数据库】【生物信息学】STRING数据库的介绍和使用 | 15:10 | — | [博客](blog/STRING数据库的介绍和使用.md) | 14 | [B站](https://www.bilibili.com/video/BV1hA411V7UX/) |
 
 > 说明：`c2kFHtuEt8s` / `8rePVA8rpoY` / `s75eFLYe3cc` 来自 Alex Carlin 的《Protein transformers from scratch》系列（播放列表共 3 讲），目前仅收录视频演说图文稿，博客暂缺。
 >
@@ -103,19 +102,6 @@
 - 八、能做什么、不能做什么：结构可预测，稳定性/功能不能（但可接 MLP「捞」稳定性）
 - 九、答疑精选（受力信息、柔性 linker、抗原抗体、动态折叠、复合物判读等）
 
-**STRING 数据库的介绍和使用——从蛋白互作网络到功能富集分析**
-
-- 一、STRING 是什么：一站式蛋白互作与功能富集数据库（四类数据来源、核心功能、加权整合与可靠指数、版本与收录规模）
-- 二、数据怎么拿：Download（整库 / 物种子集 / 原始文件 / SQL）与 My Data（上传自己的实验数据）
-- 三、检索蛋白互作：单蛋白（输出全部互作）与多蛋白 / 序列（只输出输入蛋白之间）的区别
-- 四、读懂网络里的节点与证据（点击节点看信息与 PDB / SWISS-MODEL 结构，点击连线看证据）
-- 五、证据视图：experiments / databases / textmining / cooccurrence / coexpression / neighborhood / fusion
-- 六、读懂图例（Legend）：节点颜色与内容、八类边颜色、连线粗细的含义
-- 七、自定义网络：Settings（证据集合、evidence / confidence、来源勾选、最低得分与显示数量）
-- 八、功能富集分析：GO / KEGG / Reactome / UniProt / Pfam
-- 九、导出与聚类：把结果带走（PNG / SVG / TSV，按综合得分聚类）
-- 十、多蛋白查询与新功能：差异基因（悬停 GO id 高亮通路）
-
 ## 核心知识点速览
 
 - **结构地基**：X 射线 / 冷冻电镜 / NMR 三大测定手段；PDB 文件各列含义与原子命名；结构四级层次、φ/ψ/ω 二面角与 Ramachandran 图；domain、motif、别构调控、同源建模；能量 = 分子力学 + 溶剂化能 → MM/PBSA、MM/GBSA、gmx_MMPBSA。
@@ -132,4 +118,3 @@
 - **AlphaFold3 输入（一）**：两套格式——旧 `alphafoldserver` 可被 `run_alphafold.py` 自动转成新 `alphafold3`；指定文件用 `--json_path` / `--input_dir`，新版一个 JSON 只对应一个任务（塞列表报错）；顶层 7 字段 name / modelSeeds / sequences / bondedAtomPairs / userCCD / dialect / version；新版种子必须显式指定且写成列表、离子统一视为配体、每个实体需唯一大写 id（列表表示同聚物）；蛋白含 modifications/unpairedMsa/pairedMsa/templates，RNA 只有 unpairedMsa 无配对/模板，DNA 只有序列与修饰，配体三法（ccdCodes / smiles / 自定义 CCD）互斥。
 - **AlphaFold3 输入（二）**：MSA 不设即自动用 Jackhmmer/Hmmer 搜库；RNA 的 unpairedMsa 三态（null / "" / A3M），蛋白 unpairedMsa+pairedMsa 五种组合且「一起设或一起不设」；自提供 MSA 需 A3M 格式、首条=查询序列、非插入长度一致；多链才需 MSA 匹配（靠 pairedMsa 的 UniProt 物种 id）；模板只对蛋白有效（mmcif/queryIndices/templateIndices，0 基、等长、单链）；bondedAtomPairs 用 (实体 id, 残基号 1 基, 原子名) 描述、仅支持共价键；聚糖用配体+共价键；userCCD 名不含下划线、换行用 `\n`、化学式单引号，可用 CCDUtils 生成。
 - **AlphaFold 原理和展望**：AlphaFold2 五大设计——MSA（UniRef/MGnify/BFD + PDB 70% 去重，决定精度上限，深度 >30 即可、>100 无益）、Recycling（输出回灌输入，默认 3 轮共 4 次，复杂蛋白如 T1064 到第 4 轮才折叠正确）、Evoformer（MSA 表示 × pair 表示，逐行/列注意力 + 三角几何更新）、Structure Module（IPA + residue gas，3D 等变、全原子输出、无需 refinement，仅 AMBER 侧链优化）、pLDDT（逐残基 0–100 置信度，>90 准、<50 基本错）；本质是「共进化 → contact」而非物理，学的是「序列 → 晶体结构」；Multimer（2.1）通过 cross-chain MSA 配对（原核用基因组距离、真核用序列相似性排序）、链间不设阈值的 FAPE、新增 ipTM（model confidence=0.8·ipTM+0.2·pTM）预测复合物，但常「训练过度、坍缩成球」，建议与 ColabFold（AF2+gap）并用；POWERFOLD 把 CPU/GPU 串行流程拆分、多线程加速 MSA（-67%）、减少重复编译，约 2 万小蛋白在 16 张 V100 上从上千小时降到 3–5 小时；实测：突变结构（GA98/GB98）可试不保、Ras-Raf 极好（0.898）、TCR-MHC 中等（0.552）、RBD-ACE2 失败（0.333、偏向柔性区）、Spike 三聚体坍缩、Aβ42 淀粉样 Multimer 失败而 ColabFold 更像；常见报错：MSA 内存不足（加内存/核数）、HHblits failed（把 UniClust 从 2018-08 更新到 2020-06）、IndexError（复合物任务误用单体模型）、CUDA OOM（多卡共享显存）、Tensor >2GB（限制 MSA 深度）、运行极慢（检查 GPU/CUDA）；能力边界：不能预测稳定性（pLDDT/ΔΔG 相关性差，接 MLP 后 r≈0.8），更不能预测功能（GFP 荧光与 pLDDT 几乎无关）。
-- **STRING 数据库**：检索已知 / 预测的蛋白-蛋白质相互作用，数据来自实验、文本挖掘、其他数据库与生物信息学预测，可与 Cytoscape 联用；所有互作加权整合并给出可靠指数（score），录制时约 5,090 物种、2,458 万蛋白、31 亿互作；检索规则：单蛋白 → 输出该蛋白的全部互作，多蛋白 / 序列 → 只输出输入蛋白之间的互作；节点=蛋白（红=查询蛋白及第一层、白=第二层），点击节点看信息与 PDB / SWISS-MODEL 结构，点击连线看证据；边颜色=证据类型（蓝=策展数据库、粉红=实验、绿=基因邻域、红=基因融合、深蓝=基因共现、黄=文本挖掘、黑=共表达、浅蓝=同源性），粗细=相互作用强度；Settings 可按 evidence / confidence 与来源、最低得分、显示数量筛选；Analysis 提供 GO / KEGG 富集并链接 Reactome、UniProt、Pfam、SMART；Exports 支持 PNG / 高分辨率 PNG / SVG / TSV（含 node1、node2、accession、annotation、综合得分）；Clusters 聚类后同簇同色、簇间虚线；多蛋白支持列表或文件上传，新增「差异基因」功能可悬停 GO id 在网络上高亮通路。
