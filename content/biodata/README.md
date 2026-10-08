@@ -1,9 +1,9 @@
 # 系列：生物数据资源与分析（biodata）
 
-- **平台**：Bilibili / YouTube
-- **来源**：BV1hA411V7UX、BV1fLZ1YkEwU、BV1dM41187Gy、BV1ZjmPYeEVz、BV1Gg4y1G7m3、BV1ngfhYCE3X、o208DwyFbNk
-- **视频数**：7
-- **主题**：本目录收录「生物数据资源与分析」相关的视频整理博客。当前四篇围绕蛋白质互作：第一篇系统介绍 **STRING 数据库**的定位、数据下载、单 / 多蛋白检索、PPI 网络的节点 / 证据视图 / 图例颜色、Settings 筛选、GO/KEGG/Reactome/UniProt/Pfam 功能富集、聚类与导出，并介绍「差异基因」新功能；第二篇是**蛋白质互作（PPI）网络构建**的实操，讲清「单个 / 多个基因」×「按名称 id / 按序列」四种入口、非模式物种的映射、Settings 调参（置信度、shell）以及 SVG/PNG/TSV 导出并接入 Cytoscape；第三篇《什么是蛋白质-蛋白质相互作用》讲清二元交互概念与 PPI 的核心逻辑（由已知推未知），并以酵母双杂交为例；第四篇《蛋白质互作研究技术》按「研究对象 × 体内/体外」系统梳理六大技术的原理与用途——酵母单杂交（Y1H）与 EMSA（蛋白-DNA），酵母双杂交（Y2H）与双分子荧光互补（BiFC，体内蛋白-蛋白），免疫共沉淀（Co-IP）与 pull-down（体外蛋白-蛋白）；第五、六篇则从不同角度深入**酵母双杂交（Y2H）**——一篇以高中生物二轮复习视角讲透「拆转录因子—融合基因—报告基因」的核心逻辑，并完整拆解一道从 CMV 感染的番茄 cDNA 文库筛选 CMV CP 互作蛋白的例题；另一篇系统讲解 Y2H 的核/膜体系分类、GAL4 原理、营养缺陷型报告基因、载体与筛选标记、五步实验流程，以及文献中 Y2H 结果图的读法。此外还收录了一篇 STRING 作者官方简介（YouTube）的整理，专门讲清 **STRING 的七大证据来源、质量打分、校准到 KEGG 金标准、combined score 与同源转移**。
+- **平台**：Bilibili、YouTube
+- **来源**：BV1hA411V7UX、BV1fLZ1YkEwU、BV1dM41187Gy、BV1ZjmPYeEVz、BV1Gg4y1G7m3、BV1ngfhYCE3X、o208DwyFbNk、uXbwNHnhVoA、wTdtuXXgjmM
+- **视频数**：9
+- **主题**：本目录收录「生物数据资源与分析」相关的视频整理博客。当前四篇围绕蛋白质互作：第一篇系统介绍 **STRING 数据库**的定位、数据下载、单 / 多蛋白检索、PPI 网络的节点 / 证据视图 / 图例颜色、Settings 筛选、GO/KEGG/Reactome/UniProt/Pfam 功能富集、聚类与导出，并介绍「差异基因」新功能；第二篇是**蛋白质互作（PPI）网络构建**的实操，讲清「单个 / 多个基因」×「按名称 id / 按序列」四种入口、非模式物种的映射、Settings 调参（置信度、shell）以及 SVG/PNG/TSV 导出并接入 Cytoscape；第三篇《什么是蛋白质-蛋白质相互作用》讲清二元交互概念与 PPI 的核心逻辑（由已知推未知），并以酵母双杂交为例；第四篇《蛋白质互作研究技术》按「研究对象 × 体内/体外」系统梳理六大技术的原理与用途——酵母单杂交（Y1H）与 EMSA（蛋白-DNA），酵母双杂交（Y2H）与双分子荧光互补（BiFC，体内蛋白-蛋白），免疫共沉淀（Co-IP）与 pull-down（体外蛋白-蛋白）；第五、六篇则从不同角度深入**酵母双杂交（Y2H）**——一篇以高中生物二轮复习视角讲透「拆转录因子—融合基因—报告基因」的核心逻辑，并完整拆解一道从 CMV 感染的番茄 cDNA 文库筛选 CMV CP 互作蛋白的例题；另一篇系统讲解 Y2H 的核/膜体系分类、GAL4 原理、营养缺陷型报告基因、载体与筛选标记、五步实验流程，以及文献中 Y2H 结果图的读法。此外还收录了一篇 STRING 作者官方简介（YouTube）的整理，专门讲清 **STRING 的七大证据来源、质量打分、校准到 KEGG 金标准、combined score 与同源转移**；第七篇则系统辨析 **UniProt 的三大数据库 UniProtKB / UniRef / UniParc** 的分工，讲清 Swiss-Prot 与 TrEMBL、FASTA header 的 sp/tr 与 PE 等级、UniRef100/90/50 的聚类与 80% 覆盖规则、seed 与 representative 的区别、accession 命名，以及 BLAST 目标库与「相似蛋白」面板的用法；第八篇（EMBL-EBI 官方 webinar）则手把手讲**怎么用 UniParc 与 UniRef**：UniParc 的 UPI、交叉引用、版本与 active/inactive、下载格式、Proteins API 编程访问、以及"冗余蛋白只能从 UniParc 取"的用例；UniRef 的三档聚类、非全长/不看分类学的特点、网站检索三个簇、seed 与 representative、Advanced Search，以及用 BLAST 检索 UniRef90/50 相比 UniProtKB 覆盖更多样序列的实测对比。
 
 ## 视频索引
 
@@ -16,6 +16,8 @@
 | BV1Gg4y1G7m3 | 【高中生物二轮复习】酵母双杂交技术 | 09:56 | [博客](blog/酵母双杂交技术（高中生物二轮复习）.md) | 9 | [B站](https://www.bilibili.com/video/BV1Gg4y1G7m3/) |
 | BV1ngfhYCE3X | 新人快速掌握——酵母双杂交实验 | 18:15 | [博客](blog/酵母双杂交实验入门与结果解读.md) | 7 | [B站](https://www.bilibili.com/video/BV1ngfhYCE3X/) |
 | o208DwyFbNk | The STRING database: Brief introduction to protein networks and how they are made | 05:55 | [博客](blog/STRING简介-蛋白网络的证据来源与整合.md) | 6 | [YouTube](https://www.youtube.com/watch?v=o208DwyFbNk) |
+| uXbwNHnhVoA | UniProt makeup - UniProtKB vs UniRef vs UniParc | 15:52 | [博客](blog/UniRef数据库详解（UniProtKB vs UniRef vs UniParc）.md) | 8 | [YouTube](https://www.youtube.com/watch?v=uXbwNHnhVoA) |
+| wTdtuXXgjmM | Explore the known protein space through UniProt Archive and Clusters | 27:46 | [博客](blog/UniParc与UniRef数据库使用指南.md) | 12 | [YouTube](https://www.youtube.com/watch?v=wTdtuXXgjmM) |
 
 ## 博客结构速览
 
@@ -81,6 +83,24 @@
 - 四、怎么变成可比较可合并的分数：质量分 → 校准到 KEGG 金标准转后验概率 → 合并成 combined score → 同源（interolog）转移
 - 五、怎么用：网页 + 证据查看器 + Cytoscape stringApp + 批量下载
 
+**UniRef 数据库详解——UniProtKB、UniRef、UniParc 的分工**
+
+- 一、先分清三个库的分工：要功能信息去 UniProtKB，要缩小检索空间去 UniRef，要看全部去 UniParc；「相似」指序列同一性
+- 二、UniProtKB：带注释的知识库（注释=把功能/位置映射到序列；条目=一个基因产生的蛋白，含异构体、多亚基各链独立）；注释评分 1–5
+- 三、Swiss-Prot vs TrEMBL：已审阅（人工、金色带星）与未审阅（自动、灰色）；FASTA header 的 sp/tr 与 PE 1–5 怎么读
+- 四、为什么需要 UniRef：UniProtKB 里序列太重复；UniRef100/90/50 三档聚类（90/50 需覆盖种子 ≥80%、最小 11 个氨基酸）、缩小 58% / 79%
+- 五、seed（最长，用于比较）≠ representative（条目最好，作簇代表）；accession 形如 UniRef90_P49814；选择规则（人工注释、参考物种、长度）
+- 六、UniRef 怎么用：BLAST 选择目标库 + 条目页 Similar Proteins / UniRef clusters 面板
+- 七、UniParc：全量、非冗余的序列档案馆，连停用序列也永久保存
+
+**UniParc 与 UniRef 使用指南——UniProt 的归档与聚类数据库怎么用（EMBL-EBI webinar）**
+
+- 一、UniParc：全面的非冗余序列档案馆（UPI 永不变更、交叉引用串起来源库、版本与 active/inactive、冗余蛋白兜底）
+- 二、UniParc 在网站上怎么用：检索/结果页下载（FASTA/tab/Excel/XML）、条目页与 InterPro 特征、直接 BLAST、Proteins API 编程访问
+- 三、UniRef：把相似序列聚成参考簇（100/90/50 分辨率；同一性非全长衡量、不看分类学；规模 2.85 亿→3800 万）
+- 四、UniRef 在网站上怎么用：搜一个蛋白得三个簇、读懂 seed（最长）与 representative（注释最好）、Advanced Search、BLAST 目标库选择
+- 五、两个易混点（Q&A）：overhang/his-tag 为何不合并；UniRef50 单簇成员更多却总记录更少
+
 ## 核心知识点速览
 
 - **STRING 数据库**：检索已知 / 预测的蛋白-蛋白质相互作用，数据来自实验、文本挖掘、其他数据库与生物信息学预测，可与 Cytoscape 联用；所有互作加权整合并给出可靠指数（score），录制时约 5,090 物种、2,458 万蛋白、31 亿互作；检索规则：单蛋白 → 输出该蛋白的全部互作，多蛋白 / 序列 → 只输出输入蛋白之间的互作；节点=蛋白（红=查询蛋白及第一层、白=第二层），点击节点看信息与 PDB / SWISS-MODEL 结构，点击连线看证据；边颜色=证据类型（蓝=策展数据库、粉红=实验、绿=基因邻域、红=基因融合、深蓝=基因共现、黄=文本挖掘、黑=共表达、浅蓝=同源性），粗细=相互作用强度；Settings 可按 evidence / confidence 与来源、最低得分、显示数量筛选；Analysis 提供 GO / KEGG 富集并链接 Reactome、UniProt、Pfam、SMART；Exports 支持 PNG / 高分辨率 PNG / SVG / TSV（含 node1、node2、accession、annotation、综合得分）；Clusters 聚类后同簇同色、簇间虚线；多蛋白支持列表或文件上传，新增「差异基因」功能可悬停 GO id 在网络上高亮通路。
@@ -90,3 +110,5 @@
 - **酵母双杂交技术（高中生物二轮复习）**：核心是利用转录因子的可拆分性——BD 结合启动子（UAS）但不能激活转录，AD 能激活转录但不能结合 DNA，二者靠近拼成完整转录因子才能启动下游**报告基因**（LacZ 表达使酵母菌落变蓝）。把 BD/AD 分别与待研究蛋白 X/Y 构建成**融合基因**（目的基因与 BD/AD 共用同一启动子—终止子），X 与 Y 结合即拉近 BD 与 AD、报告基因表达。融合基因的获得按教学口径属**基因重组**；例题（CMV CP 互作蛋白筛选）还涉及：选有症状叶片是为保证含较多病毒以获得足够 cDNA；RT-PCR 最适循环数由电泳条带「整齐明亮、无拖尾/弥散」判断（取 18 次）；引物两端需加**具体**的限制酶识别序列（BamHⅠ、EcoRⅠ）以保证定向插入；转化大肠杆菌后用**稀释涂布平板法**接种到含**卡那霉素**的选择培养基；文库筛选流程为「构建 cDNA 文库 → 构建系列靶蛋白载体 → 导入已用诱饵载体转化的酵母菌 → 取蓝色菌落 → 筛选鉴定」。
 - **酵母双杂交实验入门**：Y2H 是在酵母内验证蛋白-蛋白互作的方法之一，结论宜由体内/体外多种方法（Co-IP、GST pull-down、BiFC）互证；分**核体系**（依赖 GAL4）与**膜体系**（依赖泛素），膜定位诱饵选膜体系。核体系里 GAL4 的 BD 结合 UAS、AD 招募 RNA 聚合酶 II；X-BD（bait）与 Y-AD（prey）结合即拼成完整 GAL4，启动**报告基因**（AH109/Y2HGold 含 ADE2、HIS3、LacZ、MEL1），用**营养缺陷型培养基**上酵母能否生长/显色来判断互作；载体 pGBKT7（TRP1，-Trp）与 pGADT7（LEU2，-Leu）用二缺培养基确认共同转入。流程五步：菌株准备→载体构建→感受态制备及转化→**自激活验证**→三缺/四缺点斑验证。文献读图三步：明确验证哪两个蛋白、关注三缺（-Leu/-Trp/-His）与四缺（-Trp/-Leu/-His/-Ade）结果、分清阴性/阳性/实验组（示例 SIPCK27–SISUS3、CRPK1–CNGC20）。
 - **STRING 简介（Lars Juhl Jensen 官方）**：STRING 的目标是把**物理互作**与**功能关联**（不直接结合但很可能一起干活）整合成全局网络（11.5 版 14,000+ 基因组、6,700 万+ 蛋白）。**七大证据通道**：基因组上下文（基因融合、基因邻域/保守操纵子、系统发育谱即共现）+ 基因共表达 + 互作实验（如 pull-down，含 Y2H）+ 策展数据库（复合物/通路，如 KEGG）+ 文本挖掘（识别基因/蛋白名 → 共现 → 深度学习抽物理互作）。困境：来源多、格式乱、命名乱、**质量参差**、不同证据**本质不可比**、证据常来自别的物种。解法：给每类证据打**质量分** → 以 **KEGG 通路为金标准校准**、把原始分转成「同一通路」的**后验概率**（使各通道落在同一尺度）→ 各通道概率相加得 **combined score** → 用**同源/ interolog 跨物种转移**证据。分数是**置信度**（非结合强度）；对应分数表的 `This organism`（本体分）、`Other (transfer)`（同源转移分）、`Combined score`（合并分）。使用：网页查询 + **证据查看器**下钻、大网络用 **Cytoscape stringApp**、支持批量下载。
+- **UniRef / UniProtKB / UniParc**：UniProt 拆成三个库——**UniProtKB** 存带注释条目（一个基因产生的蛋白及其异构体一个条目，多亚基各链独立），又分**已审阅的 Swiss-Prot**（人工、金色带星）与**未审阅的 TrEMBL**（自动、灰色纸片），FASTA 头行 `sp`/`tr` 可直接区分，`PE=1~5` 表示蛋白存在证据由强到弱，另有 **Annotation Score 1–5**；**UniRef** 按序列同一性把序列聚成 **UniRef100 / 90 / 50** 三档以去冗余、加速检索（90、50 两档要求对最长 seed 覆盖 ≥80%，UniRef100 每条至少 11 个氨基酸），数据库规模分别缩小约 58% 与 79%，适合 BLAST 找更远缘、更多样的序列（「相似」实指 percent identity）；簇里 **seed=最长序列**（用于判定入簇），**representative=条目质量最好的那条**（作簇代表，通常不是 seed），选择时优先人工注释、参考物种/模式生物与长度，accession 形如 `UniRef90_P49814`（下划线后为代表条目，前面标明是哪一档簇）；**UniParc** 是全量、非冗余、永久保存的序列档案馆，连停用序列也保留，可靠性最低但保证「一切都被存在某处」。三者都从 `uniprot.org` 免费访问，BLAST 可自选目标库，条目页 Similar Proteins / Feature viewer 可查看对应 UniRef 簇与变异、PTM 等注释。
+- **UniParc 与 UniRef 使用指南（EMBL-EBI webinar）**：**UniParc** 是全量非冗余的序列档案馆——每条唯一序列只存一份、赋永久标识 **UPI**，用**交叉引用**串起来源库，记录源库的删除/失活与**版本**变化；需要**冗余蛋白序列时只能来 UniParc** 取；网页可把结果下载为 FASTA/tab/Excel/XML，条目页可看 InterPro 特征并直接 BLAST，编程访问走 **Proteins API**（按 UPI/UPID/交叉引用/accession/序列检索，含各语言示例代码）。**UniRef** 把相似序列聚成参考簇，分辨率 100%/90%/50%，**同一性非全长衡量、且不看分类学**；规模由 UniParc 2.85 亿→UniRef100 2.02 亿→UniRef90 1.01 亿→UniRef50 3800 万（release 2019_08）；网站上搜一个蛋白得到三个簇，簇里 **seed=最长序列、representative=注释最好的序列**（通常不是 seed）；用 **Advanced Search** 可按簇名/分类学/同一性/大小/长度构造检索；**BLAST 选 UniRef 目标库**最省算力——同一序列第 10 条命中同一性：UniProtKB 99%、UniRef100 97%、UniRef90 60%、UniRef50 56%，因为每条命中代表一整簇、看前 10 条就覆盖大量多样序列。易混点：带 his-tag 等突出端（overhang）的序列因非全长一致而不并入同一 UPI；UniRef50 单簇成员更多但总簇数（总记录）更少，因为 >50% 比 100% 宽松。
