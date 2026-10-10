@@ -43,6 +43,7 @@ content/                        # 最终产物
 | alphafold | AlphaFold 图解与算法解析（中译长文 / 中文逐层拆解 / 视频博客） | 9 篇 | [content/protein_group/alphafold](content/protein_group/alphafold/README.md) |
 | protein_interaction | Rosetta 蛋白-蛋白相互作用（PPI）设计工作坊（2025） | 8（已整理 2） | [content/protein_group/protein_interaction](content/protein_group/protein_interaction/README.md) |
 | protein_ml_bootcamp | Rosetta ML Bootcamp：蛋白质建模与设计的机器学习方法 | 18（已整理 7） | [content/protein_group/protein_ml_bootcamp](content/protein_group/protein_ml_bootcamp/README.md) |
+| highfold | HighFold 与环肽 / 二硫键结构预测（AlphaFold 环肽设计、富二硫键微型蛋白） | 2 | [content/biomodel/highfold](content/biomodel/highfold/README.md) |
 | kubernetes | Kubernetes RBAC 权限控制（Anton Putra） | 1 | [content/kubernetes](content/kubernetes/README.md) |
 | kubernetes_cursor | 40 天 Kubernetes 挑战 / CKA 全课程（Tech Tutorials with Piyush） | 40+（已整理 8） | [content/kubernetes_cursor](content/kubernetes_cursor/README.md) |
 | drug_design | AI 药物发现与分子生成（GenMol） | 1 | [content/drug_design](content/drug_design/README.md) |
