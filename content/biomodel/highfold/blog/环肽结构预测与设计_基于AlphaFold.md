@@ -1,6 +1,6 @@
 # 环肽结构预测与设计：用 AlphaFold 攻克「环」的难题
 
-> 本文整理自 ML for Protein Engineering 研讨会报告《Cyclic peptide structure prediction and design using AlphaFold》，讲者为 Stephen Rettie（华盛顿大学 Bhardwaj 实验室）与 Simon Kozlov（哈佛大学 Ovchinnikov 实验室）。[【观看原视频】](https://www.youtube.com/watch?v=SDxy5E8fvXY)
+> 本文整理自 ML for Protein Engineering 研讨会报告《Cyclic peptide structure prediction and design using AlphaFold》，讲者为 Stephen Rettie（华盛顿大学 Bhardwaj 实验室，专长多肽合成与质谱）与 Simon Kozlov（哈佛大学 Ovchinnikov 实验室，计算机科学/机器学习背景）。[【观看原视频】](https://www.youtube.com/watch?v=SDxy5E8fvXY)
 
 ## 本讲要解决的核心问题（SCQA）
 
@@ -60,6 +60,8 @@ GKC 的核心思路借自**机器人学**：把环肽首尾闭合，想象成让
 把 D 型和 L 型氨基酸混在同一分子（heterochiral），还带来一个额外好处：**抗蛋白酶降解**。体内的蛋白酶很擅长识别纯 L 型的肽，而 D/L 混合又高度锁死的结构会被"挡住"；再加上**环化**让外切蛋白酶无处下口，稳定性大幅提升。
 
 ![Rosetta FastDesign 可同时分配 L 型和 D 型氨基酸；右图为 L/D 氨基酸的 Ramachandran 分布](assets/环肽结构预测与设计_基于AlphaFold/00361.webp)
+
+这些肽被合成出来后，交给了华盛顿大学的 **Varani 实验室**做核磁（NMR）。他们得到的构象系综与设计模型在**原子级精度**上高度吻合——这是这套 Rosetta 流程最早的漂亮验证之一。但讲者也坦言：这是一个"漂亮但什么都不做"的肽，接下来要解决的是"让肽真正起作用"。
 
 ### 1.4 两个已验证的成果：膜渗透环肽 + 靶向小分子起点的环肽
 
@@ -235,9 +237,12 @@ AlphaFold 本身是「序列 → 结构」。**AFdesign 把它反过来**：
 - **非天然氨基酸 / D 型氨基酸？** 完全可以对全 D 型环肽用这套方法，但更省事的是做 L 型再镜像即可。真正的难点是"D 型肽 vs L 型靶点"——模型没见过 D/L 相互作用的例子。瓶颈**不在模型而在数据**：非天然化学的公开数据太少。
 - **金属离子结合位点？** 可以设计成让离子结合区自己去"吸引"正确的配位残基，然后靠采样找到成功的例子。
 - **构象柔性 / 溶液中的构象系综？** AlphaFold 默认给 5 个模型，可当作"抖动"参考；但他们的设计刻意针对**单一静态构象**，不主动考虑柔性。
-- **低 pLDDT 的结构能否挽救？** 有可能——低分骨架可用 **ProteinMPNN** 重设计序列来"抢救"。
+- **低 pLDDT 的结构能否挽救？** 有可能——低分骨架可用 **ProteinMPNN** 重设计序列来"抢救"，也许能把一部分没通过筛选的结构救回来；不过他们对低分结构**并未做实验**验证（只挑了最高置信度的来做）。
 - **怎么挑 14 个候选？** 不只靠整体 pLDDT：界面残基的 **PAE（预测对齐误差）**、Rosetta 的**接触分子表面**、**DDG（界面能量）**等指标一起用。
 - **和 Rosetta 比，是不是只是采样更强？** 很难直接比分数；他们用"完整能量景观"来判断设计是否真能稳定折叠，并且只挑了"既过 AlphaFold、又过 Rosetta 旧指标"的设计。多模型一致（ProteinMPNN 生成 → AlphaFold 筛选）通常能提高成功率。
+- **抗体热点环能"搬进"大环吗？**（Parisa / Shirintoo 之问）能——AlphaFold 训练时见过大量抗体和这些"热点环"，把它们支架化成有序大环在数据上并不意外；但实验上"90% 都能搬"的做法往往没这么顺利，仍需采样与验证，这也是他们正用新骨架尝试的方向。
+- **模体嫁接用的是哪种损失？**（Yu Yang 之问）先用 ground-truth 损失选定支架：把带螺旋的 hallucination 骨架叠到模体上、避开与靶点冲突，让它占据已知结合物所在的区域；loop 与螺旋一起设计，之后再重设计序列、重新预测。
+- **是否只挑了"好例子"？**（Arthur 的批评）确实只选了"既过 AlphaFold、又过 Rosetta 旧指标"的设计，无法百分百确定大规模采样就找不到它们；但 AlphaFold 的价值在于能给出**1 分钟级、带置信度**的结构。
 
 ---
 
