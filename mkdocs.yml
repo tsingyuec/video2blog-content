@@ -1,6 +1,10 @@
 # MkDocs Material 站点配置
-# 构建前需先运行 `python scripts/build_site.py` 生成 build/docs。
+# 构建前需先运行 `python scripts/build_site.py` 生成 build/docs 与 build/nav.yml。
 # 本地预览：python scripts/build_site.py && mkdocs serve
+#
+# 导航（nav）由 scripts/build_site.py 依据各页一级标题自动生成到 build/nav.yml，
+# 这里通过 INHERIT 合并进来；若要手工调整顺序/名称，改脚本里的 PRIORITY / DIR_LABELS。
+INHERIT: build/nav.yml
 
 site_name: 视频图文博客库
 site_description: 把 Bilibili / YouTube 视频整理成「图文博客」的合集
@@ -16,10 +20,12 @@ use_directory_urls: false
 theme:
   name: material
   language: zh
+  font: false
   features:
     - navigation.instant
     - navigation.top
     - navigation.tracking
+    - navigation.indexes
     - search.suggest
     - search.highlight
     - content.code.copy

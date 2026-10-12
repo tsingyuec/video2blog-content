@@ -26,7 +26,10 @@ import re
 import shutil
 import sys
 import unicodedata
+from collections import defaultdict
 from urllib.parse import quote, unquote
+
+import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, "content")
@@ -34,6 +37,35 @@ DOCS = os.path.join(ROOT, "build", "docs")
 
 # 这些目录（content/ 下的任意层级）不发布
 EXCLUDE_DIRS = {"transcripts", "code"}
+
+# 侧栏排序优先级（同级之间），未列出的按字母序排在后面
+PRIORITY = [
+    "cs336", "gpu", "minimind",
+    "vllm_group", "vllm", "vllm_class", "vllm_meetup",
+    "aiinfra", "aiinfra_learning", "flash_attention",
+    "protein_group", "protein_design", "alphafold", "protein_interaction", "protein_ml_bootcamp",
+    "biomodel", "highfold",
+    "kubernetes", "kubernetes_cursor", "drug_design", "ai4s_tasks",
+    "agent", "biodata",
+]
+
+# 没有索引页的目录，手工指定侧栏名称
+DIR_LABELS = {
+    "vllm_group": "vLLM 系列",
+    "protein_group": "蛋白质系列",
+}
+
+# 标题截断标记：索引页 / 博文页用不同规则，避免侧栏标题过长或丢失中文名
+_CUT_INDEX = ["（", "(", "|", "｜", "·"]
+_CUT_PAGE = ["——", "（", "(", "|", "｜", "·"]
+
+# 这些目录在侧栏里"透明"（拉平），不额外产生一层分组
+TRANSPARENT_DIRS = {"blog"}
+
+
+def _natural_key(s: str):
+    """自然排序：让 Lecture 2 排在 Lecture 10 之前。"""
+    return [int(p) if p.isdigit() else p.lower() for p in re.split(r"(\d+)", s)]
 
 # 只发布：README.md（索引） 与 blog/ 目录下的所有文件（博文 + 配图）
 # 链接目标可能含空格（未做 URL 编码），故用非贪婪匹配到右括号
@@ -72,6 +104,158 @@ def nmatch(s: str) -> str:
 
 def has_excluded_segment(path: str) -> bool:
     return any(seg in EXCLUDE_DIRS for seg in path.split("/"))
+
+
+_h1_cache: dict[str, str] = {}
+
+
+def first_h1(repo_rel: str) -> str:
+    """读取 Markdown 源文件的第一个一级标题。"""
+    if repo_rel in _h1_cache:
+        return _h1_cache[repo_rel]
+    title = ""
+    try:
+        with open(os.path.join(ROOT, repo_rel), encoding="utf-8") as fh:
+            for i, line in enumerate(fh):
+                if i > 80:
+                    break
+                if line.startswith("# "):
+                    title = line[2:].strip()
+                    break
+    except OSError:
+        pass
+    _h1_cache[repo_rel] = title
+    return title
+
+
+def short_title(text: str, marks) -> str:
+    """把过长的标题截短，作为侧栏标签。"""
+    t = text.strip()
+    if not t:
+        return t
+    t = re.sub(r"^(系列|分组)[：:]\s*", "", t)
+    cuts = [i for i in (t.find(m) for m in marks) if i > 0]
+    if cuts:
+        t = t[: min(cuts)]
+    t = re.sub(r"\s+", " ", t).strip()
+    if len(t) > 48:
+        t = t[:47].rstrip() + "…"
+    return t
+
+
+def title_for_index(repo_rel: str) -> str:
+    h1 = first_h1(repo_rel)
+    # 索引页里的「——」多用于连接中英文名，替换为空格而非截断
+    h1 = h1.replace("——", " ")
+    return short_title(h1, _CUT_INDEX)
+
+
+def title_for_page(repo_rel: str) -> str:
+    return short_title(first_h1(repo_rel), _CUT_PAGE)
+
+
+def humanize(name: str) -> str:
+    return name.replace("_", " ").replace("-", " ").strip().title()
+
+
+def _order_key(name: str):
+    return (PRIORITY.index(name) if name in PRIORITY else len(PRIORITY), name)
+
+
+def build_nav(files: dict[str, str]):
+    """根据发布文件生成带中文标题的 nav 结构。"""
+    rev = {dr: rr for rr, dr in files.items()}
+    index_of: dict[str, str] = {}
+    pages_of: dict[str, list[str]] = defaultdict(list)
+    all_dirs: set[str] = set()
+
+    for rr, dr in files.items():
+        if not dr.endswith(".md"):
+            continue
+        d = posixpath.dirname(dr)
+        all_dirs.add(d)
+        if d:
+            parts = d.split("/")
+            for i in range(1, len(parts) + 1):
+                all_dirs.add("/".join(parts[:i]))
+        if posixpath.basename(dr) == "index.md":
+            index_of[d] = dr
+        else:
+            pages_of[d].append(dr)
+
+    def child_dirs(parent: str):
+        kids = [x for x in all_dirs if x != parent and posixpath.dirname(x) == parent]
+        return sorted(kids, key=lambda x: _order_key(posixpath.basename(x)))
+
+    def label_dir(d: str) -> str:
+        if d in index_of:
+            t = title_for_index(rev[index_of[d]])
+            if t:
+                return t
+        base = posixpath.basename(d)
+        return DIR_LABELS.get(base, humanize(base))
+
+    def label_page(p: str) -> str:
+        t = title_for_page(rev[p])
+        return t or humanize(posixpath.splitext(posixpath.basename(p))[0])
+
+    def disambiguate(pairs):
+        """同一层出现重名标题时，用文件名加以区分。"""
+        counts = defaultdict(int)
+        for lab, _ in pairs:
+            counts[lab] += 1
+        out = []
+        for lab, p in pairs:
+            if counts[lab] > 1:
+                stem = humanize(posixpath.splitext(posixpath.basename(p))[0])
+                m = re.search(r"\d+\D*$", stem)
+                suffix = (m.group(0) if m else stem).strip(" _-")
+                suffix = re.sub(r"\s+", " ", suffix)
+                lab = f"{lab}（{suffix}）" if suffix and suffix != lab else lab
+            out.append({lab: p})
+        return out
+
+    def node(d: str):
+        entries = []
+        if d in index_of:
+            entries.append(index_of[d])
+        for sub in child_dirs(d):
+            if posixpath.basename(sub) not in TRANSPARENT_DIRS:
+                entries.append({label_dir(sub): node(sub)})
+        pages = []
+        for sub in child_dirs(d):
+            if posixpath.basename(sub) in TRANSPARENT_DIRS:
+                if sub in index_of:
+                    entries.append(index_of[sub])
+                pages.extend(pages_of.get(sub, []))
+        pages.extend(pages_of.get(d, []))
+        pages = sorted(pages, key=lambda x: _natural_key(posixpath.basename(x)))
+        entries.extend(disambiguate([(label_page(p), p) for p in pages]))
+        return entries
+
+    nav = []
+    if "" in index_of:
+        nav.append({title_for_index(rev[index_of[""]]) or "首页": index_of[""]})
+    for top in child_dirs(""):
+        nav.append({label_dir(top): node(top)})
+    return nav
+
+
+def write_nav(files: dict[str, str]) -> str:
+    nav = build_nav(files)
+    path = os.path.join(ROOT, "build", "nav.yml")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(
+            yaml.safe_dump(
+                {"nav": nav},
+                allow_unicode=True,
+                sort_keys=False,
+                default_flow_style=False,
+                width=1000,
+            )
+        )
+    return path
 
 
 def build_plan():
@@ -186,6 +370,9 @@ def main() -> int:
         if os.path.exists(DOCS):
             shutil.rmtree(DOCS)
         os.makedirs(DOCS, exist_ok=True)
+        # 生成中文导航
+        nav_path = write_nav(files)
+        print(f"已生成导航：{nav_path}")
         # 拷贝自定义样式，供 mkdocs extra_css 使用
         extra_css = os.path.join(ROOT, "scripts", "extra.css")
         if os.path.exists(extra_css):

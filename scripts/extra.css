@@ -1,13 +1,121 @@
-/* 站点自定义样式（由 scripts/build_site.py 拷入 build/docs/_static/extra.css） */
+/* ============================================================
+   站点自定义样式（由 scripts/build_site.py 拷入 build/docs/_static/extra.css）
+   目标：中文阅读更舒适、配图更精致、表格/引用块更清爽。
+   ============================================================ */
 
-/* 配图统一自适应，避免超宽/超高图片撑破正文 */
-.md-typeset img {
-  max-width: 100%;
-  height: auto;
+/* ---------- 1. 字体：优先系统原生字体，中文回退到苹方/雅黑 ---------- */
+:root {
+  --md-text-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC",
+    "Noto Sans CJK SC", "Helvetica Neue", Arial, sans-serif;
+  --md-code-font: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace,
+    SFMono-Regular, Consolas, "Noto Sans Mono CJK SC", monospace;
+  --mk-radius: 8px;
 }
 
-/* 表格较宽时允许横向滚动（系列索引里表格列很多） */
+/* ---------- 2. 正文排版 ---------- */
+.md-typeset {
+  line-height: 1.8;              /* 中文行距比默认更松，长文更耐读 */
+  letter-spacing: 0.012em;
+}
+
+.md-typeset p {
+  margin: 0.9em 0;
+}
+
+/* 标题：层级更清晰，二级标题加一条细分割线 */
+.md-typeset h1 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.md-typeset h2 {
+  font-weight: 650;
+  margin-top: 2.2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+.md-typeset h3 {
+  font-weight: 600;
+  margin-top: 1.7em;
+}
+.md-typeset h4 {
+  font-weight: 600;
+}
+
+/* ---------- 3. 配图：圆角 + 轻投影 + 居中 ---------- */
+.md-typeset img {
+  display: block;
+  margin: 1.4em auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--mk-radius);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+/* 行内表情/图标不要套用上面的卡片样式 */
+.md-typeset img.emoji,
+.md-typeset .twemoji img {
+  display: inline;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ---------- 4. 引用块：这些博客大量使用「> 说明：…」 ---------- */
+.md-typeset blockquote {
+  border-left: 4px solid var(--md-accent-fg-color);
+  border-radius: 0 var(--mk-radius) var(--mk-radius) 0;
+  background: var(--md-code-bg-color);
+  padding: 0.7em 1em;
+  margin: 1.2em 0;
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset blockquote > p:first-child { margin-top: 0; }
+.md-typeset blockquote > p:last-child { margin-bottom: 0; }
+
+/* ---------- 5. 表格：表头柔和底色、行悬浮、横向可滚动 ---------- */
 .md-typeset table:not([class]) {
   display: block;
   overflow-x: auto;
+  border-radius: var(--mk-radius);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.md-typeset table:not([class]) th {
+  background: var(--md-code-bg-color);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.md-typeset table:not([class]) td {
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+.md-typeset table:not([class]) tr:hover {
+  background: color-mix(in srgb, var(--md-primary-fg-color) 6%, transparent);
+}
+
+/* ---------- 6. 代码块 ---------- */
+.md-typeset pre > code {
+  border-radius: var(--mk-radius);
+}
+.md-typeset code {
+  border-radius: 4px;
+}
+
+/* ---------- 7. 导航与整体宽度 ---------- */
+.md-grid {
+  max-width: 64rem;              /* 内容区略放宽，容纳宽幅配图 */
+}
+.md-nav__link--active,
+.md-nav__item--active > .md-nav__link {
+  font-weight: 600;
+}
+.md-nav__title {
+  font-weight: 600;
+}
+
+/* ---------- 8. 链接：默认不强调下划线，悬浮时再出现 ---------- */
+.md-typeset a {
+  text-decoration: none;
+}
+.md-typeset a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
