@@ -25,6 +25,7 @@ content/                        # 最终产物
 - **`<名称>`**：博客按视频名称命名——多 P 系列为 `第NN讲_<分P标题>`（如 `第07讲_理论：RMSNorm`），单视频为视频名称。
 - **分组目录**：相关系列可再套一层分组目录，如 `content/vllm_group/`、`content/protein_group/`；分组目录下同样放一个 `README.md` 作为该分组的索引。
 - **版本控制**：仓库只收录各系列的 `README.md`、`blog/`（含配图）与 `code/`。中间结果（`_work/` 下的视频、抽帧、字幕、文稿）体积大且可再生，均由 `.gitignore` 排除。
+- **生物内容的二层结构**：`content/biomodel/`（按**模型**）、`content/biodata/`（按**数据站点**）、`content/biobasic/`（**公共生物学**）采用「分组 / 主题」两层结构——主题子目录内**直接放**博客 `.md` 与配图 `assets/`，**不再有** `README.md` 与 `blog/`；每个分组各有自己的 `README.md` 作索引。
 
 ## 系列索引
 
@@ -39,11 +40,11 @@ content/                        # 最终产物
 | aiinfra | 手撕 AI Infra 算子（CUDA + Triton + PyTorch） | 5 | [content/aiinfra](content/aiinfra/README.md) |
 | aiinfra_learning | AI INFRA 学习（vLLM 推理优化） | 5 | [content/aiinfra_learning](content/aiinfra_learning/README.md) |
 | flash_attention | Flash Attention 学习过程详解 | 8 | [content/flash_attention](content/flash_attention/README.md) |
-| protein_design | AI + 蛋白质设计（从经典力场到深度学习、AlphaFold 实践） | 12 | [content/protein_group/protein_design](content/protein_group/protein_design/README.md) |
-| alphafold | AlphaFold 图解与算法解析（中译长文 / 中文逐层拆解 / 视频博客） | 9 篇 | [content/protein_group/alphafold](content/protein_group/alphafold/README.md) |
+| biomodel | 生物大分子建模（AlphaFold / ProteinMPNN / RFdiffusion / RoseTTAFold / 蛋白质设计通识 / HighFold） | 24 | [content/biomodel](content/biomodel/README.md) |
+| biodata | 生物数据站点（STRING / UniProt） | 5 | [content/biodata](content/biodata/README.md) |
+| biobasic | 公共生物学（PPI 概念 / 互作研究技术 / 酵母双杂交） | 4 | [content/biobasic](content/biobasic/README.md) |
 | protein_interaction | Rosetta 蛋白-蛋白相互作用（PPI）设计工作坊（2025） | 8（已整理 2） | [content/protein_group/protein_interaction](content/protein_group/protein_interaction/README.md) |
 | protein_ml_bootcamp | Rosetta ML Bootcamp：蛋白质建模与设计的机器学习方法 | 18（已整理 7） | [content/protein_group/protein_ml_bootcamp](content/protein_group/protein_ml_bootcamp/README.md) |
-| highfold | HighFold 与环肽 / 二硫键结构预测（AlphaFold 环肽设计、富二硫键微型蛋白） | 2 | [content/biomodel/highfold](content/biomodel/highfold/README.md) |
 | kubernetes | Kubernetes RBAC 权限控制（Anton Putra） | 1 | [content/kubernetes](content/kubernetes/README.md) |
 | kubernetes_cursor | 40 天 Kubernetes 挑战 / CKA 全课程（Tech Tutorials with Piyush） | 40+（已整理 8） | [content/kubernetes_cursor](content/kubernetes_cursor/README.md) |
 | drug_design | AI 药物发现与分子生成（GenMol） | 1 | [content/drug_design](content/drug_design/README.md) |

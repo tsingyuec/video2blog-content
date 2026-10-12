@@ -38,6 +38,10 @@ DOCS = os.path.join(ROOT, "build", "docs")
 # 这些目录（content/ 下的任意层级）不发布
 EXCLUDE_DIRS = {"transcripts", "code"}
 
+# 「扁平」结构的分组根目录：如 content/biomodel/<模型>/*.md、content/biodata/<站点>/*.md、
+# content/biobasic/*.md —— 这些目录下不再有 README.md 与 blog/，博客与配图直接落在子目录里
+FLAT_ROOT_DIRS = ("biomodel", "biodata", "biobasic")
+
 # 侧栏 = /content 的真实目录树；同级按自然序（第2讲 排在 第10讲 前）
 
 
@@ -45,7 +49,8 @@ def _natural_key(s: str):
     """自然排序：让 Lecture 2 排在 Lecture 10 之前。"""
     return [int(p) if p.isdigit() else p.lower() for p in re.split(r"(\d+)", s)]
 
-# 只发布：README.md（索引） 与 blog/ 目录下的所有文件（博文 + 配图）
+# 发布范围：README.md（索引）、blog/ 目录下的所有文件（博文 + 配图），
+# 以及 FLAT_ROOT_DIRS 扁平分组下的所有文件。
 # 链接目标可能含空格（未做 URL 编码），故用非贪婪匹配到右括号
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(\s*(<[^>]*>|[^)\n]*?)((?:\s+\"[^\"]*\")?)\s*\)")
 
@@ -66,7 +71,10 @@ def is_included(sub: str) -> bool:
     base = posixpath.basename(sub)
     if base == "README.md":
         return True
-    return "/blog/" in "/" + sub
+    if "/blog/" in "/" + sub:
+        return True
+    # 扁平分组（biomodel / biodata / biobasic）：目录下的 .md 与配图一并发布
+    return sub.split("/", 1)[0] in FLAT_ROOT_DIRS
 
 
 def docs_rel(sub: str) -> str:

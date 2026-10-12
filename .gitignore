@@ -27,6 +27,18 @@ content/**/code/**/__pycache__/
 content/**/code/**/*.py[cod]
 content/**/code/**/*.cif
 
+# 7) 反向保留「扁平分组」：biomodel / biodata / biobasic 下的博客与配图
+#    （这些主题子目录内不再有 README.md 与 blog/，博客直接落在子目录里）
+!content/biomodel/
+!content/biomodel/**
+!content/biodata/
+!content/biodata/**
+!content/biobasic/
+!content/biobasic/**
+# 其中子目录下的 transcripts/ 仍不收录
+content/biomodel/**/transcripts/
+content/biobasic/**/transcripts/
+
 # 项目内工具（多 P 封装等）与临时目录
 /tools/
 **/_work/
