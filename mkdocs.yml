@@ -21,7 +21,11 @@ theme:
   name: material
   language: zh
   font: false
+  icon:
+    logo: material/bookshelf
   features:
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.instant
     - navigation.top
     - navigation.tracking
@@ -31,17 +35,19 @@ theme:
     - content.code.copy
     - toc.follow
   palette:
+    # 浅色：白底 + 红色强调（OI Wiki 风格）
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: indigo
+      primary: white
+      accent: red
       toggle:
         icon: material/weather-night
         name: 切换到深色模式
+    # 深色：蓝色主色
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: blue
+      accent: blue
       toggle:
         icon: material/weather-sunny
         name: 切换到浅色模式

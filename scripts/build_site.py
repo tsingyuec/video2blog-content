@@ -55,6 +55,27 @@ DIR_LABELS = {
     "protein_group": "蛋白质系列",
 }
 
+# 顶部标签分组（OI Wiki 风格）：把顶层系列归类成若干短标签，
+# 标签下再列出各系列与文章。改这里即可调整顶部导航。
+CATEGORY = {
+    "cs336": "大语言模型",
+    "minimind": "大语言模型",
+    "vllm_group": "大语言模型",
+    "aiinfra": "大语言模型",
+    "aiinfra_learning": "大语言模型",
+    "flash_attention": "大语言模型",
+    "protein_group": "生物计算",
+    "biomodel": "生物计算",
+    "biodata": "生物计算",
+    "drug_design": "生物计算",
+    "ai4s_tasks": "生物计算",
+    "gpu": "系统与基础设施",
+    "kubernetes": "系统与基础设施",
+    "kubernetes_cursor": "系统与基础设施",
+    "agent": "其他",
+}
+CATEGORY_ORDER = ["大语言模型", "生物计算", "系统与基础设施", "其他"]
+
 # 标题截断标记：索引页 / 博文页用不同规则，避免侧栏标题过长或丢失中文名
 _CUT_INDEX = ["（", "(", "|", "｜", "·"]
 _CUT_PAGE = ["——", "（", "(", "|", "｜", "·"]
@@ -233,11 +254,18 @@ def build_nav(files: dict[str, str]):
         entries.extend(disambiguate([(label_page(p), p) for p in pages]))
         return entries
 
+    tops = child_dirs("")
+    grouped: dict[str, list[str]] = defaultdict(list)
+    for t in tops:
+        grouped[CATEGORY.get(posixpath.basename(t), "其他")].append(t)
+
     nav = []
     if "" in index_of:
         nav.append({title_for_index(rev[index_of[""]]) or "首页": index_of[""]})
-    for top in child_dirs(""):
-        nav.append({label_dir(top): node(top)})
+    order = [c for c in CATEGORY_ORDER if c in grouped]
+    order += [c for c in grouped if c not in CATEGORY_ORDER]
+    for cat in order:
+        nav.append({cat: [{label_dir(t): node(t)} for t in grouped[cat]]})
     return nav
 
 
