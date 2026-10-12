@@ -401,12 +401,16 @@ def main() -> int:
         # 生成中文导航
         nav_path = write_nav(files)
         print(f"已生成导航：{nav_path}")
-        # 拷贝自定义样式，供 mkdocs extra_css 使用
-        extra_css = os.path.join(ROOT, "scripts", "extra.css")
-        if os.path.exists(extra_css):
-            static_dir = os.path.join(DOCS, "_static")
-            os.makedirs(static_dir, exist_ok=True)
-            shutil.copy2(extra_css, os.path.join(static_dir, "extra.css"))
+        # 拷贝自定义样式 / 脚本 / 字体，供 mkdocs 引用
+        static_dir = os.path.join(DOCS, "_static")
+        for name in ("extra.css", "extra.js"):
+            src = os.path.join(ROOT, "scripts", name)
+            if os.path.exists(src):
+                os.makedirs(static_dir, exist_ok=True)
+                shutil.copy2(src, os.path.join(static_dir, name))
+        fonts_src = os.path.join(ROOT, "scripts", "fonts")
+        if os.path.isdir(fonts_src):
+            shutil.copytree(fonts_src, os.path.join(static_dir, "fonts"), dirs_exist_ok=True)
 
     for rr, dr in files.items():
         src = os.path.join(ROOT, rr)
