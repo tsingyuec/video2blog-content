@@ -30,3 +30,7 @@ content/**/code/**/*.cif
 # 项目内工具（多 P 封装等）与临时目录
 /tools/
 **/_work/
+
+# 站点构建产物（由 scripts/build_site.py 与 mkdocs 生成）
+/build/
+/site/

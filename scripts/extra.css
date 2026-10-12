@@ -1,0 +1,13 @@
+/* 站点自定义样式（由 scripts/build_site.py 拷入 build/docs/_static/extra.css） */
+
+/* 配图统一自适应，避免超宽/超高图片撑破正文 */
+.md-typeset img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 表格较宽时允许横向滚动（系列索引里表格列很多） */
+.md-typeset table:not([class]) {
+  display: block;
+  overflow-x: auto;
+}

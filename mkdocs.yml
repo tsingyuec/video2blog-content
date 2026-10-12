@@ -1,0 +1,63 @@
+# MkDocs Material 站点配置
+# 构建前需先运行 `python scripts/build_site.py` 生成 build/docs。
+# 本地预览：python scripts/build_site.py && mkdocs serve
+
+site_name: 视频图文博客库
+site_description: 把 Bilibili / YouTube 视频整理成「图文博客」的合集
+site_url: https://tsingyuec.github.io/video2blog-content/
+repo_url: https://github.com/tsingyuec/video2blog-content
+repo_name: tsingyuec/video2blog-content
+edit_uri: ""
+
+docs_dir: build/docs
+site_dir: build/site
+use_directory_urls: false
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.instant
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.details
+
+plugins:
+  - search:
+      lang: zh
+
+extra_css:
+  - _static/extra.css
+
+extra:
+  generator: false
+
+copyright: 内容由 video2blog skill 生成
