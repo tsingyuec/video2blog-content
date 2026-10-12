@@ -1,5 +1,5 @@
 /* ============================================================
-   复刻 Typora 的 newsprint 主题 + 「左侧目录树 / 右侧正文」双栏布局
+   复刻 Typora 的 newsprint 主题 + 「左侧目录树 / 右侧正文」
    取值来自本机 Typora 的 newsprint.css
    ============================================================ */
 
@@ -30,7 +30,7 @@
 }
 
 :root {
-  /* 西文用 PT Serif，中文回退到系统宋体（与 Typora 在 Windows 上一致） */
+  /* 西文用 PT Serif，中文回退系统宋体（与 Typora 在 Windows 上一致） */
   --md-text-font: "PT Serif", "Times New Roman", "Songti SC", "SimSun",
     "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
   --md-code-font: Menlo, "Ubuntu Mono", Consolas, "Courier New",
@@ -56,8 +56,6 @@ body[data-md-color-scheme="default"] {
   --md-accent-fg-color: #065588;
   --md-primary-fg-color: #f3f2ee;
   --md-primary-bg-color: #1f0909;
-  --np-active-bg: rgba(32, 43, 51, 0.63);
-  --np-active-fg: #ffffff;
   --np-quote-border: #bababa;
   --np-quote-fg: #656565;
   --np-rule: #c5c5c5;
@@ -82,18 +80,28 @@ body[data-md-color-scheme="slate"] {
   --md-accent-fg-color: #8fbde0;
   --md-primary-fg-color: #262322;
   --md-primary-bg-color: #e6e1d6;
-  --np-active-bg: rgba(255, 255, 255, 0.16);
-  --np-active-fg: #ffffff;
   --np-quote-border: #6b6560;
   --np-quote-fg: #a8a29a;
   --np-rule: #4a4542;
 }
 
-/* ---------- 3. 正文排版（照 newsprint） ---------- */
+/* ---------- 3. 正文：字号 16px、栏宽 40em（照 newsprint） ---------- */
 .md-typeset {
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--md-typeset-color);
+}
+
+/* 正文栏宽：newsprint 为 40em（≥1400px 时 914px），居中 */
+.md-content__inner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.4rem 1rem 4rem;
+}
+@media screen and (min-width: 1400px) {
+  .md-content__inner {
+    max-width: 914px;
+  }
 }
 
 .md-typeset p,
@@ -153,7 +161,9 @@ body[data-md-color-scheme="slate"] {
   padding: 0 0 0 1em;
   background: none;
 }
-.md-typeset blockquote > p:last-child { margin-bottom: 0; }
+.md-typeset blockquote > p:last-child {
+  margin-bottom: 0;
+}
 
 /* 行内代码 / 代码块 */
 .md-typeset code {
@@ -213,29 +223,23 @@ body[data-md-color-scheme="slate"] {
   box-shadow: none;
 }
 
-/* ---------- 4. 布局：桌面端隐藏顶栏与标签，做「左树 / 右文」 ---------- */
-@media screen and (min-width: 76.25em) {
-  .md-header,
-  .md-tabs {
-    display: none;
-  }
-  .md-sidebar {
-    top: 0;
-  }
-  .md-sidebar--secondary {
-    display: none;           /* 不要右侧 TOC，保持两栏 */
-  }
-  .md-main__inner {
-    margin-top: 0.8rem;
-  }
+/* ---------- 4. 顶栏：极简 newsprint 风格（搜索/深浅色按钮保留在此） ---------- */
+.md-header {
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  box-shadow: none;
+  border-bottom: 1px solid var(--np-rule);
+}
+.md-header__title {
+  font-size: 0.72rem;
+}
+.md-search__input {
+  font-family: var(--md-text-font);
 }
 
-/* 左侧栏：newsprint 底色，条目风格 */
-.md-sidebar--primary {
-  background-color: transparent;
-}
+/* ---------- 5. 左侧栏：newsprint 底色，条目风格 ---------- */
 .md-nav--primary {
-  font-size: 0.68rem;
+  font-size: 14px;
 }
 .md-nav__link {
   color: var(--md-default-fg-color--light);
@@ -243,56 +247,34 @@ body[data-md-color-scheme="slate"] {
 .md-nav__link:hover {
   color: var(--md-typeset-a-color);
 }
-/* 当前文件：深色半透明底 + 白字（照 Typora 的文件树选中态） */
+/* 当前文件：加粗 + 主色，不用灰底 */
 .md-nav__link--active,
 .md-nav__item--active > .md-nav__link {
-  color: var(--np-active-fg);
-  background-color: var(--np-active-bg);
-  border-radius: 3px;
-  padding-left: 0.4rem;
-  padding-right: 0.4rem;
-}
-.md-nav__link--active:hover,
-.md-nav__item--active > .md-nav__link:hover {
-  color: var(--np-active-fg);
+  color: var(--md-default-fg-color);
+  font-weight: 700;
+  background: none;
 }
 
-/* ---------- 5. 左侧栏顶部工具条（搜索 / 深浅色 / 文件·大纲） ---------- */
+/* ---------- 6. 左侧栏顶部工具条：文件 / 大纲 ---------- */
 .np-toolbar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   padding: 0 0 0.5rem;
   margin-bottom: 0.6rem;
   border-bottom: 1px dashed var(--np-rule);
   font-size: 0.7rem;
 }
-.np-toolbar .np-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  cursor: pointer;
-  color: var(--md-default-fg-color--light);
-  border-radius: 3px;
-}
-.np-toolbar .np-btn:hover {
-  background-color: var(--np-active-bg);
-  color: var(--np-active-fg);
-}
-.np-toolbar .np-spacer {
-  flex: 1;
-}
 .np-toolbar .np-tab {
   cursor: pointer;
-  padding: 0.15rem 0.5rem;
-  border-radius: 3px;
+  padding: 0.1rem 0;
   color: var(--md-default-fg-color--light);
+  border-bottom: 2px solid transparent;
 }
 .np-toolbar .np-tab--active {
-  background-color: var(--np-active-bg);
-  color: var(--np-active-fg);
+  color: var(--md-default-fg-color);
+  font-weight: 700;
+  border-bottom-color: var(--md-typeset-a-color);
 }
 
 /* 文件 / 大纲 切换：大纲由 JS 克隆到 .np-outline */
@@ -305,11 +287,15 @@ html[data-np-mode="outline"] .md-nav--primary > .md-nav__list {
 html[data-np-mode="outline"] .np-outline {
   display: block;
 }
-html[data-np-mode="file"] .md-nav--primary .md-nav--secondary {
-  display: none;
-}
 .np-outline__empty {
   color: var(--md-default-fg-color--lighter);
   font-size: 0.7rem;
   padding: 0.4rem 0;
+}
+
+/* ---------- 7. 布局：桌面端两栏（左侧树 / 右正文），隐藏右侧大纲栏 ---------- */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--secondary {
+    display: none;
+  }
 }

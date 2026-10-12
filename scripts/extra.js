@@ -1,13 +1,8 @@
-/* 左侧栏顶部工具条：搜索 / 深浅色 / 文件·大纲 切换 */
+/* 左侧栏顶部工具条：文件 / 大纲 切换
+   - 文件：显示 /content 的目录树
+   - 大纲：显示当前页的标题大纲（从右侧 md-nav--secondary 克隆而来） */
 (function () {
-  var SEARCH_SVG =
-    '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">' +
-    '<path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>';
-  var THEME_SVG =
-    '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">' +
-    '<path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>';
-
-  function mode() {
+  function currentMode() {
     return document.documentElement.getAttribute("data-np-mode") || "file";
   }
 
@@ -23,7 +18,6 @@
     var nav = document.querySelector(".md-sidebar--primary .md-nav--primary");
     if (!nav) return;
 
-    // 每次导航都重建，避免残留旧的克隆大纲
     var old = nav.querySelector(".np-toolbar");
     if (old) old.remove();
     var oldOutline = nav.querySelector(".np-outline");
@@ -32,20 +26,18 @@
     var bar = document.createElement("div");
     bar.className = "np-toolbar";
     bar.innerHTML =
-      '<label class="np-btn" for="__search" title="搜索">' + SEARCH_SVG + "</label>" +
-      '<label class="np-btn" for="__palette_1" title="切换深浅色">' + THEME_SVG + "</label>" +
-      '<span class="np-spacer"></span>' +
       '<span class="np-tab" data-np="file">文件</span>' +
       '<span class="np-tab" data-np="outline">大纲</span>';
 
-    // 把「大纲」（md-nav--secondary）克隆一份，独立放在工具条下方
+    // 克隆当前页大纲（右侧栏里的 md-nav--secondary）
     var outline = document.createElement("div");
     outline.className = "np-outline";
-    var toc = nav.querySelector(".md-nav--secondary");
+    var toc = document.querySelector(".md-sidebar--secondary .md-nav--secondary");
     if (toc) {
       var list = toc.querySelector(".md-nav__list");
       if (list) outline.appendChild(list.cloneNode(true));
-    } else {
+    }
+    if (!outline.firstChild) {
       outline.innerHTML = '<div class="np-outline__empty">本页无大纲</div>';
     }
 
@@ -57,7 +49,7 @@
       if (t) setMode(t.getAttribute("data-np"));
     });
 
-    setMode(mode());
+    setMode(currentMode());
   }
 
   function boot() {
