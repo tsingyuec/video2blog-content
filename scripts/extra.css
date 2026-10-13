@@ -316,8 +316,14 @@ html[data-np-mode="outline"] .np-outline {
 }
 
 /* 左栏宽度：由 extra.js 直接写在 .md-sidebar--primary 的行内样式上（不依赖样式表规则；
-   左栏是 flex item，改宽度后正文自动重排）。 */
+   左栏是 flex item，改宽度后正文自动重排）。
+   注意：Material 用 [dir=ltr] .md-sidebar__inner{padding-right:calc(100% - 11.5rem)} 把目录树
+   钉死在 11.5rem 宽——左栏被拖宽后右侧会留一大片空白、树本身不变宽。这里解掉它，
+   让目录树（含「文件/大纲」工具条）跟着左栏一起变宽。 */
 @media screen and (min-width: 76.25em) {
+  .md-sidebar.md-sidebar--primary .md-sidebar__inner {
+    padding-right: 0.4rem;
+  }
   /* 分界线：插在左栏与正文之间的 flex item；命中区跨边界（左 4px + 右 12px），
      净占位 0px，视觉上是紧贴左栏右缘的一条细线 */
   .np-splitter {
