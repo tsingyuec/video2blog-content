@@ -293,9 +293,56 @@ html[data-np-mode="outline"] .np-outline {
   padding: 0.4rem 0;
 }
 
-/* ---------- 7. 布局：桌面端两栏（左侧树 / 右正文），隐藏右侧大纲栏 ---------- */
+/* ---------- 7. 布局：桌面端两栏（左树 / 右正文），右侧不展示大纲 ---------- */
+/* 右侧大纲栏：任何宽度都不显示（≥60em 时 Material 默认会显示，用 !important 压掉）。
+   大纲改由左栏顶部「大纲」页签提供，克隆自这里的 .md-nav--secondary。 */
+.md-sidebar--secondary {
+  display: none !important;
+}
+
+/* ---------- 8. 左栏宽度可拖动（分界线） ---------- */
+/* 分界线：默认隐藏，仅桌面端显示 */
+.np-splitter {
+  display: none;
+}
+
+/* 左栏宽度由 --np-sidebar-w 控制；.md-sidebar--primary 是 flex item，
+   改宽度后正文自动重排。变量挂在 <html> 上，由 extra.js 拖动时写入。 */
 @media screen and (min-width: 76.25em) {
-  .md-sidebar--secondary {
-    display: none;
+  .md-sidebar--primary {
+    width: var(--np-sidebar-w, 12.1rem);
+  }
+  /* 分界线：插在左栏与正文之间的 flex item，正好压在边界上 */
+  .np-splitter {
+    display: block;
+    flex: 0 0 9px;
+    align-self: stretch;
+    margin: 0 -4px;
+    background: none;
+    border: none;
+    cursor: col-resize;
+    position: relative;
+    z-index: 3;
+    touch-action: none;
+  }
+  .np-splitter:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 4px;
+    width: 1px;
+    background: var(--np-rule);
+    opacity: 0.55;
+    transition: opacity 0.15s ease;
+  }
+  .np-splitter:hover:before,
+  .np-splitter--drag:before {
+    opacity: 1;
+  }
+  body.np-resizing,
+  body.np-resizing * {
+    cursor: col-resize !important;
+    user-select: none !important;
   }
 }
