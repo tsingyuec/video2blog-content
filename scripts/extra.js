@@ -1,35 +1,20 @@
 /* 左侧栏：文件 / 大纲 切换 + 可拖动的分界线
    - 文件：显示 /content 的目录树
    - 大纲：显示当前页的标题大纲（从右侧 md-nav--secondary 克隆而来）
-   - 分界线：可左右拖动调整左栏宽度，宽度写入 localStorage，全站共享、双击复位 */
+   - 分界线：可左右拖动调整左栏宽度。宽度直接写进 .md-sidebar--primary 的**行内样式**
+     （不依赖任何样式表规则，因此一定能生效），并按位移量计算；宽度存 localStorage，
+     全站共享、双击复位；窄屏（抽屉）下自动交回 Material 的默认宽度。 */
 (function () {
   var KEY = "np-sidebar-w";
   var MIN = 150; /* px */
   var MAX = 560; /* px */
+  var DESKTOP = window.matchMedia("(min-width: 76.25em)");
 
-  function doc() {
-    return document.documentElement;
+  function primary() {
+    return document.querySelector(".md-sidebar--primary");
   }
 
   /* ---------- 左栏宽度 ---------- */
-  function applyWidth(px) {
-    if (px == null || !isFinite(px)) {
-      doc().style.removeProperty("--np-sidebar-w");
-      return null;
-    }
-    px = Math.round(Math.max(MIN, Math.min(MAX, px)));
-    doc().style.setProperty("--np-sidebar-w", px + "px");
-    return px;
-  }
-
-  function restoreWidth() {
-    var v = NaN;
-    try {
-      v = parseInt(localStorage.getItem(KEY), 10);
-    } catch (e) {}
-    if (isFinite(v)) applyWidth(v);
-  }
-
   function saveWidth(px) {
     try {
       if (px == null) localStorage.removeItem(KEY);
@@ -37,18 +22,46 @@
     } catch (e) {}
   }
 
-  function resetWidth() {
-    applyWidth(null);
-    saveWidth(null);
+  function savedWidth() {
+    var v = NaN;
+    try {
+      v = parseInt(localStorage.getItem(KEY), 10);
+    } catch (e) {}
+    return isFinite(v) ? v : null;
+  }
+
+  function applyWidth(px, persist) {
+    var el = primary();
+    if (!el) return null;
+    if (px == null || !isFinite(px) || !DESKTOP.matches) {
+      el.style.removeProperty("width");
+      if (persist) saveWidth(null);
+      return null;
+    }
+    px = Math.round(Math.max(MIN, Math.min(MAX, px)));
+    el.style.width = px + "px";
+    if (persist) saveWidth(px);
+    return px;
+  }
+
+  function currentWidth() {
+    var el = primary();
+    if (!el) return null;
+    var w = parseFloat(el.style.width);
+    return isFinite(w) ? w : el.getBoundingClientRect().width;
+  }
+
+  function restoreWidth() {
+    applyWidth(savedWidth(), false);
   }
 
   /* ---------- 文件 / 大纲 切换 ---------- */
   function currentMode() {
-    return doc().getAttribute("data-np-mode") || "file";
+    return document.documentElement.getAttribute("data-np-mode") || "file";
   }
 
   function setMode(m) {
-    doc().setAttribute("data-np-mode", m);
+    document.documentElement.setAttribute("data-np-mode", m);
     var tabs = document.querySelectorAll(".np-toolbar .np-tab");
     for (var i = 0; i < tabs.length; i++) {
       tabs[i].classList.toggle("np-tab--active", tabs[i].getAttribute("data-np") === m);
@@ -57,9 +70,8 @@
 
   /* ---------- 分界线 ---------- */
   function mountSplitter() {
-    var primary = document.querySelector(".md-sidebar--primary");
     var content = document.querySelector(".md-content");
-    if (!primary || !content || !content.parentNode) return;
+    if (!content || !content.parentNode || !primary()) return;
 
     var prev = content.previousElementSibling;
     if (prev && prev.classList.contains("np-splitter")) return; /* 已挂载 */
@@ -74,29 +86,32 @@
 
     bar.addEventListener("mousedown", function (e) {
       if (e.button !== 0) return;
-      var sidebar = document.querySelector(".md-sidebar--primary");
-      if (!sidebar) return;
-      var left = sidebar.getBoundingClientRect().left;
-      var last = null;
+      var startX = e.clientX;
+      var startW = currentWidth();
+      if (startW == null) return;
       bar.classList.add("np-splitter--drag");
       document.body.classList.add("np-resizing");
       e.preventDefault();
 
       function onMove(ev) {
-        last = applyWidth(ev.clientX - left);
+        applyWidth(startW + (ev.clientX - startX), false);
       }
       function onUp() {
         bar.classList.remove("np-splitter--drag");
         document.body.classList.remove("np-resizing");
         document.removeEventListener("mousemove", onMove);
         document.removeEventListener("mouseup", onUp);
-        if (last != null) saveWidth(last);
+        var el = primary();
+        var w = el ? parseFloat(el.style.width) : NaN;
+        saveWidth(isFinite(w) ? w : null);
       }
       document.addEventListener("mousemove", onMove);
       document.addEventListener("mouseup", onUp);
     });
 
-    bar.addEventListener("dblclick", resetWidth);
+    bar.addEventListener("dblclick", function () {
+      applyWidth(null, true);
+    });
   }
 
   /* ---------- 装配 ---------- */
@@ -141,6 +156,9 @@
   }
 
   function boot() {
+    restoreWidth();
+    window.addEventListener("resize", restoreWidth);
+    if (DESKTOP.addEventListener) DESKTOP.addEventListener("change", restoreWidth);
     if (window.document$ && typeof window.document$.subscribe === "function") {
       window.document$.subscribe(inject);
     } else {
