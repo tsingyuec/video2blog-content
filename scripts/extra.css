@@ -309,6 +309,26 @@ html[data-np-mode="outline"] .np-outline {
   }
 }
 
+/* ---------- 9. 正文栏居中：两侧间距相等 ---------- */
+/* Material 把主区 .md-main__inner.md-grid 限制在 61rem（=1220px，root 20px）并居中，
+   于是正文右侧空出一大条死白（左栏越宽越明显）：左间距只有 1.2rem、右间距上百 px。
+   桌面端放开限宽（改成整窗宽），并补上与原居中量相同的左内边距——左栏位置、
+   与顶栏 logo 的对齐都保持不变——这样正文所在的 .md-content 一直延伸到窗口右缘，
+   再配合两侧 auto 外边距，正文就在「左栏右侧的剩余空间」里居中，两侧等距。 */
+@media screen and (min-width: 76.25em) {
+  .md-main__inner.md-grid {
+    max-width: none;
+    padding-left: max(0px, calc((100% - 61rem) / 2));
+  }
+  /* 覆盖 Material 的 [dir=ltr] .md-sidebar--primary:not([hidden])~.md-content>.md-content__inner
+     {margin-left:1.2rem}（特异性 0,5,0）→ 这里同特异性把两侧都设为 auto */
+  [dir="ltr"] .md-sidebar--primary:not([hidden]) ~ .md-content > .md-content__inner,
+  [dir="rtl"] .md-sidebar--primary:not([hidden]) ~ .md-content > .md-content__inner {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* ---------- 8. 左栏宽度可拖动（分界线） ---------- */
 /* 分界线：默认隐藏，仅桌面端显示 */
 .np-splitter {
