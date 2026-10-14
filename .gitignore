@@ -39,9 +39,23 @@ content/**/code/**/*.cif
 content/biomodel/**/transcripts/
 content/biobasic/**/transcripts/
 
+# 8) 反向保留「生物信息」：自动任务产出的章节目录（结构与 biobasic 类似，
+#    但可能再套一层子子目录；规则文件 AGENT_TASK.md 同在此处）
+!content/生物信息/
+!content/生物信息/**
+
 # 项目内工具（多 P 封装等）与临时目录
 /tools/
 **/_work/
+
+# 自动整理任务的临时中间产物（视频/抽帧/字幕/文稿）
+temp/
+
+# skills CLI 装在本地的 skill 拷贝（Maka Agent 首轮运行时安装）
+.agents/
+.claude/
+agent/
+skills-lock.json
 
 # 站点构建产物（由 scripts/build_site.py 与 mkdocs 生成）
 /build/

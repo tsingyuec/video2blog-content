@@ -3,29 +3,18 @@
 把 Bilibili / YouTube 视频整理成「**视频演说图文稿** + **初学者也能看懂的博客**」的合集。
 内容按**主题系列**分目录，每个系列一个 `README.md`，用于索引该系列下的视频。处理过程中的文稿与其它中间结果放在 `_work/`，最终博客放在 `content/`。
 
+> **给 Agent 的规则**（目录结构 / 处理约定 / skill 安装 / 处理流程 / 交互约定）见 [AGENTS.md](AGENTS.md)。
+
 ## 目录结构
 
 ```
 _work/                          # 处理中间结果（体积大、可再生，不进版本库）
-└─ <系列>/
-   ├─ videos/<视频ID>.mp4        # 下载的视频（仅视频流）
-   ├─ frames/<视频ID>/           # 1fps 抽帧
-   ├─ subs/<视频ID>.srt          # 字幕
-   └─ transcripts/<名称>.md      # 视频演说图文稿（图-字幕对照）
-
+└─ <系列>/ …                    # 视频、抽帧、字幕、文稿
 content/                        # 最终产物
-└─ <系列>/                       # 也可再套一层分组目录，如 content/protein_group/<系列>/
+└─ <系列>/
    ├─ README.md                  # 该系列的视频索引
-   └─ blog/
-      ├─ <名称>.md               # 博客
-      └─ assets/<名称>/          # 博客配图
+   └─ blog/                      # 博客与配图
 ```
-
-- **处理约定**：处理视频时，所有**中间结果**——下载的视频、1fps 抽帧、字幕，以及「图-字幕」**视频演说图文稿（文稿）**——统一放在 `_work/` 目录下；最终生成的**博客**放在 `content/` 目录下。也就是说，`content/` 只收录博客、配图与系列索引，**不包含文稿**。
-- **`<名称>`**：博客按视频名称命名——多 P 系列为 `第NN讲_<分P标题>`（如 `第07讲_理论：RMSNorm`），单视频为视频名称。
-- **分组目录**：相关系列可再套一层分组目录，如 `content/vllm_group/`、`content/protein_group/`；分组目录下同样放一个 `README.md` 作为该分组的索引。
-- **版本控制**：仓库只收录各系列的 `README.md`、`blog/`（含配图）与 `code/`。中间结果（`_work/` 下的视频、抽帧、字幕、文稿）体积大且可再生，均由 `.gitignore` 排除。
-- **生物内容的二层结构**：`content/biomodel/`（按**模型**）、`content/biodata/`（按**数据站点**）、`content/biobasic/`（**公共生物学**）采用「分组 / 主题」两层结构——主题子目录内**直接放**博客 `.md` 与配图 `assets/`，**不再有** `README.md` 与 `blog/`；每个分组各有自己的 `README.md` 作索引。
 
 ## 系列索引
 
@@ -49,43 +38,3 @@ content/                        # 最终产物
 | kubernetes_cursor | 40 天 Kubernetes 挑战 / CKA 全课程（Tech Tutorials with Piyush） | 40+（已整理 8） | [content/kubernetes_cursor](content/kubernetes_cursor/README.md) |
 | drug_design | AI 药物发现与分子生成（GenMol） | 1 | [content/drug_design](content/drug_design/README.md) |
 | ai4s_tasks | AI for Science 核心任务（逆合成/口袋识别/分子生成/MOF/蛋白编辑/抗体CDR） | 6 | [content/ai4s_tasks](content/ai4s_tasks/README.md) |
-
-## 安装 video2blog skill
-
-本项目的内容由 [`video2blog`](https://github.com/tsingyuec/video2blog-skill) skill 生成。
-
-**方式一：交给 Agent 安装（推荐）**
-
-```
-Use the skills in "https://github.com/tsingyuec/video2blog-skill" that are relevant to the current task. Run `npx skills add "https://github.com/tsingyuec/video2blog-skill"` and select the relevant skills, then follow their instructions.
-```
-
-**方式二：命令行安装**
-
-```bash
-npx skills add tsingyuec/video2blog-skill       # 安装到 Agent 技能目录（本机为 ~/.agents/skills/video2blog/）
-```
-
-**安装 Python 依赖**（抽帧、图像处理、视频下载）：
-
-```bash
-pip install -r ~/.agents/skills/video2blog/requirements.txt   # opencv-python、numpy、pillow、yt-dlp
-# 无桌面环境可将 opencv-python 换成 opencv-python-headless
-```
-
-- 依赖：Python 3 + `opencv-python` / `numpy`（抽帧）、`pillow`（图像处理）、`yt-dlp`（下载）；字幕抓取为纯标准库实现，无需额外依赖，但需能访问 `kedou.life`。
-
-## 处理流程
-
-基于 `video2blog` skill：**下载 → 抽帧 → 抓取字幕 → 生成「图-字幕」视频演说图文稿 → 通顺化 → 写博客**。
-
-- 多 P 视频按 `?p=N` 逐集下载，时间戳跳转链接为 `?p=N&t=<秒>`；文稿与博客按 `第NN讲_<分P标题>` 命名。
-- **产物落位**：下载的视频、抽帧、字幕与文稿都落在 `_work/<系列>/`；最终博客落在 `content/<系列>/blog/`。
-- 博客严格基于视频演说图文稿撰写，内容可核查；字幕来自 B 站 AI 字幕，已逐窗口纠正错拼。
-
-## 交互约定
-
-- 当用户输入 `explore:<关键词>` 时，表示要从 Bilibili / YouTube 中探索与关键词相关的视频，步骤如下：
-  1. **筛选**：先根据视频标题、简介等介绍信息做大致排序，剔除与关键词不相关或相关度很低的视频。
-  2. **精排**：对剩下可能高质量的视频抓取字幕，据此判断其介绍内容的**详细程度**，做更合理的排序。
-  3. **展示**：按最终排序将视频展示给用户。
