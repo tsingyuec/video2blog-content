@@ -40,7 +40,8 @@ EXCLUDE_DIRS = {"transcripts", "code"}
 
 # 「扁平」结构的分组根目录：如 content/biomodel/<模型>/*.md、content/biodata/<站点>/*.md、
 # content/biobasic/*.md —— 这些目录下不再有 README.md 与 blog/，博客与配图直接落在子目录里
-FLAT_ROOT_DIRS = ("biomodel", "biodata", "biobasic")
+# 生物信息：Maka 定时任务产出的章节目录（章节/条目/配图，同样无 blog/ 层）
+FLAT_ROOT_DIRS = ("biomodel", "biodata", "biobasic", "生物信息")
 
 # 侧栏 = /content 的真实目录树；同级按自然序（第2讲 排在 第10讲 前）
 
@@ -165,6 +166,12 @@ def build_plan():
     if os.path.exists(root_readme):
         files["README.md"] = "index.md"
         urls[nmatch("README.md")] = "index.md"
+
+    # 根 AGENTS.md（README 中有链接指向它）
+    root_agents = os.path.join(ROOT, "AGENTS.md")
+    if os.path.exists(root_agents):
+        files["AGENTS.md"] = "AGENTS.md"
+        urls[nmatch("AGENTS.md")] = "AGENTS.md"
 
     for dirpath, dirnames, filenames in os.walk(CONTENT):
         for fn in filenames:
