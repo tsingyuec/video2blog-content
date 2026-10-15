@@ -55,75 +55,75 @@
 - 2.2.3 链 ID / auth_asym_id / 残基编号 / B-factor（= 残基误差估计） **【已完成】** 📺 [How to rename chain ID and residue name using PyMol？](2.2_结构类格式/2.2.3_链ID_auth_asym_id_残基编号_B-factor/How to rename chain ID and residue name using PyMol？.md) · 📺 [What Are B-Factors？ Understanding Protein Flexibility in X-Ray Crystallography](2.2_结构类格式/2.2.3_链ID_auth_asym_id_残基编号_B-factor/What Are B-Factors？ Understanding Protein Flexibility in X-Ray Crystallography.md)
 
 ## 2.3 比对类格式
-- 2.3.1 MSA 多序列比对概念：同源序列、共变信息
-- 2.3.2 A3M 格式（MSA Search 输出 → Protenix/OpenFold3 输入）
-- 2.3.3 HHR 模板格式（Protenix `templatesPath`）
-- 2.3.4 配对 MSA vs 非配对 MSA（`pairedMsaPath` / `unpairedMsaPath`）
+- 2.3.1 MSA 多序列比对概念：同源序列、共变信息 **【已完成】** 📺 [Multiple Sequence Alignment](2.3_比对类格式/2.3.1_MSA多序列比对概念_同源序列_共变信息/Multiple Sequence Alignment.md) · 📺 [Using sequence covariance to make inferences about protein structure and functions](2.3_比对类格式/2.3.1_MSA多序列比对概念_同源序列_共变信息/Using sequence covariance to make inferences about protein structure and functions.md)
+- 2.3.2 A3M 格式（MSA Search 输出 → Protenix/OpenFold3 输入） **【已完成】** 📺 [alphafold3官方文档讲解：02 输入设置：MSA,模板,共价键,CCD定义](2.3_比对类格式/2.3.2_A3M格式/alphafold3官方文档讲解：02%20输入设置：MSA,模板,共价键,CCD定义.md) · 📺 [ColabFold - Making protein folding accessible to all via Google Colab!](2.3_比对类格式/2.3.2_A3M格式/ColabFold%20-%20Making%20protein%20folding%20accessible%20to%20all%20via%20Google%20Colab!.md)
+- 2.3.3 HHR 模板格式（Protenix `templatesPath`） **【已完成】** 📺 [Homology Modeling with PSI-BLAST, HHblits, HHpred and Modeller](2.3_比对类格式/2.3.3_HHR模板格式/Homology%20Modeling%20with%20PSI-BLAST,%20HHblits,%20HHpred%20and%20Modeller.md) · 📺 [Protein Structure and HHpred](2.3_比对类格式/2.3.3_HHR模板格式/Protein%20Structure%20and%20HHpred.md)
+- 2.3.4 配对 MSA vs 非配对 MSA（`pairedMsaPath` / `unpairedMsaPath`） **【已完成】** 📺 [基于人工智能的蛋白质复合体三维空间结构预测：AlphaFold-Multimer原理介绍 - 李盼博士 ｜ 钰沐菡 公益公开课](2.3_比对类格式/基于人工智能的蛋白质复合体三维空间结构预测：AlphaFold-Multimer原理介绍%20-%20李盼博士%20｜%20钰沐菡%20公益公开课.md)
 
 ## 2.4 RNA 结构表示
-- 2.4.1 dot-bracket：`(((...)))`（配对/未配对）
-- 2.4.2 扩展 dot-bracket：`{}` `[]` 多层配对（RNAcentroid）
-- 2.4.3 接触图 / 配对概率矩阵（L×L，RNA-FM 输出）
+- 2.4.1 dot-bracket：`(((...)))`（配对/未配对） **【已完成】** 📺 [RNA Folding： How to Use Dot-Bracket Notation](2.4_RNA结构表示/2.4.1_dot-bracket/RNA%20Folding：%20How%20to%20Use%20Dot-Bracket%20Notation.md) · 📺 [RNA Folding： How to Reverse Engineer Dot-Bracket Notation](2.4_RNA结构表示/2.4.1_dot-bracket/RNA%20Folding：%20How%20to%20Reverse%20Engineer%20Dot-Bracket%20Notation.md)
+- 2.4.2 扩展 dot-bracket：`{}` `[]` 多层配对（RNAcentroid） **【已完成】** 📺 [11. RNA Secondary Structure; Biological Functions and Predictions](2.4_RNA结构表示/2.4.2_扩展dot-bracket多层配对/11.%20RNA%20Secondary%20Structure;%20Biological%20Functions%20and%20Predictions.md) · 📺 [IPknot： fast and accurate prediction of RNA secondary structures with pseudoknot](2.4_RNA结构表示/2.4.2_扩展dot-bracket多层配对/IPknot：%20fast%20and%20accurate%20prediction%20of%20RNA%20secondary%20structures%20with%20pseudoknot.md)
+- 2.4.3 接触图 / 配对概率矩阵（L×L，RNA-FM 输出） **【已完成】** 📺 [杨建益教授，王文恺研究员-AI赋能RNA结构预测](2.4_RNA结构表示/杨建益教授，王文恺研究员-AI赋能RNA结构预测.md)
 
 ## 2.5 分子输入打包格式
-- 2.5.1 AlphaFold Server JSON（Protenix `sequences[]`：proteinChain / dnaSequence / rnaSequence / ligand / ion）
-- 2.5.2 OpenFold3 NIM `inputs[].molecules[]` 格式
-- 2.5.3 Boltz-2 `polymers[]` 格式
+- 2.5.1 AlphaFold Server JSON（Protenix `sequences[]`：proteinChain / dnaSequence / rnaSequence / ligand / ion） **【已完成】** 📺 [AlphaFold3零代码使用教程](2.5_分子输入打包格式/2.5.1_AlphaFoldServerJSON/AlphaFold3零代码使用教程.md) · 📺 [AlphaFold3实操教程来咯，全新结构预测神器，还不快来跟着教学视频操练一下？](2.5_分子输入打包格式/2.5.1_AlphaFoldServerJSON/AlphaFold3实操教程来咯，全新结构预测神器，还不快来跟着教学视频操练一下？.md) · 📺 [从输入到结果，手把手带你用 Protenix 生物分子结构预测模型](2.5_分子输入打包格式/2.5.1_AlphaFoldServerJSON/从输入到结果，手把手带你用%20Protenix%20生物分子结构预测模型.md)
+- 2.5.2 OpenFold3 NIM `inputs[].molecules[]` 格式 **【已完成】** 📺 [OpenFold3： A Researcher's Guide To Your First Protein Prediction](2.5_分子输入打包格式/2.5.2_OpenFold3NIM_inputsmolecules格式/OpenFold3： A%20Researcher's%20Guide%20To%20Your%20First%20Protein%20Prediction.md) · 📺 [Deploying OpenFold3 with NVIDIA NIMs on Brev & AWS EC2](2.5_分子输入打包格式/2.5.2_OpenFold3NIM_inputsmolecules格式/Deploying%20OpenFold3%20with%20NVIDIA%20NIMs%20on%20Brev%20&%20AWS%20EC2.md)
+- 2.5.3 Boltz-2 `polymers[]` 格式 **【已完成】** 📺 [麻省理工Boltz-2模型：一键预测生物分子3D结构与相互作用](2.5_分子输入打包格式/2.5.3_Boltz-2polymers格式/麻省理工Boltz-2模型：一键预测生物分子3D结构与相互作用.md) · 📺 [To use Boltz-2 for affinity predictions](2.5_分子输入打包格式/2.5.3_Boltz-2polymers格式/To%20use%20Boltz-2%20for%20affinity%20predictions.md)
 
 ## 2.6 模拟文件族（GROMACS）
-- 2.6.1 .gro（坐标）、.top（拓扑）、.mdp（参数）、.ndx（索引）、.xtc（轨迹）、.tpr（运行输入）
+- 2.6.1 .gro（坐标）、.top（拓扑）、.mdp（参数）、.ndx（索引）、.xtc（轨迹）、.tpr（运行输入） **【已完成】** 📺 [Gromacs视频教程-文件格式-gro文件](2.6_模拟文件族GROMACS/2.6.1_GROMACS模拟文件族/Gromacs视频教程-文件格式-gro文件.md) · 📺 [Gromacs入门讲解](2.6_模拟文件族GROMACS/2.6.1_GROMACS模拟文件族/Gromacs入门讲解.md)
 
 ---
 
 # 3. 指标层：读懂模型输出的数字
 
 ## 3.1 结构预测置信度
-- 3.1.1 pLDDT（0-100，逐残基）：>90 高置信，<50 常为无序区
-- 3.1.2 pTM / ipTM（0-1，全局 / 界面）
-- 3.1.3 confidence_score（各模型综合置信度）
-- 3.1.4 PDE（位置差异熵，越低越好）
+- 3.1.1 pLDDT（0-100，逐残基）：>90 高置信，<50 常为无序区 **【已完成】** 📺 [Interpreting AlphaFold predictions and confidence indicators](3.1_结构预测置信度/3.1.1_pLDDT逐残基置信度/Interpreting%20AlphaFold%20predictions%20and%20confidence%20indicators.md) · 📺 [Alphafold3输出的结果文件数据解读及复合体预测流程](3.1_结构预测置信度/3.1.1_pLDDT逐残基置信度/Alphafold3输出的结果文件数据解读及复合体预测流程.md)
+- 3.1.2 pTM / ipTM（0-1，全局 / 界面） **【已完成】** 📺 [AlphaFold Tutorial： Predict Protein Structures & Interpret pLDDT, PAE, pTM and ipTM](3.1_结构预测置信度/3.1.2_pTM_ipTM_0-1_全局_界面/AlphaFold%20Tutorial： Predict%20Protein%20Structures%20%26%20Interpret%20pLDDT,%20PAE,%20pTM%20and%20ipTM.md) · 📺 [Confidence metrics used in the AlphaFold Database multimers](3.1_结构预测置信度/3.1.2_pTM_ipTM_0-1_全局_界面/Confidence%20metrics%20used%20in%20the%20AlphaFold%20Database%20multimers.md)
+- 3.1.3 confidence_score（各模型综合置信度） **【已完成】** 📺 [Similarity Metrics & Confidence Scores in Protein Structure Prediction ｜ EMBL-EBI Tutorial](3.1_结构预测置信度/3.1.3_confidence_score各模型综合置信度/Similarity%20Metrics%20%26%20Confidence%20Scores%20in%20Protein%20Structure%20Prediction%20｜%20EMBL-EBI%20Tutorial.md) · 📺 [AlphaFold 3 Explained ｜ Complete Beginner's Guide to Structure Prediction](3.1_结构预测置信度/3.1.3_confidence_score各模型综合置信度/AlphaFold%203%20Explained%20｜%20Complete%20Beginner's%20Guide%20to%20Structure%20Prediction.md)
+- 3.1.4 PDE（位置差异熵，越低越好） **【已完成】**（未找到合适视频：PDE 为 AlphaFold 3 输出置信度指标，内容仅见于论文补充材料与官方文档；两平台检索 10+ 组关键词、核查 8+ 候选视频字幕，仅 YouTube『Core explained \| AlphaFold 3』02:50 与 Boltz-2 亲和力预测视频 02:56 各一句带过，陈巍『alphafold3官方文档讲解:03 输出内容』讲解了置信度 JSON 全部指标但独缺 PDE，信息量无法支撑一篇可核查的博客）
 
 ## 3.2 能量类
-- 3.2.1 MFE / ΔG（kcal/mol，越负越稳定）——ViennaRNA 全系
-- 3.2.2 ensemble free energy（系综自由能，RNAcentroid）
-- 3.2.3 ddG（突变结合能变化，dyMEAN 亲和力优化）
+- 3.2.1 MFE / ΔG（kcal/mol，越负越稳定）——ViennaRNA 全系 **【已完成】** 📺 [RNA secondary structure prediction with RNAfold](3.2_能量类/3.2.1_MFE_ΔG_ViennaRNA全系/RNA%20secondary%20structure%20prediction%20with%20RNAfold.md) · 📺 [Secondary structure prediction using mFOLD and Forna](3.2_能量类/3.2.1_MFE_ΔG_ViennaRNA全系/Secondary%20structure%20prediction%20using%20mFOLD%20and%20Forna｜mRNA%20structure%20forecast%20tools.md)
+- 3.2.2 ensemble free energy（系综自由能，RNAcentroid） **【已完成】** 📺 [Ivo Hofacker：RNA secondary structures](3.2_能量类/Ivo%20Hofacker：RNA%20secondary%20structures.md)
+- 3.2.3 ddG（突变结合能变化，dyMEAN 亲和力优化） **【已完成】** 📺 [丙氨酸扫描：如何寻找蛋白质中的关键功能残基？](3.2_能量类/3.2.3_ddG突变结合能变化_dyMEAN亲和力优化/丙氨酸扫描：如何寻找蛋白质中的关键功能残基？.md) · 📺 [Tutorial for Performing In Silico Protein Mutagenesis using Python Wrapper Mutatex employing Foldx](3.2_能量类/3.2.3_ddG突变结合能变化_dyMEAN亲和力优化/Tutorial for Performing In Silico Protein Mutagenesis using Python Wrapper Mutatex employing Foldx.md) · 📺 [虚拟氨基酸突变指导抗体亲和力成熟（Discovery Studio 抗体药物设计与优化）](3.2_能量类/3.2.3_ddG突变结合能变化_dyMEAN亲和力优化/虚拟氨基酸突变指导抗体亲和力成熟（Discovery Studio 抗体药物设计与优化）.md)
 
 ## 3.3 分类与概率
-- 3.3.2 混淆矩阵指标：sensitivity / PPV / MCC / F1
+- 3.3.2 混淆矩阵指标：sensitivity / PPV / MCC / F1 **【已完成】** 📺 [7分钟搞懂：敏感性、特异性、阳性预测值、阴性预测值！](3.3_分类与概率/3.3.2_混淆矩阵指标/7分钟搞懂：敏感性、特异性、阳性预测值、阴性预测值！.md) · 📺 [【小萌五分钟】机器学习｜模型评估：准确率 Accuracy 精确率 Precision 召回率 Recall F1值](3.3_分类与概率/3.3.2_混淆矩阵指标/【小萌五分钟】机器学习｜模型评估：准确率 Accuracy 精确率 Precision 召回率 Recall F1值.md) · 📺 [The Definitive Guide to the Matthews Correlation Coefficient](3.3_分类与概率/3.3.2_混淆矩阵指标/The Definitive Guide to the Matthews Correlation Coefficient.md)
 
 ## 3.4 回归值
-- 3.4.1 pI（等电点）、Tm（熔解温度 °C）——ABDP
-- 3.4.2 MIC（μM，最小抑菌浓度，越低越好）——APEX
-- 3.4.3 OASis / 人源性评分（越高免疫原性风险越低）——BioPhi
-- 3.4.4 NLL score（序列可折叠性，越低越好）——ProteinMPNN
+- 3.4.1 pI（等电点）、Tm（熔解温度 °C）——ABDP **【已完成】** 📺 [7.生物化学 -- 第二章 -- 氨基酸等电点。-- 上](3.4_回归值/3.4.1_pI等电点Tm熔解温度_ABDP/7.生物化学%20--%20第二章%20--%20氨基酸等电点。--%20上.md) · 📺 [Fluorescence thermal shift (FTS) aka Differential Scanning Fluorimetry (DFS) aka Thermal Melt basics](3.4_回归值/3.4.1_pI等电点Tm熔解温度_ABDP/Fluorescence%20thermal%20shift%20%28FTS%29%20aka%20DSF%20aka%20Thermal%20Melt%20basics.md)
+- 3.4.2 MIC（μM，最小抑菌浓度，越低越好）——APEX **【已完成】** 📺 [最小抑菌浓度mic（微量肉汤法）](3.4_回归值/3.4.2_MIC最小抑菌浓度_APEX/最小抑菌浓度mic（微量肉汤法）.md) · 📺 [【分子生物学指南】最小抑菌浓度MIC](3.4_回归值/3.4.2_MIC最小抑菌浓度_APEX/【分子生物学指南】最小抑菌浓度MIC.md)
+- 3.4.3 OASis / 人源性评分（越高免疫原性风险越低）——BioPhi **【已完成】** 📺 [AbNatiV抗体人源化科普教程](3.4_回归值/3.4.3_OASis人源性评分_BioPhi/AbNatiV抗体人源化科普教程.md) · 📺 [How to Predict Antibody Immunogenicity Before Testing： Humanness Score](3.4_回归值/3.4.3_OASis人源性评分_BioPhi/How%20to%20Predict%20Antibody%20Immunogenicity%20Before%20Testing：%20Humanness%20Score.md) · 📺 [BioPhi Antibody design platform： Intro](3.4_回归值/3.4.3_OASis人源性评分_BioPhi/BioPhi%20Antibody%20design%20platform：%20Intro.md)
+- 3.4.4 NLL score（序列可折叠性，越低越好）——ProteinMPNN **【已完成】** 📺 [Sequence Design with ProteinMPNN](3.4_回归值/3.4.4_NLLscore序列可折叠性_ProteinMPNN/Sequence%20Design%20with%20ProteinMPNN.md) · 📺 [WeMol教程_18｜ 蛋白序列设计ProteinMPNN](3.4_回归值/3.4.4_NLLscore序列可折叠性_ProteinMPNN/WeMol教程_18｜%20蛋白序列设计ProteinMPNN.md)
 
 ## 3.5 生成质量
-- 3.5.1 困惑度 ppl（越低越好）——LOGOS
-- 3.5.2 扩散置信度（RFdiffusion plddt_mean、DiffDock position_confidence）
-- 3.5.3 距离指标：mindist / averagemin（Å，RFantibody 热点贴合度）
+- 3.5.1 困惑度 ppl（越低越好）——LOGOS **【已完成】** 📺 [PPL 越低，模型越聪明？3 分钟看懂困惑度](3.5_生成质量/3.5.1_困惑度ppl_LOGOS/PPL%20越低，模型越聪明？3%20分钟看懂困惑度.md) · 📺 [L3.3- 评估准则(perplexity 困惑度等)](3.5_生成质量/3.5.1_困惑度ppl_LOGOS/L3.3-%20评估准则%28perplexity%20困惑度等%29.md) · 📺 [你知道用什么指标评价一个大模型的好坏吗？PPL，MMLU，MATH，GPQA，BBH，IF-EVAL，MMLU-PRO](3.5_生成质量/3.5.1_困惑度ppl_LOGOS/你知道用什么指标评价一个大模型的好坏吗？PPL，MMLU，MATH，GPQA，BBH，IF-EVAL，MMLU-PRO.md)
+- 3.5.2 扩散置信度（RFdiffusion plddt_mean、DiffDock position_confidence） **【已完成】** 📺 [RFdiffusion蛋白设计实操](3.5_生成质量/3.5.2_扩散置信度/深度学习蛋白质设计教程2025最新-使用RFdiffusion进行蛋白质结构和功能的设计实操.md) · 📺 [DiffDock扩散对接与置信度](3.5_生成质量/3.5.2_扩散置信度/DiffDock_%20Diffusion%20Steps,%20Twists,%20and%20Turns%20for%20Molecular%20Docking.md)
+- 3.5.3 距离指标：mindist / averagemin（Å，RFantibody 热点贴合度） **【已完成】**（未找到合适视频：mindist/averagemin 是 RFantibody 设计结果过滤脚本中的热点贴合距离列名，属脚本级细节；两平台 15+ 组中英文关键词、核查 9+ 候选视频字幕，RFantibody 相关视频仅有 B 站《全程零代码…RFantibody抗体设计AI工具》2m07s、《抗体不再靠库筛》43s 宣传与 YouTube Nano Helix 4m 界面演示，均不讲解结果过滤与距离指标；Baker 官方 RFdiffusion3 教程仅讲输入侧原子级热点约束，Neurosnap 91m 工作坊仅 Q&A 提及 hotspot；《吴凡迪｜AI抗体设计》80m 与《文献快讯：Baker 团队 RFdiffusion 抗体设计》10m 无字幕轨。kedou 当日配额耗尽，字幕全程走 cookie 降级链，均无法支撑可核查本指标的博客）
 
 ---
 
 # 4. 方法层：四大 AI 流派与经典方法
 
 ## 4.1 热力学 / 动态规划（经典）
-- 4.1.1 Zuker 算法与 MFE（RNAfold）
-- 4.1.2 配分函数与系综（RNAcentroid）
-- 4.1.3 Turner 能量参数模型
+- 4.1.1 Zuker 算法与 MFE（RNAfold） **【已完成】** 📺 [【屈婉玲教授 ｜ 算法设计与分析】06-06 RNA二级结构预测](4.1_热力学_动态规划经典/4.1.1_Zuker算法与MFE_RNAfold/【屈婉玲教授 ｜ 算法设计与分析】06-06 RNA二级结构预测.md) · 📺 [RNA二级结构的预测](4.1_热力学_动态规划经典/4.1.1_Zuker算法与MFE_RNAfold/RNA二级结构的预测.md)
+- 4.1.2 配分函数与系综（RNAcentroid） **【已完成】** 📺 [玻尔兹曼因子与配分函数：统计力学入门](4.1_热力学_动态规划经典/4.1.2_配分函数与系综_RNAcentroid/玻尔兹曼因子与配分函数：统计力学入门.md) · 📺 [LinearPartition：线性时间近似RNA配分函数与碱基配对概率](4.1_热力学_动态规划经典/4.1.2_配分函数与系综_RNAcentroid/LinearPartition：线性时间近似RNA配分函数与碱基配对概率.md)
+- 4.1.3 Turner 能量参数模型 **【已完成】** 📺 [Folding engines, models & thermodynamics](4.1_热力学_动态规划经典/4.1.3_Turner能量参数模型/Folding%20engines,%20models%20&%20thermodynamics.md) · 📺 [2. Thermodynamics of DNA and RNA](4.1_热力学_动态规划经典/4.1.3_Turner能量参数模型/2.%20Thermodynamics%20of%20DNA%20and%20RNA.md)
 
 ## 4.2 序列语言模型（PLM）
-- 4.2.1 BERT 式掩码预训练 → 嵌入（embedding）
-- 4.2.2 ProtTrans / AbLang（ABDP 底座）
-- 4.2.3 ESM2（AMP-Diffusion 底座，8M 参数）
-- 4.2.4 RNA-FM（640 维）/ mRNA-FM（1280 维，密码子分词）
-- 4.2.5 GPT 式自回归生成：Evo 2（DNA）、LOGOS（统一科学语法）
-- 4.2.6 均值池化 / 逐 token 嵌入（`return_per_token`）
+- 4.2.1 BERT 式掩码预训练 → 嵌入（embedding） **【已完成】** 📺 [小白也能听懂的 bert模型原理解读 预训练语言模型](4.2_序列语言模型PLM/4.2.1_BERT式掩码预训练_嵌入embedding/小白也能听懂的 bert模型原理解读 预训练语言模型.md) · 📺 [蛋白质语言模型（PLM）的基本原理与四大应用｜AI in biology 知其所以然EP01](4.2_序列语言模型PLM/4.2.1_BERT式掩码预训练_嵌入embedding/蛋白质语言模型（PLM）的基本原理与四大应用｜AI in biology 知其所以然EP01.md) · 📺 [Embedding到底是什么？从氨基酸到数字特征｜AI in biology 知其所以然EP02](4.2_序列语言模型PLM/4.2.1_BERT式掩码预训练_嵌入embedding/Embedding到底是什么？从氨基酸到数字特征｜AI in biology 知其所以然EP02.md)
+- 4.2.2 ProtTrans / AbLang（ABDP 底座） **【已完成】** 📺 [BERTology meets Biology｜Solving biological problems with Transformers](4.2_序列语言模型PLM/4.2.2_ProtTransAbLang_ABDP底座/BERTology meets Biology｜Solving biological problems with Transformers.md) · 📺 [AbLang：An antibody language model for completing... - Tobias H. Olsen - MLCSB - Poster - ISMB 2022](4.2_序列语言模型PLM/4.2.2_ProtTransAbLang_ABDP底座/AbLang：An%20antibody%20language%20model%20for%20completing...%20-%20Tobias%20H.%20Olsen%20-%20MLCSB%20-%20Poster%20-%20ISMB%202022.md) · 📺 [Gen AI in Biology. AbLang：An Antibody Sequence Language Model. (Bio LLMs)](4.2_序列语言模型PLM/4.2.2_ProtTransAbLang_ABDP底座/Gen%20AI%20in%20Biology.%20AbLang：An%20Antibody%20Sequence%20Language%20Model.%20%28Bio%20LLMs%29.md)
+- 4.2.3 ESM2（AMP-Diffusion 底座，8M 参数） **【已完成】** 📺 [ESM-2 Protein Language Model Explained – Architecture & Training](4.2_序列语言模型PLM/4.2.3_ESM2_AMP-Diffusion底座8M参数/ESM-2 Protein Language Model Explained – Architecture & Training.md) · 📺 [Using ESM-2 in Python： Protein Embeddings & Fine-Tuning](4.2_序列语言模型PLM/4.2.3_ESM2_AMP-Diffusion底座8M参数/Using ESM-2 in Python： Protein Embeddings & Fine-Tuning.md)
+- 4.2.4 RNA-FM（640 维）/ mRNA-FM（1280 维，密码子分词） **【已完成】** 📺 [RNA大型语言模型代码教程](4.2_序列语言模型PLM/4.2.4_RNA-FM640维_mRNA-FM1280维密码子分词/RNA大型语言模型代码教程.md) · 📺 [DNA、RNA也能有自己的“大模型”？大湾区大学胡智航教授带你走进生命序列大模型，探索AI如何读懂DNA／RNA，解锁生命科学新可能](4.2_序列语言模型PLM/4.2.4_RNA-FM640维_mRNA-FM1280维密码子分词/DNA、RNA也能有自己的“大模型”？大湾区大学胡智航教授带你走进生命序列大模型，探索AI如何读懂DNA／RNA，解锁生命科学新可能.md)
+- 4.2.5 GPT 式自回归生成：Evo 2（DNA）、LOGOS（统一科学语法） **【已完成】** 📺 [超强解析 Evo2 基因组语言模型](4.2_序列语言模型PLM/超强解析 Evo2 基因组语言模型.md)（注：LOGOS（统一科学语法）未找到合适视频：两平台 10+ 组中英文关键词检索仅命中 logo 设计、游戏角色等无关内容，无讲解该分子设计模型的视频；Evo 2 已由本视频充分覆盖）
+- 4.2.6 均值池化 / 逐 token 嵌入（`return_per_token`） **【已完成】** 📺 [SBERT（Sentence-BERT）模型介绍](4.2_序列语言模型PLM/4.2.6_均值池化_逐token嵌入/SBERT（Sentence-BERT）模型介绍.md) · 📺 [CLS Pooling vs Mean Pooling in Python： Compare Semantic Search Recall](4.2_序列语言模型PLM/4.2.6_均值池化_逐token嵌入/CLS Pooling vs Mean Pooling in Python： Compare Semantic Search Recall.md)
 
 ## 4.3 扩散模型（diffusion）
-- 4.3.1 去噪直觉：noise → N_step/diffusion_steps → sample
-- 4.3.2 结构生成扩散：RFdiffusion、RFantibody（RFdiffusion_Ab.pt）
-- 4.3.3 结构预测扩散：Protenix、OpenFold3、Boltz-2（N_cycle / N_sample / N_step）
-- 4.3.4 序列-结构共设计扩散：DiffAb、dyMEAN、AMP-Diffusion（潜空间）
+- 4.3.1 去噪直觉：noise → N_step/diffusion_steps → sample **【已完成】** 📺 [大白话AI｜图像生成模型DDPM｜扩散模型｜生成模型｜概率扩散去噪生成模型](4.3_扩散模型diffusion/4.3.1_去噪直觉_noise到sample/大白话AI｜图像生成模型DDPM｜扩散模型｜生成模型｜概率扩散去噪生成模型.md) · 📺 [Diffusion Models：DDPM｜Generative AI Animated](4.3_扩散模型diffusion/4.3.1_去噪直觉_noise到sample/Diffusion%20Models：DDPM｜Generative%20AI%20Animated.md)
+- 4.3.2 结构生成扩散：RFdiffusion、RFantibody（RFdiffusion_Ab.pt） **【已完成】** 📺 [知识分享丨RFdiffusion介绍](4.3_扩散模型diffusion/4.3.2_结构生成扩散RFdiffusion_RFantibody/知识分享丨RFdiffusion介绍丨26／7／23.md) · 📺 [Baker实验室官方教程：用RFDiffusion3设计蛋白质Binder](4.3_扩散模型diffusion/4.3.2_结构生成扩散RFdiffusion_RFantibody/Baker实验室官方教程：用RFDiffusion3设计蛋白质Binder.md)（注：RFantibody 未找到合适视频：两平台仅见 B 站《全程零代码，点点鼠标即可完成抗体设计——RFantibody抗体设计AI工具》2m06s（字幕为界面宣传词，无原理讲解）、《抗体不再靠库筛？RFAntibody 直接"设计"》42s（字幕近空）与 YouTube Nano Helix《Designing Antibodies with RF Antibody in Nano Helix》4m03s 界面演示，均不涉及 CDR loop 规格、hotspots 与 RFdiffusion_Ab.pt 微调原理，信息量无法支撑可核查博客；RFdiffusion 主体已由上述两视频充分覆盖）
+- 4.3.3 结构预测扩散：Protenix、OpenFold3、Boltz-2（N_cycle / N_sample / N_step） **【已完成】** 📺 [【机器学习】AlphaFold 3 论文精讲 + 模型介绍](4.3_扩散模型diffusion/4.3.3_结构预测扩散Protenix_OpenFold3_Boltz-2/【机器学习】AlphaFold 3 论文精讲 + 模型介绍.md) · 📺 [Boltz-2：实现准确高效的结合亲和力预测](4.3_扩散模型diffusion/4.3.3_结构预测扩散Protenix_OpenFold3_Boltz-2/Boltz-2：实现准确高效的结合亲和力预测.md)
+- 4.3.4 序列-结构共设计扩散：DiffAb、dyMEAN、AMP-Diffusion（潜空间） **【处理中】**
 - 4.3.5 对接扩散：DiffDock（平移/旋转/扭转）、DiffPepDock
 
 ## 4.4 几何图神经网络
