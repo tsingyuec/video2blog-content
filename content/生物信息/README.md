@@ -133,33 +133,33 @@
 
 ## 4.5 经典机器学习与统计
 - 4.5.1 SVM / SVR 回归（ABDP pI/Tm） **【已完成】** 📺 [【数之道】支持向量机SVM是什么，八分钟直觉理解其本质](4.5_经典机器学习与统计/4.5.1_SVM_SVR回归_ABDP_pI_Tm/【数之道】支持向量机SVM是什么，八分钟直觉理解其本质.md) · 📺 [支持向量回归（SVR）](4.5_经典机器学习与统计/4.5.1_SVM_SVR回归_ABDP_pI_Tm/支持向量回归（SVR）.md)
-- 4.5.2 随机森林（ABDP Binding、p2ank） **【处理中】**
-- 4.5.3 ensemble 集成（APEX 40 权重）
-- 4.5.4 Voronoi 镶嵌几何（fpocket）
-- 4.5.5 逆折叠启发式搜索（RNAinverse、ProteinMPNN）
-- 4.5.6 分子力学与数值积分（GROMACS：EM → NVT → NPT → production）
+- 4.5.2 随机森林（ABDP Binding、p2ank） **【已完成】** 📺 [集成算法：决策树和随机森林的原理介绍](4.5_经典机器学习与统计/4.5.2_随机森林/集成算法：决策树和随机森林的原理介绍.md) · 📺 [\[中字\]简单易懂的随机森林算法原理分析](4.5_经典机器学习与统计/4.5.2_随机森林/[中字]简单易懂的随机森林算法原理分析.md) · 📺 [【五分钟机器学习】随机森林（RandomForest）：看我以弱搏强](4.5_经典机器学习与统计/4.5.2_随机森林/【五分钟机器学习】随机森林（RandomForest）：看我以弱搏强.md)
+- 4.5.3 ensemble 集成（APEX 40 权重） **【已完成】** 📺 [集成算法：bagging和boosting算法简介](4.5_经典机器学习与统计/4.5.3_ensemble_集成_APEX_40_权重/集成算法：bagging和boosting算法简介.md) · 📺 [【机器学习八股文】集成学习，bagging，boosting，stacking](4.5_经典机器学习与统计/4.5.3_ensemble_集成_APEX_40_权重/【机器学习八股文】集成学习，bagging，boosting，stacking.md)
+- 4.5.4 Voronoi 镶嵌几何（fpocket） **【已完成】** 📺 [Protein-ligand Docking Tutorial ： Using AutoDock Vina and fpocket tool](4.5_经典机器学习与统计/4.5.4_Voronoi镶嵌几何_fpocket/Protein-ligand Docking Tutorial ： Using AutoDock Vina and fpocket tool.md) · 📺 [12. Druggability feature predictions ｜ P2Rank, AF2BIND, and Fpocket ｜ BTK inhibitor binding sites](4.5_经典机器学习与统计/4.5.4_Voronoi镶嵌几何_fpocket/12. Druggability feature predictions ｜ P2Rank, AF2BIND, and Fpocket ｜ BTK inhibitor binding sites.md)
+- 4.5.5 逆折叠启发式搜索（RNAinverse、ProteinMPNN） **【已完成】** 📺 [没有公式！10分钟动画讲清蛋白质设计](4.5_经典机器学习与统计/4.5.5_逆折叠启发式搜索_RNAinverse_ProteinMPNN/没有公式！10分钟动画讲清蛋白质设计.md) · 📺 [设计优化蛋白序列，通过ProteinMPNN和alphafold2在线网站的傻瓜操作](4.5_经典机器学习与统计/4.5.5_逆折叠启发式搜索_RNAinverse_ProteinMPNN/设计优化蛋白序列，通过ProteinMPNN和alphafold2在线网站的傻瓜操作.md) · 📺 [RiboDiffusion：基于三级结构的RNA逆折叠生成式扩散模型](4.5_经典机器学习与统计/4.5.5_逆折叠启发式搜索_RNAinverse_ProteinMPNN/RiboDiffusion：基于三级结构的RNA逆折叠生成式扩散模型.md)（注：RNAinverse 未找到合适视频：两平台多轮中英文关键词（RNAinverse、RNA inverse folding、RNA 逆向设计、ViennaRNA 序列设计等）检索均无讲解该 ViennaRNA 工具的视频——B 站仅零散提及；YouTube 相关内容皆为深度学习方法的 RNA 逆折叠报告（RiboDiffusion、gRNAde、RWKV-IF 等）或 89 分钟数理向学术报告（Danny Barash），且报告类字幕本地抓取多受限流不可用；条目主题改由三视频覆盖：ProteinMPNN 原理动画（逆折叠=按环境逐位搜索氨基酸）、ProteinMPNN 网页版+AlphaFold 回折验证实操（设计→验证闭环）、RiboDiffusion ISMB 报告（RNA 三级结构逆折叠，含与二级结构方法及 Rosetta 物理优化的对比））
+- 4.5.6 分子力学与数值积分（GROMACS：EM → NVT → NPT → production） **【已完成】** 📺 [分子模拟从入门到发文章——3.能量最小化、体系平衡及模拟](4.5_经典机器学习与统计/4.5.6_分子力学与数值积分/分子模拟从入门到发文章——3.能量最小化、体系平衡及模拟.md) · 📺 [分子动力学模拟：第06集-能量最小化与NVT·NPT预平衡。GROMACS 教程 06｜能量最小化收敛判断 + NVT 控温 + NPT 控压-含 mdp 要点](4.5_经典机器学习与统计/4.5.6_分子力学与数值积分/分子动力学模拟：第06集-能量最小化与NVT·NPT预平衡。GROMACS 教程 06｜能量最小化收敛判断 + NVT 控温 + NPT 控压-含 mdp 要点.md) · 📺 [（101）谈谈做分子动力学模拟什么时候适合用NPT和NVT系综](4.5_经典机器学习与统计/4.5.6_分子力学与数值积分/（101）谈谈做分子动力学模拟什么时候适合用NPT和NVT系综.md)
 
 ---
 
 # 5. 模型层：按任务域的模型目录
 
 ## 5.1 结构预测域（序列 → 结构）
-- 5.1.1 Protenix —— AF3 类复合物预测旗舰 [仓库 protenix]
-- 5.1.2 OpenFold3 —— AF3 复刻（NIM / BioIR 双入口）[仓库 bioir]
-- 5.1.3 Boltz-2 —— MIT AF3 类模型（NIM / BioIR）[仓库 bioir]
-- 5.1.4 AlphaFold2 —— 经典单体 [仓库 alphafold2 配置]
-- 5.1.5 HighFold —— 环肽 / 环肽-蛋白复合物（CycPOEM）[仓库 highfold]
-- 5.1.6 ImmuneBuilder —— 抗体 / 纳米抗体 / TCR 三 builder [仓库 immunebuilder]
-- 5.1.7 dyMEAN `structure` 任务 —— 抗体-抗原复合物结构预测 
+- 5.1.1 Protenix —— AF3 类复合物预测旗舰 [仓库 protenix] **【已完成】** 📺 [教程：怎么使用Protenix进行分子对接](5.1_结构预测域/5.1.1_Protenix/教程：怎么使用Protenix进行分子对接.md) · 📺 [865-Protenix-v2： Biomolecular Structure Prediction](5.1_结构预测域/5.1.1_Protenix/865-Protenix-v2：%20Biomolecular%20Structure%20Prediction.md)
+- 5.1.2 OpenFold3 —— AF3 复刻（NIM / BioIR 双入口）[仓库 bioir] **【已完成】** 📺 [AI4LIFE Innovation Talks #5： OpenFold3 for Biological Structure Prediction](5.1_结构预测域/5.1.2_OpenFold3/AI4LIFE%20Innovation%20Talks%20%235：%20OpenFold3%20for%20Biological%20Structure%20Prediction.md) · 📺 [OpenFold3 and AQAffinity： A New Era of Open-Source Molecular Modeling](5.1_结构预测域/5.1.2_OpenFold3/OpenFold3%20and%20AQAffinity：%20A%20New%20Era%20of%20Open-Source%20Molecular%20Modeling.md)
+- 5.1.3 Boltz-2 —— MIT AF3 类模型（NIM / BioIR）[仓库 bioir] **【已完成】** 📺 [Using Boltz-2 NIM： A Short Tutorial](5.1_结构预测域/5.1.3_Boltz-2/Using%20Boltz-2%20NIM：%20A%20Short%20Tutorial.md) · 📺 [一键预测生物大分子，ChimeraX+Boltz2](5.1_结构预测域/5.1.3_Boltz-2/一键预测生物大分子，ChimeraX+Boltz2.md)
+- 5.1.4 AlphaFold2 —— 经典单体 [仓库 alphafold2 配置] **【已完成】** 📺 [【公开课】基于AI预测蛋白质折叠的三维空间结构——AlphaFold2原理及安装使用](5.1_结构预测域/5.1.4_AlphaFold2经典单体/【公开课】基于AI预测蛋白质折叠的三维空间结构——AlphaFold2原理及安装使用.md) · 📺 [AlphaFold2结果解读及可视化 （口齿基本清楚，故未加字幕）](5.1_结构预测域/5.1.4_AlphaFold2经典单体/AlphaFold2结果解读及可视化%20（口齿基本清楚，故未加字幕）.md)
+- 5.1.5 HighFold —— 环肽 / 环肽-蛋白复合物（CycPOEM）[仓库 highfold] **【已完成】** 📺 [Cyclic peptide structure prediction and design using AlphaFold](5.1_结构预测域/5.1.5_HighFold环肽与环肽-蛋白复合物/Cyclic peptide structure prediction and design using AlphaFold.md) · 📺 [Structure prediction of cyclic peptides via molecular dynamics and machine learning](5.1_结构预测域/5.1.5_HighFold环肽与环肽-蛋白复合物/Structure prediction of cyclic peptides via molecular dynamics and machine learning.md)（注：HighFold / CycPOEM 专名未找到合适视频——两平台多组中英文关键词（HighFold、cyclic peptide prediction、环肽 复合物 预测等）检索，HighFold 仅见 Vecura 42 秒产品宣传片（无字幕、无原理讲解，与 4.3.4 DiffAb 结论一致），CycPOEM 为论文基准集、无讲解视频；条目问题域「环肽 / 环肽-蛋白复合物结构预测」改由两条互补路线覆盖：AlphaFold 循环偏移 + AFDesign 序列/骨架设计路线（ML for protein engineering 研讨课 67min，一作亲历 + 晶体验证），与 MD + 机器学习 StrEAMM 结构系综预测路线（Peptide Drug Hunting Consortium 报告 41min，含元动力学采样机制与 R²≈0.96 模型））
+- 5.1.6 ImmuneBuilder —— 抗体 / 纳米抗体 / TCR 三 builder [仓库 immunebuilder] **【已完成】** 📺 [从序列到结构，一步搞定抗体建模（太香了）](5.1_结构预测域/从序列到结构，一步搞定抗体建模（太香了）.md)
+- 5.1.7 dyMEAN `structure` 任务 —— 抗体-抗原复合物结构预测 **【已完成】** 📺 [抗体-抗原对接：如何预测抗体识别抗原的结合方式？](5.1_结构预测域/5.1.7_dyMEAN_structure任务_抗体-抗原复合物结构预测/抗体-抗原对接：如何预测抗体识别抗原的结合方式.md) · 📺 [xTrimoDock：抗原抗体复合物结构预测](5.1_结构预测域/5.1.7_dyMEAN_structure任务_抗体-抗原复合物结构预测/xTrimoDock：抗原抗体复合物结构预测.md) · 📺 [Discovery Studio-抗体、抗原分子对接](5.1_结构预测域/5.1.7_dyMEAN_structure任务_抗体-抗原复合物结构预测/Discovery Studio-抗体、抗原分子对接.md)（注：dyMEAN 专名未找到合适视频——两平台多轮中英文关键词检索均无讲解该方法的视频，与 4.3.4、4.4.3 运行的检索结论一致；本条目问题域「抗体-抗原复合物结构预测」改由三视频覆盖：对接问题框架与避坑清单（4m21s）、AI 对接方法 xTrimoDock 原理与性能（12m21s）、Discovery Studio 传统对接四程序全流程实操（31m34s）；YouTube 侧候选因本地字幕端点 429 限流、kedou 无字幕返回、jdcloud 无法访问 YouTube 而全部不可用）
 
 ## 5.2 从头设计域（功能 → 序列/结构）
 ### 5.2.1 蛋白 Binder 设计三部曲
-- (a) RFdiffusion —— 骨架生成（contigs 配置）[仓库 RFdiffusion]
-- (b) ProteinMPNN —— 骨架 → 序列（逆折叠）
-- (c) Protenix/OpenFold3 —— 回折验证（回到 5.1）
+- (a) RFdiffusion —— 骨架生成（contigs 配置）[仓库 RFdiffusion] **【已完成】** 📺 [RFdiffusion系列教程（5）：结合蛋白设计](5.2_从头设计域/5.2.1a_RFDiffusion骨架生成/RFdiffusion系列教程（5）：结合蛋白设计.md) · 📺 [RFDiffusion3 AI蛋白设计 binder设计 上机操作 及 讲解](5.2_从头设计域/5.2.1a_RFDiffusion骨架生成/RFDiffusion3%20AI蛋白设计%20binder设计%20上机操作%20及%20讲解.md)（注：YouTube 侧 4 个候选（RosettaCommons《Fundamentals of protein binder design with RFdiffusion》20m32s、《Binder Design with RFdiffusion3》9m07s、Neurosnap《RFdiffusion Crash Course Part 1》10m44s、Bioinformatics Insights《Theory to Practical Part 3》34m15s）字幕抓取全部 429 限流，kedou 同步 code=500 且 jdcloud 无法访问 YouTube，与 5.1.7 运行结论一致；B 站《深度学习蛋白质设计教程2025最新…实操》56m 主体讲论文新颖性/可设计性指标且已在 3.5.2 采用，《Baker实验室官方教程：用RFDiffusion3设计蛋白质Binder》已在 4.3.2 采用，故本条目改由两支互补实操视频覆盖：经典 RFdiffusion contigs 配置（A1-150 + 70-100 长度区间 + PPI_HOTSPOT，PDB 甘氨酸骨架长度 87、PyMOL 目检 alpha 螺旋偏好）与 RFdiffusion3 全原子 JSON 配置（PDL1 靶蛋白、binder 长度 50~120、残基编号 18~132、原子级热点 A56/A66、10 batch ≈ 80 骨架、结尾点明下一步 MPNN），两视频恰好对应条目「骨架生成（contigs 配置）」的新旧两代写法）
+- (b) ProteinMPNN —— 骨架 → 序列（逆折叠） **【已完成】** 📺 [ProteinMPNN 华盛顿大学 Baker 实验室开发的 AI 蛋白质序列设计工具](5.2_从头设计域/5.2.1b_ProteinMPNN骨架到序列逆折叠/ProteinMPNN 华盛顿大学 Baker 实验室开发的 AI 蛋白质序列设计工具.md) · 📺 [双模型 ProteinMPNN 可视化教程｜通用 + 可溶性模型，零基础一键逆向设计蛋白序列](5.2_从头设计域/5.2.1b_ProteinMPNN骨架到序列逆折叠/双模型 ProteinMPNN 可视化教程｜通用 + 可溶性模型，零基础一键逆向设计蛋白序列.md) · 📺 [RFDiffusion3 AI蛋白设计 binder设计 上机操作 及 讲解 MPNN部分](5.2_从头设计域/5.2.1b_ProteinMPNN骨架到序列逆折叠/RFDiffusion3 AI蛋白设计 binder设计 上机操作 及 讲解 MPNN部分.md)
+- (c) Protenix/OpenFold3 —— 回折验证（回到 5.1） **【已完成】** 📺 [Using AI protein design to design binding proteins to challenging bacterial transporters](5.2_从头设计域/5.2.1c_ProtenixOpenFold3回折验证/Using%20AI%20protein%20design%20to%20design%20binding%20proteins%20to%20challenging%20bacterial%20transporters.md) · 📺 [ProteinDJ： A modular and open-source framework for protein design workflows](5.2_从头设计域/5.2.1c_ProtenixOpenFold3回折验证/ProteinDJ：%20A%20modular%20and%20open-source%20framework%20for%20protein%20design%20workflows.md)（注：Protenix/OpenFold3 主体已由 5.1.1–5.1.3 覆盖；本条目聚焦三部曲第三步「回折验证」——前者的 ChuA 案例演示 iPAE<10、pLDDT>90 过滤并以实验结构验证设计模型，后者讲解 AF2 initial guess 与 Boltz 两种验证程序及指标选择）
 
 ### 5.2.2 抗体设计簇
-- RFantibody (RFdiffusion-Ab) —— 抗体微调骨架设计（CDR loop 规格 + hotspots）[仓库 RFantibody]
+- RFantibody (RFdiffusion-Ab) —— 抗体微调骨架设计（CDR loop 规格 + hotspots）[仓库 RFantibody] **【已完成】** 📺 [Designing Antibodies with RF Antibody in Nano Helix](5.2_从头设计域/5.2.2_抗体设计簇/Designing%20Antibodies%20with%20RF%20Antibody%20in%20Nano%20Helix.md)（注：RFantibody 专名视频两平台仅见本篇 Nano Helix 官方操作教程 4m03s（en-orig 原声字幕经 yt-dlp android 客户端降级链抓取），覆盖完整网页工作流：靶蛋白 PDB 6C0B → 热点残基选择（AI 编程环境/手动点选）→ 截短 ≤500 残基 → 纳米抗体/scFv 框架模板 → CDR loop 长度调整 → RFantibody→ProteinMPNN→RosettaFold2 串行 → 五个设计抗体与热点贴合叠合检查；RFdiffusion_Ab.pt 微调原理仍无视频覆盖（与 4.3.2 运行结论一致）；B 站《文献快讯》10m 与《吴凡迪｜AI抗体设计》80m 经 cookie 降级链核实均无 AI 字幕轨（与既往结论一致）；kedou 当日配额耗尽（对照测试 code=500）；相邻候选《基于RF diffusion实现多肽设计》40m 有 ai-zh 字幕但为通用 RFdiffusion binder 流程（抗体仅一句带过），已由 4.3.2/3.5.2 覆盖，未收录）
 - DiffAb —— 扩散式 CDR 序列+结构共设计（5 种 mode）[仓库 diffab]
 - dyMEAN —— 全原子端到端设计（design/optimize 6 任务）[仓库 dymean]
 - IgGM —— 抗体生成式基础模型（从头/CDR/人源化/亲和力成熟/表位）[仓库 iggm]
