@@ -14,6 +14,7 @@
 | `rosettafold/` | RoseTTAFold All-Atom 论文精读 | 1 |
 | `protein_design/` | 蛋白质设计通识与课程（经典力场 → 深度学习） | 3 |
 | `highfold/` | HighFold / 环肽与二硫键结构预测 | 2 |
+| `gromacs/` | GROMACS 分子动力学：安装、建模、模拟与增强采样 | 19 |
 
 ## `alphafold/` — AlphaFold 图解与算法解析
 
@@ -80,6 +81,41 @@
 | --- | --- | --- | ---: |
 | 环肽结构预测与设计：用 AlphaFold 攻克「环」的难题 | [YouTube SDxy5E8fvXY](https://www.youtube.com/watch?v=SDxy5E8fvXY) | [博客](highfold/环肽结构预测与设计_基于AlphaFold.md) | 15 |
 | 富二硫键微型蛋白的从头设计：靶向 B 类 GPCR | [YouTube T4b9YuMhchg](https://www.youtube.com/watch?v=T4b9YuMhchg) | [博客](highfold/富二硫键微型蛋白的从头设计_靶向B类GPCR.md) | 15 |
+
+## `gromacs/` — GROMACS 分子动力学
+
+收录两套互补的中文视频课程：**玄月只有无言**的 12 集短课偏「概念 + 单点实操」，从安装、PDB/力场一路讲到膜蛋白、AMBER、元动力学与 GaMD；**材料人**的 7 集系统课偏「完整流水线」，从运行文件、源码编译、模拟流程、力场，到 LAMMPS–GROMACS 联用的长案例。两套课程都配有时间戳与幻灯片，可按需跳读。
+
+### 玄月只有无言：从入门到精通（12 集）
+
+| 名称 | 来源 | 博客 | 配图 |
+| --- | --- | --- | ---: |
+| 第 01 讲：在 Linux 上从零编译安装 GROMACS 与 PLUMED | [B站 BV1MhoUYKEhF](https://www.bilibili.com/video/BV1MhoUYKEhF/) | [博客](gromacs/GROMACS入门01_安装模拟软件GROMACS.md) | 13 |
+| 第 02 讲：认识 PDB 文件与力场 | [B站 BV1MhoUYKEjY](https://www.bilibili.com/video/BV1MhoUYKEjY/) | [博客](gromacs/GROMACS入门02_认识PDB与力场.md) | 10 |
+| 第 03 讲：蛋白质体系的完整动力学模拟流程 | [B站 BV1MaoUYvEwD](https://www.bilibili.com/video/BV1MaoUYvEwD/) | [博客](gromacs/GROMACS入门03_蛋白质体系的动力学模拟.md) | 12 |
+| 第 04 讲：用 VMD 做轨迹可视化与 RMSD、氢键分析 | [B站 BV1UJZNYmEyY](https://www.bilibili.com/video/BV1UJZNYmEyY/) | [博客](gromacs/GROMACS入门04_VMD轨迹可视化与RMSD氢键计算.md) | 10 |
+| 第 05 讲：蛋白质–配体复合物的动力学模拟 | [B站 BV1haZVYrEAu](https://www.bilibili.com/video/BV1haZVYrEAu/) | [博客](gromacs/GROMACS入门05_蛋白质配体复合物的动力学模拟.md) | 12 |
+| 第 06 讲：用 Uni-GBSA 计算结合自由能与能量分解 | [B站 BV1MdZGYTEYP](https://www.bilibili.com/video/BV1MdZGYTEYP/) | [博客](gromacs/GROMACS入门06_mmGBSA结合自由能与能量分解.md) | 8 |
+| 第 07 讲：用 CHARMM-GUI 搭建膜蛋白模拟体系 | [B站 BV1piocY4Etj](https://www.bilibili.com/video/BV1piocY4Etj/) | [博客](gromacs/GROMACS入门07_膜蛋白的动力学模拟.md) | 9 |
+| 第 08 讲：换用 AMBER 跑同一套蛋白质模拟 | [B站 BV1iMocY1Eef](https://www.bilibili.com/video/BV1iMocY1Eef/) | [博客](gromacs/GROMACS入门08_使用AMBER进行分子动力学模拟.md) | 10 |
+| 第 09 讲：势能面、玻尔兹曼分布与增强采样的动机 | [B站 BV18i5bzHEEC](https://www.bilibili.com/video/BV18i5bzHEEC/) | [博客](gromacs/GROMACS入门09_势能面与玻尔兹曼分布.md) | 10 |
+| 第 10 讲：元动力学（Metadynamics）理论 | [B站 BV1iURJBXEm3](https://www.bilibili.com/video/BV1iURJBXEm3/) | [博客](gromacs/GROMACS入门10_元动力学模拟理论.md) | 9 |
+| 第 11 讲：元动力学实战——用 PLUMED 跑一个案例 | [B站 BV1vURJBXEzX](https://www.bilibili.com/video/BV1vURJBXEzX/) | [博客](gromacs/GROMACS入门11_元动力学模拟案例.md) | 9 |
+| 第 12 讲：用 AMBER 做高斯加速动力学（GaMD） | [B站 BV1iJVT6SEmY](https://www.bilibili.com/video/BV1iJVT6SEmY/) | [博客](gromacs/GROMACS入门12_AMBER高斯加速动力学模拟.md) | 9 |
+
+### 材料人系统课（7 集）
+
+| 名称 | 来源 | 博客 | 配图 |
+| --- | --- | --- | ---: |
+| 第 01 讲：GROMACS 是什么，为什么适合初学者 | [B站 BV1k5411V7eW P1](https://www.bilibili.com/video/BV1k5411V7eW/?p=1) | [博客](gromacs/GROMACS系统课01_GROMACS简单介绍.md) | 6 |
+| 第 02 讲：运行文件、辅助工具与计算流程 | [B站 BV1k5411V7eW P2](https://www.bilibili.com/video/BV1k5411V7eW/?p=2) | [博客](gromacs/GROMACS系统课02_运行文件与计算流程.md) | 10 |
+| 第 03 讲：源码编译安装 GROMACS 的完整过程 | [B站 BV1k5411V7eW P3](https://www.bilibili.com/video/BV1k5411V7eW/?p=3) | [博客](gromacs/GROMACS系统课03_GROMACS编译安装.md) | 12 |
+| 第 04 讲：能量最小化、NVT、NPT 与生产模拟 | [B站 BV1k5411V7eW P4](https://www.bilibili.com/video/BV1k5411V7eW/?p=4) | [博客](gromacs/GROMACS系统课04_GROMACS模拟流程.md) | 6 |
+| 第 05 讲：力场是什么，GROMACS 里怎么选 | [B站 BV1k5411V7eW P5](https://www.bilibili.com/video/BV1k5411V7eW/?p=5) | [博客](gromacs/GROMACS系统课05_GROMACS力场介绍.md) | 8 |
+| 第 06 讲：LAMMPS 搭 KCl 水溶液，GROMACS 做分析（上） | [B站 BV1k5411V7eW P6](https://www.bilibili.com/video/BV1k5411V7eW/?p=6) | [博客](gromacs/GROMACS系统课06_LAMMPS-GROMACS联用一.md) | 14 |
+| 第 07 讲：LAMMPS 搭 KCl 水溶液，GROMACS 做分析（下） | [B站 BV1k5411V7eW P7](https://www.bilibili.com/video/BV1k5411V7eW/?p=7) | [博客](gromacs/GROMACS系统课07_LAMMPS-GROMACS联用二.md) | 12 |
+
+**阅读路径建议**：先跟「玄月 01–05」跑通一套蛋白–配体模拟，再看「材料人 02–05」补齐文件、编译与力场背景；想做自由能/增强采样时读「玄月 06、09–12」；需要把 LAMMPS 轨迹交给 GROMACS 分析时读「材料人 06–07」。
 
 ## 致谢与许可
 
