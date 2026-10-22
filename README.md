@@ -29,7 +29,7 @@ content/                        # 最终产物
 | aiinfra | 手撕 AI Infra 算子（CUDA + Triton + PyTorch） | 5 | [content/aiinfra](content/aiinfra/README.md) |
 | aiinfra_learning | AI INFRA 学习（vLLM 推理优化） | 5 | [content/aiinfra_learning](content/aiinfra_learning/README.md) |
 | flash_attention | Flash Attention 学习过程详解 | 8 | [content/flash_attention](content/flash_attention/README.md) |
-| biomodel | 生物大分子建模（AlphaFold / ProteinMPNN / RFdiffusion / RoseTTAFold / 蛋白质设计通识 / HighFold） | 24 | [content/biomodel](content/biomodel/README.md) |
+| biomodel | 生物分子与细胞建模（AlphaFold / ProteinMPNN / RFdiffusion / RoseTTAFold / 蛋白质设计 / HighFold / GROMACS / 虚拟细胞） | 53 | [content/biomodel](content/biomodel/README.md) |
 | biodata | 生物数据站点（STRING / UniProt） | 5 | [content/biodata](content/biodata/README.md) |
 | biobasic | 公共生物学（PPI 概念 / 互作研究技术 / 酵母双杂交） | 4 | [content/biobasic](content/biobasic/README.md) |
 | protein_interaction | Rosetta 蛋白-蛋白相互作用（PPI）设计工作坊（2025） | 8（已整理 2） | [content/protein_group/protein_interaction](content/protein_group/protein_interaction/README.md) |
