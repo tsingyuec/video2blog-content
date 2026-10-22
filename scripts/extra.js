@@ -4,12 +4,13 @@
    - 分界线：可左右拖动调整左栏宽度。宽度直接写进 .md-sidebar--primary 的**行内样式**
      （不依赖任何样式表规则，因此一定能生效），并按位移量计算；宽度存 localStorage，
      全站共享、双击复位；窄屏（抽屉）下自动交回 Material 的默认宽度。
-   - 收起：桌面端把左栏收到屏幕左缘，正文和右侧视频让出这块宽度；再点左缘「目录」展开。 */
+   - 收起：向左拖动分界线，宽度低于阈值时松手即收起；再点左缘「目录」展开，宽度回到拖动前。 */
 (function () {
   var KEY = "np-sidebar-w";
   var COLLAPSE_KEY = "np-sidebar-collapsed";
   var MIN = 150; /* px */
   var MAX = 560; /* px */
+  var COLLAPSE_AT = 80; /* 拖到比这更窄，松手后收起 */
   var DESKTOP = window.matchMedia("(min-width: 76.25em)");
 
   function primary() {
@@ -32,7 +33,7 @@
     return isFinite(v) ? v : null;
   }
 
-  function applyWidth(px, persist) {
+  function applyWidth(px, persist, allowNarrow) {
     var el = primary();
     if (!el) return null;
     if (px == null || !isFinite(px) || !DESKTOP.matches) {
@@ -40,7 +41,8 @@
       if (persist) saveWidth(null);
       return null;
     }
-    px = Math.round(Math.max(MIN, Math.min(MAX, px)));
+    var min = allowNarrow ? 0 : MIN;
+    px = Math.round(Math.max(min, Math.min(MAX, px)));
     el.style.width = px + "px";
     if (persist) saveWidth(px);
     return px;
@@ -69,10 +71,6 @@
   function setSidebarCollapsed(collapsed, persist) {
     if (!DESKTOP.matches) collapsed = false;
     document.body.classList.toggle("np-sidebar-collapsed", !!collapsed);
-    var buttons = document.querySelectorAll(".np-side-collapse");
-    for (var i = 0; i < buttons.length; i++) {
-      buttons[i].setAttribute("aria-expanded", collapsed ? "false" : "true");
-    }
     if (!persist) return;
     try {
       if (collapsed) localStorage.setItem(COLLAPSE_KEY, "1");
@@ -133,7 +131,7 @@
       e.preventDefault();
 
       function onMove(ev) {
-        applyWidth(startW + (ev.clientX - startX), false);
+        applyWidth(startW + (ev.clientX - startX), false, true);
       }
       function onUp() {
         bar.classList.remove("np-splitter--drag");
@@ -142,7 +140,12 @@
         document.removeEventListener("mouseup", onUp);
         var el = primary();
         var w = el ? parseFloat(el.style.width) : NaN;
-        saveWidth(isFinite(w) ? w : null);
+        if (!isFinite(w) || w < COLLAPSE_AT) {
+          applyWidth(startW, false);
+          setSidebarCollapsed(true, true);
+          return;
+        }
+        applyWidth(w, true);
       }
       document.addEventListener("mousemove", onMove);
       document.addEventListener("mouseup", onUp);
@@ -167,8 +170,7 @@
     bar.className = "np-toolbar";
     bar.innerHTML =
       '<span class="np-tab" data-np="file">文件</span>' +
-      '<span class="np-tab" data-np="outline">大纲</span>' +
-      '<button type="button" class="np-side-collapse" title="收起左侧目录" aria-label="收起左侧目录">收起</button>';
+      '<span class="np-tab" data-np="outline">大纲</span>';
 
     /* 克隆当前页大纲（右侧栏里的 md-nav--secondary） */
     var outline = document.createElement("div");
@@ -186,11 +188,6 @@
     nav.insertBefore(bar, nav.firstChild);
 
     bar.addEventListener("click", function (e) {
-      var collapse = e.target.closest ? e.target.closest(".np-side-collapse") : null;
-      if (collapse) {
-        setSidebarCollapsed(true, true);
-        return;
-      }
       var t = e.target.closest ? e.target.closest(".np-tab") : null;
       if (t) setMode(t.getAttribute("data-np"));
     });
@@ -630,6 +627,20 @@
     player.iframe.setAttribute("data-yt-ready", "1");
   }
 
+  var pageKey = location.pathname + location.search;
+
+  /* 切到另一篇文章时收起正在展开的播放器；同一页里的锚点跳转不动它。 */
+  function onPage() {
+    tagLinks();
+    var next = location.pathname + location.search;
+    if (next === pageKey) return;
+    pageKey = next;
+    if (!player) return;
+    if (!document.body.classList.contains("np-player-open")) return;
+    if (document.body.classList.contains("np-player-collapsed")) return;
+    setCollapsed(true);
+  }
+
   function boot() {
     restorePlayerWidth();
     placeTop();
@@ -638,9 +649,10 @@
     window.addEventListener("message", onMessage);
     window.addEventListener("resize", placeTop);
     if (DESKTOP.addEventListener) DESKTOP.addEventListener("change", placeTop);
-    tagLinks();
     if (window.document$ && typeof window.document$.subscribe === "function") {
-      window.document$.subscribe(tagLinks);
+      window.document$.subscribe(onPage);
+    } else {
+      tagLinks();
     }
   }
 

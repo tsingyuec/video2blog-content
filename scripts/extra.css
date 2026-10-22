@@ -278,22 +278,6 @@ body[data-md-color-scheme="slate"] {
   font-weight: 700;
   border-bottom-color: var(--md-typeset-a-color);
 }
-.np-toolbar .np-side-collapse {
-  display: none;
-  flex: 0 0 auto;
-  margin-left: 0.15rem;
-  border: none;
-  background: none;
-  font: inherit;
-  font-size: 0.7rem;
-  line-height: 1.4;
-  cursor: pointer;
-  color: var(--md-default-fg-color--light);
-  padding: 0.1rem 0.15rem;
-}
-.np-toolbar .np-side-collapse:hover {
-  color: var(--md-typeset-a-color);
-}
 
 /* 文件 / 大纲 切换：大纲由 JS 克隆到 .np-outline */
 .np-outline {
@@ -406,9 +390,6 @@ html[data-np-mode="outline"] .np-outline {
     border: 0 !important;
     visibility: hidden;
     pointer-events: none;
-  }
-  .np-toolbar .np-side-collapse {
-    display: inline;
   }
   body.np-sidebar-collapsed .np-splitter {
     display: none;
@@ -583,9 +564,6 @@ body.np-player-collapsed .np-player__stage {
 }
 body.np-player-collapsed .np-player__resize {
   display: none;
-}
-body.np-player-collapsed .md-top {
-  bottom: 3.6rem;
 }
 
 /* 桌面端：正文给右侧窗口让位，避免挡住文字 */
