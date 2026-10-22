@@ -1,11 +1,13 @@
-/* 左侧栏：文件 / 大纲 切换 + 可拖动的分界线
+/* 左侧栏：文件 / 大纲 切换 + 可拖动的分界线 + 向左收起
    - 文件：显示 /content 的目录树
    - 大纲：显示当前页的标题大纲（从右侧 md-nav--secondary 克隆而来）
    - 分界线：可左右拖动调整左栏宽度。宽度直接写进 .md-sidebar--primary 的**行内样式**
      （不依赖任何样式表规则，因此一定能生效），并按位移量计算；宽度存 localStorage，
-     全站共享、双击复位；窄屏（抽屉）下自动交回 Material 的默认宽度。 */
+     全站共享、双击复位；窄屏（抽屉）下自动交回 Material 的默认宽度。
+   - 收起：桌面端把左栏收到屏幕左缘，正文和右侧视频让出这块宽度；再点左缘「目录」展开。 */
 (function () {
   var KEY = "np-sidebar-w";
+  var COLLAPSE_KEY = "np-sidebar-collapsed";
   var MIN = 150; /* px */
   var MAX = 560; /* px */
   var DESKTOP = window.matchMedia("(min-width: 76.25em)");
@@ -53,6 +55,43 @@
 
   function restoreWidth() {
     applyWidth(savedWidth(), false);
+  }
+
+  /* ---------- 向左收起 ---------- */
+  function savedCollapsed() {
+    try {
+      return localStorage.getItem(COLLAPSE_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function setSidebarCollapsed(collapsed, persist) {
+    if (!DESKTOP.matches) collapsed = false;
+    document.body.classList.toggle("np-sidebar-collapsed", !!collapsed);
+    var buttons = document.querySelectorAll(".np-side-collapse");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+    if (!persist) return;
+    try {
+      if (collapsed) localStorage.setItem(COLLAPSE_KEY, "1");
+      else localStorage.removeItem(COLLAPSE_KEY);
+    } catch (e) {}
+  }
+
+  function mountExpand() {
+    if (document.querySelector(".np-side-expand")) return;
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "np-side-expand";
+    button.textContent = "目录";
+    button.title = "展开左侧目录";
+    button.setAttribute("aria-label", "展开左侧目录");
+    button.addEventListener("click", function () {
+      setSidebarCollapsed(false, true);
+    });
+    document.body.appendChild(button);
   }
 
   /* ---------- 文件 / 大纲 切换 ---------- */
@@ -128,7 +167,8 @@
     bar.className = "np-toolbar";
     bar.innerHTML =
       '<span class="np-tab" data-np="file">文件</span>' +
-      '<span class="np-tab" data-np="outline">大纲</span>';
+      '<span class="np-tab" data-np="outline">大纲</span>' +
+      '<button type="button" class="np-side-collapse" title="收起左侧目录" aria-label="收起左侧目录">收起</button>';
 
     /* 克隆当前页大纲（右侧栏里的 md-nav--secondary） */
     var outline = document.createElement("div");
@@ -146,19 +186,33 @@
     nav.insertBefore(bar, nav.firstChild);
 
     bar.addEventListener("click", function (e) {
+      var collapse = e.target.closest ? e.target.closest(".np-side-collapse") : null;
+      if (collapse) {
+        setSidebarCollapsed(true, true);
+        return;
+      }
       var t = e.target.closest ? e.target.closest(".np-tab") : null;
       if (t) setMode(t.getAttribute("data-np"));
     });
 
     setMode(currentMode());
     mountSplitter();
+    mountExpand();
     restoreWidth();
+    setSidebarCollapsed(savedCollapsed(), false);
+  }
+
+  function onDesktopChange() {
+    restoreWidth();
+    setSidebarCollapsed(savedCollapsed(), false);
   }
 
   function boot() {
     restoreWidth();
-    window.addEventListener("resize", restoreWidth);
-    if (DESKTOP.addEventListener) DESKTOP.addEventListener("change", restoreWidth);
+    mountExpand();
+    setSidebarCollapsed(savedCollapsed(), false);
+    window.addEventListener("resize", onDesktopChange);
+    if (DESKTOP.addEventListener) DESKTOP.addEventListener("change", onDesktopChange);
     if (window.document$ && typeof window.document$.subscribe === "function") {
       window.document$.subscribe(inject);
     } else {
@@ -347,18 +401,14 @@
     setPlayerWidth(isFinite(v) ? v : WIDTH_DEFAULT, false);
   }
 
+  /* 位置交给样式表：展开时在顶栏以下的区域里垂直居中，收起时贴右下角。 */
   function placeTop() {
-    if (!player) return;
-    var dock = DESKTOP.matches &&
-      document.body.classList.contains("np-player-open") &&
-      !document.body.classList.contains("np-player-collapsed");
-    if (!dock) {
-      player.root.style.top = "";
-      return;
-    }
     var header = document.querySelector(".md-header");
     var h = header ? Math.round(header.getBoundingClientRect().height) : 48;
-    player.root.style.top = (h + 10) + "px";
+    document.documentElement.style.setProperty("--np-header-h", h + "px");
+    if (!player) return;
+    player.root.style.top = "";
+    player.root.style.transform = "";
   }
 
   function mark(a) {
@@ -582,6 +632,7 @@
 
   function boot() {
     restorePlayerWidth();
+    placeTop();
     document.addEventListener("click", onClick, true);
     document.addEventListener("keydown", onKey);
     window.addEventListener("message", onMessage);

@@ -278,6 +278,22 @@ body[data-md-color-scheme="slate"] {
   font-weight: 700;
   border-bottom-color: var(--md-typeset-a-color);
 }
+.np-toolbar .np-side-collapse {
+  display: none;
+  flex: 0 0 auto;
+  margin-left: 0.15rem;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  cursor: pointer;
+  color: var(--md-default-fg-color--light);
+  padding: 0.1rem 0.15rem;
+}
+.np-toolbar .np-side-collapse:hover {
+  color: var(--md-typeset-a-color);
+}
 
 /* 文件 / 大纲 切换：大纲由 JS 克隆到 .np-outline */
 .np-outline {
@@ -378,6 +394,53 @@ html[data-np-mode="outline"] .np-outline {
     cursor: col-resize !important;
     user-select: none !important;
   }
+
+  /* 收起后左栏不再占位，正文从窗口左缘排起 */
+  body.np-sidebar-collapsed .md-sidebar--primary {
+    width: 0 !important;
+    min-width: 0 !important;
+    flex: 0 0 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .np-toolbar .np-side-collapse {
+    display: inline;
+  }
+  body.np-sidebar-collapsed .np-splitter {
+    display: none;
+  }
+  body.np-sidebar-collapsed .md-main__inner.md-grid {
+    padding-left: 0;
+  }
+  body.np-sidebar-collapsed .np-side-expand {
+    display: block;
+  }
+}
+
+.np-side-expand {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  border: 1px solid var(--np-rule, #c5c5c5);
+  border-left: none;
+  background: var(--md-default-bg-color, #f3f2ee);
+  color: var(--md-default-fg-color, #1f0909);
+  font: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  padding: 0.7rem 0.28rem;
+  cursor: pointer;
+}
+.np-side-expand:hover {
+  color: var(--md-typeset-a-color, #065588);
 }
 
 /* ---------- 10. 时间戳：右侧就地播放，不离开当前文章 ---------- */
@@ -490,11 +553,20 @@ body.np-player-drag * {
   user-select: none !important;
 }
 
+/* 桌面端展开时，在顶栏以下的区域里上下居中 */
+@media screen and (min-width: 76.25em) {
+  body.np-player-open:not(.np-player-collapsed) .np-player {
+    top: calc(var(--np-header-h, 2.4rem) + (100vh - var(--np-header-h, 2.4rem)) / 2);
+    transform: translateY(-50%);
+  }
+}
+
 /* 收起后变成右下角一条，播放不中断，正文恢复全宽 */
 body.np-player-collapsed .np-player {
   top: auto;
   bottom: 0.8rem;
   left: auto;
+  transform: none;
   width: auto;
   min-width: 16rem;
   max-width: calc(100vw - 1.5rem);
