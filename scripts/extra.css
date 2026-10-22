@@ -379,3 +379,160 @@ html[data-np-mode="outline"] .np-outline {
     user-select: none !important;
   }
 }
+
+/* ---------- 10. 时间戳：右侧就地播放，不离开当前文章 ---------- */
+.md-typeset a.np-ts-on {
+  background-color: color-mix(in srgb, var(--md-typeset-a-color) 18%, transparent);
+  border-radius: 2px;
+}
+
+.np-player {
+  position: fixed;
+  z-index: 2;
+  top: calc(var(--md-header-height, 2.4rem) + 0.65rem);
+  right: 0.75rem;
+  width: min(var(--np-player-w, 420px), calc(100vw - 1.5rem));
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  color: var(--md-default-fg-color, #1f0909);
+  background: var(--md-default-bg-color, #f3f2ee);
+  border: 1px solid var(--np-rule, #c5c5c5);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+}
+.np-player[hidden] {
+  display: none !important;
+}
+
+.np-player__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.35rem 0.35rem 0.7rem;
+  border-bottom: 1px solid var(--np-rule, #c5c5c5);
+  background: var(--md-default-bg-color--light, #f6f5f1);
+  user-select: none;
+}
+.np-player__time {
+  font-family: var(--md-code-font);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+.np-player__kind {
+  color: var(--md-default-fg-color--lighter, #777777);
+  font-size: 0.75rem;
+}
+.np-player__gap {
+  flex: 1 1 auto;
+}
+.np-player__btn {
+  font: inherit;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--md-typeset-a-color, #065588);
+  background: none;
+  border: none;
+  padding: 0.12rem 0.4rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.np-player__btn:hover {
+  text-decoration: underline;
+}
+.np-player__btn:focus-visible {
+  outline: 2px solid var(--md-typeset-a-color);
+  outline-offset: 1px;
+}
+
+.np-player__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: calc(100vh - 6.5rem);
+  background: #111;
+}
+.np-player__stage iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #111;
+}
+
+.np-player__resize {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -5px;
+  width: 10px;
+  cursor: col-resize;
+  touch-action: none;
+  z-index: 1;
+}
+.np-player__resize:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  width: 1px;
+  background: var(--np-rule);
+  opacity: 0;
+}
+.np-player__resize:hover:before,
+.np-player__resize--drag:before {
+  opacity: 1;
+}
+body.np-player-drag,
+body.np-player-drag * {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+
+/* 收起后变成右下角一条，播放不中断，正文恢复全宽 */
+body.np-player-collapsed .np-player {
+  top: auto;
+  bottom: 0.8rem;
+  left: auto;
+  width: auto;
+  min-width: 16rem;
+  max-width: calc(100vw - 1.5rem);
+}
+body.np-player-collapsed .np-player__stage {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  max-height: none;
+  aspect-ratio: auto;
+  overflow: hidden;
+  clip-path: inset(50%);
+  pointer-events: none;
+}
+body.np-player-collapsed .np-player__resize {
+  display: none;
+}
+body.np-player-collapsed .md-top {
+  bottom: 3.6rem;
+}
+
+/* 桌面端：正文给右侧窗口让位，避免挡住文字 */
+@media screen and (min-width: 76.25em) {
+  body.np-player-open:not(.np-player-collapsed) .md-content {
+    padding-right: calc(var(--np-player-w, 420px) + 1.35rem);
+  }
+}
+
+/* 窄屏：底部播放条，不挤压正文 */
+@media screen and (max-width: 76.24em) {
+  body.np-player-open:not(.np-player-collapsed) .np-player {
+    top: auto;
+    left: 0.6rem;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    width: auto;
+  }
+  .np-player__resize {
+    display: none;
+  }
+}
