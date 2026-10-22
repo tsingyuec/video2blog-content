@@ -41,7 +41,8 @@ EXCLUDE_DIRS = {"transcripts", "code"}
 # 「扁平」结构的分组根目录：如 content/biomodel/<模型>/*.md、content/biodata/<站点>/*.md、
 # content/biobasic/*.md —— 这些目录下不再有 README.md 与 blog/，博客与配图直接落在子目录里
 # 生物信息：Maka 定时任务产出的章节目录（章节/条目/配图，同样无 blog/ 层）
-FLAT_ROOT_DIRS = ("biomodel", "biodata", "biobasic", "生物信息")
+# 容器技术：同结构新知识树（层级为 第N章 → X.Y 小节 → X.Y.Z 条目）
+FLAT_ROOT_DIRS = ("biomodel", "biodata", "biobasic", "生物信息", "容器技术")
 
 # 侧栏 = /content 的真实目录树；同级按自然序（第2讲 排在 第10讲 前）
 

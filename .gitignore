@@ -1,62 +1,43 @@
-# 只版本化「博客」与「视频演说图文稿」；视频、抽帧、字幕、元数据、工具等
-# 均由处理流程可再生，或属本地环境，不入库。
-# content 下允许「系列」直接位于 content/ 下，也允许再套一层分组目录（如 content/vllm_group/vllm）。
+# 版本化策略：content/ 下的内容（博客、配图、索引、配套代码）默认全部入库；
+# 仅排除「可再生 / 本地环境」类产物。视频、抽帧、字幕、图文稿等中间结果一律放在
+# temp/ 或 _work/ 下（已忽略），不应出现在 content/ 中。
 
-# 1) 先忽略 content 下的一切
-content/**/*
+# 1) 中间产物：视频演说图文稿（含抽帧 img/）
+content/**/transcripts/
 
-# 2) 反向保留各级目录本身（否则 Git 不会向下查找）
-!content/**/
+# 2) 媒体与字幕原料（不应出现在 content/，出现即视为误放）
+content/**/*.mp4
+content/**/*.mkv
+content/**/*.webm
+content/**/*.flv
+content/**/*.srt
+content/**/*.ass
+content/**/*.vtt
 
-# 3) 反向保留各级视频索引 README（系列 / 分组）
-!content/**/README.md
-
-# 4) 反向保留「博客」（含配图 assets/）
-!content/**/blog/
-!content/**/blog/**
-
-# 5) 反向保留「视频演说图文稿」（含代表帧 img/）
-# !content/**/transcripts/
-# !content/**/transcripts/**
-
-# 6) 反向保留各系列「配套代码」目录 code/（虚拟环境与 Python 缓存仍忽略）
-!content/**/code/
-!content/**/code/**
-content/**/code/.venv/
-content/**/code/**/__pycache__/
-content/**/code/**/*.py[cod]
+# 3) 配套代码目录中的虚拟环境与缓存
+content/**/.venv/
+content/**/venv/
+content/**/__pycache__/
+content/**/*.py[cod]
 content/**/code/**/*.cif
 
-# 7) 反向保留「扁平分组」：biomodel / biodata / biobasic 下的博客与配图
-#    （这些主题子目录内不再有 README.md 与 blog/，博客直接落在子目录里）
-!content/biomodel/
-!content/biomodel/**
-!content/biodata/
-!content/biodata/**
-!content/biobasic/
-!content/biobasic/**
-# 其中子目录下的 transcripts/ 仍不收录
-content/biomodel/**/transcripts/
-content/biobasic/**/transcripts/
-
-# 8) 反向保留「生物信息」：自动任务产出的章节目录（结构与 biobasic 类似，
-#    但可能再套一层子子目录；规则文件 AGENT_TASK.md 同在此处）
-!content/生物信息/
-!content/生物信息/**
-
-# 项目内工具（多 P 封装等）与临时目录
+# 4) 项目内工具与临时目录
 /tools/
 **/_work/
-
-# 自动整理任务的临时中间产物（视频/抽帧/字幕/文稿）
 temp/
 
-# skills CLI 装在本地的 skill 拷贝（Maka Agent 首轮运行时安装）
+# 5) skills CLI 装在本地的 skill 拷贝（Maka Agent 首次运行时安装）
 .agents/
 .claude/
 agent/
 skills-lock.json
 
-# 站点构建产物（由 scripts/build_site.py 与 mkdocs 生成）
+# 6) 站点构建产物（由 scripts/build_site.py 与 mkdocs 生成）
 /build/
 /site/
+
+# 7) 系统与编辑器噪音
+.DS_Store
+Thumbs.db
+*.swp
+*~

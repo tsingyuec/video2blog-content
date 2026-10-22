@@ -70,3 +70,29 @@ pip install -r ~/.agents/skills/video2blog/requirements.txt   # opencv-python、
   1. **筛选**：先根据视频标题、简介等介绍信息做大致排序，剔除与关键词不相关或相关度很低的视频。
   2. **精排**：对剩下可能高质量的视频抓取字幕，据此判断其介绍内容的**详细程度**，做更合理的排序。
   3. **展示**：按最终排序将视频展示给用户。
+
+## Maka 定时任务管理
+
+Maka 无公共 CLI；正规通道是用其内置的 Runtime Host 客户端 RPC（Electron 运行中即可连，无需重启）：
+
+```js
+// 存为 .mjs 后执行：ELECTRON_RUN_AS_NODE=1 /opt/Maka/maka <脚本>.mjs
+import { createRequire } from 'node:module';
+const require = createRequire('/opt/Maka/resources/app.asar/');
+const { connectExistingRuntimeHost } = require('@maka/runtime-host/client');
+const c = await connectExistingRuntimeHost({
+  rootPath: '/home/zn102/.config/Maka/workspaces/default',
+  protocol: { min: 0, max: 0 }, compositionId: 'maka.interactive',
+});
+const r = await c.connection.request('scheduled-task.mutate', { /* 输入见下 */ }, 15000);
+await c.connection.close();
+```
+
+- **创建**：`{ kind: 'create', input: { title, intentBody, schedule, effect } }`；调度 `schedule` 三选一：
+  `{kind:'once', runAt}` / `{kind:'interval', everySeconds, startAt}` / `{kind:'cron', expression}`（时间用 epoch 毫秒）；
+  效果 `effect` 三选一：`{kind:'notify', channel:'local'}`（仅提醒）/
+  `{kind:'session_resume', sessionId}`（续原对话）/
+  `{kind:'agent_run', execution:{cwd, llmConnectionId, llmConnectionSlug, model, permissionMode, collaborationMode, orchestrationMode}}`（独立运行；`permissionMode` 取 `explore|ask|bypass`，无人值守用 `bypass`；连接 ID/模型见 `~/.config/Maka/workspaces/default/connection-catalog.json`）。
+- **查询/暂停/恢复/删除/立即触发**：`{kind:'query'}` 走 `scheduled-task.query`（`{kind:'list'}` 或 `{kind:'get', taskId}`）；
+  变更均发 `scheduled-task.mutate`：`{kind:'pause'|'resume'|'delete'|'trigger_now', taskId}`。
+- 也可以在 Maka 应用内对话中直接说「创建/暂停定时任务…」，Agent 会调用内置 ScheduledTask 工具，效果相同。
