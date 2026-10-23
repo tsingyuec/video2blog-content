@@ -432,9 +432,10 @@ html[data-np-mode="outline"] .np-outline {
 
 .np-player {
   position: fixed;
-  z-index: 2;
-  top: calc(var(--md-header-height, 2.4rem) + 0.65rem);
+  z-index: 3;
+  top: auto;
   right: 0.75rem;
+  bottom: 0.8rem;
   width: min(var(--np-player-w, 420px), calc(100vw - 1.5rem));
   display: flex;
   flex-direction: column;
@@ -534,15 +535,7 @@ body.np-player-drag * {
   user-select: none !important;
 }
 
-/* 桌面端展开时，在顶栏以下的区域里上下居中 */
-@media screen and (min-width: 76.25em) {
-  body.np-player-open:not(.np-player-collapsed) .np-player {
-    top: calc(var(--np-header-h, 2.4rem) + (100vh - var(--np-header-h, 2.4rem)) / 2);
-    transform: translateY(-50%);
-  }
-}
-
-/* 收起后变成右下角一条，播放不中断，正文恢复全宽 */
+/* 收起后仍在右下角，只留一条，播放不中断 */
 body.np-player-collapsed .np-player {
   top: auto;
   bottom: 0.8rem;
@@ -566,14 +559,7 @@ body.np-player-collapsed .np-player__resize {
   display: none;
 }
 
-/* 桌面端：正文给右侧窗口让位，避免挡住文字 */
-@media screen and (min-width: 76.25em) {
-  body.np-player-open:not(.np-player-collapsed) .md-content {
-    padding-right: calc(var(--np-player-w, 420px) + 1.35rem);
-  }
-}
-
-/* 窄屏：底部播放条，不挤压正文 */
+/* 窄屏：底部铺开，仍盖在正文上 */
 @media screen and (max-width: 76.24em) {
   body.np-player-open:not(.np-player-collapsed) .np-player {
     top: auto;

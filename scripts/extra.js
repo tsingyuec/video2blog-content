@@ -398,11 +398,8 @@
     setPlayerWidth(isFinite(v) ? v : WIDTH_DEFAULT, false);
   }
 
-  /* 位置交给样式表：展开时在顶栏以下的区域里垂直居中，收起时贴右下角。 */
+  /* 清掉曾经写在元素上的 top / transform，位置完全由样式表决定。 */
   function placeTop() {
-    var header = document.querySelector(".md-header");
-    var h = header ? Math.round(header.getBoundingClientRect().height) : 48;
-    document.documentElement.style.setProperty("--np-header-h", h + "px");
     if (!player) return;
     player.root.style.top = "";
     player.root.style.transform = "";
