@@ -73,6 +73,9 @@
 ## 2.6 模拟文件族（GROMACS）
 - 2.6.1 .gro（坐标）、.top（拓扑）、.mdp（参数）、.ndx（索引）、.xtc（轨迹）、.tpr（运行输入） **【已完成】** 📺 [Gromacs视频教程-文件格式-gro文件](2.6_模拟文件族GROMACS/2.6.1_GROMACS模拟文件族/Gromacs视频教程-文件格式-gro文件.md) · 📺 [Gromacs入门讲解](2.6_模拟文件族GROMACS/2.6.1_GROMACS模拟文件族/Gromacs入门讲解.md)
 
+## 2.7 本体与术语数据（OLS）
+- 2.7.1 OLS（Ontology Lookup Service）：统一检索生物医学本体 **【已完成】** 📺 [Ontology Lookup Service (OLS)](2.7_本体与术语数据OLS/Ontology%20Lookup%20Service%20%28OLS%29.md) · 📺 [Building a Repository of Biomedical Ontologies with Neo4j](2.7_本体与术语数据OLS/Building%20a%20Repository%20of%20Biomedical%20Ontologies%20with%20Neo4j.md) · 📺 [Searching for an Ontology Term using Ontology Lookup Service](2.7_本体与术语数据OLS/Searching%20for%20an%20Ontology%20Term%20using%20Ontology%20Lookup%20Service.md)（三视频互补：OLS 使用全貌 / Neo4j 后端架构 / OLS4 实操）
+
 ---
 
 # 3. 指标层：读懂模型输出的数字
