@@ -231,9 +231,11 @@
    再次点击只跳进度；换视频或 Bilibili 分 P 则切换播放地址。 */
 (function () {
   var WIDTH_KEY = "np-player-w";
+  var HEIGHT_KEY = "np-player-h";
   var WIDTH_DEFAULT = 420;
   var WIDTH_MIN = 280;
-  var WIDTH_MAX = 760;
+  var WIDTH_MAX = 2400;
+  var HEIGHT_MIN = 150;
   var DESKTOP = window.matchMedia("(min-width: 76.25em)");
 
   var player = null;
@@ -380,10 +382,19 @@
     };
   }
 
+  function maxPlayerWidth() {
+    var view = (window.innerWidth || 1280) - 32;
+    return Math.max(WIDTH_MIN, Math.min(WIDTH_MAX, view));
+  }
+
+  function maxStageHeight() {
+    return Math.max(HEIGHT_MIN, (window.innerHeight || 800) - 96);
+  }
+
   function setPlayerWidth(px, persist) {
     var reset = px == null || !isFinite(px);
     if (reset) px = WIDTH_DEFAULT;
-    px = Math.round(Math.max(WIDTH_MIN, Math.min(WIDTH_MAX, px)));
+    px = Math.round(Math.max(WIDTH_MIN, Math.min(maxPlayerWidth(), px)));
     document.documentElement.style.setProperty("--np-player-w", px + "px");
     if (!persist) return;
     try {
@@ -392,10 +403,30 @@
     } catch (err) {}
   }
 
-  function restorePlayerWidth() {
+  function setStageHeight(px, persist) {
+    var reset = px == null || !isFinite(px);
+    if (reset) {
+      document.documentElement.style.removeProperty("--np-player-stage-h");
+      if (player) player.root.classList.remove("np-player--custom-h");
+    } else {
+      px = Math.round(Math.max(HEIGHT_MIN, Math.min(maxStageHeight(), px)));
+      document.documentElement.style.setProperty("--np-player-stage-h", px + "px");
+      if (player) player.root.classList.add("np-player--custom-h");
+    }
+    if (!persist) return;
+    try {
+      if (reset) localStorage.removeItem(HEIGHT_KEY);
+      else localStorage.setItem(HEIGHT_KEY, String(px));
+    } catch (err) {}
+  }
+
+  function restorePlayerSize() {
     var v = NaN;
+    var h = NaN;
     try { v = parseInt(localStorage.getItem(WIDTH_KEY), 10); } catch (err) {}
+    try { h = parseInt(localStorage.getItem(HEIGHT_KEY), 10); } catch (err2) {}
     setPlayerWidth(isFinite(v) ? v : WIDTH_DEFAULT, false);
+    if (isFinite(h)) setStageHeight(h, false);
   }
 
   /* 清掉曾经写在元素上的 top / transform，位置完全由样式表决定。 */
@@ -461,6 +492,7 @@
     root.setAttribute("aria-label", "视频播放");
     root.innerHTML =
       '<div class="np-player__resize" role="separator" aria-orientation="vertical" aria-label="拖动调整播放器宽度，双击复位" title="拖动调整宽度，双击复位"></div>' +
+      '<div class="np-player__corner" role="separator" aria-label="从左上角拖动调整播放器大小，双击复位" title="拖动调整大小，双击复位"></div>' +
       '<div class="np-player__bar">' +
         '<span class="np-player__time">00:00:00</span>' +
         '<span class="np-player__kind"></span>' +
@@ -477,10 +509,15 @@
       root: root,
       time: root.querySelector(".np-player__time"),
       kind: root.querySelector(".np-player__kind"),
+      bar: root.querySelector(".np-player__bar"),
       collapseBtn: root.querySelector("[data-np-act='collapse']"),
       iframe: root.querySelector("iframe"),
-      resize: root.querySelector(".np-player__resize")
+      resize: root.querySelector(".np-player__resize"),
+      corner: root.querySelector(".np-player__corner")
     };
+    if (document.documentElement.style.getPropertyValue("--np-player-stage-h")) {
+      root.classList.add("np-player--custom-h");
+    }
 
     root.addEventListener("click", function (e) {
       var btn = e.target && e.target.closest ? e.target.closest("[data-np-act]") : null;
@@ -512,7 +549,7 @@
       e.preventDefault();
       function onMove(ev) {
         var px = rightEdge - ev.clientX;
-        var max = Math.min(WIDTH_MAX, window.innerWidth - 240);
+        var max = rightEdge - 12;
         if (px > max) px = max;
         setPlayerWidth(px, false);
       }
@@ -530,6 +567,47 @@
 
     player.resize.addEventListener("dblclick", function () {
       setPlayerWidth(null, true);
+    });
+
+    player.corner.addEventListener("mousedown", function (e) {
+      if (e.button !== 0 || !DESKTOP.matches) return;
+      if (document.body.classList.contains("np-player-collapsed")) return;
+      var rect = player.root.getBoundingClientRect();
+      var rightEdge = rect.right;
+      var bottomEdge = rect.bottom;
+      var barH = player.bar.getBoundingClientRect().height;
+      player.corner.classList.add("np-player__corner--drag");
+      document.body.classList.add("np-player-drag");
+      document.body.classList.add("np-player-drag--corner");
+      e.preventDefault();
+      function onMove(ev) {
+        var w = rightEdge - ev.clientX;
+        var stageH = bottomEdge - ev.clientY - barH;
+        var maxW = rightEdge - 12;
+        var maxH = bottomEdge - 12 - barH;
+        if (w > maxW) w = maxW;
+        if (stageH > maxH) stageH = maxH;
+        setPlayerWidth(w, false);
+        setStageHeight(stageH, false);
+      }
+      function onUp() {
+        player.corner.classList.remove("np-player__corner--drag");
+        document.body.classList.remove("np-player-drag");
+        document.body.classList.remove("np-player-drag--corner");
+        document.removeEventListener("mousemove", onMove);
+        document.removeEventListener("mouseup", onUp);
+        var curW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--np-player-w"));
+        var curH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--np-player-stage-h"));
+        if (isFinite(curW)) setPlayerWidth(curW, true);
+        if (isFinite(curH)) setStageHeight(curH, true);
+      }
+      document.addEventListener("mousemove", onMove);
+      document.addEventListener("mouseup", onUp);
+    });
+
+    player.corner.addEventListener("dblclick", function () {
+      setPlayerWidth(null, true);
+      setStageHeight(null, true);
     });
 
     return player;
@@ -639,7 +717,7 @@
   }
 
   function boot() {
-    restorePlayerWidth();
+    restorePlayerSize();
     placeTop();
     document.addEventListener("click", onClick, true);
     document.addEventListener("keydown", onKey);
