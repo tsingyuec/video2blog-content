@@ -30,7 +30,7 @@ content/                        # 最终产物
 | aiinfra_learning | AI INFRA 学习（vLLM 推理优化） | 5 | [content/aiinfra_learning](content/aiinfra_learning/README.md) |
 | flash_attention | Flash Attention 学习过程详解 | 8 | [content/flash_attention](content/flash_attention/README.md) |
 | biomodel | 生物分子与细胞建模（AlphaFold / ProteinMPNN / RFdiffusion / RoseTTAFold / 蛋白质设计 / HighFold / GROMACS / 虚拟细胞） | 53 | [content/biomodel](content/biomodel/README.md) |
-| 虚拟细胞 | 虚拟细胞精选版（每个视频一篇：总览 / 数据 / 评价 / 三个模型 / 选型） | 11 | [content/虚拟细胞](content/虚拟细胞/README.md) |
+| 虚拟细胞 | 虚拟细胞精选版（每个视频一篇：总览 / 数据 / 评价 / 三个模型 / 选型）＋ 实验基础四类（文库构建 / 表达载体 / sgRNA / 基因敲除） | 11 ＋ 8 | [content/虚拟细胞](content/虚拟细胞/README.md) |
 | biodata | 生物数据站点（STRING / UniProt） | 5 | [content/biodata](content/biodata/README.md) |
 | biobasic | 公共生物学（PPI 概念 / 互作研究技术 / 酵母双杂交） | 4 | [content/biobasic](content/biobasic/README.md) |
 | protein_interaction | Rosetta 蛋白-蛋白相互作用（PPI）设计工作坊（2025） | 8（已整理 2） | [content/protein_group/protein_interaction](content/protein_group/protein_interaction/README.md) |

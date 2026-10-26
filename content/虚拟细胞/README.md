@@ -16,6 +16,18 @@
 - **1 小时建立框架**：再加 Yusuf Roohani、MPG Primer、PerturBench、1661-Virtual Cell Challenge
 - **按模型深入**：Graph Neural Networks User Group Meetup（GEARS）→ Predicting...Unseen Drugs（chemCPA）→ BioML Seminar（Tahoe-x1）
 
+## 实验基础（湿实验侧）
+
+> 上面几节讲的是**扰动数据与模型**（Perturb-seq 分析、Tahoe-100M、GEARS/chemCPA、基准与挑战）；下面四个子目录补的是**这些数据在湿实验里怎么产生**：文库怎么建、载体怎么装、sgRNA 怎么设计、基因怎么敲掉。
+> 选题来自 `explore`：文库构建 / 表达载体 / sgRNA / 基因敲除，每类取精排前两条，一视频一篇博客。
+
+| 子系列 | 主题 | 视频数 | 入口 |
+| --- | --- | ---: | --- |
+| 文库构建 | CRISPR 文库筛选（筛选侧）＋ NGS 建库（测序侧） | 2 | [文库构建](文库构建/README.md) |
+| 表达载体 | sgRNA 表达框与克隆构建 ＋ 慢病毒递送载体 | 2 | [表达载体](表达载体/README.md) |
+| sgRNA | 靶点选择、序列/引物设计、验证 | 2 | [sgRNA](sgRNA/README.md) |
+| 基因敲除 | 敲除原理与策略、单克隆株获取与验证 | 2 | [基因敲除](基因敲除/README.md) |
+
 ## 总览
 
 | 博客（标题=视频标题） | 视频 | 配图 |
