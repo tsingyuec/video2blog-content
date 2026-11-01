@@ -256,12 +256,19 @@ body[data-md-color-scheme="slate"] {
 }
 
 /* ---------- 6. 左侧栏顶部工具条：文件 / 大纲 ---------- */
+/* 侧栏目录在 .md-sidebar__scrollwrap 里滚动。工具条用 sticky 钉在滚动区顶部，
+   目录往下滚时它留在原处。下方阴影盖住滚到边线底下的条目。 */
 .np-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   display: flex;
   align-items: stretch;
   padding: 0 0 0.5rem;
   margin-bottom: 0.6rem;
   border-bottom: 1px dashed var(--np-rule);
+  background: var(--md-default-bg-color);
+  box-shadow: 0 0.6rem 0 var(--md-default-bg-color);
   font-size: 0.7rem;
 }
 /* 「文件 / 大纲」各占一半、文字居中 */
