@@ -22,6 +22,7 @@ content/                        # 最终产物
 | --- | --- | --- | --- |
 | cs336 | Stanford CS336 从零构建大语言模型 | 18 | [content/cs336](content/cs336/README.md) |
 | gpu | 显卡 / GPU 的工作原理 | 1 | [content/gpu](content/gpu/README.md) |
+| network_mtu | MTU / MSS、PMTUD 网络黑洞与 IPsec 排障 | 4 | [content/network_mtu](content/network_mtu/README.md) |
 | minimind | 从零手敲大模型（Minimind） | 25 | [content/minimind](content/minimind/README.md) |
 | vllm | 从零手撸 vLLM（推理引擎） | 15 | [content/vllm_group/vllm](content/vllm_group/vllm/README.md) |
 | vllm_class | vLLM 小课堂（vLLM 官方直播系列） | 21 | [content/vllm_group/vllm_class](content/vllm_group/vllm_class/README.md) |
