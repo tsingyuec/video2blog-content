@@ -14,6 +14,7 @@
 | `rosettafold/` | RoseTTAFold All-Atom 论文精读 | 1 |
 | `protein_design/` | 蛋白质设计通识与课程（经典力场 → 深度学习） | 3 |
 | `highfold/` | HighFold / 环肽与二硫键结构预测 | 2 |
+| `boltz2/` | Boltz-2：结构与结合亲和力联合预测、分子基础模型 | 2 |
 | `gromacs/` | GROMACS 分子动力学：安装、建模、模拟与增强采样 | 19 |
 | `虚拟细胞/` | 虚拟细胞：任务、数据、评价与 GEARS / chemCPA / Tahoe-x1 | 10 |
 
@@ -82,6 +83,17 @@
 | --- | --- | --- | ---: |
 | 环肽结构预测与设计：用 AlphaFold 攻克「环」的难题 | [YouTube SDxy5E8fvXY](https://www.youtube.com/watch?v=SDxy5E8fvXY) | [博客](highfold/环肽结构预测与设计_基于AlphaFold.md) | 15 |
 | 富二硫键微型蛋白的从头设计：靶向 B 类 GPCR | [YouTube T4b9YuMhchg](https://www.youtube.com/watch?v=T4b9YuMhchg) | [博客](highfold/富二硫键微型蛋白的从头设计_靶向B类GPCR.md) | 15 |
+
+## `boltz2/` — Boltz-2：结构与结合亲和力联合预测
+
+收录 MIT（Corso / Wohlwend / Passaro 等，与 Recursion 合作）**Boltz 系列**的两篇视频博客：一篇是 **Boltz-2 论文精读**（结构模块的四个改进 + 亲和力模块的数据工程与训练技巧 + FEP+/CASP16/前瞻性筛选结果），另一篇是作者 **Gabriele Corso 的长访谈**（DiffDock → Boltz-1 → Boltz-2 → BoltzGen 的来路，以及「模型能不能替代湿实验」的边界讨论）。
+
+| 名称 | 来源 | 博客 | 配图 |
+| --- | --- | --- | ---: |
+| Boltz-2 精读：从结构预测到结合亲和力预测 | [YouTube iHDauMATkr0](https://www.youtube.com/watch?v=iHDauMATkr0) | [博客](boltz2/Boltz-2精读：从结构预测到结合亲和力预测.md) | 16 |
+| Boltz-2 与分子基础模型：Gabriele Corso 访谈 | [YouTube GF2De0XRino](https://www.youtube.com/watch?v=GF2De0XRino) | [博客](boltz2/Boltz-2与分子基础模型：Gabriele%20Corso访谈.md) | 5 |
+
+**阅读建议**：先读「精读」了解模型本身（结构怎么改、亲和力怎么训、结果怎么评），再读「访谈」校准预期（命中率、迭代次数、物理 vs 机器学习、领域的开放问题）。
 
 ## `gromacs/` — GROMACS 分子动力学
 

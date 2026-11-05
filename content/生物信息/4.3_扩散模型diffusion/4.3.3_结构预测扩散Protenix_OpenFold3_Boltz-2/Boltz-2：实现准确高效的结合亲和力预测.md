@@ -1,3 +1,5 @@
+> 同一场分享的**英文原声版精读**另见 [Boltz-2 精读：从结构预测到结合亲和力预测](../../../biomodel/boltz2/Boltz-2精读：从结构预测到结合亲和力预测.md)（按「模型视角」重新组织，术语与数字按原始英文校对）。
+
 # Boltz-2：实现准确高效的结合亲和力预测
 
 > 本文整理自 Bilibili 视频 [Boltz-2：实现准确高效的结合亲和力预测](https://www.bilibili.com/video/BV1XfNJzGEJK/)（约 59 分钟，MIT Boltz-2 团队论文阅读小组，作者 Gabriele、Jeremy、Sara 亲讲；中文为 B 站 AI 翻译字幕，已逐窗口校正）。内容以视频字幕与画面为依据整理，可溯源。
