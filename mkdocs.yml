@@ -17,6 +17,10 @@ docs_dir: build/docs
 site_dir: build/site
 use_directory_urls: false
 
+# KaTeX 自带 README.md，放在 docs 里会被当成页面。静态资源仍会复制。
+exclude_docs: |
+  _static/**/*.md
+
 theme:
   name: material
   language: zh
@@ -56,6 +60,8 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.superfences
   - pymdownx.details
 
@@ -65,8 +71,12 @@ plugins:
 
 extra_css:
   - _static/extra.css
+  - _static/katex/katex.min.css
 
 extra_javascript:
+  - _static/katex/katex.min.js
+  - _static/katex/contrib/auto-render.min.js
+  - _static/katex.js
   - _static/extra.js
 
 extra:

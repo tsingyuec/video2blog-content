@@ -289,11 +289,15 @@ def main() -> int:
         print(f"已生成导航：{nav_path}")
         # 拷贝自定义样式 / 脚本 / 字体，供 mkdocs 引用
         static_dir = os.path.join(DOCS, "_static")
-        for name in ("extra.css", "extra.js"):
+        for name in ("extra.css", "extra.js", "katex.js"):
             src = os.path.join(ROOT, "scripts", name)
             if os.path.exists(src):
                 os.makedirs(static_dir, exist_ok=True)
                 shutil.copy2(src, os.path.join(static_dir, name))
+        katex_src = os.path.join(ROOT, "scripts", "vendor", "katex")
+        if os.path.isdir(katex_src):
+            os.makedirs(static_dir, exist_ok=True)
+            shutil.copytree(katex_src, os.path.join(static_dir, "katex"), dirs_exist_ok=True)
         fonts_src = os.path.join(ROOT, "scripts", "fonts")
         if os.path.isdir(fonts_src):
             shutil.copytree(fonts_src, os.path.join(static_dir, "fonts"), dirs_exist_ok=True)

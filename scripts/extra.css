@@ -623,3 +623,10 @@ body.np-player-collapsed .np-player__corner {
     display: none;
   }
 }
+
+/* ---------- 10. 公式：行间公式过长时横向滚动，不撑破正文栏 ---------- */
+.md-typeset div.arithmatex,
+.md-typeset .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
