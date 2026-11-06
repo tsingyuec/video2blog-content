@@ -6,46 +6,46 @@
 ## 第 1 章 集群架构与声明式模型
 
 ### 1.1 集群组件与职责
-- 1.1.1 控制面组件与职责
-- 1.1.2 节点组件与职责
-- 1.1.3 组件间通信与高可用基础
+- 1.1.1 控制面组件与职责 **【已完成】** 📺 [k8s 数据流核心逻辑](1.1_集群组件与职责/1.1.1_控制面组件与职责/B站讲解k8s数据流核心底层逻辑.md) · 📺 [控制面四大组件详解](1.1_集群组件与职责/1.1.1_控制面组件与职责/Kubernetes Control Plane Components Explained.md)
+- 1.1.2 节点组件与职责 **【已完成】** 📺 [工作节点三件套：kubelet、容器运行时与 kube-proxy](1.1_集群组件与职责/1.1.2_节点组件与职责/Kubernetes Worker Node Components Explained.md) · 📺 [kubelet 是节点上的宰相](1.1_集群组件与职责/1.1.2_节点组件与职责/Kubelet这样讲你应该能听懂了吧.md)
+- 1.1.3 组件间通信与高可用基础 **【已完成】** 📺 [Kubernetes list-watch机制原理](1.1_集群组件与职责/1.1.3_组件间通信与高可用基础/Kubernetes list-watch机制原理.md) · 📺 [Kubernetes Leader Election 选举机制](1.1_集群组件与职责/1.1.3_组件间通信与高可用基础/Kubernetes Leader Election 选举机制.md)
 
 ### 1.2 声明式 API 与资源模型
-- 1.2.1 期望状态与声明式 API
-- 1.2.2 API 资源、GVK 与命名空间
-- 1.2.3 标签、选择器与 OwnerReference
+- 1.2.1 期望状态与声明式 API **【已完成】** 📺 [K8S架构原则与对象设计：声明式系统](1.2_声明式 API 与资源模型/1.2.1_期望状态与声明式API/K8S架构原则与对象设计：声明式系统.md) · 📺 [别只会操作K8s：从声明式与控制器底层读懂分布式软件设计](1.2_声明式 API 与资源模型/1.2.1_期望状态与声明式API/别只会操作K8s：从声明式与控制器底层读懂分布式软件设计.md) · 📺 [什么是声明式：声明式vs命令式与k8s的选择](1.2_声明式 API 与资源模型/1.2.1_期望状态与声明式API/什么是声明式：声明式vs命令式与k8s的选择.md)
+- 1.2.2 API 资源、GVK 与命名空间 **【已完成】** 📺 [Kubernetes API 中概念探究：Resource、Kind、Object 与 CRD](1.2_声明式 API 与资源模型/1.2.2_API资源GVK与命名空间/Kubernetes API 中概念探究：Resource、Kind、Object 与 CRD.md) · 📺 [API 组、版本、生命周期与弃用策略](1.2_声明式 API 与资源模型/1.2.2_API资源GVK与命名空间/Kubernetes API Fundamentals You Must Know.md)
+- 1.2.3 标签、选择器与 OwnerReference **【已完成】** 📺 [深入理解 K8s 的标签与标签选择器](1.2_声明式 API 与资源模型/1.2.3_标签选择器与OwnerReference/深入理解K8s的标签.md) · 📺 [Finalizer 与 OwnerReference：安全有序删除](1.2_声明式 API 与资源模型/1.2.3_标签选择器与OwnerReference/K8s EP15 Finalizers and Owner References.md)
 
 ### 1.3 etcd 与 API Server
-- 1.3.1 etcd 与 Raft 共识
-- 1.3.2 watch 机制与事件分发
-- 1.3.3 kube-apiserver 请求流水线
+- 1.3.1 etcd 与 Raft 共识 **【已完成】** 📺 [解读共识算法Raft（合集）](1.3_etcd 与 API Server/1.3.1_etcd与Raft共识/解读共识算法Raft（合集）.md) · 📺 [Deep Dive： etcd - Jingyi Hu, Google](1.3_etcd 与 API Server/1.3.1_etcd与Raft共识/Deep Dive： etcd - Jingyi Hu, Google.md)
+- 1.3.2 watch 机制与事件分发 **【已完成】** 📺 [etcd Watch 机制源码剖析](1.3_etcd 与 API Server/1.3.2_watch机制与事件分发/etcd Watch 机制源码剖析.md) · 📺 [client-go Informer 源码剖析：FIFO 队列](1.3_etcd 与 API Server/1.3.2_watch机制与事件分发/client-go Informer 源码剖析：FIFO 队列.md)
+- 1.3.3 kube-apiserver 请求流水线 **【已完成】** 📺 [kube-apiserver 请求处理流水线](1.3_etcd 与 API Server/1.3.3_kube-apiserver请求流水线/kube-apiserver 请求处理流水线.md) · 📺 [kube-apiserver 中的策略模式与装饰器模式](1.3_etcd 与 API Server/1.3.3_kube-apiserver请求流水线/kube-apiserver 中的策略模式与装饰器模式.md)
 
 ---
 
 ## 第 2 章 控制器与工作负载
 
 ### 2.1 控制器模式
-- 2.1.1 Reconcile 循环
-- 2.1.2 Informer 与工作队列
-- 2.1.3 控制器与期望状态收敛
+- 2.1.1 Reconcile 循环 **【已完成】** 📺 [Kubernetes 控制器深潜：控制循环与事件协调](2.1_控制器模式/2.1.1_Reconcile循环/Kubernetes 控制器深潜：控制循环与事件协调.md) · 📺 [Reconcile 循环解剖：edge-driven 与 level-driven](2.1_控制器模式/2.1.1_Reconcile循环/Reconcile 循环解剖：edge-driven 与 level-driven.md)
+- 2.1.2 Informer 与工作队列 **【已完成】** 📺 [Informer 机制：为什么控制器不直接访问 API Server](2.1_控制器模式/2.1.2_Informer与工作队列/Informer 机制：为什么控制器不直接访问 API Server.md) · 📺 [Informer 原理与使用：Indexer 与 SharedInformerFactory](2.1_控制器模式/2.1.2_Informer与工作队列/Informer 原理与使用：Indexer 与 SharedInformerFactory.md) · 📺 [WorkQueue 的实现：限流重试、去重与两阶段出队](2.1_控制器模式/2.1.2_Informer与工作队列/WorkQueue 的实现：限流重试、去重与两阶段出队.md)
+- 2.1.3 控制器与期望状态收敛 **【已完成】** 📺 [Kubernetes 自愈能力的设计原理](2.1_控制器模式/2.1.3_控制器与期望状态收敛/The Magic of Kubernetes Self-Healing Capabilities.md) · 📺 [Kubernetes 究竟如何工作：从愿望到收敛](2.1_控制器模式/2.1.3_控制器与期望状态收敛/How Kubernetes Actually Works（Desired State, Reconciled）.md)
 
 ### 2.2 工作负载控制器
-- 2.2.1 Deployment 与 ReplicaSet
-- 2.2.2 StatefulSet
-- 2.2.3 DaemonSet
-- 2.2.4 Job 与 CronJob
+- 2.2.1 Deployment 与 ReplicaSet **【已完成】** 📺 [K8S-Deployment的设计与实现](2.2_工作负载控制器/2.2.1_Deployment与ReplicaSet/K8S-Deployment的设计与实现.md) · 📺 [K8S-ReplicaSet实现详解](2.2_工作负载控制器/2.2.1_Deployment与ReplicaSet/K8S-ReplicaSet实现详解.md)
+- 2.2.2 StatefulSet **【已完成】** 📺 [StatefulSet 运行机制详解](2.2_工作负载控制器/2.2.2_StatefulSet/StatefulSet运行机制详解.md) · 📺 [Pod 控制器：StatefulSet 与无头服务](2.2_工作负载控制器/2.2.2_StatefulSet/Pod控制器StatefulSet与无头服务.md)
+- 2.2.3 DaemonSet **【已完成】** 📺 [K8s原生技术之DaemonSet控制器详解](2.2_工作负载控制器/2.2.3_DaemonSet/K8s原生技术之DaemonSet控制器详解.md) · 📺 [Pod控制器-DaemonSet](2.2_工作负载控制器/2.2.3_DaemonSet/Pod控制器-DaemonSet.md)
+- 2.2.4 Job 与 CronJob **【已完成】** 📺 [B站最清晰讲解：掌握 k8s - Job 控制器](2.2_工作负载控制器/2.2.4_Job与CronJob/B站最清晰讲解,掌握k8s（kubernetes）-Job控制器.md) · 📺 [Kubernetes 原生技术之 CronJob 控制器详解](2.2_工作负载控制器/2.2.4_Job与CronJob/Kubernetes原生技术之CronJob控制器详解.md)
 
 ### 2.3 扩展控制面
-- 2.3.1 CRD 与自定义资源
-- 2.3.2 Operator 模式
-- 2.3.3 控制器与准入控制的协作
+- 2.3.1 CRD 与自定义资源 **【已完成】** 📺 [深度解析 K8s API 扩展：从 CRD 到独立 API Server](2.3_扩展控制面/2.3.1_CRD与自定义资源/深度解析K8s API扩展：从CRD到独立API Server.md) · 📺 [Kubernetes CRD Design for the Long Haul](2.3_扩展控制面/2.3.1_CRD与自定义资源/Kubernetes CRD Design for the Long Haul.md)
+- 2.3.2 Operator 模式 **【已完成】** 📺 [Operator 的运行模型](2.3_扩展控制面/2.3.2_Operator模式/Operator 的运行模型.md) · 📺 [用 controller-runtime 编写 Kubernetes Operator](2.3_扩展控制面/2.3.2_Operator模式/用 controller-runtime 编写 Kubernetes Operator.md)
+- 2.3.3 控制器与准入控制的协作 **【已完成】** 📺 [深入浅出 K8s 准入控制](2.3_扩展控制面/2.3.3_控制器与准入控制的协作/深入浅出 K8s 准入控制.md) · 📺 [用准入 Webhook 增强集群安全](2.3_扩展控制面/2.3.3_控制器与准入控制的协作/用准入 Webhook 增强集群安全.md) · 📺 [Kubebuilder 准入 Webhook 实战](2.3_扩展控制面/2.3.3_控制器与准入控制的协作/Kubebuilder 准入 Webhook 实战.md)
 
 ---
 
 ## 第 3 章 调度与节点执行
 
 ### 3.1 调度
-- 3.1.1 调度框架
+- 3.1.1 调度框架 **【处理中】**
 - 3.1.2 过滤与打分
 - 3.1.3 资源请求与节点可分配资源
 - 3.1.4 亲和与反亲和
