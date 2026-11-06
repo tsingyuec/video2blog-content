@@ -21,6 +21,7 @@ content/                        # 最终产物
 | 系列 | 主题 | 视频数 | 入口 |
 | --- | --- | --- | --- |
 | cs336 | Stanford CS336 从零构建大语言模型 | 18 | [content/cs336](content/cs336/README.md) |
+| graph_deep_learning | 图深度学习：理论与应用（原著作者精讲） | 9 | [content/graph_deep_learning](content/graph_deep_learning/README.md) |
 | gpu | 显卡 / GPU 的工作原理 | 1 | [content/gpu](content/gpu/README.md) |
 | network_mtu | MTU / MSS、PMTUD 网络黑洞与 IPsec 排障 | 4 | [content/network_mtu](content/network_mtu/README.md) |
 | minimind | 从零手敲大模型（Minimind） | 25 | [content/minimind](content/minimind/README.md) |
