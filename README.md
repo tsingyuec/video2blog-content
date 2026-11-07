@@ -40,5 +40,6 @@ content/                        # 最终产物
 | kubernetes | Kubernetes RBAC 权限控制（Anton Putra） | 1 | [content/kubernetes](content/kubernetes/README.md) |
 | kubernetes_cursor | 40 天 Kubernetes 挑战 / CKA 全课程（Tech Tutorials with Piyush） | 40+（已整理 8） | [content/kubernetes_cursor](content/kubernetes_cursor/README.md) |
 | kubernetes_architecture | Kubernetes 集群架构与数据面（组件职责 / 声明式 API / 控制器 / 调度 / CNI / Service / CSI / 准入） | 6 章 · 17 小节 · 67 条目（整理中） | [content/kubernetes_architecture](content/kubernetes_architecture/README.md) |
+| reinforcement_learning | 强化学习知识体系（MDP / 动态规划 / MC / TD / DQN / 策略梯度 / Actor-Critic / PPO / SAC / MBRL / 模仿学习 / 离线 RL / MARL / RLHF） | 5 篇 · 14 章 · 70 条目（整理中） | [content/reinforcement_learning](content/reinforcement_learning/README.md) |
 | drug_design | AI 药物发现与分子生成（GenMol） | 1 | [content/drug_design](content/drug_design/README.md) |
 | ai4s_tasks | AI for Science 核心任务（逆合成/口袋识别/分子生成/MOF/蛋白编辑/抗体CDR） | 6 | [content/ai4s_tasks](content/ai4s_tasks/README.md) |
