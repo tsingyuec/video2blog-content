@@ -36,9 +36,9 @@
 
 ### 1.2 MC Basic 用的是 initial-visit：只认起点
 
-MC Basic 里用的策略叫 **initial-visit**：**对一条 episode，只考虑它的起点 (s1, a2)**，用起点之后的回报来估计 `Q^π(s1,a2)`。
+MC Basic 里用的策略叫 **initial-visit**：**对一条 episode，只考虑它的起点 (s1, a2)**，用起点之后的回报来估计 $Q^\pi(s_1,a_2)$。
 
-问题很明显：**这条 episode 里还有很多数据被浪费了**。既然我们已经跑出了 `(s2,a4) → (s1,a2) → (s2,a3) → (s5,a1)` 这一段，那它本身就可以看作一条**新的 episode**（从 (s2,a4) 出发），完全可以用来估计 `Q^π(s2,a4)`。
+问题很明显：**这条 episode 里还有很多数据被浪费了**。既然我们已经跑出了 `(s2,a4) → (s1,a2) → (s2,a3) → (s5,a1)` 这一段，那它本身就可以看作一条**新的 episode**（从 (s2,a4) 出发），完全可以用来估计 $Q^\pi(s_2,a_4)$。
 
 [【跳转到 01:20】](https://www.bilibili.com/video/BV1Ke4y1S7BT/?t=80)
 

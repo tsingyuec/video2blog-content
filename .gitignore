@@ -17,6 +17,7 @@ content/**/*.vtt
 # 3) 配套代码目录中的虚拟环境与缓存
 content/**/.venv/
 content/**/venv/
+__pycache__/
 content/**/__pycache__/
 content/**/*.py[cod]
 content/**/code/**/*.cif
