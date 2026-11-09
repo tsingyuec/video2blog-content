@@ -41,80 +41,80 @@
 ### 第 5 章 时序差分学习 (Temporal-Difference Learning)
 - 5.1 结合动态规划与蒙特卡洛：自举 (Bootstrapping) 与采样 **【已完成】** 📺 [时序差分学习：自举与采样](第5章_时序差分学习Temporal-Difference Learning/时序差分学习：自举与采样.md)
 - 5.2 TD(0) 预测算法：TD 目标与 TD 误差 **【已完成】** 📺 [时序差分策略评估：从样本均值到TD更新](第5章_时序差分学习Temporal-Difference Learning/5.2_TD0预测算法/时序差分策略评估：从样本均值到TD更新.md) · 📺 [TD0预测算法：TD目标与TD误差](第5章_时序差分学习Temporal-Difference Learning/5.2_TD0预测算法/TD0预测算法：TD目标与TD误差.md)
-- 5.3 同轨策略控制：SARSA 算法与期望 SARSA
-- 5.4 离轨策略控制：Q-Learning 算法与最大化偏差、Double Q-Learning
-- 5.5 多步时序差分 ($n$-step TD) 与资格迹 ($\text{TD}(\lambda)$)
+- 5.3 同轨策略控制：SARSA 算法与期望 SARSA **【已完成】** 📺 [SARSA算法：同轨策略的TD控制](第5章_时序差分学习Temporal-Difference Learning/5.3_同轨策略控制SARSA与期望SARSA/SARSA算法：同轨策略的TD控制.md) · 📺 [期望SARSA：对下一动作求期望的TD目标](第5章_时序差分学习Temporal-Difference Learning/5.3_同轨策略控制SARSA与期望SARSA/期望SARSA：对下一动作求期望的TD目标.md)
+- 5.4 离轨策略控制：Q-Learning 算法与最大化偏差、Double Q-Learning **【已完成】** 📺 [Q-Learning算法与离轨策略](第5章_时序差分学习Temporal-Difference Learning/5.4_离轨策略控制Q-Learning/Q-Learning算法与离轨策略.md) · 📺 [Q-Learning伪代码与例子](第5章_时序差分学习Temporal-Difference Learning/5.4_离轨策略控制Q-Learning/Q-Learning伪代码与例子.md) · 📺 [最大化偏差与Double Q-Learning](第5章_时序差分学习Temporal-Difference Learning/5.4_离轨策略控制Q-Learning/最大化偏差与Double Q-Learning.md)
+- 5.5 多步时序差分 ($n$-step TD) 与资格迹 ($\text{TD}(\lambda)$) **【已完成】** 📺 [n步TD预测：从一步自举到多步回报](第5章_时序差分学习Temporal-Difference Learning/5.5_多步时序差分与资格迹/n步TD预测：从一步自举到多步回报.md) · 📺 [TD（λ）与资格迹：TD误差按资格迹回溯](第5章_时序差分学习Temporal-Difference Learning/5.5_多步时序差分与资格迹/TD（λ）与资格迹：TD误差按资格迹回溯.md)
 
 ---
 
 ## 第三篇：函数近似与深度强化学习 (Function Approximation & Deep RL)
 
 ### 第 6 章 价值函数近似与 DQN 家族
-- 6.1 从表格到参数化函数：连续状态空间的表示
-- 6.2 线性函数近似与随机梯度下降
-- 6.3 深度 Q 网络 (DQN)：经验回放 (Experience Replay) 与目标网络 (Target Network)
-- 6.4 DQN 的核心改进：Double DQN、优先经验回放 (PER)、Dueling DQN
-- 6.5 分布式强化学习 (Distributional RL) 与 Rainbow 综合框架
+- 6.1 从表格到参数化函数：连续状态空间的表示 **【已完成】** 📺 [从表格到参数化函数：为什么一条曲线能替掉整张Q表](第6章_价值函数近似与DQN家族/6.1_从表格到参数化函数/从表格到参数化函数：为什么一条曲线能替掉整张Q表.md) · 📺 [值函数近似的目标函数：把拟合好坏变成优化问题](第6章_价值函数近似与DQN家族/6.1_从表格到参数化函数/值函数近似的目标函数：把拟合好坏变成优化问题.md)
+- 6.2 线性函数近似与随机梯度下降 **【已完成】** 📺 [梯度下降与随机梯度：把目标函数真正优化起来](第6章_价值函数近似与DQN家族/6.2_线性函数近似与随机梯度下降/梯度下降与随机梯度：把目标函数真正优化起来.md) · 📺 [线性函数近似的实例与分析：用平面还是曲面拟合价值函数](第6章_价值函数近似与DQN家族/6.2_线性函数近似与随机梯度下降/线性函数近似的实例与分析：用平面还是曲面拟合价值函数.md)
+- 6.3 深度 Q 网络 (DQN)：经验回放 (Experience Replay) 与目标网络 (Target Network) **【已完成】** 📺 [DQN基本原理：目标网络与两套参数](第6章_价值函数近似与DQN家族/6.3_深度Q网络DQN/DQN基本原理：目标网络与两套参数.md) · 📺 [经验回放：为什么必须打乱样本顺序](第6章_价值函数近似与DQN家族/6.3_深度Q网络DQN/经验回放：为什么必须打乱样本顺序.md)
+- 6.4 DQN 的核心改进：Double DQN、优先经验回放 (PER)、Dueling DQN **【已完成】** 📺 [高估问题与Double DQN：Target Network为什么不够](第6章_价值函数近似与DQN家族/6.4_DQN核心改进/高估问题与Double%20DQN：Target%20Network为什么不够.md) · 📺 [优先经验回放：从均匀抽样到按TD误差加权](第6章_价值函数近似与DQN家族/6.4_DQN核心改进/优先经验回放：从均匀抽样到按TD误差加权.md) · 📺 [Dueling Network：把Q拆成V加优势A](第6章_价值函数近似与DQN家族/6.4_DQN核心改进/Dueling%20Network：把Q拆成V加优势A.md)
+- 6.5 分布式强化学习 (Distributional RL) 与 Rainbow 综合框架 **【已完成】** 📺 [从学期望到学分布（C51与QR-DQN）](第6章_价值函数近似与DQN家族/6.5_分布式强化学习与Rainbow/分布式强化学习：从学期望到学分布（C51与QR-DQN）.md) · 📺 [Rainbow：把六种DQN改进拼成一个智能体](第6章_价值函数近似与DQN家族/6.5_分布式强化学习与Rainbow/Rainbow：把六种DQN改进拼成一个智能体.md)
 
 ### 第 7 章 策略梯度方法 (Policy Gradient Methods)
-- 7.1 基于价值 vs. 基于策略：处理连续动作空间与随机策略
-- 7.2 策略目标函数与策略梯度定理 (Policy Gradient Theorem)
-- 7.3 蒙特卡洛策略梯度：REINFORCE 算法
-- 7.4 减小方差：引入基线 (Baseline) 的 REINFORCE
+- 7.1 基于价值 vs. 基于策略：处理连续动作空间与随机策略 **【已完成】** 📺 [为什么需要策略梯度：价值方法的两道坎](第7章_策略梯度方法Policy Gradient Methods/7.1_基于价值vs基于策略/为什么需要策略梯度：价值方法的两道坎.md) · 📺 [策略为什么要参数化：从查表到带参数的策略函数](第7章_策略梯度方法Policy Gradient Methods/7.1_基于价值vs基于策略/策略为什么要参数化：从查表到带参数的策略函数.md)
+- 7.2 策略目标函数与策略梯度定理 (Policy Gradient Theorem) **【已完成】** 📺 [策略目标函数：平均价值的定义](第7章_策略梯度方法Policy Gradient Methods/7.2_策略目标函数与策略梯度定理/策略目标函数：平均价值的定义.md) · 📺 [策略目标函数：平均奖励与两种度量的等价](第7章_策略梯度方法Policy Gradient Methods/7.2_策略目标函数与策略梯度定理/策略目标函数：平均奖励与两种度量的等价.md) · 📺 [策略梯度定理：目标函数的梯度](第7章_策略梯度方法Policy Gradient Methods/7.2_策略目标函数与策略梯度定理/策略梯度定理：目标函数的梯度.md)
+- 7.3 蒙特卡洛策略梯度：REINFORCE 算法 **【已完成】** 📺 [REINFORCE：用一次采样的回报代替真实梯度](第7章_策略梯度方法Policy Gradient Methods/7.3_蒙特卡洛策略梯度REINFORCE/REINFORCE：用一次采样的回报代替真实梯度.md) · 📺 [REINFORCE的轨迹视角：回报为什么能当梯度权重](第7章_策略梯度方法Policy Gradient Methods/7.3_蒙特卡洛策略梯度REINFORCE/REINFORCE的轨迹视角：回报为什么能当梯度权重.md)
+- 7.4 减小方差：引入基线 (Baseline) 的 REINFORCE **【已完成】** 📺 [策略梯度中的Baseline：为什么不改变期望却能降方差](第7章_策略梯度方法Policy Gradient Methods/7.4_减小方差引入基线/策略梯度中的Baseline：为什么不改变期望却能降方差.md) · 📺 [REINFORCE with Baseline：用价值网络做基线的算法](第7章_策略梯度方法Policy Gradient Methods/7.4_减小方差引入基线/REINFORCE%20with%20Baseline：用价值网络做基线的算法.md)
 
 ### 第 8 章 演员-评论家算法 (Actor-Critic Methods)
-- 8.1 Actor-Critic 架构原理：结合策略梯度与时序差分
-- 8.2 优势函数 (Advantage Function) 与广义优势估计 (GAE)
-- 8.3 同步与异步优势演员-评论家：A2C 与 A3C
-- 8.4 确定性策略梯度：DDPG 算法
-- 8.5 延迟策略更新与目标平滑：TD3 (Twin Delayed DDPG) 算法
+- 8.1 Actor-Critic 架构原理：结合策略梯度与时序差分 **【已完成】** 📺 [最简单的Actor-Critic：QAC](第8章_演员-评论家算法Actor-Critic Methods/8.1_Actor-Critic架构原理/最简单的Actor-Critic：QAC.md) · 📺 [从REINFORCE到Actor-Critic：为什么用价值函数替代回报](第8章_演员-评论家算法Actor-Critic Methods/8.1_Actor-Critic架构原理/从REINFORCE到Actor-Critic：为什么用价值函数替代回报.md)
+- 8.2 优势函数 (Advantage Function) 与广义优势估计 (GAE) **【已完成】** 📺 [优势函数与GAE：从Q减V到指数加权的优势估计](第8章_演员-评论家算法Actor-Critic Methods/优势函数与GAE：从Q减V到指数加权的优势估计.md)
+- 8.3 同步与异步优势演员-评论家：A2C 与 A3C **【已完成】** 📺 [分布式强化学习：A2C与A3C的同步与异步](第8章_演员-评论家算法Actor-Critic Methods/8.3_A2C与A3C/分布式强化学习：A2C与A3C的同步与异步.md) · 📺 [A3C论文精读：用异步并行把深度强化学习做稳定](第8章_演员-评论家算法Actor-Critic Methods/8.3_A2C与A3C/A3C论文精读：用异步并行把深度强化学习做稳定.md)
+- 8.4 确定性策略梯度：DDPG 算法 **【已完成】** 📺 [确定性策略梯度定理：为什么可以直接对动作求梯度](第8章_演员-评论家算法Actor-Critic Methods/8.4_确定性策略梯度DDPG/确定性策略梯度定理：为什么可以直接对动作求梯度.md) · 📺 [DDPG的工程实现：四个网络、软更新与探索噪声](第8章_演员-评论家算法Actor-Critic Methods/8.4_确定性策略梯度DDPG/DDPG的工程实现：四个网络、软更新与探索噪声.md)
+- 8.5 延迟策略更新与目标平滑：TD3 (Twin Delayed DDPG) 算法 **【已完成】** 📺 [Q值为什么会被高估：actor与critic的相互吹捧](第8章_演员-评论家算法Actor-Critic Methods/8.5_延迟策略更新与目标平滑TD3/Q值为什么会被高估：actor与critic的相互吹捧.md) · 📺 [TD3的三大改进：截断双Q、延迟更新与目标平滑](第8章_演员-评论家算法Actor-Critic Methods/8.5_延迟策略更新与目标平滑TD3/TD3的三大改进：截断双Q、延迟更新与目标平滑.md)
 
 ### 第 9 章 现代主流深度强化学习算法
-- 9.1 策略更新的步长困境与单调改进保证
-- 9.2 信赖域策略优化 (TRPO)：KL 散度约束与共轭梯度
-- 9.3 近端策略优化 (PPO)：PPO-Penalty 与 PPO-Clip
-- 9.4 最大熵强化学习框架：探索与鲁棒性
-- 9.5 柔性演员-评论家算法 (SAC, Soft Actor-Critic)
+- 9.1 策略更新的步长困境与单调改进保证 **【已完成】** 📺 [策略梯度的步长困境：为什么一步迈太大就回不来](第9章_现代主流深度强化学习算法/9.1_策略更新的步长困境与单调改进保证/策略梯度的步长困境：为什么一步迈太大就回不来.md) · 📺 [单调改进保证：从新旧策略性能差到策略下界](第9章_现代主流深度强化学习算法/9.1_策略更新的步长困境与单调改进保证/单调改进保证：从新旧策略性能差到策略下界.md)
+- 9.2 信赖域策略优化 (TRPO)：KL 散度约束与共轭梯度 **【已完成】** 📺 [从策略梯度到TRPO：泰勒近似与拉格朗日对偶](第9章_现代主流深度强化学习算法/9.2_信赖域策略优化TRPO/从策略梯度到TRPO：泰勒近似与拉格朗日对偶.md) · 📺 [共轭梯度法：求解TRPO背后的矩阵方程](第9章_现代主流深度强化学习算法/9.2_信赖域策略优化TRPO/共轭梯度法：求解TRPO背后的矩阵方程.md) · 📺 [TRPO代码实现：海森向量积与回溯线搜索](第9章_现代主流深度强化学习算法/9.2_信赖域策略优化TRPO/TRPO代码实现：海森向量积与回溯线搜索.md)
+- 9.3 近端策略优化 (PPO)：PPO-Penalty 与 PPO-Clip **【已完成】** 📺 [PPO的裁剪目标函数：从梯度本质看clip](第9章_现代主流深度强化学习算法/9.3_近端策略优化PPO/PPO的裁剪目标函数：从梯度本质看clip.md) · 📺 [PPO原理与推导：从替代目标到clip与数据复用](第9章_现代主流深度强化学习算法/9.3_近端策略优化PPO/PPO原理与推导：从替代目标到clip与数据复用.md)
+- 9.4 最大熵强化学习框架：探索与鲁棒性 **【已完成】** 📺 [最大熵强化学习框架：从能量模型到软贝尔曼方程](第9章_现代主流深度强化学习算法/最大熵强化学习框架：从能量模型到软贝尔曼方程.md)
+- 9.5 柔性演员-评论家算法 (SAC, Soft Actor-Critic) **【已完成】** 📺 [SAC算法：软Q目标、重参数化与自动温度](第9章_现代主流深度强化学习算法/9.5_柔性演员-评论家算法SAC/SAC算法：软Q目标、重参数化与自动温度.md) · 📺 [SAC代码实现：熵的计算与温度自动调节](第9章_现代主流深度强化学习算法/9.5_柔性演员-评论家算法SAC/SAC代码实现：熵的计算与温度自动调节.md)
 
 ---
 
 ## 第四篇：基于模型的强化学习与规划 (Model-Based RL & Planning)
 
 ### 第 10 章 环境建模与搜索规划
-- 10.1 有模型 (Model-Based) 与免模型 (Model-Free) 的权衡
-- 10.2 环境转移模型的学习与复合误差问题 (Compounding Error)
-- 10.3 整合学习与规划：Dyna 架构与 Dyna-Q
-- 10.4 蒙特卡洛树搜索 (MCTS) 与 UCT 算法
-- 10.5 从 AlphaGo、AlphaZero 到 MuZero (隐空间规划)
-- 10.6 世界模型 (World Models) 与 MBPO (Model-Based Policy Optimization)
+- 10.1 有模型 (Model-Based) 与免模型 (Model-Free) 的权衡 **【已完成】** 📺 [环境模型与规划：Dyna架构如何把学习与规划合起来](第10章_环境建模与搜索规划/10.1_有模型与免模型的权衡/环境模型与规划：Dyna架构如何把学习与规划合起来.md) · 📺 [用计算换样本：无模型与有模型强化学习的权衡](第10章_环境建模与搜索规划/10.1_有模型与免模型的权衡/用计算换样本：无模型与有模型强化学习的权衡.md)
+- 10.2 环境转移模型的学习与复合误差问题 (Compounding Error) **【已完成】** 📺 [基于模型的强化学习MBRL](第10章_环境建模与搜索规划/10.2_环境转移模型的学习与复合误差问题/ZJU-NICE_Tutorial_基于模型的强化学习MBRL.md) · 📺 [MBPO 何时该信任你的模型](第10章_环境建模与搜索规划/10.2_环境转移模型的学习与复合误差问题/MBPO_何时该信任你的模型.md)
+- 10.3 整合学习与规划：Dyna 架构与 Dyna-Q **【已完成】** 📺 [Dyna的工程实现与家族变体：优先遍历与模型存储](第10章_环境建模与搜索规划/10.3_整合学习与规划Dyna架构/Dyna的工程实现与家族变体：优先遍历与模型存储.md)
+- 10.4 蒙特卡洛树搜索 (MCTS) 与 UCT 算法 **【已完成】** 📺 [蒙特卡洛树搜索：用UCB把博弈树长成不对称的形状](第10章_环境建模与搜索规划/10.4_蒙特卡洛树搜索MCTS与UCT/第02讲_蒙特卡洛树搜索.md) · 📺 [直观了解蒙特卡洛树搜索MCTS](第10章_环境建模与搜索规划/10.4_蒙特卡洛树搜索MCTS与UCT/AI如何下棋：直观了解蒙特卡洛树搜索MCTS.md)
+- 10.5 从 AlphaGo、AlphaZero 到 MuZero (隐空间规划) **【已完成】** 📺 [AlphaGo：策略网络、价值网络与快速走子的三件套](第10章_环境建模与搜索规划/10.5_从AlphaGo到MuZero/AlphaGo：策略网络、价值网络与快速走子的三件套.md) · 📺 [AlphaZero：把MCTS变成策略改进算子](第10章_环境建模与搜索规划/10.5_从AlphaGo到MuZero/AlphaZero：把MCTS变成策略改进算子.md) · 📺 [MuZero：只学奖励策略与价值的隐空间规划](第10章_环境建模与搜索规划/10.5_从AlphaGo到MuZero/MuZero：只学奖励策略与价值的隐空间规划.md)
+- 10.6 世界模型 (World Models) 与 MBPO (Model-Based Policy Optimization) **【已完成】** 📺 [世界模型：从WorldModels到Dreamer](第10章_环境建模与搜索规划/10.6_世界模型与MBPO/世界模型：从WorldModels到Dreamer.md) · 📺 [MBPO算法全解：概率集成与短分支rollout](第10章_环境建模与搜索规划/10.6_世界模型与MBPO/MBPO算法全解：概率集成与短分支rollout.md)
 
 ---
 
 ## 第五篇：进阶专题与前沿应用 (Advanced Topics & Frontiers)
 
 ### 第 11 章 模仿学习与逆强化学习
-- 11.1 稀疏奖励困境与专家演示数据
-- 11.2 行为克隆 (Behavioral Cloning) 与分布偏移、DAgger 算法
-- 11.3 逆强化学习 (IRL)：从行为反推奖励函数
-- 11.4 生成对抗模仿学习 (GAIL)
+- 11.1 稀疏奖励困境与专家演示数据 **【已完成】** 📺 [稀疏奖励困境与专家演示数据](第11章_模仿学习与示教Imitation Learning/11.1_稀疏奖励困境与专家演示数据/稀疏奖励困境与专家演示数据.md)
+- 11.2 行为克隆 (Behavioral Cloning) 与分布偏移、DAgger 算法 **【已完成】** 📺 [DAgger：把模仿学习归约为无悔在线学习](第11章_模仿学习与示教Imitation Learning/11.2_行为克隆与分布偏移DAgger/DAgger：把模仿学习归约为无悔在线学习.md) · 📺 [行为克隆为何越开越偏](第11章_模仿学习与示教Imitation Learning/11.2_行为克隆与分布偏移DAgger/行为克隆为何越开越偏.md)
+- 11.3 逆强化学习 (IRL)：从行为反推奖励函数 **【已完成】** 📺 [逆强化学习IRL：从行为反推奖励函数](第11章_模仿学习与示教Imitation Learning/11.3_逆强化学习IRL/逆强化学习IRL：从行为反推奖励函数.md)
+- 11.4 生成对抗模仿学习 (GAIL) **【已完成】** 📺 [GAIL：用判别器匹配专家的占用度量](第11章_模仿学习与示教Imitation Learning/11.4_生成对抗模仿学习GAIL/GAIL：用判别器匹配专家的占用度量.md)
 
 ### 第 12 章 离线强化学习 (Offline RL)
-- 12.1 离线强化学习的定义与应用场景 (纯静态数据集学习)
-- 12.2 核心挑战：分布外 (OOD) 动作与价值高估
-- 12.3 策略约束方法 (BCQ, BEAR)
-- 12.4 保守价值估计：CQL (Conservative Q-Learning) 与 IQL
-- 12.5 序列建模视角：Decision Transformer
+- 12.1 离线强化学习的定义与应用场景 (纯静态数据集学习) **【已完成】** 📺 [离线强化学习：冻结数据集上的范式转移](第12章_离线强化学习Offline RL/12.1_离线强化学习的定义与应用场景/离线强化学习：冻结数据集上的范式转移.md) · 📺 [离线强化学习的设定与它为何能超越数据集](第12章_离线强化学习Offline RL/12.1_离线强化学习的定义与应用场景/离线强化学习的设定与它为何能超越数据集.md)
+- 12.2 核心挑战：分布外 (OOD) 动作与价值高估 **【已完成】** 📺 [外推误差：离线强化学习为何会高估没见过的动作](第12章_离线强化学习Offline RL/12.2_分布外动作与价值高估/外推误差：离线强化学习为何会高估没见过的动作.md) · 📺 [没见过的动作凭什么得高分](第12章_离线强化学习Offline RL/12.2_分布外动作与价值高估/没见过的动作凭什么得高分.md)
+- 12.3 策略约束方法 (BCQ, BEAR) **【已完成】** 📺 [BCQ：把动作限制在数据支持集内](第12章_离线强化学习Offline RL/12.3_策略约束方法BCQ与BEAR/BCQ：把动作限制在数据支持集内.md) · 📺 [BEAR：从分布匹配到支持集约束](第12章_离线强化学习Offline RL/12.3_策略约束方法BCQ与BEAR/BEAR：从分布匹配到支持集约束.md)
+- 12.4 保守价值估计：CQL (Conservative Q-Learning) 与 IQL **【已完成】** 📺 [从IQL到CQL：把保守性搬到价值函数上](第12章_离线强化学习Offline RL/12.4_保守价值估计CQL与IQL/从IQL到CQL：把保守性搬到价值函数上.md) · 📺 [IQL论文精读：用期望分位数回归在数据集内做最大化](第12章_离线强化学习Offline RL/12.4_保守价值估计CQL与IQL/IQL论文精读：用期望分位数回归在数据集内做最大化.md)
+- 12.5 序列建模视角：Decision Transformer **【已完成】** 📺 [Decision Transformer：把离线强化学习变成条件序列建模](第12章_离线强化学习Offline RL/12.5_序列建模DecisionTransformer/DecisionTransformer：把离线强化学习变成条件序列建模.md)
 
 ### 第 13 章 多智能体强化学习 (MARL)
-- 13.1 多智能体系统的博弈论基础：纳什均衡与马尔可夫博弈
-- 13.2 关系设定：完全合作、完全竞争与混合场景
-- 13.3 集中式训练与分布式执行 (CTDE) 范式
-- 13.4 价值分解方法：VDN 与 QMIX
-- 13.5 多智能体策略梯度：MADDPG 与 MAPPO
+- 13.1 多智能体系统的博弈论基础：纳什均衡与马尔可夫博弈 **【已完成】** 📺 [纯策略纳什均衡：囚徒困境与最佳对策](第13章_多智能体强化学习MARL/13.1_博弈论基础纳什均衡与马尔可夫博弈/纯策略纳什均衡：囚徒困境与最佳对策.md) · 📺 [混合策略纳什均衡：猜硬币与零和博弈](第13章_多智能体强化学习MARL/13.1_博弈论基础纳什均衡与马尔可夫博弈/混合策略纳什均衡：猜硬币与零和博弈.md) · 📺 [马尔可夫博弈：多智能体如何打破MDP的假设](第13章_多智能体强化学习MARL/13.1_博弈论基础纳什均衡与马尔可夫博弈/马尔可夫博弈：多智能体如何打破MDP的假设.md)
+- 13.2 关系设定：完全合作、完全竞争与混合场景 **【已完成】** 📺 [关系设定：完全合作、完全竞争与混合如何决定算法设计](第13章_多智能体强化学习MARL/13.2_关系设定合作竞争与混合/关系设定：完全合作、完全竞争与混合如何决定算法设计.md)
+- 13.3 集中式训练与分布式执行 (CTDE) 范式 **【已完成】** 📺 [集中式训练与分布式执行：CTDE范式](第13章_多智能体强化学习MARL/13.3_集中式训练与分布式执行CTDE/集中式训练与分布式执行：CTDE范式.md)
+- 13.4 价值分解方法：VDN 与 QMIX **【已完成】** 📺 [价值分解与单调性：从VDN到QMIX](第13章_多智能体强化学习MARL/13.4_价值分解VDN与QMIX/价值分解与单调性：从VDN到QMIX.md)
+- 13.5 多智能体策略梯度：MADDPG 与 MAPPO **【已完成】** 📺 [MADDPG：集中式critic如何让环境重新变平稳](第13章_多智能体强化学习MARL/13.5_多智能体策略梯度MADDPG与MAPPO/MADDPG：集中式critic如何让环境重新变平稳.md) · 📺 [MAPPO：简单PPO加正确细节就能打赢复杂方法](第13章_多智能体强化学习MARL/13.5_多智能体策略梯度MADDPG与MAPPO/MAPPO：简单PPO加正确细节就能打赢复杂方法.md)
 
 ### 第 14 章 大模型时代的强化学习 (RL for LLMs)
-- 14.1 语言模型作为策略网络：序列生成的 MDP 建模
-- 14.2 人类反馈强化学习 (RLHF) 三阶段流程
-- 14.3 奖励模型 (Reward Model) 的训练与 Bradley-Terry 模型
-- 14.4 直接偏好优化 (DPO) 及其变体 (IPO, KTO)
-- 14.5 面向推理能力的强化学习：过程奖励模型 (PRM) 与 GRPO (Group Relative Policy Optimization)
+- 14.1 语言模型作为策略网络：序列生成的 MDP 建模 **【已完成】** 📺 [语言模型作为策略：序列生成的MDP建模](第14章_大模型时代的强化学习/14.1_语言模型作为策略网络/语言模型作为策略：序列生成的MDP建模.md)
+- 14.2 人类反馈强化学习 (RLHF) 三阶段流程 **【已完成】** 📺 [RLHF三阶段：从SFT到奖励模型再到PPO](第14章_大模型时代的强化学习/14.2_RLHF三阶段流程/RLHF三阶段：从SFT到奖励模型再到PPO.md) · 📺 [用四选一的玩具模型走一遍RLHF](第14章_大模型时代的强化学习/14.2_RLHF三阶段流程/用四选一的玩具模型走一遍RLHF.md)
+- 14.3 奖励模型 (Reward Model) 的训练与 Bradley-Terry 模型 **【已完成】** 📺 [Bradley-Terry：把比较变成偏好概率](第14章_大模型时代的强化学习/14.3_奖励模型与BradleyTerry/Bradley-Terry：把比较变成偏好概率.md) · 📺 [奖励模型的实现：reward head 与成对损失](第14章_大模型时代的强化学习/14.3_奖励模型与BradleyTerry/奖励模型的实现：reward head 与成对损失.md)
+- 14.4 直接偏好优化 (DPO) 及其变体 (IPO, KTO) **【已完成】** 📺 [DPO：从KL约束最优解到纯策略损失](第14章_大模型时代的强化学习/14.4_直接偏好优化DPO/DPO：从KL约束最优解到纯策略损失.md)
+- 14.5 面向推理能力的强化学习：过程奖励模型 (PRM) 与 GRPO (Group Relative Policy Optimization) **【已完成】** 📺 [面向推理的强化学习：从PRM到GRPO](第14章_大模型时代的强化学习/14.5_过程奖励模型与GRPO/面向推理的强化学习：过程奖励模型PRM与GRPO.md)

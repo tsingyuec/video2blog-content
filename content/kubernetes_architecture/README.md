@@ -72,7 +72,7 @@
 
 ### 4.2 CNI 与 IPAM
 - 4.2.1 CNI 规范与插件调用流程 **【已完成】** 📺 [容器是怎么连上网的？CNI 原理一次讲透](4.2_CNI 与 IPAM/4.2.1_CNI规范与插件调用流程/容器是怎么连上网的？CNI 原理一次讲透.md) · 📺 [一条 ADD 命令，容器怎么就被接进网络了？CNI 调用链一次讲透](4.2_CNI 与 IPAM/4.2.1_CNI规范与插件调用流程/一条 ADD 命令，容器怎么就被接进网络了？CNI 调用链一次讲透.md) · 📺 [从零手写一个 CNI 插件](4.2_CNI 与 IPAM/4.2.1_CNI规范与插件调用流程/Kubernetes Networking： How to Write a CNI Plugin From Scratch.md)
-- 4.2.2 IPAM 地址分配 **【已完成】** 📺 [一个 Pod 的 IP 到底是谁发的：CNI 与 host-local IPAM 全链路拆解](4.2_CNI 与 IPAM/4.2.2_IPAM地址分配/How Kubernetes Networking Actually Works： CNI & IPAM Explained.md) · 📺 [Calico 是怎么给 Pod 发 IP 的：IP 池、IP 块与 Block Affinity 实操](4.2_CNI 与 IPAM/4.2.2_IPAM地址分配/01. Calico IP Address Management (IPAM) for Kubernetes.md) · 📺 [Kubernetes 的 IP 都在哪：地址规划、IPv4 耗尽与应对策略](4.2_CNI 与 IPAM/4.2.2_IPAM地址分配/Kubernetes IP Management： From Core Concepts To Strategic Solutions.md)
+- 4.2.2 IPAM 地址分配 **【已完成】** 📺 [一个 Pod 的 IP 到底是谁发的：CNI 与 host-local IPAM 全链路拆解](4.2_CNI 与 IPAM/4.2.2_IPAM地址分配/How Kubernetes Networking Actually Works： CNI & IPAM Explained.md) · 📺 [Calico 是怎么给 Pod 发 IP 的：IP 池、IP 块与 Block Affinity 实操](<4.2_CNI 与 IPAM/4.2.2_IPAM地址分配/01. Calico IP Address Management (IPAM) for Kubernetes.md>) · 📺 [Kubernetes 的 IP 都在哪：地址规划、IPv4 耗尽与应对策略](4.2_CNI 与 IPAM/4.2.2_IPAM地址分配/Kubernetes IP Management： From Core Concepts To Strategic Solutions.md)
 - 4.2.3 网络配置与 Pod sandbox **【已完成】** 📺 [Pod的IP从哪来的CNI插件的秘密](4.2_CNI 与 IPAM/4.2.3_网络配置与Podsandbox/Pod的IP从哪来的CNI插件的秘密.md) · 📺 [kubernetes cni剖析](4.2_CNI 与 IPAM/4.2.3_网络配置与Podsandbox/kubernetes cni剖析.md)
 
 ### 4.3 网络实现模式
