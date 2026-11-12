@@ -77,10 +77,12 @@ extra_css:
   - _static/katex/katex.min.css
 
 extra_javascript:
-  - _static/katex/katex.min.js
-  - _static/katex/contrib/auto-render.min.js
   - _static/katex.js
   - _static/extra.js
+
+# 构建后处理：目前用于把搜索索引改成按需加载（见 scripts/site_hooks.py）
+hooks:
+  - scripts/site_hooks.py
 
 extra:
   generator: false

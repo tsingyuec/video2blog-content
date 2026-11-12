@@ -261,10 +261,13 @@ body[data-md-color-scheme="slate"] {
    不再用 sticky / absolute 叠在滚动内容上：iOS Safari 会滚动 overflow:hidden 的容器，
    叠在上面的绝对定位元素会被卷出屏幕（表现就是手机上「文件 / 大纲」不见了）。 */
 .md-sidebar--primary {
-  /* 抽屉头高度；窄屏（第 11 节）会改成更高的大按钮版本 */
-  --np-toolbar-h: 2.2rem;
+  /* 抽屉头高度 = tab 区域 + 虚线下的留白，保证 tab 本身仍有 3.1rem 的大按钮体量
+     （窄屏会在这个基础上再抬高） */
+  --np-toolbar-h: 2.65rem;
   /* 桌面端左栏自身的 padding-top（Material 的 .md-sidebar 带 1.2rem） */
   --np-sidebar-pad-top: 1.2rem;
+  /* 虚线距头部底边的留白：留出一点空隙，下面紧接的逐级回跳条才不会显得被挤 */
+  --np-toolbar-gap: 0.45rem;
 }
 .np-toolbar {
   position: relative;
@@ -273,20 +276,33 @@ body[data-md-color-scheme="slate"] {
   align-items: flex-start;
   height: var(--np-toolbar-h);
   padding: 0;
-  border-bottom: 1px dashed var(--np-rule);
+  border: 0;
   background: var(--md-default-bg-color);
   font-size: 0.7rem;
+}
+/* 分隔虚线画在头部内部（高于底边 var(--np-toolbar-gap)），
+   头部底边以下的空间就是留白；激活 tab 的下划线恰好落在虚线上 */
+.np-toolbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--np-toolbar-gap);
+  border-bottom: 1px dashed var(--np-rule);
 }
 /* 滚动区让出头部高度（它本身是 inset:0 的绝对定位盒） */
 .md-sidebar--primary .md-sidebar__scrollwrap {
   top: calc(var(--np-sidebar-pad-top) + var(--np-toolbar-h));
 }
-/* 「文件 / 大纲」各占一半、文字居中 */
+/* 「文件 / 大纲」各占一半、文字居中；tab 高度止于虚线，激活下划线就压在虚线上 */
 .np-toolbar .np-tab {
   flex: 1 1 0;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - var(--np-toolbar-gap));
   cursor: pointer;
-  padding: 0.1rem 0;
+  padding: 0;
   color: var(--md-default-fg-color--light);
   border-bottom: 2px solid transparent;
 }
@@ -651,21 +667,16 @@ body.np-player-collapsed .np-player__corner {
         但只有最顶层 [for=__drawer] 真有 logo）。 */
 @media screen and (max-width: 76.24em) {
   .md-sidebar--primary {
-    --np-toolbar-h: 3.1rem;
+    /* tab 区域仍占 3.1rem（62px），额外 0.5rem 是虚线下的留白 */
+    --np-toolbar-h: 3.6rem;
     --np-sidebar-pad-top: 0px; /* 抽屉（fixed）自身没有 padding-top */
+    --np-toolbar-gap: 0.5rem;
     /* Material 的 .md-sidebar 带 1.2rem padding-top（为桌面左栏设计），
        抽屉里会让头部下方空出 24px，这里清零，让抽屉头贴顶满幅 */
     padding-top: 0;
   }
   .np-toolbar {
     font-size: 0.8rem;
-  }
-  /* tab 撑满抽屉头、文字垂直居中；激活下划线落在抽屉头底边 */
-  .np-toolbar .np-tab {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.3rem 0 0;
   }
 
   /* 逐级返回标题：压成普通条高（不带 logo 就没必要留 3rem 顶白），

@@ -67,6 +67,11 @@ def _natural_key(s: str):
 # 链接目标可能含空格（未做 URL 编码），故用非贪婪匹配到右括号
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(\s*(<[^>]*>|[^)\n]*?)((?:\s+\"[^\"]*\")?)\s*\)")
 
+# 给正文图片补上 loading="lazy"（浏览器只加载可视区附近的图）与 decoding="async"。
+# 一篇文章动辄十几张抽帧截图，不懒加载时首屏要等全部图下完。
+# 已有 { ... } 属性块的图片不重复追加。
+IMG_RE = re.compile(r"(!\[[^\]]*\]\((?:<[^>]*>|[^)\n])*\))(?!\s*\{)")
+
 
 def rel_repo(path: str) -> str:
     return os.path.relpath(path, ROOT).replace("\\", "/")
@@ -268,7 +273,9 @@ def rewrite_text(text, page_repo_rel, page_docs, urls, present, stats):
         if i % 2 == 1:  # 代码块
             out.append(part)
         else:
-            out.append(LINK_RE.sub(handle, part))
+            part = LINK_RE.sub(handle, part)
+            part = IMG_RE.sub(r'\1{ loading="lazy" decoding="async" }', part)
+            out.append(part)
     return "".join(out)
 
 
