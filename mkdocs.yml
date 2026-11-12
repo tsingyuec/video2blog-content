@@ -29,6 +29,9 @@ theme:
     logo: material/bookshelf
   features:
     - navigation.instant
+    # 悬停侧栏/正文链接时预取该页（material 只预取当前悬停的这一个 href，不会批量拉全站）
+    - navigation.instant.prefetch
+    - navigation.instant.progress
     - navigation.top
     - navigation.tracking
     - search.suggest

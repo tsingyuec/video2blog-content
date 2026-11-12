@@ -630,3 +630,59 @@ body.np-player-collapsed .np-player__corner {
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+/* ---------- 11. 移动端抽屉：「文件 / 大纲」工具条与逐级标题的高度 ---------- */
+/* 背景：窄屏下 Material 把抽屉做成一层层绝对定位的整屏面板
+   （.md-nav{position:absolute;top:0;height:100%}），面板从抽屉 y=0 开始铺满，
+   而自定义的 .np-toolbar 只是浮在面板上方——旧样式里它只有文字高（实测 35px），
+   工具条下沿就框在面板标题（112px）的腰上，看上去“一条很扁的条压着一大块空白”。
+   这里：① 工具条改成固定高度的抽屉头，绝对定位不随目录滚动；
+        ② 面板整体下移 3.1rem 给它让位；
+        ③ 逐级返回标题压成普通条高（Material 给每一级都留了 3rem 的 logo 位，
+           但只有最顶层 [for=__drawer] 真有 logo）。
+   桌面端左栏常年可见、无需大按钮，不受影响。 */
+@media screen and (max-width: 76.24em) {
+  .np-toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    height: 3.1rem;
+    padding: 0;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+  }
+  /* tab 撑满抽屉头、文字垂直居中；激活下划线落在工具条底边 */
+  .np-toolbar .np-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem 0 0;
+  }
+
+  /* 主面板：内容下移一个抽屉头的高度 */
+  .md-sidebar--primary .md-nav--primary {
+    padding-top: 3.1rem;
+  }
+  /* 逐级面板（绝对定位，不受 padding 影响，需单独下移并缩短） */
+  .md-sidebar--primary .md-nav--primary .md-nav {
+    top: 3.1rem;
+    height: calc(100% - 3.1rem);
+  }
+
+  /* 逐级返回标题：压成普通条高（不带 logo 就没必要留 3rem 顶白），
+     左侧让出返回箭头的位置（.md-nav__icon 距左 0.6rem、宽 1.2rem） */
+  .md-sidebar--primary .md-nav__title:not([for="__drawer"]) {
+    height: 2.6rem;
+    padding: 0 0.8rem 0 2.1rem;
+    line-height: 2.6rem;
+  }
+
+  /* 「大纲」模式只应显示当前页大纲：抽屉里的站点标题块与仓库卡片属于「文件」模式，
+     原样式下切到「大纲」后这两个块仍排在目录下方（桌面端因为另有限制才看不到）。 */
+  html[data-np-mode="outline"] .md-nav--primary > .md-nav__title,
+  html[data-np-mode="outline"] .md-nav--primary > .md-nav__source {
+    display: none;
+  }
+}
