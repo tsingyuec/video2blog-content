@@ -158,10 +158,11 @@
 
   /* ---------- 装配 ---------- */
   function inject() {
+    var sidebar = primary();
     var nav = document.querySelector(".md-sidebar--primary .md-nav--primary");
-    if (!nav) return;
+    if (!sidebar || !nav) return;
 
-    var old = nav.querySelector(".np-toolbar");
+    var old = sidebar.querySelector(".np-toolbar");
     if (old) old.remove();
     var oldOutline = nav.querySelector(".np-outline");
     if (oldOutline) oldOutline.remove();
@@ -185,7 +186,11 @@
     }
 
     nav.insertBefore(outline, nav.firstChild);
-    nav.insertBefore(bar, nav.firstChild);
+    /* 工具条插在抽屉 / 左栏本身下，而不是滚动区（.md-sidebar__scrollwrap）里：
+       它是头部，滚动区整体下移给它让位（见 extra.css 第 6 节）。
+       放在滚动区里用 sticky / absolute 都不可靠：iOS Safari 能滚动 overflow:hidden
+       的容器，绝对定位的工具条会被卷出屏幕，看上去就像“文件 / 大纲不见了”。 */
+    sidebar.insertBefore(bar, sidebar.firstChild);
 
     bar.addEventListener("click", function (e) {
       var t = e.target.closest ? e.target.closest(".np-tab") : null;
