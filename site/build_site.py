@@ -7,11 +7,12 @@
 - content/<...>/README.md -> build/docs/<...>/index.md（各系列/分组索引）
 - content/<...>/**/*.md    -> 原样拷贝（不要求有 blog/ 层）
 - content/<...>/**/*.{webp,png,jpg,…} -> 原样拷贝（博客配图）
-- 发布范围 = 所有 .md + 图片等非文本资源；只排除 code/、transcripts/ 与 AGENT_TASK.md
+- 发布范围 = 所有 .md + 图片等非文本资源（隐藏文件/隐藏目录除外），不认目录名
 
 同时把文内链接重写为构建后的站点 URL：
 - `content/x/README.md` / `../x/README.md` / `blog/x.md` 等 -> 正确的站点相对链接
-- 指向被排除内容（code/transcripts、AGENT_TASK.md）的链接 -> 降级为纯文本，避免死链
+- 指向「不会被发布的内容」（非 .md / 非图片 / 隐藏文件）或压根不存在的目标的链接
+  -> 降级为纯文本，避免死链；缺失的目标会统计出来，便于发现笔误
 
 用法：
     python site/build_site.py            # 生成 build/docs
@@ -41,14 +42,11 @@ ASSETS = os.path.join(ROOT, "site", "assets")
 VENDOR = os.path.join(ROOT, "vendor")
 STATIC_FILES = ("extra.css", "extra.js", "katex.js")
 
-# 发布规则（与目录结构无关，新增系列无需改这里）：
+# 发布规则（与目录结构无关，新增系列/新目录无需改这里，也不认任何目录名/文件名）：
 #   1) 所有 *.md 都发布；
-#   2) 图片等非文本资源按扩展名发布（ASSET_EXTS），源码/锁文件/配置等一律不发。
-# 黑名单只用来挡两类不该上站的东西，不看目录层级，也不看是不是 .md：
-#   - code/、transcripts/：配套源码与视频演说图文稿（体积大、非博客正文，且常被 .gitignore 掉）
-#   - AGENT_TASK.md：Agent 的批次任务清单，不是内容
-EXCLUDE_DIRS = {"transcripts", "code"}
-EXCLUDE_FILES = {"AGENT_TASK.md"}
+#   2) 图片等非文本资源按扩展名发布（ASSET_EXTS），源码/锁文件/配置等一律不发；
+#   3) 隐藏文件与隐藏目录（以 . 开头，如 .venv/、.DS_Store）不是内容，不发。
+# 想「留在仓库里但不上站」的东西，按上面第 2/3 条办即可（改名成 .xxx 或非 ASSET_EXTS 后缀）。
 ASSET_EXTS = {
     ".webp", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".avif", ".bmp", ".ico", ".pdf",
 }
@@ -60,8 +58,11 @@ def _natural_key(s: str):
     """自然排序：让 Lecture 2 排在 Lecture 10 之前。"""
     return [int(p) if p.isdigit() else p.lower() for p in re.split(r"(\d+)", s)]
 
-# 链接目标可能含空格（未做 URL 编码），故用非贪婪匹配到右括号
-LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(\s*(<[^>]*>|[^)\n]*?)((?:\s+\"[^\"]*\")?)\s*\)")
+# 链接目标可能含空格（未做 URL 编码）与成对括号（文件名如 `xxx（volume, tmpfs）.md`），
+# 故允许一层括号，且用非贪婪匹配到右括号
+LINK_RE = re.compile(
+    r"(!?)\[([^\]]*)\]\(\s*(<[^>]*>|(?:[^()\n]|\([^()\n]*\))*?)((?:\s+\"[^\"]*\")?)\s*\)"
+)
 
 # 给正文图片补上 loading="lazy"（浏览器只加载可视区附近的图）与 decoding="async"。
 # 一篇文章动辄十几张抽帧截图，不懒加载时首屏要等全部图下完。
@@ -77,15 +78,14 @@ def rel_content(path: str) -> str:
     return os.path.relpath(path, CONTENT).replace("\\", "/")
 
 
-def is_excluded(sub: str) -> bool:
-    """按路径段/文件名排除，与层级无关。"""
-    segs = sub.split("/")
-    return any(seg in EXCLUDE_DIRS for seg in segs) or segs[-1] in EXCLUDE_FILES
+def is_hidden(sub: str) -> bool:
+    """任一以 . 开头的路径段：.venv/、.git/、.DS_Store 等，都不是内容。"""
+    return any(seg.startswith(".") for seg in sub.split("/"))
 
 
 def is_publishable(sub: str) -> bool:
-    """所有 .md + 图片等非文本资源。"""
-    if is_excluded(sub):
+    """所有 .md + 图片等非文本资源（隐藏文件/目录除外）。"""
+    if is_hidden(sub):
         return False
     ext = posixpath.splitext(sub)[1].lower()
     return ext == ".md" or ext in ASSET_EXTS
@@ -100,10 +100,6 @@ def docs_rel(sub: str) -> str:
 def nmatch(s: str) -> str:
     """Unicode NFC 归一化，用于文件名匹配。"""
     return unicodedata.normalize("NFC", s)
-
-
-def has_excluded_segment(path: str) -> bool:
-    return is_excluded(path)
 
 
 def build_nav(files: dict[str, str]):
@@ -208,6 +204,28 @@ def _split(url: str) -> tuple[str, str]:
     return url, ""
 
 
+def _link_candidates(pdir_repo: str, target: str) -> list[tuple[str, str]]:
+    """把链接目标拆成 (仓库相对路径, #fragment) 候选。
+
+    先按 # 当锚点切（常规写法），再把整串当路径试一次（文件名本身带 # 的情况，
+    如 `Docker Crash Course #8 - Layer Caching.md`）。
+    """
+    candidates: list[tuple[str, str]] = []
+    specs = []
+    path_part, frag = _split(target)
+    specs.append((unquote(path_part), frag))
+    if frag:
+        specs.append((unquote(target), ""))
+    for path, f in specs:
+        for cand in (
+            posixpath.normpath(posixpath.join(pdir_repo, path)),
+            posixpath.normpath(path),
+        ):
+            if (cand, f) not in candidates:
+                candidates.append((cand, f))
+    return candidates
+
+
 def _is_external(t: str) -> bool:
     return (
         not t
@@ -234,14 +252,9 @@ def rewrite_text(text, page_repo_rel, page_docs, urls, present, stats):
         if _is_external(target):
             return m.group(0)
 
-        path_part, frag = _split(target)
-        decoded = unquote(path_part)
+        cands = _link_candidates(pdir_repo, target)
 
-        cands = [
-            posixpath.normpath(posixpath.join(pdir_repo, decoded)),
-            posixpath.normpath(decoded),
-        ]
-        for cand in cands:
+        for cand, frag in cands:
             key = nmatch(cand)
             if key in urls:
                 dest = urls[key]
@@ -251,18 +264,21 @@ def rewrite_text(text, page_repo_rel, page_docs, urls, present, stats):
                     stats["rewritten"] += 1
                 return f"{bang}[{label}]({new}{title})"
 
-        # 指向被排除/未发布的内容：降级为纯文本（含仓库里本就缺失的 transcripts 链接）
-        for cand in cands:
-            if nmatch(cand) in present or has_excluded_segment(cand):
-                stats["neutralized"] += 1
-                return label
-
-        # 无法解析：原样保留
-        stats["unresolved"] += 1
-        if decoded.endswith(".md"):
-            stats.setdefault("unresolved_md", [])
-            stats["unresolved_md"].append(f"{page_repo_rel} -> {target}")
-        return m.group(0)
+        # 其余一律降级为纯文本（站内不留死链），但分两档记账：
+        #   unpublished：目标在仓库里存在，但按发布规则不上站（源码/配置/隐藏文件等）
+        #   missing    ：目标根本不在仓库里——多半是视频演说图文稿这类被 .gitignore
+        #                掉的中间产物（正常），也可能是笔误/漏提交（要报出来）
+        if any(nmatch(c) in present for c, _ in cands):
+            stats["unpublished"] += 1
+        else:
+            stats["missing"] += 1
+            orphan = not any(
+                os.path.isdir(os.path.join(ROOT, posixpath.dirname(c))) for c, _ in cands
+            )
+            stats.setdefault("missing_orphan" if orphan else "missing_file", []).append(
+                f"{page_repo_rel} -> {target}"
+            )
+        return label
 
     out = []
     for i, part in enumerate(parts):
@@ -283,7 +299,7 @@ def main() -> int:
     files, urls, present = build_plan()
     print(f"计划发布文件：{len(files)}（其中 .md：{sum(1 for d in files.values() if d.endswith('.md'))}）")
 
-    stats = {"rewritten": 0, "neutralized": 0, "unresolved": 0}
+    stats = {"rewritten": 0, "unpublished": 0, "missing": 0}
 
     if not args.check:
         if os.path.exists(DOCS):
@@ -325,12 +341,20 @@ def main() -> int:
             shutil.copy2(src, dst)
 
     print(
-        f"链接处理：重写 {stats['rewritten']}，降级 {stats['neutralized']}，未解析 {stats['unresolved']}"
+        f"链接处理：重写 {stats['rewritten']}，降级 {stats['unpublished'] + stats['missing']}"
+        f"（目标未发布 {stats['unpublished']}，目标缺失 {stats['missing']}）"
     )
-    bad = stats.get("unresolved_md", [])
-    if bad:
-        print(f"未解析的 .md 链接（{len(bad)} 条，前 20）：")
-        for line in bad[:20]:
+    # 缺失且父目录也不存在：多半是 transcripts/ 这类被 .gitignore 掉的中间产物，正常；
+    # 父目录存在却没这个文件：多半是笔误或漏提交的配图，需要人看。
+    orphans = stats.get("missing_orphan", [])
+    broken = stats.get("missing_file", [])
+    if orphans:
+        print(f"缺失目标（父目录也不存在，正常，{len(orphans)} 条）：")
+        for line in orphans[:3]:
+            print("  ", line)
+    if broken:
+        print(f"缺失目标（父目录在、文件不在，请核，{len(broken)} 条，前 20）：")
+        for line in broken[:20]:
             print("  ", line)
     if not args.check:
         print(f"已生成：{DOCS}")
