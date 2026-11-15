@@ -63,11 +63,11 @@
 
 先在"只有换根、没有隔离"的层面验证：`chroot rootfs /bin/bash` 进去后 `ls` 不工作——因为 PATH 没设。`export PATH=/bin:$PATH` 之后 `ls`、`hostname` 都正常；`curl` 则失败，因为打包时没包含它——没放进 rootfs 的程序就是不存在（[【跳转到 05:14】](https://www.youtube.com/watch?v=qjZ5YR1Qi0Y&t=314)）。
 
-### 3.2 echo $$ = 1：进入新进程世界
+### 3.2 `echo $$` = 1：进入新进程世界
 
 接下来做容器式的隔离：`unshare` 加上为 mount、UTS、IPC、net、pid 创建独立命名空间的 flags。进去之后 `echo $$` 打印当前 shell 的 PID——是 **1**。这意味着已经不在宿主环境里，而是进入了新的"进程世界"，和容器一样（[【跳转到 06:04】](https://www.youtube.com/watch?v=qjZ5YR1Qi0Y&t=364)）。
 
-![unshare 隔离命名空间后 echo $$ 输出 1：新进程世界里我们是 PID 1](assets/Docker根切换pivot_root详解/00364.webp)
+![unshare 隔离命名空间后 `echo $$` 输出 1：新进程世界里我们是 PID 1](assets/Docker根切换pivot_root详解/00364.webp)
 
 ## 四、pivot_root 三步走
 
