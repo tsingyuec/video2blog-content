@@ -226,8 +226,8 @@ $$
 模型输出的不是一条序列，而是一个概率分布。**采样温度** $T$ 就用来调节这个分布的"尖锐程度"（[【跳转到 00:26:12】](https://www.bilibili.com/video/BV1zu4y1J7MJ/?t=1572)）：
 
 $$
-\logits_i = \mathrm{ProteinMPNN}(\text{backbone}), \qquad
-q_i = \frac{e^{\,logits_i / T}}{\sum_j e^{\,logits_j / T}}
+\mathrm{logits}_i = \mathrm{ProteinMPNN}(\text{backbone}), \qquad
+q_i = \frac{e^{\,\mathrm{logits}_i / T}}{\sum_j e^{\,\mathrm{logits}_j / T}}
 $$
 
 - **温度低**（如 0.1）：分布很尖锐，趋向于选最可能氨基酸，序列恢复率高但多样性少；
