@@ -348,11 +348,7 @@ struct AddFunctor {
 
 提交时可以选 **private** 或 **public**。作者自己也试着提交了一次：直接拿 torch 写的参考实现扔上去，大概只有 0.21，性能当然比较差——这也正说明，想拿高分就要用 Triton 或 CUDA 做真正的算子优化。
 
-![SOL-ExecBench 的提交页与排行榜：私有/公开提交、延迟指标](assets/第06讲_工业级Element_Wise的实现_Oneflow详解/00114.webp)
-
-这几个资源对应的，正是作者博客《CUDA学习之路[7]：详解 oneflow 的 element_wise 代码》的内容：
-
-![作者博客《CUDA 学习之路：详解 oneflow 的 element_wise 代码》](assets/第06讲_工业级Element_Wise的实现_Oneflow详解/00148.webp)
+这几个资源对应的，正是作者博客《CUDA学习之路[7]：详解 oneflow 的 element_wise 代码》的内容。
 
 [【跳转到 00:23】](https://www.bilibili.com/video/BV1npovBCE1r/?t=23)
 
