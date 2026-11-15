@@ -108,7 +108,7 @@ function walk(dir) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, e.name);
     if (e.isDirectory()) out.push(...walk(p));
-    else if (e.name.endsWith('.md') && e.name !== 'README.md' && e.name !== 'AGENT_TASK.md') out.push(p);
+    else if (e.name.endsWith('.md') && e.name !== 'README.md') out.push(p);
   }
   return out;
 }

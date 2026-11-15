@@ -2,8 +2,8 @@
 # 构建前需先运行 `python site/build_site.py` 生成 build/docs 与 build/nav.yml。
 # 本地预览：python site/build_site.py && mkdocs serve
 #
-# 导航（nav）由 site/build_site.py 依据各页一级标题自动生成到 build/nav.yml，
-# 这里通过 INHERIT 合并进来；若要手工调整顺序/名称，改脚本里的 PRIORITY / DIR_LABELS。
+# 导航（nav）由 site/build_site.py 依 content/ 的真实目录树生成到 build/nav.yml，
+# 这里通过 INHERIT 合并进来；要调顺序/名称就改 content/ 下的目录名与文件名。
 INHERIT: build/nav.yml
 
 site_name: 视频图文博客库
@@ -80,7 +80,7 @@ extra_javascript:
   - _static/katex.js
   - _static/extra.js
 
-# 构建后处理：目前用于把搜索索引改成按需加载（见 site/hooks.py）
+# 构建后处理 hook：把搜索索引改为按需加载（见 site/hooks.py）
 hooks:
   - site/hooks.py
 

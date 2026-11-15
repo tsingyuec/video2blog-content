@@ -434,7 +434,7 @@
     if (isFinite(h)) setStageHeight(h, false);
   }
 
-  /* 清掉曾经写在元素上的 top / transform，位置完全由样式表决定。 */
+  /* 把 top / transform 置空，位置完全由样式表决定。 */
   function placeTop() {
     if (!player) return;
     player.root.style.top = "";

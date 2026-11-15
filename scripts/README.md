@@ -10,14 +10,14 @@
 | `node scripts/checks/check_md_math.mjs <md 或目录>` | 校验**源文件**里的公式能否被 KaTeX 渲染（失败/落单 $/残留代码样式三项须为 0） | 写完博客自检 |
 | `node scripts/checks/check_images.mjs <md 或目录> [--quiet]` | 校验图片引用：文件是否存在、扩展名与文件头是否一致（`.png` 实为 WEBP 之类）、0 字节/目录、扩展名是否在发布白名单；传**目录**时额外列出「存着但没被任何文章引用」的孤儿图（可删除或挪走） | 写完博客自检、定期清理配图 |
 | `node scripts/checks/check_katex.mjs build/site/<系列> --recursive` | 校验**构建产物**里的公式；能抓到源文件检查漏掉的制表符转义 | 全量构建后验收 |
-| `python scripts/checks/convert_math_inline.py --dry-run <md...>` | 一次性迁移工具：把「代码样式公式」批量转成 KaTeX（历史遗留，现已无人调用） | 一般不需要 |
+| `python scripts/checks/convert_math_inline.py --dry-run <md...>` | 把「代码样式公式」批量转成 KaTeX 的迁移工具；例行流程用不到，需要时手动跑 | 一般不需要 |
 
 ## 本目录之外的相关文件
 
 | 路径 | 作用 |
 | --- | --- |
 | `site/build_site.py` | 站点装配脚本（上面命令表第一行） |
-| `site/hooks.py` | MkDocs 构建后置 hook：把 36 MB 搜索索引改成按需加载；`mkdocs.yml` 的 `hooks:` 指向它 |
+| `site/hooks.py` | MkDocs 构建后置 hook：把搜索索引改为按需加载；`mkdocs.yml` 的 `hooks:` 指向它 |
 | `site/assets/` | `extra.css`（newsprint 主题）、`extra.js`（左栏文件/大纲）、`katex.js`（按需加载 KaTeX）、`fonts/`（PT Serif） |
 | `vendor/katex/` | KaTeX 发行包；`build_site.py` 会把整包拷进 `build/docs/_static/katex/`，两个校验脚本也 `import` 它的 `katex.mjs` |
 | `mkdocs.yml` | 站点配置；`extra_css`/`extra_javascript` 指向产物里的 `_static/*`（源文件在 `site/assets/`） |

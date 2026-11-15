@@ -1,8 +1,8 @@
 /* 把 pymdownx.arithmatex（generic）产出的 \( \) / \[ \] 交给 KaTeX。
    navigation.instant 换页后 document$ 会再触发，需要重新排版。
 
-   KaTeX 本体（katex.min.js 约 76 KB + auto-render 与字体）不再随每页无条件加载：
-   本页没有公式就不下，有公式才按需注入脚本再排版。 */
+   KaTeX 本体（katex.min.js 约 76 KB + auto-render 与字体）按需加载：
+   本页没有公式就不下载，有公式才注入脚本再排版。 */
 (function () {
   var self = document.currentScript ||
     document.querySelector('script[src$="_static/katex.js"]');

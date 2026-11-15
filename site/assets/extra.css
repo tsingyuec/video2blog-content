@@ -258,7 +258,7 @@ body[data-md-color-scheme="slate"] {
 /* ---------- 6. 左侧栏顶部工具条：文件 / 大纲 ---------- */
 /* 工具条是左栏 / 抽屉的**头部**：由 extra.js 插在 .md-sidebar--primary 下、
    滚动区（.md-sidebar__scrollwrap）之外；滚动区整体下移给它让位。
-   不再用 sticky / absolute 叠在滚动内容上：iOS Safari 会滚动 overflow:hidden 的容器，
+   工具条不叠在滚动内容上（不用 sticky / absolute）：iOS Safari 会滚动 overflow:hidden 的容器，
    叠在上面的绝对定位元素会被卷出屏幕（表现就是手机上「文件 / 大纲」不见了）。 */
 .md-sidebar--primary {
   /* 抽屉头高度 = tab 区域 + 虚线下的留白，保证 tab 本身仍有 3.1rem 的大按钮体量
@@ -345,7 +345,7 @@ html[data-np-mode="outline"] .np-outline {
 /* ---------- 9. 正文栏居中：两侧间距相等 ---------- */
 /* Material 把主区 .md-main__inner.md-grid 限制在 61rem（=1220px，root 20px）并居中，
    于是正文右侧空出一大条死白（左栏越宽越明显）：左间距只有 1.2rem、右间距上百 px。
-   桌面端放开限宽（改成整窗宽），并补上与原居中量相同的左内边距——左栏位置、
+   桌面端放开限宽（整窗宽），并补上与顶栏 logo 对齐所需的左内边距——左栏位置、
    与顶栏 logo 的对齐都保持不变——这样正文所在的 .md-content 一直延伸到窗口右缘，
    再配合两侧 auto 外边距，正文就在「左栏右侧的剩余空间」里居中，两侧等距。 */
 @media screen and (min-width: 76.25em) {
@@ -412,7 +412,7 @@ html[data-np-mode="outline"] .np-outline {
     user-select: none !important;
   }
 
-  /* 收起后左栏不再占位，正文从窗口左缘排起 */
+  /* 收起时左栏宽度归零，正文从窗口左缘排起 */
   body.np-sidebar-collapsed .md-sidebar--primary {
     width: 0 !important;
     min-width: 0 !important;
