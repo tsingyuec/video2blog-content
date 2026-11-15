@@ -1,7 +1,7 @@
 # 虚拟细胞（精选版）
 
 > 按视频质量与相关性筛选，**每个视频一篇博客**；博客标题与视频标题一致，不合并多个视频。
-> 更完整的 10 节旧版见 [content/biomodel/虚拟细胞](../biomodel/虚拟细胞/README.md)。
+> 同一主题的完整十节版本见 [content/biomodel/虚拟细胞](../biomodel/虚拟细胞/README.md)。
 
 ## 选题原则
 

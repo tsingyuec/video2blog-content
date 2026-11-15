@@ -29,7 +29,7 @@ content/**/code/**/*.cif
 # 5) skills CLI 装在本地的 skill 拷贝（Maka Agent 首次运行时安装）
 .agents/
 .claude/
-agent/
+/agent/
 skills-lock.json
 
 # 6) 站点构建产物（由 site/build_site.py 与 mkdocs 生成）
