@@ -158,7 +158,7 @@ pip install -r ~/.agents/skills/video2blog/requirements.txt   # opencv-python、
 
 ### 参考实现
 
-这套调度**不靠脚本**：由 Agent 在会话里按上表逐批执行，或交给 Maka 定时任务（读系列目录下的 `AGENT_TASK.md`）。批与批之间不共享记忆，进度只看 README 行尾标记。
+这套调度**不靠脚本**：由 Agent 在会话里按上表逐批执行，或交给 Maka 定时任务。批与批之间不共享记忆，进度只看 README 行尾标记。
 
 ## 交互约定
 
