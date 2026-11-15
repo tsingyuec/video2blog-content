@@ -33,9 +33,9 @@ temp/
 agent/
 skills-lock.json
 
-# 6) 站点构建产物（由 scripts/build_site.py 与 mkdocs 生成）
+# 6) 站点构建产物（由 site/build_site.py 与 mkdocs 生成）
+# 注意：/site/ 是**源码目录**（构建脚本与静态资源），不可忽略；站产物在 build/ 下。
 /build/
-/site/
 
 # 7) 系统与编辑器噪音
 .DS_Store

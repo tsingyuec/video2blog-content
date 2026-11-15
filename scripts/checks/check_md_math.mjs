@@ -2,8 +2,8 @@
 // 直接校验 Markdown 源文件里的 LaTeX 公式能否被 KaTeX 渲染（不需要构建站点）。
 //
 // 用法：
-//   node scripts/check_md_math.mjs <a.md> [b.md ...]
-//   node scripts/check_md_math.mjs content/reinforcement_learning
+//   node scripts/checks/check_md_math.mjs <a.md> [b.md ...]
+//   node scripts/checks/check_md_math.mjs content/reinforcement_learning
 //
 // 检查项：
 //   1. 每个 $...$ / $$...$$ 都能被 KaTeX 无错渲染；
@@ -15,7 +15,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import katex from '../scripts/vendor/katex/katex.mjs';
+import katex from '../../vendor/katex/katex.mjs';
 
 const MATH_HINT = /[_^{}\\]|\b(argmax|argmin|sum|prod|frac|sqrt|mathbb|mathcal|epsilon|gamma|alpha|lambda|theta|pi|sigma|mu|max|min|log|exp)\b/;
 
@@ -115,7 +115,7 @@ function walk(dir) {
 
 const args = process.argv.slice(2);
 if (!args.length) {
-  console.error('用法: node scripts/check_md_math.mjs <md 文件或目录> [...]');
+  console.error('用法: node scripts/checks/check_md_math.mjs <md 文件或目录> [...]');
   process.exit(2);
 }
 

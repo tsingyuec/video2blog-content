@@ -2,14 +2,14 @@
 // 校验构建产物里的 KaTeX 公式能否被真正渲染（而不是靠肉眼猜）。
 //
 // 用法：
-//   node scripts/check_katex.mjs build/site/<页面>.html
-//   node scripts/check_katex.mjs build/site/reinforcement_learning --recursive
+//   node scripts/checks/check_katex.mjs build/site/<页面>.html
+//   node scripts/checks/check_katex.mjs build/site/reinforcement_learning --recursive
 //
 // 退出码：0 = 全部可渲染；1 = 有公式报错或页面里还有未转换的 $...$。
 
 import fs from 'node:fs';
 import path from 'node:path';
-import katex from '../scripts/vendor/katex/katex.mjs';
+import katex from '../../vendor/katex/katex.mjs';
 
 const INLINE = /<span class="arithmatex">\\\(([\s\S]*?)\\\)<\/span>/g;
 const DISPLAY = /<div class="arithmatex">\\\[([\s\S]*?)\\\]<\/div>/g;
@@ -68,7 +68,7 @@ function walk(dir) {
 
 const target = process.argv[2];
 if (!target) {
-  console.error('用法: node scripts/check_katex.mjs <html 文件或目录> [--recursive]');
+  console.error('用法: node scripts/checks/check_katex.mjs <html 文件或目录> [--recursive]');
   process.exit(2);
 }
 

@@ -1,8 +1,8 @@
 # MkDocs Material 站点配置
-# 构建前需先运行 `python scripts/build_site.py` 生成 build/docs 与 build/nav.yml。
-# 本地预览：python scripts/build_site.py && mkdocs serve
+# 构建前需先运行 `python site/build_site.py` 生成 build/docs 与 build/nav.yml。
+# 本地预览：python site/build_site.py && mkdocs serve
 #
-# 导航（nav）由 scripts/build_site.py 依据各页一级标题自动生成到 build/nav.yml，
+# 导航（nav）由 site/build_site.py 依据各页一级标题自动生成到 build/nav.yml，
 # 这里通过 INHERIT 合并进来；若要手工调整顺序/名称，改脚本里的 PRIORITY / DIR_LABELS。
 INHERIT: build/nav.yml
 
@@ -80,9 +80,9 @@ extra_javascript:
   - _static/katex.js
   - _static/extra.js
 
-# 构建后处理：目前用于把搜索索引改成按需加载（见 scripts/site_hooks.py）
+# 构建后处理：目前用于把搜索索引改成按需加载（见 site/hooks.py）
 hooks:
-  - scripts/site_hooks.py
+  - site/hooks.py
 
 extra:
   generator: false

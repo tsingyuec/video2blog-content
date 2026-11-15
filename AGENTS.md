@@ -23,12 +23,24 @@ content/                        # 最终产物
    └─ blog/
       ├─ <名称>.md               # 博客
       └─ assets/<名称>/          # 博客配图
+
+site/                           # 站点（前端）构建
+├─ build_site.py                # content/ -> build/docs，生成 build/nav.yml
+├─ hooks.py                     # mkdocs 构建后置 hook（搜索索引按需加载）
+└─ assets/                      # extra.css / extra.js / katex.js / fonts/
+
+vendor/katex/                   # KaTeX 发行包（站点与公式校验共用）
+
+scripts/                        # 只放可执行工具，不放静态资源
+├─ README.md                    # 工具入口清单
+└─ checks/                      # 内容质检：check_md_math.mjs、check_katex.mjs
 ```
 
 - **处理约定**：处理视频时，所有**中间结果**——下载的视频、1fps 抽帧、字幕，以及「图-字幕」**视频演说图文稿（文稿）**——统一放在 `_work/` 目录下；最终生成的**博客**放在 `content/` 目录下。也就是说，`content/` 只收录博客、配图与系列索引，**不包含文稿**。
 - **`<名称>`**：博客按视频名称命名——多 P 系列为 `第NN讲_<分P标题>`（如 `第07讲_理论：RMSNorm`），单视频为视频名称。
 - **分组目录**：相关系列可再套一层分组目录，如 `content/vllm_group/`、`content/protein_group/`；分组目录下同样放一个 `README.md` 作为该分组的索引。
 - **版本控制**：仓库只收录各系列的 `README.md`、`blog/`（含配图）与 `code/`。中间结果（`_work/` 下的视频、抽帧、字幕、文稿）体积大且可再生，均由 `.gitignore` 排除。
+- **工具与静态资源分家**：`scripts/` 只放可执行的检查/工具脚本；站点样式、字体与第三方库分别放 `site/assets/` 与 `vendor/`，`scripts/` 里不存静态文件。
 - **生物内容的二层结构**：`content/biomodel/`（按**模型**）、`content/biodata/`（按**数据站点**）、`content/biobasic/`（**公共生物学**）采用「分组 / 主题」两层结构——主题子目录内**直接放**博客 `.md` 与配图 `assets/`，**不再有** `README.md` 与 `blog/`；每个分组各有自己的 `README.md` 作索引。
 
 ## 安装 video2blog skill
@@ -140,13 +152,13 @@ pip install -r ~/.agents/skills/video2blog/requirements.txt   # opencv-python、
 子智能体报告完成后仍需自己核一遍，不要只信它的自检：
 
 1. **图片引用数 == 文件数**（无孤立、无缺失）。
-2. `node scripts/check_md_math.mjs <目录>` 三项全 0。
+2. `node scripts/checks/check_md_math.mjs <目录>` 三项全 0。
 3. `<README>` 只有它自己那一行变更。
-4. 全量构建后跑 `node scripts/check_katex.mjs build/site/<系列> --recursive`——**源文件检查会漏掉制表符转义这类问题，构建产物检查才是最终防线**。
+4. 全量构建后跑 `node scripts/checks/check_katex.mjs build/site/<系列> --recursive`——**源文件检查会漏掉制表符转义这类问题，构建产物检查才是最终防线**。
 
 ### 参考实现
 
-`scripts/rl_auto_process.sh` 是这套调度的现成实现（`BATCH=2`、`ENTRY_TIMEOUT` 单条超时、`flock` 单实例、失败自动回滚），换系列时改 `SPEC`、`PY` 与日志目录即可复用。
+这套调度**不靠脚本**：由 Agent 在会话里按上表逐批执行，或交给 Maka 定时任务（读系列目录下的 `AGENT_TASK.md`）。批与批之间不共享记忆，进度只看 README 行尾标记。
 
 ## 交互约定
 

@@ -5,8 +5,8 @@
 含 _ ^ { } \\ 或数学关键字，且不是纯标识符。
 
 用法：
-  python3 scripts/convert_math_inline.py --dry-run <md...>
-  python3 scripts/convert_math_inline.py --apply  <md...>
+  python3 scripts/checks/convert_math_inline.py --dry-run <md...>
+  python3 scripts/checks/convert_math_inline.py --apply  <md...>
 """
 import re
 import sys

@@ -48,8 +48,8 @@
 - **配图是相对路径**：博客里图片写的是 `assets/<名称>/xxx.webp`，与对应 `.md` **同处一层**。把 `.md` 和它的 `assets/<名称>/` 目录**一起搬走、保持相对位置**即可，**无需改任何链接**。
 - **assets 目录名未必等于文件名**：例如 `UniParc与UniRef数据库使用指南.md` 对应的 assets 目录名是 `UniParc与UniRef使用指南`（少了「数据库」）。搬移时应以 **md 里实际引用的 `assets/<name>`** 去定位 assets 目录，不要用文件名去猜。
 - **`transcripts/` 目录未被 git 跟踪**（本地中间产物，站点已排除）：可一并迁移以保持整洁，也可留着或删除，不影响站点与仓库。
-- **必须同步改构建脚本**：`scripts/build_site.py` 的 `is_included()` 目前**只收录** `README.md` 与 `/blog/` 下的文件。新结构是 `biomodel/<模型>/*.md`、`biodata/<站点>/*.md`、`biobasic/*.md`，**都不在其内**——不改这个函数，这些博客**不会出现在站点上**。
-- **导航**由 `scripts/build_site.py` 按**真实目录树**自动生成到 `build/nav.yml`，`mkdocs.yml` 用 `INHERIT: build/nav.yml` 合并。改完目录结构无需手改 nav。
+- **必须同步改构建脚本**：`site/build_site.py` 的 `is_included()` 目前**只收录** `README.md` 与 `/blog/` 下的文件。新结构是 `biomodel/<模型>/*.md`、`biodata/<站点>/*.md`、`biobasic/*.md`，**都不在其内**——不改这个函数，这些博客**不会出现在站点上**。
+- **导航**由 `site/build_site.py` 按**真实目录树**自动生成到 `build/nav.yml`，`mkdocs.yml` 用 `INHERIT: build/nav.yml` 合并。改完目录结构无需手改 nav。
 
 ### 需要一并更新的索引页（README）
 
@@ -68,10 +68,10 @@
 - **站点**：https://tsingyuec.github.io/video2blog-content/ （仓库 `tsingyuec/video2blog-content`，`main` 分支）
 - **技术**：MkDocs **Material**；每次 push 到 `main` → GitHub Actions 自动构建并发布 Pages。
 - **自动化**：`.github/workflows/deploy-pages.yml`（build → configure-pages → upload → deploy）。
-- **构建**：先 `python scripts/build_site.py` 生成 `build/docs` 与 `build/nav.yml`，再 `mkdocs build`；本地预览：`python scripts/build_site.py && python -m mkdocs serve`。
+- **构建**：先 `python site/build_site.py` 生成 `build/docs` 与 `build/nav.yml`，再 `mkdocs build`；本地预览：`python site/build_site.py && python -m mkdocs serve`。
 - **站点体积**：约 310 MB（已排除 `transcripts/`、`code/`，二者合计约 1.4 GB，会超 Pages 1 GB 限额）。
 - **主题**：复刻本机 Typora 的 **newsprint**——衬线 PT Serif（已打包 woff2，西文用 PT Serif、中文回退系统宋体）+ 米色背景 `#f3f2ee` + 文字 `#1f0909` + 链接 `#065588` + `#dadada` 代码底 + 斜体灰引用块（5px 左边框）。深色为按同色系派生的版本。
-- **布局**：桌面端两栏——左目录树 / 右正文；左栏顶部有「文件 / 大纲」切换（大纲由 `scripts/extra.js` 从右侧 TOC 克隆）。
+- **布局**：桌面端两栏——左目录树 / 右正文；左栏顶部有「文件 / 大纲」切换（大纲由 `site/assets/extra.js` 从右侧 TOC 克隆）。
 - **重要约束**：**顶栏必须保留**——MkDocs Material 的搜索弹层与深浅色控件都内建在顶栏里，`display:none` 顶栏会让这两个按钮失效。当前顶栏为极简 newsprint 风格细栏。
 - **正文规格**：字号 16px、栏宽 640px（≥1400px 时 914px）、行距 1.6。
 
@@ -80,10 +80,14 @@
 | 文件 | 作用 |
 | --- | --- |
 | `mkdocs.yml` | 站点配置；`INHERIT: build/nav.yml`；`custom_dir` 无；`extra_css/_javascript` 指向 `_static/*` |
-| `scripts/build_site.py` | 装配 `content/` → `build/docs`；重写链接；按真实目录树生成 `build/nav.yml`；拷贝 `extra.css/js` 与字体 |
-| `scripts/extra.css` | newsprint 复刻样式（字体/配色/排版/双栏） |
-| `scripts/extra.js` | 左栏「文件 / 大纲」工具条 |
-| `scripts/fonts/*.woff2` | PT Serif（来自 Typora newsprint） |
+| `site/build_site.py` | 装配 `content/` → `build/docs`；重写链接；按真实目录树生成 `build/nav.yml`；把 `site/assets/` 与 `vendor/katex/` 拷进 `_static/` |
+| `site/hooks.py` | MkDocs 构建后置 hook：搜索索引改为按需加载 |
+| `site/assets/extra.css` | newsprint 复刻样式（字体/配色/排版/双栏） |
+| `site/assets/extra.js` | 左栏「文件 / 大纲」工具条 |
+| `site/assets/katex.js` | 按需加载 KaTeX 并排版 `\( \)` / `\[ \]` |
+| `site/assets/fonts/*.woff2` | PT Serif（来自 Typora newsprint） |
+| `vendor/katex/` | KaTeX 发行包（站点与公式校验脚本共用） |
+| `scripts/checks/` | `check_md_math.mjs`（源文件公式校验）、`check_katex.mjs`（构建产物校验） |
 | `requirements.txt` | `mkdocs-material` |
 
 ### 曾遇到的坑（供参考）

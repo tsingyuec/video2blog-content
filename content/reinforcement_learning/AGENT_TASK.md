@@ -3,7 +3,7 @@
 > 供定时任务 / 批量驱动使用。目标文件：`/workspace/working/video2blog-content/content/reinforcement_learning/README.md`
 > 工作目录：`/workspace/working/video2blog-content`
 >
-> 本文件是**唯一规则来源**。驱动脚本（`scripts/rl_auto_process.sh`）与 Maka 定时任务都只读本文件，不再另设副本；驱动模式下的差异见第 7 节。
+> 本文件是**唯一规则来源**。定时任务（Maka）与会话内手动批处理都只读本文件，不再另设副本；批量模式下的差异见第 7 节。
 
 ## 0. 运行模型
 
@@ -114,7 +114,7 @@
 
 ### 4.1 公式与记号（重要）
 
-站点**已启用 KaTeX**：`mkdocs.yml` 开了 `pymdownx.arithmatex`（generic 模式），并加载了 `_static/katex/` 下的 KaTeX 与 auto-render（`scripts/katex.js` 负责把 `\( \)` / `\[ \]` 交给 KaTeX）。因此博客里**直接写 LaTeX**：
+站点**已启用 KaTeX**：`mkdocs.yml` 开了 `pymdownx.arithmatex`（generic 模式），并加载了 `_static/katex/` 下的 KaTeX 与 auto-render（`site/assets/katex.js` 负责把 `\( \)` / `\[ \]` 交给 KaTeX）。因此博客里**直接写 LaTeX**：
 
 - **行内公式**用单个 `$`：`$V(s) = \mathbb{E}[R + \gamma V(s')]$`
 - **独立公式块**用 `$$`，且 `$$` 必须**独占一行**、前后各留一个空行：
@@ -128,7 +128,7 @@
 - 常用命令都支持：`\frac`、`\sqrt`、`\sum`、`\prod`、`\max`、`\min`、`\arg\max`、`\mathbb`、`\mathcal`、`\leftarrow`、`\to`、`\ge`、`\le`、`\mid`、`\big[`、`\quad`、`\text{}`、`\begin{aligned}...\end{aligned}`。
 - **代码块（围栏 ```）里的 `$` 不会被渲染**，讲代码时仍用围栏块；伪代码、ASCII 示意图也保留为围栏块（它们不是公式）。
 - 记号首次出现给全称（状态价值 $V(s)$、动作价值 $Q(s,a)$、优势 $A(s,a)$），同一篇内不要混用 $V_\pi$ 与 $V^\pi$ 两种写法。
-- 写完用 `node scripts/check_md_math.mjs <博客.md>` 自检：必须做到「公式失败 0、落单 $ 0、疑似未转换 0」。
+- 写完用 `node scripts/checks/check_md_math.mjs <博客.md>` 自检：必须做到「公式失败 0、落单 $ 0、疑似未转换 0」。
 
 ## 5. 回写标记
 
@@ -159,14 +159,13 @@
 | 自己的条目被别的运行改回未标记 | 博客已落位就补写完成标记，否则结束本次运行 |
 | 完成标记中链接指向的文件不存在 | 该条目视为待处理（若其同时被标 `【处理中】`，按 1.1 节超时规则处理） |
 
-## 7. 驱动模式（批量自动处理）
+## 7. 批量模式（一次并行处理多条）
 
-由 `scripts/rl_auto_process.sh` 驱动时，除本节外**全部沿用第 0~6 节**，不另设规则副本。差异只有三点：
+除本节外**全部沿用第 0~6 节**，不另设规则副本。差异只有两点：
 
 | 项目 | 差异 |
 |---|---|
-| 认领 | **跳过第 1 节**。条目已由驱动脚本预先标好 `**【处理中】**`，直接开工 |
-| 并发 | 每批固定 2 个条目并行，各自独立 temp 目录与博客目录，互不干扰 |
+| 认领 | 一次认领 **2 条**（各自行尾标 `**【处理中】**`），再逐条开工 |
 | 失败回滚 | 把自己那行的 `**【处理中】**` 去掉（回滚为待处理），并在结束消息里说明原因 |
 
 其余（探索与选题取向、字幕降级链、落位规则、公式与记号、回写标记、异常处理）一律以第 2~6 节为准。
@@ -198,7 +197,7 @@
 4. 改完自检，三项必须全为 0：
 
    ```bash
-   node scripts/check_md_math.mjs <博客.md>
+   node scripts/checks/check_md_math.mjs <博客.md>
    # 期望：失败 0，落单 $ 0，疑似未转换 0
    ```
 

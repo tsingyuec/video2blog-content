@@ -13,8 +13,8 @@
 - 指向被排除内容（transcripts/code）的链接 -> 降级为纯文本，避免死链
 
 用法：
-    python scripts/build_site.py            # 生成 build/docs
-    python scripts/build_site.py --check    # 只做链接统计，不写文件
+    python site/build_site.py            # 生成 build/docs
+    python site/build_site.py --check    # 只做链接统计，不写文件
 """
 
 from __future__ import annotations
@@ -34,6 +34,11 @@ import yaml
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, "content")
 DOCS = os.path.join(ROOT, "build", "docs")
+
+# 静态资源来源（拷贝到 build/docs/_static/ 供 mkdocs 引用）
+ASSETS = os.path.join(ROOT, "site", "assets")
+VENDOR = os.path.join(ROOT, "vendor")
+STATIC_FILES = ("extra.css", "extra.js", "katex.js")
 
 # 这些目录（content/ 下的任意层级）不发布
 EXCLUDE_DIRS = {"transcripts", "code"}
@@ -296,18 +301,18 @@ def main() -> int:
         # 生成中文导航
         nav_path = write_nav(files)
         print(f"已生成导航：{nav_path}")
-        # 拷贝自定义样式 / 脚本 / 字体，供 mkdocs 引用
+        # 拷贝自定义样式 / 脚本 / 字体 / KaTeX，供 mkdocs 引用
         static_dir = os.path.join(DOCS, "_static")
-        for name in ("extra.css", "extra.js", "katex.js"):
-            src = os.path.join(ROOT, "scripts", name)
+        for name in STATIC_FILES:
+            src = os.path.join(ASSETS, name)
             if os.path.exists(src):
                 os.makedirs(static_dir, exist_ok=True)
                 shutil.copy2(src, os.path.join(static_dir, name))
-        katex_src = os.path.join(ROOT, "scripts", "vendor", "katex")
+        katex_src = os.path.join(VENDOR, "katex")
         if os.path.isdir(katex_src):
             os.makedirs(static_dir, exist_ok=True)
             shutil.copytree(katex_src, os.path.join(static_dir, "katex"), dirs_exist_ok=True)
-        fonts_src = os.path.join(ROOT, "scripts", "fonts")
+        fonts_src = os.path.join(ASSETS, "fonts")
         if os.path.isdir(fonts_src):
             shutil.copytree(fonts_src, os.path.join(static_dir, "fonts"), dirs_exist_ok=True)
 
