@@ -18,11 +18,11 @@
 
 课程开篇就点明：Docker 存储分三种类型——**一个是针对宿主机的，一个是针对内存的，还有一部分在 Docker 这个区域里**。后者就是我们平时看得比较多的 `/var/lib/docker` 目录，它其实也属于文件系统的一部分；这些存储主要都是用来**让宿主机和容器共享数据**的。[【跳转到 00:13】](https://www.bilibili.com/video/BV1w3xCe1ENY/?t=13)
 
-![Docker 存储的三种类型：分别面向宿主机目录、内存与 /var/lib/docker](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00013.webp)
+![Docker 存储的三种类型：分别面向宿主机目录、内存与 /var/lib/docker](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00013.webp)
 
 在宿主机上执行 `df -h`，就能看到整个文件系统下有一个 `/var/lib/docker`——这一部分就属于 Docker 区域，**存储卷的数据也放在这里边**。[【跳转到 00:43】](https://www.bilibili.com/video/BV1w3xCe1ENY/?t=43)
 
-![df -h 中可见 /var/lib/docker，存储卷的数据就在这个区域里](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00043.webp)
+![df -h 中可见 /var/lib/docker，存储卷的数据就在这个区域里](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00043.webp)
 
 用一句话概括三者的分工：
 
@@ -32,7 +32,7 @@
 | **volume** | `/var/lib/docker/volumes` | `-v <卷名>:<容器路径>` |
 | **tmpfs** | 宿主机的**内存** | `--mount type=tmpfs,...` |
 
-![三种挂载方式：bind 挂宿主目录、volume 落 /var/lib/docker、tmpfs 进内存](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00063.webp)
+![三种挂载方式：bind 挂宿主目录、volume 落 /var/lib/docker、tmpfs 进内存](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00063.webp)
 
 ## 二、用 docker inspect 分辨 bind 与 volume
 
@@ -42,14 +42,14 @@
 
 启动容器后，执行 `docker inspect <容器名>`，在输出的 `Mounts` 段里看 `Type` 字段——**它的类型是 `bind`**，`Source` 就是我们指定的宿主机目录，目标（`Destination`）是容器内的目录。[【跳转到 02:06】](https://www.bilibili.com/video/BV1w3xCe1ENY/?t=126)
 
-![docker inspect 中 Mounts 的 Type 为 bind，Source 指向宿主机目录](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00126.webp)
+![docker inspect 中 Mounts 的 Type 为 bind，Source 指向宿主机目录](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00126.webp)
 
 ```bash
 docker run ... -v /宿主目录:/容器内目录 --name ng4 <镜像>
 docker inspect ng4          # Mounts.Type = bind
 ```
 
-![bind 方式的 inspect 结果：Source 是宿主机目录、Destination 是容器目录](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00149.webp)
+![bind 方式的 inspect 结果：Source 是宿主机目录、Destination 是容器目录](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00149.webp)
 
 ### 2.2 volume 方式：挂载源是卷名
 
@@ -57,7 +57,7 @@ docker inspect ng4          # Mounts.Type = bind
 
 关键是看 `Source`：它**指向 `/var/lib/docker/volumes` 下面的一个路径**。由此可以总结出一条判据——**只要挂载源落在这个路径下，它就是 volume 类型**。[【跳转到 03:04】](https://www.bilibili.com/video/BV1w3xCe1ENY/?t=184)
 
-![volume 方式：Mounts.Type = volume，Source 落在 /var/lib/docker/volumes 下](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00184.webp)
+![volume 方式：Mounts.Type = volume，Source 落在 /var/lib/docker/volumes 下](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00184.webp)
 
 ```bash
 docker run ... -v 卷名:/容器内目录 --name ng3 <镜像>
@@ -71,7 +71,7 @@ docker inspect ng3          # Mounts.Type = volume，Source 在 /var/lib/docker/
 - **`-v` 后跟以 `/` 开头的绝对路径 → bind 方式**；
 - **`-v` 后跟其它写法（卷名，包括匿名卷或具名卷）→ volume 方式**。
 
-![小结：-v 以 / 开头是 bind，其余（匿名/具名卷）是 volume](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00209.webp)
+![小结：-v 以 / 开头是 bind，其余（匿名/具名卷）是 volume](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00209.webp)
 
 ## 三、把数据放到内存：必须用 `--mount type=tmpfs`
 
@@ -85,11 +85,11 @@ docker run -itd --name ng5 \
   <镜像>
 ```
 
-![挂到内存必须用 --mount 并指定 type=tmpfs](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00246.webp)
+![挂到内存必须用 --mount 并指定 type=tmpfs](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00246.webp)
 
 容器（`ng5`）起来后，照样用 `docker inspect` 看 `Mounts`：这次 **`Type` 是 `tmpfs`**。它的含义就是——**把容器里 `/app` 的数据，直接加载到宿主机的内存中**。[【跳转到 04:56】](https://www.bilibili.com/video/BV1w3xCe1ENY/?t=296)
 
-![docker inspect 中 Mounts.Type = tmpfs，数据落在宿主机内存而非磁盘](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00296.webp)
+![docker inspect 中 Mounts.Type = tmpfs，数据落在宿主机内存而非磁盘](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00296.webp)
 
 ## 小结
 
@@ -98,7 +98,7 @@ docker run -itd --name ng5 \
 - `-v` 的两条规律：**以 `/` 开头 = bind**；**其余（匿名卷/具名卷）= volume**（看 `Source` 是否落在 `/var/lib/docker/volumes` 下）。
 - **要挂到内存，必须用 `--mount type=tmpfs`**；`-v` 与 `--mount` 有区别。
 
-![总结：三种挂载方式分别对应宿主机目录、/var/lib/docker 与内存](assets/42-docker volume 存储卷的3种类型（volume, bind mount , tmpfs mount)/00319.webp)
+![总结：三种挂载方式分别对应宿主机目录、/var/lib/docker 与内存](assets/42-docker%20volume%20存储卷的3种类型（volume,%20bind%20mount%20,%20tmpfs%20mount%29/00319.webp)
 
 ## 关键术语速查
 
