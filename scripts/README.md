@@ -8,6 +8,7 @@
 | `python site/build_site.py --check` | 同上但不写文件，只统计链接（重写/降级/未解析） | 改目录结构后核对死链 |
 | `mkdocs build` | 由 `build/docs` 生成 `build/site` | 构建 |
 | `node scripts/checks/check_md_math.mjs <md 或目录>` | 校验**源文件**里的公式能否被 KaTeX 渲染（失败/落单 $/残留代码样式三项须为 0） | 写完博客自检 |
+| `node scripts/checks/check_images.mjs <md 或目录> [--quiet]` | 校验图片引用：文件是否存在、扩展名与文件头是否一致（`.png` 实为 WEBP 之类）、0 字节/目录、扩展名是否在发布白名单；传**目录**时额外列出「存着但没被任何文章引用」的孤儿图（可删除或挪走） | 写完博客自检、定期清理配图 |
 | `node scripts/checks/check_katex.mjs build/site/<系列> --recursive` | 校验**构建产物**里的公式；能抓到源文件检查漏掉的制表符转义 | 全量构建后验收 |
 | `python scripts/checks/convert_math_inline.py --dry-run <md...>` | 一次性迁移工具：把「代码样式公式」批量转成 KaTeX（历史遗留，现已无人调用） | 一般不需要 |
 
