@@ -1,26 +1,42 @@
 # 视频图文博客库
 
 把 Bilibili / YouTube 视频整理成「**视频演说图文稿** + **初学者也能看懂的博客**」的合集。
-内容按**主题系列**分目录，每个系列一个 `README.md`，用于索引该系列下的视频。处理过程中的文稿与其它中间结果放在 `_work/`，最终博客放在 `content/`。
+内容按**主题系列**分目录，每个目录一个 `README.md` 作索引。处理过程中的文稿与其它中间结果放在 `_work/`，最终博客放在 `content/`。
 
-> **给 Agent 的规则**（目录结构 / 处理约定 / skill 安装 / 处理流程 / 交互约定）见 [AGENTS.md](AGENTS.md)。
+> **给 Agent 的规则**（目录结构 / 处理约定 / skill 安装 / 处理流程 / 调度 / 交互约定）见 [AGENTS.md](AGENTS.md)；
+> **单条任务的执行细则**见 [SUBAGENTS.md](SUBAGENTS.md)。
 
 ## 目录结构
 
 ```
 _work/                          # 处理中间结果（体积大、可再生，不进版本库）
-└─ <系列>/ …                    # 视频、抽帧、字幕、文稿
-content/                        # 最终产物
+└─ <系列>/<条目名>/ …            # 视频、抽帧、字幕、图文稿
+content/                        # 最终产物：博客 + 配图 + 索引
 └─ <系列>/
    ├─ README.md                  # 该系列的视频索引
-   └─ blog/                      # 博客与配图
+   ├─ <名称>.md                  # 博客（可直接放，也可按主题再分目录）
+   └─ assets/<名称>/             # 博客配图
 ```
+
+`content/` 的层级随主题而定，规则只有一条：`README.md` 是所在目录的索引，`<名称>.md` 是博客正文，`assets/<名称>/` 是它的配图。详见 [AGENTS.md](AGENTS.md#目录结构)。
+
+## 站点
+
+`content/` 由 `site/build_site.py` 装配成 `build/docs`（重写文内链接、按目录树生成侧栏），再由 `mkdocs build` 输出静态站到 `build/site`；推送到 `main` 后由 GitHub Actions 自动发布。本地预览：
+
+```bash
+pip install -r requirements.txt
+python site/build_site.py && mkdocs serve
+```
+
+内容质检（公式 / 图片 / 构建产物公式）见 [scripts/README.md](scripts/README.md)。
 
 ## 系列索引
 
 | 系列 | 主题 | 视频数 | 入口 |
 | --- | --- | --- | --- |
 | cs336 | Stanford CS336 从零构建大语言模型 | 18 | [content/cs336](content/cs336/README.md) |
+| agent | 智能体系统（RSI 综述：模型参数与脚手架的自我改进） | 1 | [content/agent](content/agent/README.md) |
 | graph_deep_learning | 图深度学习：理论与应用（原著作者精讲） | 9 | [content/graph_deep_learning](content/graph_deep_learning/README.md) |
 | gpu | 显卡 / GPU 的工作原理 | 1 | [content/gpu](content/gpu/README.md) |
 | network_mtu | MTU / MSS、PMTUD 网络黑洞与 IPsec 排障 | 4 | [content/network_mtu](content/network_mtu/README.md) |
@@ -43,3 +59,5 @@ content/                        # 最终产物
 | reinforcement_learning | 强化学习知识体系（MDP / 动态规划 / MC / TD / DQN / 策略梯度 / Actor-Critic / PPO / SAC / MBRL / 模仿学习 / 离线 RL / MARL / RLHF） | 5 篇 · 14 章 · 70 条目（整理中） | [content/reinforcement_learning](content/reinforcement_learning/README.md) |
 | drug_design | AI 药物发现与分子生成（GenMol） | 1 | [content/drug_design](content/drug_design/README.md) |
 | ai4s_tasks | AI for Science 核心任务（逆合成/口袋识别/分子生成/MOF/蛋白编辑/抗体CDR） | 6 | [content/ai4s_tasks](content/ai4s_tasks/README.md) |
+| 生物信息 | 生物信息知识体系（格式 / 结构 / 预测 / 生成 / 管线，284 篇） | 284 | [content/生物信息](content/生物信息/README.md) |
+| 容器技术 | 容器技术知识体系（Linux 基础 / 镜像 / 存储 / 网络 / eBPF / 运行时，279 篇） | 279 | [content/容器技术](content/容器技术/README.md) |
