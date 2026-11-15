@@ -5,12 +5,13 @@
 
 - 根 README.md            -> build/docs/index.md（站点首页）
 - content/<...>/README.md -> build/docs/<...>/index.md（各系列/分组索引）
-- content/<...>/blog/**   -> 原样拷贝（博文与配图）
-- 排除 transcripts/ 与 code/（体积巨大，且非博客正文）
+- content/<...>/**/*.md    -> 原样拷贝（不要求有 blog/ 层）
+- content/<...>/**/*.{webp,png,jpg,…} -> 原样拷贝（博客配图）
+- 发布范围 = 所有 .md + 图片等非文本资源；只排除 code/、transcripts/ 与 AGENT_TASK.md
 
 同时把文内链接重写为构建后的站点 URL：
 - `content/x/README.md` / `../x/README.md` / `blog/x.md` 等 -> 正确的站点相对链接
-- 指向被排除内容（transcripts/code）的链接 -> 降级为纯文本，避免死链
+- 指向被排除内容（code/transcripts、AGENT_TASK.md）的链接 -> 降级为纯文本，避免死链
 
 用法：
     python site/build_site.py            # 生成 build/docs
@@ -40,25 +41,17 @@ ASSETS = os.path.join(ROOT, "site", "assets")
 VENDOR = os.path.join(ROOT, "vendor")
 STATIC_FILES = ("extra.css", "extra.js", "katex.js")
 
-# 这些目录（content/ 下的任意层级）不发布
+# 发布规则（与目录结构无关，新增系列无需改这里）：
+#   1) 所有 *.md 都发布；
+#   2) 图片等非文本资源按扩展名发布（ASSET_EXTS），源码/锁文件/配置等一律不发。
+# 黑名单只用来挡两类不该上站的东西，不看目录层级，也不看是不是 .md：
+#   - code/、transcripts/：配套源码与视频演说图文稿（体积大、非博客正文，且常被 .gitignore 掉）
+#   - AGENT_TASK.md：Agent 的批次任务清单，不是内容
 EXCLUDE_DIRS = {"transcripts", "code"}
-
-# 「扁平」结构的分组根目录：如 content/biomodel/<模型>/*.md、content/biodata/<站点>/*.md、
-# content/biobasic/*.md —— 这些目录下不再有 README.md 与 blog/，博客与配图直接落在子目录里
-# 生物信息：Maka 定时任务产出的章节目录（章节/条目/配图，同样无 blog/ 层）
-# 容器技术：同结构新知识树（层级为 第N章 → X.Y 小节 → X.Y.Z 条目）
-# Kubernetes 架构：同结构（第N章 → X.Y 小节 → X.Y.Z 条目）
-# 强化学习：同结构（第N篇 → 第N章 → N.M 条目，无小节层）
-FLAT_ROOT_DIRS = (
-    "biomodel",
-    "biodata",
-    "biobasic",
-    "生物信息",
-    "容器技术",
-    "虚拟细胞",
-    "kubernetes_architecture",
-    "reinforcement_learning",
-)
+EXCLUDE_FILES = {"AGENT_TASK.md"}
+ASSET_EXTS = {
+    ".webp", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".avif", ".bmp", ".ico", ".pdf",
+}
 
 # 侧栏 = /content 的真实目录树；同级按自然序（第2讲 排在 第10讲 前）
 
@@ -67,8 +60,6 @@ def _natural_key(s: str):
     """自然排序：让 Lecture 2 排在 Lecture 10 之前。"""
     return [int(p) if p.isdigit() else p.lower() for p in re.split(r"(\d+)", s)]
 
-# 发布范围：README.md（索引）、blog/ 目录下的所有文件（博文 + 配图），
-# 以及 FLAT_ROOT_DIRS 扁平分组下的所有文件。
 # 链接目标可能含空格（未做 URL 编码），故用非贪婪匹配到右括号
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(\s*(<[^>]*>|[^)\n]*?)((?:\s+\"[^\"]*\")?)\s*\)")
 
@@ -87,17 +78,17 @@ def rel_content(path: str) -> str:
 
 
 def is_excluded(sub: str) -> bool:
-    return any(seg in EXCLUDE_DIRS for seg in sub.split("/"))
+    """按路径段/文件名排除，与层级无关。"""
+    segs = sub.split("/")
+    return any(seg in EXCLUDE_DIRS for seg in segs) or segs[-1] in EXCLUDE_FILES
 
 
-def is_included(sub: str) -> bool:
-    base = posixpath.basename(sub)
-    if base == "README.md":
-        return True
-    if "/blog/" in "/" + sub:
-        return True
-    # 扁平分组（biomodel / biodata / biobasic）：目录下的 .md 与配图一并发布
-    return sub.split("/", 1)[0] in FLAT_ROOT_DIRS
+def is_publishable(sub: str) -> bool:
+    """所有 .md + 图片等非文本资源。"""
+    if is_excluded(sub):
+        return False
+    ext = posixpath.splitext(sub)[1].lower()
+    return ext == ".md" or ext in ASSET_EXTS
 
 
 def docs_rel(sub: str) -> str:
@@ -112,7 +103,7 @@ def nmatch(s: str) -> str:
 
 
 def has_excluded_segment(path: str) -> bool:
-    return any(seg in EXCLUDE_DIRS for seg in path.split("/"))
+    return is_excluded(path)
 
 
 def build_nav(files: dict[str, str]):
@@ -201,7 +192,7 @@ def build_plan():
             rr = rel_repo(src)
             present.add(nmatch(rr))
             sub = rel_content(src)
-            if is_excluded(sub) or not is_included(sub):
+            if not is_publishable(sub):
                 continue
             dr = docs_rel(sub)
             files[rr] = dr
