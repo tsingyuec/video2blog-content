@@ -69,7 +69,7 @@ spec:
 - **入方向**：白名单生效，只允许 backend 访问；
 - **出方向**：**完全不受影响，默认全通**——这个 MySQL Pod 依然可以主动连到任何地方。[【跳转到 01:25】](https://www.bilibili.com/video/BV1tLGu6TENx/?t=85)
 
-![规则三：只配了 policyTypes: [Ingress] 时，入方向白名单生效、出方向仍默认全通](assets/NetworkPolicy 的四条基础规则/00085.webp)
+换句话说，只配 `Ingress` 的策略只锁住了「谁能进来」，「能去哪」依旧敞开——不要把它当成已经锁死。
 
 因此，如果你的需求是“**MySQL 只被 backend 访问，且 MySQL 只允许访问 DNS**”，那么**光配一个 Ingress 是不够的，必须同时配 Egress**。这也是很多“我以为锁死了，其实只锁了一半”问题的根源。[【跳转到 01:50】](https://www.bilibili.com/video/BV1tLGu6TENx/?t=110)
 

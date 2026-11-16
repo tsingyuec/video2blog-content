@@ -121,7 +121,7 @@
 
 ### 6.3 准入与资源策略
 - 6.3.1 认证与鉴权 **【已完成】** 📺 [Kubernetes 认证机制：X509 客户端证书、ServiceAccount 与 kubeconfig](<6.3_准入与资源策略/6.3.1_认证与鉴权/Kubernetes 认证机制：X509 客户端证书、ServiceAccount 与 kubeconfig.md>) · 📺 [Kubernetes 授权模式：Node、RBAC、ABAC 与 Webhook 的串联](<6.3_准入与资源策略/6.3.1_认证与鉴权/Kubernetes 授权模式：Node、RBAC、ABAC 与 Webhook 的串联.md>)
-- 6.3.2 RBAC **【已完成】** 📺 [Kubernetes RBAC 权限控制详解](../kubernetes/blog/Kubernetes RBAC 权限控制详解.md)（复用已有博客）
+- 6.3.2 RBAC **【已完成】** 📺 [Kubernetes RBAC 权限控制详解](<6.3_准入与资源策略/6.3.2_RBAC/Kubernetes RBAC 权限控制详解.md>)
 - 6.3.3 准入控制 **【已完成】** 📺 [Kubernetes 准入控制器分类之旅](<6.3_准入与资源策略/6.3.3_准入控制/Kubernetes 准入控制器分类之旅.md>) · 📺 [准入控制器：API 请求链上的改写与校验](<6.3_准入与资源策略/6.3.3_准入控制/准入控制器：API 请求链上的改写与校验.md>)
 - 6.3.4 Mutating 与 Validating Webhook **【已完成】** 📺 [准入链上的改写与拦截](<6.3_准入与资源策略/6.3.4_Mutating与ValidatingWebhook/Mutating 与 Validating Webhook：谁先改写，谁后拦截.md>) · 📺 [Webhook 三种类型与开发路径](<6.3_准入与资源策略/6.3.4_Mutating与ValidatingWebhook/Webhook 三种类型与开发路径.md>)
 - 6.3.5 ResourceQuota 与 LimitRange **【已完成】** 📺 [K8s的资源配额与限制](6.3_准入与资源策略/6.3.5_ResourceQuota与LimitRange/K8s的资源配额与限制.md) · 📺 [Why Kubernetes Blocks Your Pods – ResourceQuota and LimitRange Explained](<6.3_准入与资源策略/6.3.5_ResourceQuota与LimitRange/Why Kubernetes Blocks Your Pods – ResourceQuota and LimitRange Explained.md>)

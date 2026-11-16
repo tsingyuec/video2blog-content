@@ -53,9 +53,7 @@ python site/build_site.py && mkdocs serve
 | biobasic | 公共生物学（PPI 概念 / 互作研究技术 / 酵母双杂交） | 4 | [content/biobasic](content/biobasic/README.md) |
 | protein_interaction | Rosetta 蛋白-蛋白相互作用（PPI）设计工作坊（2025） | 8（已整理 2） | [content/protein_group/protein_interaction](content/protein_group/protein_interaction/README.md) |
 | protein_ml_bootcamp | Rosetta ML Bootcamp：蛋白质建模与设计的机器学习方法 | 18（已整理 7） | [content/protein_group/protein_ml_bootcamp](content/protein_group/protein_ml_bootcamp/README.md) |
-| kubernetes | Kubernetes RBAC 权限控制（Anton Putra） | 1 | [content/kubernetes](content/kubernetes/README.md) |
-| kubernetes_cursor | 40 天 Kubernetes 挑战 / CKA 全课程（Tech Tutorials with Piyush） | 40+（已整理 8） | [content/kubernetes_cursor](content/kubernetes_cursor/README.md) |
-| kubernetes_architecture | Kubernetes 集群架构与数据面（组件职责 / 声明式 API / 控制器 / 调度 / CNI / Service / CSI / 准入） | 6 章 · 17 小节 · 67 条目（整理中） | [content/kubernetes_architecture](content/kubernetes_architecture/README.md) |
+| K8s集群 | Kubernetes 集群架构与数据面（组件职责 / 声明式 API / 控制器 / 调度 / CNI / Service / CSI / 准入） | 6 章 · 17 小节 · 67 条目（整理中） | [content/K8s集群](content/K8s集群/README.md) |
 | reinforcement_learning | 强化学习知识体系（MDP / 动态规划 / MC / TD / DQN / 策略梯度 / Actor-Critic / PPO / SAC / MBRL / 模仿学习 / 离线 RL / MARL / RLHF） | 5 篇 · 14 章 · 70 条目（整理中） | [content/reinforcement_learning](content/reinforcement_learning/README.md) |
 | drug_design | AI 药物发现与分子生成（GenMol） | 1 | [content/drug_design](content/drug_design/README.md) |
 | ai4s_tasks | AI for Science 核心任务（逆合成/口袋识别/分子生成/MOF/蛋白编辑/抗体CDR） | 6 | [content/ai4s_tasks](content/ai4s_tasks/README.md) |

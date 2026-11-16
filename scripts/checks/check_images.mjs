@@ -2,7 +2,7 @@
 // 校验 Markdown 里的图片引用：文件在不在、格式对不对、有没有「存着但没人用」的图。
 //
 // 用法：
-//   node scripts/checks/check_images.mjs content/kubernetes_architecture
+//   node scripts/checks/check_images.mjs content/K8s集群
 //   node scripts/checks/check_images.mjs content/x/blog/某篇.md
 //   node scripts/checks/check_images.mjs content --quiet      # 只打合计
 //   node scripts/checks/check_images.mjs content --list-orphans   # 只输出孤儿图路径，便于 xargs rm
