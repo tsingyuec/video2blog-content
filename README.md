@@ -62,8 +62,9 @@ content/                        # 最终产物：博客 + 配图 + 索引
 │  └─ 2.1_<节名>/
 └─ <分组目录>/<系列>/             # 可选，如 vllm_group/、protein_group/
 
+scripts/check/                  # 内容公式检查（KaTeX + 构建产物 HTML）
 site/                           # 站点构建：content/ -> build/docs -> build/site
-vendor/katex/                   # KaTeX 发行包；检查脚本也从这里读取
+vendor/katex/                   # KaTeX 发行包：站点构建与内容公式检查
 ```
 
 目录规则只有一条：`README.md` 是所在目录的索引，博客与它的 `assets/` 同级。层级随主题而定，站点不要求固定的 `blog/` 层。
@@ -134,7 +135,7 @@ python site/build_site.py && mkdocs serve
 - **有据可查**：博客只依据「图-字幕」图文稿写作；关键结论带时间戳，配图来自原片。
 - **时间戳够用**：每篇至少 10 个，并随视频时长递增；接近 60 分钟时可按内容结构拆篇，拆后文件名加 `-1` / `-2` 标号。
 - **完整覆盖**：不因篇幅省略难讲的段落；宁可长，不可粗。
-- **公式、图片与时间戳**：由 skill 的 check 脚本报告缺失、格式、孤儿图、公式错误与时间戳不一致；按输出修到 0。配图直接使用原片代表帧，保持原始画面。
+- **公式、图片与时间戳**：图片与时间戳由 skill 的 check 脚本报告，公式由本仓库的 `scripts/check/` 报告；按输出修到 0。配图直接使用原片代表帧，保持原始画面。
 - **进度可追踪**：`README.md` 行尾的 `[WAITING]` / `[PROCESSING]` / `[DONE]` / `[ABORT]` 是唯一进度标记。
 
 ## 工具与依赖
@@ -146,18 +147,15 @@ npx skills add tsingyuec/video2blog-skill
 # Python 依赖：抽帧、图像处理、视频下载
 pip install -r ~/.agents/skills/video2blog/requirements.txt
 
-# 博客检查需要 Node.js；公式检查从 vendor/katex/ 读取 KaTeX
-node --version
-
-# 博客检查：脚本随 video2blog skill 安装
+# 图片/时间戳检查用 Python；公式检查需要 Node.js 与 vendor/katex/
 SKILL="${VIDEO2BLOG_SKILL:-$HOME/.agents/skills/video2blog}"
-node "$SKILL/scripts/check/check_images.mjs" content/<系列>
-node "$SKILL/scripts/check/check_blog.mjs" content/<系列>
-node "$SKILL/scripts/check/check_md_math.mjs" content/<系列>
+python3 "$SKILL/scripts/check/check_images.py" content/<系列>
+python3 "$SKILL/scripts/check/check_blog.py" content/<系列>
+node scripts/check/check_md_math.mjs content/<系列>
 python site/build_site.py --check
 ```
 
-博客检查脚本在 skill 的 `scripts/check/`，内容仓库不保留副本。
+图片与时间戳检查在 skill 的 `scripts/check/`；公式检查在本仓库的 `scripts/check/`，依赖 `vendor/katex/`。
 
 ## 维护
 

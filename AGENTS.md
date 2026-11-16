@@ -203,7 +203,7 @@
 ## 5. 写作与检查的边界
 
 - 博客怎么写、怎么配图、怎么放时间戳、怎么拆篇：全部看 skill 的 `SKILL.md` 与 `reference/blog-writing.md`，本文件不复述。
-- 检查脚本随 skill 安装，位于 `scripts/check/`；内容仓库不保留副本。
+- 图片与时间戳检查使用 video2blog skill 的 `scripts/check/` 脚本；公式检查依赖本仓库的 `scripts/check/` 与 `vendor/katex/`。
 - 项目级验收只做：文件是否齐、链接是否通、README 是否只动自己的行、构建是否通过。写作规范由子智能体按 skill 自检；验收用脚本输出和抽检兜底。
 
 ## 6. 检查命令
@@ -217,15 +217,15 @@ SKILL="${VIDEO2BLOG_SKILL:-$HOME/.agents/skills/video2blog}"
 单小节验收：
 
 ```bash
-node "$SKILL/scripts/check/check_images.mjs" content/<系列>/X.Y_<节>/X.Y.Z_<小节>
-node "$SKILL/scripts/check/check_blog.mjs" content/<系列>/X.Y_<节>/X.Y.Z_<小节>
-node "$SKILL/scripts/check/check_md_math.mjs" content/<系列>/X.Y_<节>/X.Y.Z_<小节>
+python3 "$SKILL/scripts/check/check_images.py" content/<系列>/X.Y_<节>/X.Y.Z_<小节>
+python3 "$SKILL/scripts/check/check_blog.py" content/<系列>/X.Y_<节>/X.Y.Z_<小节>
+node scripts/check/check_md_math.mjs content/<系列>/X.Y_<节>/X.Y.Z_<小节>
 ```
 
 系列级死链与孤儿图：
 
 ```bash
-node "$SKILL/scripts/check/check_images.mjs" content/<系列>
+python3 "$SKILL/scripts/check/check_images.py" content/<系列>
 python site/build_site.py --check
 ```
 
@@ -233,7 +233,7 @@ python site/build_site.py --check
 
 ```bash
 python site/build_site.py && mkdocs build
-node "$SKILL/scripts/check/check_katex.mjs" build/site/<系列> --recursive
+node scripts/check/check_katex.mjs build/site/<系列> --recursive
 ```
 
 - **以脚本输出为准**，报出的问题逐项修到 0；脚本不报不等于内容合格，覆盖与图注仍由 §4.5 抽查。
