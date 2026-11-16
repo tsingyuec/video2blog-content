@@ -51,6 +51,7 @@ $$\text{Attention}_{RoPE}(Q,K,V) = \text{softmax}\left(\frac{(Q\cdot R_i)(K\cdot
 旋转后角度变成 `φ + θ`，用高中三角函数展开：
 
 $$\cos(\varphi+\theta) = \cos\varphi\cos\theta - \sin\varphi\sin\theta$$
+
 $$\sin(\varphi+\theta) = \sin\varphi\cos\theta + \cos\varphi\sin\theta$$
 
 代入 `x = r cosφ`、`y = r sinφ` 整理，得到：
