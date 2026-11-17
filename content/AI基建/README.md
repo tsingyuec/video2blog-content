@@ -6,20 +6,20 @@
 
 ### 1.1 自回归生成（Autoregressive Generation）机制
 
-- 1.1.1 条件概率链式法则与 Next-Token Prediction 数学表达 [DONE] 📺 [从Next Token Prediction到LoRA：自回归模型与Transformer原理详解](1.1_自回归生成机制/1.1.1_条件概率链式法则与Next-Token_Prediction/从Next_Token_Prediction到LoRA：自回归模型与Transformer原理详解.md)
-- 1.1.2 因果掩码（Causal Mask）的下三角矩阵构造与防穿越原理 [DONE] 📺 [因果掩码：下三角矩阵如何阻止模型偷看未来](1.1_自回归生成机制/1.1.2_因果掩码/因果掩码：下三角矩阵如何阻止模型偷看未来.md)
-- 1.1.3 输出层 Logits 计算、温度缩放（Temperature）与 Softmax 归一化 [DONE] 📺 [Logits不是概率：Softmax与温度如何决定下一个Token](1.1_自回归生成机制/1.1.3_Logits与温度/Logits不是概率：Softmax与温度如何决定下一个Token.md)
-- 1.1.4 解码采样策略：Greedy Search、Top-K、Top-P（Nucleus）与重复惩罚（Repetition Penalty） [DONE] 📺 [解码采样策略：Greedy_Search、Top-K、Top-P与重复惩罚](1.1_自回归生成机制/1.1.4_解码采样策略/解码采样策略：Greedy_Search、Top-K、Top-P与重复惩罚.md)
+- 1.1.1 条件概率链式法则与 Next-Token Prediction 数学表达 [DONE]
+- 1.1.2 因果掩码（Causal Mask）的下三角矩阵构造与防穿越原理 [DONE]
+- 1.1.3 输出层 Logits 计算、温度缩放（Temperature）与 Softmax 归一化 [DONE]
+- 1.1.4 解码采样策略：Greedy Search、Top-K、Top-P（Nucleus）与重复惩罚（Repetition Penalty） [DONE]
 
 ### 1.2 分词器（Tokenizer）与词嵌入（Embedding）
 
-- 1.2.1 Byte-level BPE（字节级字节对编码）算法与 Tiktoken 实现机制 [DONE] 📺 [字节级BPE与Tiktoken：从UTF-8字节到子词词表](1.2_分词器与词嵌入/1.2.1_Byte_level_BPE与Tiktoken/字节级BPE与Tiktoken：从UTF-8字节到子词词表.md)
-- 1.2.2 词表大小（Vocabulary Size）对 Embedding 层显存及 LM Head 计算量的影响 [DONE] 📺 [词表大小的账本：Embedding与LM_Head的显存算力开销](1.2_分词器与词嵌入/1.2.2_词表大小与显存/词表大小的账本：Embedding与LM_Head的显存算力开销.md)
-- 1.2.3 Special Tokens（BOS, EOS, PAD, Chat Template 控制符）的状态机控制逻辑 [DONE] 📺 [特殊Token的状态机：BOS、EOS、PAD与Chat_Template如何控制生成](1.2_分词器与词嵌入/1.2.3_Special_Tokens/特殊Token的状态机：BOS、EOS、PAD与Chat_Template如何控制生成.md)
+- 1.2.1 Byte-level BPE（字节级字节对编码）算法与 Tiktoken 实现机制 [DONE]
+- 1.2.2 词表大小（Vocabulary Size）对 Embedding 层显存及 LM Head 计算量的影响 [DONE]
+- 1.2.3 Special Tokens（BOS, EOS, PAD, Chat Template 控制符）的状态机控制逻辑 [PROCESSING]
 
 ### 1.3 归一化层演进：从 LayerNorm 到 RMSNorm
 
-- 1.3.1 Post-Norm 与 Pre-Norm 的梯度流差异及深层网络训练稳定性 [WAITING]
+- 1.3.1 Post-Norm 与 Pre-Norm 的梯度流差异及深层网络训练稳定性 [PROCESSING]
 - 1.3.2 RMSNorm（均方根归一化）省去均值中心化的数学简化与加速收益 [WAITING]
 - 1.3.3 残差连接（Residual Connection）与归一化算子的访存融合优化 [WAITING]
 
@@ -54,13 +54,13 @@
 
 - 2.4.1 位置线性内插（Position Interpolation, PI）的原理与高频信息丢失问题 [WAITING]
 - 2.4.2 神经正切核感知缩放（NTK-Aware Scaling）与动态 NTK（Dynamic NTK） [WAITING]
-- 2.4.3 YaRN（Yet another RoPE extensioN）：分频段缩放（高频不插值、低频内插）与注意力温度补偿 [WAITING]
+- 2.4.3 YaRN（Yet another RoPE extensioN）：分频段缩放（高频不插值、低频内插）与注意力温度补偿 [PROCESSING]
 
 ## 第 3 章：主流开源模型架构变体（Llama 之后的世界）
 
 ### 3.1 稠密模型（Dense）标杆演进
 
-- 3.1.1 Llama 1 到 Llama 3 的架构参数变迁：词表扩充、GQA 普及与 RoPE 基数调整 [WAITING]
+- 3.1.1 Llama 1 到 Llama 3 的架构参数变迁：词表扩充、GQA 普及与 RoPE 基数调整 [PROCESSING]
 - 3.1.2 Qwen 与 Mistral 系列的局部微调：QKV Bias 取舍、Embedding 权重绑定（Tied Weights） [WAITING]
 - 3.1.3 权重张量命名规范：HuggingFace Safetensors 格式与模型结构映射 [WAITING]
 
