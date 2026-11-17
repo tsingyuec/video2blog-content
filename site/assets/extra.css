@@ -236,6 +236,12 @@ body[data-md-color-scheme="slate"] {
 .md-search__input {
   font-family: var(--md-text-font);
 }
+/* 右上角仓库链接：只要图标 + 仓库名。
+   Material 会用 GitHub API 取 star / fork 数并写入 .md-source__facts，
+   这里直接不展示（计数区不占位，仓库名照旧截断）。 */
+.md-source__facts {
+  display: none;
+}
 
 /* ---------- 5. 左侧栏：newsprint 底色，条目风格 ---------- */
 .md-nav--primary {
@@ -567,6 +573,30 @@ html[data-np-mode="outline"] .np-outline {
 .np-player__resize--drag:before {
   opacity: 1;
 }
+.np-player__top {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  cursor: row-resize;
+  touch-action: none;
+  z-index: 1;
+}
+.np-player__top:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4px;
+  height: 1px;
+  background: var(--np-rule);
+  opacity: 0;
+}
+.np-player__top:hover:before,
+.np-player__top--drag:before {
+  opacity: 1;
+}
 .np-player__corner {
   position: absolute;
   top: -3px;
@@ -602,6 +632,10 @@ body.np-player-drag--corner,
 body.np-player-drag--corner * {
   cursor: nwse-resize !important;
 }
+body.np-player-drag--top,
+body.np-player-drag--top * {
+  cursor: row-resize !important;
+}
 body.np-player-drag .np-player__stage iframe {
   pointer-events: none;
 }
@@ -627,6 +661,7 @@ body.np-player-collapsed .np-player__stage {
   pointer-events: none;
 }
 body.np-player-collapsed .np-player__resize,
+body.np-player-collapsed .np-player__top,
 body.np-player-collapsed .np-player__corner {
   display: none;
 }
@@ -645,6 +680,7 @@ body.np-player-collapsed .np-player__corner {
     aspect-ratio: 16 / 9;
   }
   .np-player__resize,
+  .np-player__top,
   .np-player__corner {
     display: none;
   }

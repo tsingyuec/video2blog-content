@@ -99,8 +99,7 @@ scripts/                        # 只放可执行工具，不放静态资源
     **选题取向**：优先系统讲解、源码剖析、官方文档解读、深度长文类内容；小节之间避免选用同一支视频的大段重复内容；若某视频同时覆盖相邻两条，归给它讲得更透的那条。
 3. **skill文件**：video2blog skill的文件路径，要求子智能体按照该skill的指导进行博客写作。
 
-另需转达的硬性要求：读图一次 1 张每轮最多 3 张；公式用 KaTeX 且表格内不用裸 `|`；配图必须真正看过再写图注；严禁整体重写 README。
-
+另需转达的硬性要求：读图一次最多 3 张；公式用 KaTeX 且表格内不用裸 `|`；配图必须真正看过再写图注；严禁整体重写 README。
 
 ### 回收 `[PROCESSING]` 残留
 
@@ -137,9 +136,6 @@ npx skills add tsingyuec/video2blog-skill       # 安装到 Agent 技能目录�
 
 ### 验收
 
-子智能体报告完成后仍需自己核一遍，不要只信它的自检：
+在完成写作后需要使用video2blog skill的check脚本进行自检；另外还需要使用当前项目中的scripts/check/check_math_math.js脚本进行公式检查。
 
-1. `python3 video2blog-skill/scripts/check/check_images.py <目录>`：缺失、非文件、空文件、格式不符、未发布、未被引用六项全 0。
-2. `node scripts/check/check_md_math.mjs <目录>` 三项全 0。
-3. `<README>` 只有它自己那一行变更。
-4. 全量构建后跑 `node scripts/check/check_katex.mjs build/site/<系列> --recursive`——**源文件检查会漏掉制表符转义这类问题，构建产物检查才是最终防线**。
+全量构建后跑 `node scripts/check/check_katex.mjs build/site/<系列> --recursive`——**源文件检查会漏掉制表符转义这类问题，构建产物检查才是最终防线**。

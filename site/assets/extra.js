@@ -497,6 +497,7 @@
     root.setAttribute("aria-label", "视频播放");
     root.innerHTML =
       '<div class="np-player__resize" role="separator" aria-orientation="vertical" aria-label="拖动调整播放器宽度，双击复位" title="拖动调整宽度，双击复位"></div>' +
+      '<div class="np-player__top" role="separator" aria-orientation="horizontal" aria-label="拖动调整播放器高度，双击复位" title="拖动调整高度，双击复位"></div>' +
       '<div class="np-player__corner" role="separator" aria-label="从左上角拖动调整播放器大小，双击复位" title="拖动调整大小，双击复位"></div>' +
       '<div class="np-player__bar">' +
         '<span class="np-player__time">00:00:00</span>' +
@@ -518,6 +519,7 @@
       collapseBtn: root.querySelector("[data-np-act='collapse']"),
       iframe: root.querySelector("iframe"),
       resize: root.querySelector(".np-player__resize"),
+      top: root.querySelector(".np-player__top"),
       corner: root.querySelector(".np-player__corner")
     };
     if (document.documentElement.style.getPropertyValue("--np-player-stage-h")) {
@@ -572,6 +574,41 @@
 
     player.resize.addEventListener("dblclick", function () {
       setPlayerWidth(null, true);
+    });
+
+    /* 上边框：只改高度（下边贴着窗口底边，总高由舞台高度决定）。
+       与左上角那条一样，只动 --np-player-stage-h，所以宽度不受影响。 */
+    player.top.addEventListener("mousedown", function (e) {
+      if (e.button !== 0 || !DESKTOP.matches) return;
+      if (document.body.classList.contains("np-player-collapsed")) return;
+      var rect = player.root.getBoundingClientRect();
+      var bottomEdge = rect.bottom;
+      var barH = player.bar.getBoundingClientRect().height;
+      player.top.classList.add("np-player__top--drag");
+      document.body.classList.add("np-player-drag");
+      document.body.classList.add("np-player-drag--top");
+      e.preventDefault();
+      function onMove(ev) {
+        var stageH = bottomEdge - ev.clientY - barH;
+        var maxH = bottomEdge - 12 - barH;
+        if (stageH > maxH) stageH = maxH;
+        setStageHeight(stageH, false);
+      }
+      function onUp() {
+        player.top.classList.remove("np-player__top--drag");
+        document.body.classList.remove("np-player-drag");
+        document.body.classList.remove("np-player-drag--top");
+        document.removeEventListener("mousemove", onMove);
+        document.removeEventListener("mouseup", onUp);
+        var curH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--np-player-stage-h"));
+        if (isFinite(curH)) setStageHeight(curH, true);
+      }
+      document.addEventListener("mousemove", onMove);
+      document.addEventListener("mouseup", onUp);
+    });
+
+    player.top.addEventListener("dblclick", function () {
+      setStageHeight(null, true);
     });
 
     player.corner.addEventListener("mousedown", function (e) {

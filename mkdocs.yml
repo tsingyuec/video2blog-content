@@ -6,7 +6,7 @@
 # 这里通过 INHERIT 合并进来；要调顺序/名称就改 content/ 下的目录名与文件名。
 INHERIT: build/nav.yml
 
-site_name: 视频图文博客库
+site_name: TsingYue's Blog
 site_description: 把 Bilibili / YouTube 视频整理成「图文博客」的合集
 site_url: https://tsingyuec.github.io/video2blog-content/
 repo_url: https://github.com/tsingyuec/video2blog-content
@@ -25,8 +25,11 @@ theme:
   name: material
   language: zh
   font: false
+  # 标签页图标：_static/logo.svg 由 site/build_site.py 从前仓库拷进 docs
+  favicon: _static/logo.svg
   icon:
-    logo: material/bookshelf
+    # 顶栏标记：与 favicon 同一枚弯月
+    logo: material/moon-waning-crescent
   features:
     - navigation.instant
     # 悬停侧栏/正文链接时预取该页（material 只预取当前悬停的这一个 href，不会批量拉全站）

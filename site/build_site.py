@@ -40,7 +40,7 @@ DOCS = os.path.join(ROOT, "build", "docs")
 # 静态资源来源（拷贝到 build/docs/_static/ 供 mkdocs 引用）
 ASSETS = os.path.join(ROOT, "site", "assets")
 VENDOR = os.path.join(ROOT, "vendor")
-STATIC_FILES = ("extra.css", "extra.js", "katex.js")
+STATIC_FILES = ("extra.css", "extra.js", "katex.js", "logo.svg")
 
 # 发布规则（与目录结构无关，新增系列/新目录无需改这里，也不认任何目录名/文件名）：
 #   1) 所有 *.md 都发布；

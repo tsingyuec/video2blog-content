@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <!-- 站点标记：一枚弯月（TsingYue 的「月」）。
+       顶栏 logo 用同一枚图形（mkdocs.yml 里的 material/moon-waning-crescent），
+       这个文件只给浏览器标签页当 favicon；浅色/深色标签栏各用一档墨色。 -->
+  <style>
+    path { fill: #1f1f1f; }
+    @media (prefers-color-scheme: dark) { path { fill: #e8e6e1; } }
+  </style>
+  <path d="M2 12a10 10 0 0 0 13 9.54 10 10 0 0 1 0-19.08A10 10 0 0 0 2 12"/>
+</svg>
