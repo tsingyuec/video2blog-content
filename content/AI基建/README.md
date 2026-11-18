@@ -6,61 +6,61 @@
 
 ### 1.1 自回归生成（Autoregressive Generation）机制
 
-- 1.1.1 条件概率链式法则与 Next-Token Prediction 数学表达 [DONE]
-- 1.1.2 因果掩码（Causal Mask）的下三角矩阵构造与防穿越原理 [DONE]
-- 1.1.3 输出层 Logits 计算、温度缩放（Temperature）与 Softmax 归一化 [DONE]
-- 1.1.4 解码采样策略：Greedy Search、Top-K、Top-P（Nucleus）与重复惩罚（Repetition Penalty） [DONE]
+- 1.1.1 条件概率链式法则与 Next-Token Prediction 数学表达 [DONE] 📺 [从Next_Token_Prediction到LoRA：自回归模型与Transformer原理详解](1.1_自回归生成机制/1.1.1_条件概率链式法则与Next-Token_Prediction/从Next_Token_Prediction到LoRA：自回归模型与Transformer原理详解.md)
+- 1.1.2 因果掩码（Causal Mask）的下三角矩阵构造与防穿越原理 [DONE] 📺 [两种掩码各挡什么：Padding mask 与 Sequence mask 的分工](1.1_自回归生成机制/1.1.2_因果掩码/两种掩码各挡什么：Padding%20mask%20与%20Sequence%20mask%20的分工.md) · 📺 [因果掩码：下三角矩阵如何阻止模型偷看未来](1.1_自回归生成机制/1.1.2_因果掩码/因果掩码：下三角矩阵如何阻止模型偷看未来.md)
+- 1.1.3 输出层 Logits 计算、温度缩放（Temperature）与 Softmax 归一化 [DONE] 📺 [Logits不是概率：Softmax与温度如何决定下一个Token](1.1_自回归生成机制/1.1.3_Logits与温度/Logits不是概率：Softmax与温度如何决定下一个Token.md) · 📺 [从分数到损失：Softmax回归与交叉熵怎么把 logits 变成训练目标](1.1_自回归生成机制/1.1.3_Logits与温度/从分数到损失：Softmax回归与交叉熵怎么把%20logits%20变成训练目标.md)
+- 1.1.4 解码采样策略：Greedy Search、Top-K、Top-P（Nucleus）与重复惩罚（Repetition Penalty） [DONE] 📺 [Greedy_Search：每一步都选最高分，贪心为什么会让整段文本走偏](1.1_自回归生成机制/1.1.4_解码采样策略/Greedy_Search：每一步都选最高分，贪心为什么会让整段文本走偏.md) · 📺 [Top-P采样：概率攒到p为止，候选集跟着分布自己伸缩](1.1_自回归生成机制/1.1.4_解码采样策略/Top-P采样：概率攒到p为止，候选集跟着分布自己伸缩.md) · 📺 [重复惩罚只改logits：它怎么把复读的分数压下去](1.1_自回归生成机制/1.1.4_解码采样策略/重复惩罚只改logits：它怎么把复读的分数压下去.md)
 
 ### 1.2 分词器（Tokenizer）与词嵌入（Embedding）
 
-- 1.2.1 Byte-level BPE（字节级字节对编码）算法与 Tiktoken 实现机制 [DONE]
-- 1.2.2 词表大小（Vocabulary Size）对 Embedding 层显存及 LM Head 计算量的影响 [DONE]
-- 1.2.3 Special Tokens（BOS, EOS, PAD, Chat Template 控制符）的状态机控制逻辑 [PROCESSING]
+- 1.2.1 Byte-level BPE（字节级字节对编码）算法与 Tiktoken 实现机制 [DONE] 📺 [tiktoken实操：把BPE训练好的词表装成能查能编的编码器](1.2_分词器与词嵌入/1.2.1_Byte_level_BPE与Tiktoken/tiktoken实操：把BPE训练好的词表装成能查能编的编码器.md) · 📺 [字节级BPE：从UTF-8字节起步，反复合并最高频相邻对](1.2_分词器与词嵌入/1.2.1_Byte_level_BPE与Tiktoken/字节级BPE：从UTF-8字节起步，反复合并最高频相邻对.md)
+- 1.2.2 词表大小（Vocabulary Size）对 Embedding 层显存及 LM Head 计算量的影响 [DONE] 📺 [参数量怎么数：把Embedding与LM_Head摊开算一遍](1.2_分词器与词嵌入/1.2.2_词表大小与显存/参数量怎么数：把Embedding与LM_Head摊开算一遍.md) · 📺 [最后一层输出到词表分数：LM_Head的形状与计算量从哪来](1.2_分词器与词嵌入/1.2.2_词表大小与显存/最后一层输出到词表分数：LM_Head的形状与计算量从哪来.md) · 📺 [词表大小的账本：Embedding与LM_Head的显存算力开销](1.2_分词器与词嵌入/1.2.2_词表大小与显存/词表大小的账本：Embedding与LM_Head的显存算力开销.md)
+- 1.2.3 Special Tokens（BOS, EOS, PAD, Chat Template 控制符）的状态机控制逻辑 [DONE] 📺 [Llama_2的提示词格式：BOS、EOS与双方对话标记怎么拼](1.2_分词器与词嵌入/1.2.3_Special_Tokens/Llama_2的提示词格式：BOS、EOS与双方对话标记怎么拼.md) · 📺 [左填充还是右填充：批处理生成里PAD放在哪一侧](1.2_分词器与词嵌入/1.2.3_Special_Tokens/左填充还是右填充：批处理生成里PAD放在哪一侧.md) · 📺 [特殊Token的状态机：BOS、EOS、PAD与Chat_Template如何控制生成](1.2_分词器与词嵌入/1.2.3_Special_Tokens/特殊Token的状态机：BOS、EOS、PAD与Chat_Template如何控制生成.md)
 
 ### 1.3 归一化层演进：从 LayerNorm 到 RMSNorm
 
-- 1.3.1 Post-Norm 与 Pre-Norm 的梯度流差异及深层网络训练稳定性 [PROCESSING]
-- 1.3.2 RMSNorm（均方根归一化）省去均值中心化的数学简化与加速收益 [WAITING]
-- 1.3.3 残差连接（Residual Connection）与归一化算子的访存融合优化 [WAITING]
+- 1.3.1 Post-Norm 与 Pre-Norm 的梯度流差异及深层网络训练稳定性 [DONE] 📺 [Post-Norm的梯度是连乘、Pre-Norm是连加：四篇论文看深层Transformer为什么训得动](1.3_归一化层演进/1.3.1_Post-Norm与Pre-Norm/Post-Norm的梯度是连乘、Pre-Norm是连加：四篇论文看深层Transformer为什么训得动.md) · 📺 [把归一化框挪出残差主干：两个小模型的对照实验看Pre-Norm为何更稳](1.3_归一化层演进/1.3.1_Post-Norm与Pre-Norm/把归一化框挪出残差主干：两个小模型的对照实验看Pre-Norm为何更稳.md)
+- 1.3.2 RMSNorm（均方根归一化）省去均值中心化的数学简化与加速收益 [DONE] 📺 [RMSNorm的本质：一个默认均值为零的LayerNorm](1.3_归一化层演进/1.3.2_RMSNorm/RMSNorm的本质：一个默认均值为零的LayerNorm.md) · 📺 [归一化是把两把尺子的刻度拉平：从z-score到RMSNorm，大模型为什么离不开它](1.3_归一化层演进/1.3.2_RMSNorm/归一化是把两把尺子的刻度拉平：从z-score到RMSNorm，大模型为什么离不开它.md)
+- 1.3.3 残差连接（Residual Connection）与归一化算子的访存融合优化 [DONE] 📺 [一个token只读写24KB：decode时add+RMSNorm融合省下的是固定延迟](1.3_归一化层演进/1.3.3_残差连接与融合/一个token只读写24KB：decode时add+RMSNorm融合省下的是固定延迟.md) · 📺 [五次显存往返压成一次：算子融合把中间张量留在片上](1.3_归一化层演进/1.3.3_残差连接与融合/五次显存往返压成一次：算子融合把中间张量留在片上.md) · 📺 [融合省访存、CUDA_Graph省启动：两笔成本要分开算](1.3_归一化层演进/1.3.3_残差连接与融合/融合省访存、CUDA_Graph省启动：两笔成本要分开算.md)
 
 ### 1.4 前馈神经网络（FFN）与激活函数升级
 
-- 1.4.1 激活函数演进：ReLU、GELU 到 Swish（SiLU）的平滑性与门控特性 [WAITING]
-- 1.4.2 SwiGLU 结构拆解：Gate Proj、Up Proj 与 Down Proj 三个线性层的矩阵变换 [WAITING]
-- 1.4.3 隐藏层维度缩放：为什么 SwiGLU 的中间层维度通常设定为 $\frac{8}{3}d$ 并向硬件对齐 [WAITING]
+- 1.4.1 激活函数演进：ReLU、GELU 到 Swish（SiLU）的平滑性与门控特性 [DONE] 📺 [GELU的来历：ReLU在随机Dropout下的期望，与激活函数的自动搜索](1.4_FFN与激活函数/1.4.1_激活函数演进/GELU的来历：ReLU在随机Dropout下的期望，与激活函数的自动搜索.md) · 📺 [平滑与门控各解决什么：从ReLU的过拟合到GELU、SiLU与SwiGLU](1.4_FFN与激活函数/1.4.1_激活函数演进/平滑与门控各解决什么：从ReLU的过拟合到GELU、SiLU与SwiGLU.md)
+- 1.4.2 SwiGLU 结构拆解：Gate Proj、Up Proj 与 Down Proj 三个线性层的矩阵变换 [DONE] 📺 [一支token穿过SwiGLU：Gate、Up、Down三个矩阵的形状与手算](1.4_FFN与激活函数/1.4.2_SwiGLU结构/一支token穿过SwiGLU：Gate、Up、Down三个矩阵的形状与手算.md) · 📺 [为什么SwiGLU要三个矩阵：门控乘法与参数对齐](1.4_FFN与激活函数/1.4.2_SwiGLU结构/为什么SwiGLU要三个矩阵：门控乘法与参数对齐.md)
+- 1.4.3 隐藏层维度缩放：为什么 SwiGLU 的中间层维度通常设定为 $\frac{8}{3}d$ 并向硬件对齐 [DONE] 📺 [三个矩阵换两个矩阵：SwiGLU中间维度为什么是2.67d](1.4_FFN与激活函数/1.4.3_隐藏层维度缩放/三个矩阵换两个矩阵：SwiGLU中间维度为什么是2.67d.md)
 
 ## 第 2 章：注意力机制（Attention）与位置编码的工程优化
 
 ### 2.1 标准多头注意力（MHA）的计算与显存剖析
 
-- 2.1.1 Q、K、V 线性投影与多头切分（Head Splitting）的张量重排（Transpose/Reshape） [WAITING]
-- 2.1.2 缩放点积注意力（Scaled Dot-Product Attention）中 $\sqrt{d_k}$ 防止 Softmax 饱和的数学原理 [WAITING]
-- 2.1.3 序列长度 $N^2$ 复杂度在长文本推理下的显存爆炸与计算瓶颈 [WAITING]
+- 2.1.1 Q、K、V 线性投影与多头切分（Head Splitting）的张量重排（Transpose/Reshape） [DONE] 📺 [多头不是多算：一次大投影加两次重排，把768切成12个64](2.1_标准多头注意力/2.1.1_QKV投影与多头切分/多头不是多算：一次大投影加两次重排，把768切成12个64.md) · 📺 [手写多头注意力：先view再transpose，拼回去之前要先contiguous](2.1_标准多头注意力/2.1.1_QKV投影与多头切分/手写多头注意力：先view再transpose，拼回去之前要先contiguous.md)
+- 2.1.2 缩放点积注意力（Scaled Dot-Product Attention）中 $\sqrt{d_k}$ 防止 Softmax 饱和的数学原理 [DONE] 📺 [分母为什么是根号d_k：分数方差随维度增长，Softmax就只剩一个赢家](2.1_标准多头注意力/2.1.2_缩放点积注意力/分母为什么是根号d_k：分数方差随维度增长，Softmax就只剩一个赢家.md) · 📺 [把根号d_k拿掉会怎样：方差从1涨到64，Softmax只挑一个词、梯度几乎归零](2.1_标准多头注意力/2.1.2_缩放点积注意力/把根号d_k拿掉会怎样：方差从1涨到64，Softmax只挑一个词、梯度几乎归零.md)
+- 2.1.3 序列长度 $N^2$ 复杂度在长文本推理下的显存爆炸与计算瓶颈 [DONE] 📺 [上下文翻倍，注意力开销翻四倍：n×n分数矩阵如何吃掉长文本的显存与算力](2.1_标准多头注意力/2.1.3_N平方复杂度/上下文翻倍，注意力开销翻四倍：n×n分数矩阵如何吃掉长文本的显存与算力.md)
 
 ### 2.2 键值缓存压缩：MQA 与 GQA
 
-- 2.2.1 多查询注意力（MQA）：所有 Query 头共享单组 K/V 头的带宽节省与精度折衷 [WAITING]
-- 2.2.2 分组查询注意力（GQA）：Llama-2/3 中 Group 数量的选择与张量广播（Broadcast）实现 [WAITING]
-- 2.2.3 MHA、MQA 与 GQA 在推理阶段的 KV Cache 体积对比与访存带宽测算 [WAITING]
+- 2.2.1 多查询注意力（MQA）：所有 Query 头共享单组 K/V 头的带宽节省与精度折衷 [DONE] 📺 [MQA的矩阵账：一个KV头如何服务多个Query头，又丢掉了什么](2.2_键值缓存压缩/2.2.1_MQA/MQA的矩阵账：一个KV头如何服务多个Query头，又丢掉了什么.md) · 📺 [MQA省的是带宽不是算力：共享一份KV之后解码为什么快了](2.2_键值缓存压缩/2.2.1_MQA/MQA省的是带宽不是算力：共享一份KV之后解码为什么快了.md)
+- 2.2.2 分组查询注意力（GQA）：Llama-2/3 中 Group 数量的选择与张量广播（Broadcast）实现 [DONE] 📺 [GQA 的形状账：KV 头数从 H 缩到 G，读时用 repeat_interleave 广播回 H](2.2_键值缓存压缩/2.2.2_GQA/GQA%20的形状账：KV%20头数从%20H%20缩到%20G，读时用%20repeat_interleave%20广播回%20H.md) · 📺 [为什么是 8 组：GQA 用八分之一的缓存，换回几乎全部质量，只补训百分之五](2.2_键值缓存压缩/2.2.2_GQA/为什么是%208%20组：GQA%20用八分之一的缓存，换回几乎全部质量，只补训百分之五.md)
+- 2.2.3 MHA、MQA 与 GQA 在推理阶段的 KV Cache 体积对比与访存带宽测算 [DONE] 📺 [把KV头从32拧到1：同一个7B模型每token的缓存从512KB掉到16KB](2.2_键值缓存压缩/2.2.3_KV_Cache对比/把KV头从32拧到1：同一个7B模型每token的缓存从512KB掉到16KB.md) · 📺 [每步搬多少字节，就决定每秒出多少token：KV_Cache字节账与decode上限](2.2_键值缓存压缩/2.2.3_KV_Cache对比/每步搬多少字节，就决定每秒出多少token：KV_Cache字节账与decode上限.md)
 
 ### 2.3 旋转位置编码（RoPE）
 
-- 2.3.1 绝对位置编码与相对位置编码的局限性 [WAITING]
-- 2.3.2 RoPE 复数空间推导：通过二维平面旋转矩阵注入相对位置信息 [WAITING]
-- 2.3.3 RoPE 的远程衰减特性（Long-term Decay）与旋转频率基数（Base $\theta$）的作用 [WAITING]
-- 2.3.4 RoPE 算子实现：实数域逐元素乘加（Element-wise）与预计算 Cos/Sin 缓存表 [WAITING]
+- 2.3.1 绝对位置编码与相对位置编码的局限性 [DONE] 📺 [绝对位置编码缺距离，相对位置编码丢绝对：位置编码外推的两难](2.3_旋转位置编码/2.3.1_位置编码局限/绝对位置编码缺距离，相对位置编码丢绝对：位置编码外推的两难.md)
+- 2.3.2 RoPE 复数空间推导：通过二维平面旋转矩阵注入相对位置信息 [DONE] 📺 [q 和 k 各转各的，内积只剩夹角差：RoPE 旋转矩阵的手推与几何直觉](2.3_旋转位置编码/2.3.2_RoPE推导/q%20和%20k%20各转各的，内积只剩夹角差：RoPE%20旋转矩阵的手推与几何直觉.md) · 📺 [位置写进角度里：RoPE 论文如何从一条内积约束解出复数乘法与旋转矩阵](2.3_旋转位置编码/2.3.2_RoPE推导/位置写进角度里：RoPE%20论文如何从一条内积约束解出复数乘法与旋转矩阵.md)
+- 2.3.3 RoPE 的远程衰减特性（Long-term Decay）与旋转频率基数（Base $\theta$）的作用 [DONE] 📺 [q和k全取1，内积变成一串cos：RoPE的远程衰减与底数的作用](2.3_旋转位置编码/2.3.3_远程衰减与Base/q和k全取1，内积变成一串cos：RoPE的远程衰减与底数的作用.md) · 📺 [衰减是上界不是等式：频率阶梯与base如何决定注意力能看多远](2.3_旋转位置编码/2.3.3_远程衰减与Base/衰减是上界不是等式：频率阶梯与base如何决定注意力能看多远.md)
+- 2.3.4 RoPE 算子实现：实数域逐元素乘加（Element-wise）与预计算 Cos/Sin 缓存表 [DONE] 📺 [复数查表加广播乘法：官方 Llama 的 RoPE 算子前向不做矩阵乘](2.3_旋转位置编码/2.3.4_RoPE算子实现/复数查表加广播乘法：官方%20Llama%20的%20RoPE%20算子前向不做矩阵乘.md) · 📺 [把旋转写成前后半的逐元素乘加：cos、sin 缓存表让 RoPE 只剩四次 mul](2.3_旋转位置编码/2.3.4_RoPE算子实现/把旋转写成前后半的逐元素乘加：cos、sin%20缓存表让%20RoPE%20只剩四次%20mul.md)
 
 ### 2.4 长上下文外推与上下文窗口扩展
 
-- 2.4.1 位置线性内插（Position Interpolation, PI）的原理与高频信息丢失问题 [WAITING]
-- 2.4.2 神经正切核感知缩放（NTK-Aware Scaling）与动态 NTK（Dynamic NTK） [WAITING]
-- 2.4.3 YaRN（Yet another RoPE extensioN）：分频段缩放（高频不插值、低频内插）与注意力温度补偿 [PROCESSING]
+- 2.4.1 位置线性内插（Position Interpolation, PI）的原理与高频信息丢失问题 [DONE] 📺 [位置内插PI：把超长位置索引压回训练区间，代价是高频分辨率被摊薄](2.4_长上下文外推/2.4.1_位置内插PI/位置内插PI：把超长位置索引压回训练区间，代价是高频分辨率被摊薄.md)
+- 2.4.2 神经正切核感知缩放（NTK-Aware Scaling）与动态 NTK（Dynamic NTK） [DONE] 📺 [同一底座、同一份数据的对照实验：NTK系缩放赢在保高频与可外推，输在必须微调和无限长度](2.4_长上下文外推/2.4.2_NTK缩放/同一底座、同一份数据的对照实验：NTK系缩放赢在保高频与可外推，输在必须微调和无限长度.md) · 📺 [改底数不改位置：NTK-aware缩放的一行公式与Dynamic_NTK的按需生效](2.4_长上下文外推/2.4.2_NTK缩放/改底数不改位置：NTK-aware缩放的一行公式与Dynamic_NTK的按需生效.md)
+- 2.4.3 YaRN（Yet another RoPE extensioN）：分频段缩放（高频不插值、低频内插）与注意力温度补偿 [DONE] 📺 [从论文到config：YaRN落地后的账单、缓存与开关](2.4_长上下文外推/2.4.3_YaRN/从论文到config：YaRN落地后的账单、缓存与开关.md) · 📺 [数它转了几圈：YaRN的斜坡插值与温度补偿](2.4_长上下文外推/2.4.3_YaRN/数它转了几圈：YaRN的斜坡插值与温度补偿.md)
 
 ## 第 3 章：主流开源模型架构变体（Llama 之后的世界）
 
 ### 3.1 稠密模型（Dense）标杆演进
 
-- 3.1.1 Llama 1 到 Llama 3 的架构参数变迁：词表扩充、GQA 普及与 RoPE 基数调整 [PROCESSING]
+- 3.1.1 Llama 1 到 Llama 3 的架构参数变迁：词表扩充、GQA 普及与 RoPE 基数调整 [WAITING]
 - 3.1.2 Qwen 与 Mistral 系列的局部微调：QKV Bias 取舍、Embedding 权重绑定（Tied Weights） [WAITING]
 - 3.1.3 权重张量命名规范：HuggingFace Safetensors 格式与模型结构映射 [WAITING]
 
