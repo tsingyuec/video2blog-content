@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <!-- 站点标记：一枚弯月（TsingYue 的「月」）。
-       顶栏 logo 用同一枚图形（mkdocs.yml 里的 material/moon-waning-crescent），
-       这个文件只给浏览器标签页当 favicon；浅色/深色标签栏各用一档墨色。 -->
-  <style>
-    path { fill: #1f1f1f; }
-    @media (prefers-color-scheme: dark) { path { fill: #e8e6e1; } }
-  </style>
-  <path d="M2 12a10 10 0 0 0 13 9.54 10 10 0 0 1 0-19.08A10 10 0 0 0 2 12"/>
+  <!-- 站点标记：一枚「书本」徽章——墨色圆角底 + 米色书本。
+       浅色 / 深色标签栏上都看得清，所以不做深浅两套配色。
+       顶栏 logo 用的是同一个图形（mkdocs.yml 的 material/book-open-page-variant），
+       那边由 Material 用 currentcolor 上色，跟随主题深浅。 -->
+  <rect x="1" y="1" width="22" height="22" rx="5.5" fill="#1f1f1f"/>
+  <g transform="translate(4.3 4.3) scale(0.65)" fill="#f3f2ee">
+    <path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/>
+  </g>
 </svg>

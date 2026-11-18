@@ -28,8 +28,8 @@ theme:
   # 标签页图标：_static/logo.svg 由 site/build_site.py 从前仓库拷进 docs
   favicon: _static/logo.svg
   icon:
-    # 顶栏标记：与 favicon 同一枚弯月
-    logo: material/moon-waning-crescent
+    # 顶栏标记：与 favicon 同一枚「翻开的书」
+    logo: material/book-open-page-variant
   features:
     - navigation.instant
     # 悬停侧栏/正文链接时预取该页（material 只预取当前悬停的这一个 href，不会批量拉全站）
