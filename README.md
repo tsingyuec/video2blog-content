@@ -115,6 +115,7 @@ python site/build_site.py && mkdocs serve
 | 系列 | 主题 | 规模 | 入口 |
 | --- | --- | --- | --- |
 | 生物信息 | 生物信息知识体系：格式 / 结构 / 预测 / 生成 / 管线 | 123 小节 · 284 篇 | [content/生物信息](content/生物信息/README.md) |
+| 单细胞扰动组学 | 单细胞扰动组学知识体系：表达基础 / 单细胞技术 / 扰动实验 / 数据资源 / 分析与建模 | 90 小节 · 165 篇 | [content/单细胞扰动组学](content/单细胞扰动组学/README.md) |
 | biomodel | 生物分子与细胞建模：AlphaFold / ProteinMPNN / RFdiffusion / RoseTTAFold / GROMACS | 55 篇 | [content/biomodel](content/biomodel/README.md) |
 | 虚拟细胞 | 虚拟细胞精选版（总览 / 数据 / 评价 / 三个模型 / 选型）＋ 实验基础四类 | 19 篇 | [content/虚拟细胞](content/虚拟细胞/README.md) |
 | biodata | 生物数据站点（STRING / UniProt） | 5 篇 | [content/biodata](content/biodata/README.md) |
