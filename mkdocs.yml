@@ -1,0 +1,93 @@
+# MkDocs Material 站点配置
+# 构建前需先运行 `python site/build_site.py` 生成 build/docs 与 build/nav.yml。
+# 本地预览：python site/build_site.py && mkdocs serve
+#
+# 导航（nav）由 site/build_site.py 依 content/ 的真实目录树生成到 build/nav.yml，
+# 这里通过 INHERIT 合并进来；要调顺序/名称就改 content/ 下的目录名与文件名。
+INHERIT: build/nav.yml
+
+site_name: TsingYue's Blog
+site_description: 把 Bilibili / YouTube 视频整理成「图文博客」的合集
+site_url: https://tsingyuec.github.io/video2blog-content/
+repo_url: https://github.com/tsingyuec/video2blog-content
+repo_name: tsingyuec/video2blog-content
+edit_uri: ""
+
+docs_dir: build/docs
+site_dir: build/site
+use_directory_urls: false
+
+# KaTeX 自带 README.md，放在 docs 里会被当成页面。静态资源仍会复制。
+exclude_docs: |
+  _static/**/*.md
+
+theme:
+  name: material
+  language: zh
+  font: false
+  # 标签页图标：_static/logo.svg 由 site/build_site.py 从前仓库拷进 docs
+  favicon: _static/logo.svg
+  icon:
+    # 顶栏标记：与 favicon 同一枚「翻开的书」
+    logo: material/book-open-page-variant
+  features:
+    - navigation.instant
+    # 悬停侧栏/正文链接时预取该页（material 只预取当前悬停的这一个 href，不会批量拉全站）
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+  palette:
+    # 浅色：白底 + 红色强调（OI Wiki 风格）
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: red
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    # 深色：蓝色主色
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+  - pymdownx.details
+
+plugins:
+  - search:
+      lang: zh
+
+extra_css:
+  - _static/extra.css
+  - _static/katex/katex.min.css
+
+extra_javascript:
+  - _static/katex.js
+  - _static/extra.js
+
+# 构建后处理 hook：把搜索索引改为按需加载（见 site/hooks.py）
+hooks:
+  - site/hooks.py
+
+extra:
+  generator: false
+
+copyright: 内容由 video2blog skill 生成

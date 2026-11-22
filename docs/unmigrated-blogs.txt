@@ -1,0 +1,248 @@
+ai4s_tasks/blog/MOF 材料生成：机器学习如何设计金属有机框架.md
+ai4s_tasks/blog/抗体 CDR 设计：AI 如何设计抗体结合区.md
+ai4s_tasks/blog/蛋白质定向进化：预训练模型如何辅助蛋白工程.md
+ai4s_tasks/blog/逆合成预测：AI 如何反推分子合成路线.md
+aiinfra/blog/第03讲_极速环境配置.md
+aiinfra_learning/blog/第01讲_LLM全景图介绍与vLLM快速入门.md
+biobasic/蛋白质互作研究技术.md
+biobasic/酵母双杂交实验入门与结果解读.md
+biobasic/酵母双杂交技术（高中生物二轮复习）.md
+biomodel/alphafold/AlphaFold的原理和展望.md
+biomodel/gromacs/材料人GROMACS系统课/GROMACS系统课01_GROMACS简单介绍.md
+biomodel/gromacs/材料人GROMACS系统课/GROMACS系统课03_GROMACS编译安装.md
+biomodel/gromacs/材料人GROMACS系统课/GROMACS系统课06_LAMMPS-GROMACS联用一.md
+biomodel/gromacs/材料人GROMACS系统课/GROMACS系统课07_LAMMPS-GROMACS联用二.md
+biomodel/gromacs/玄月GROMACS入门/GROMACS入门01_安装模拟软件GROMACS.md
+biomodel/gromacs/玄月GROMACS入门/GROMACS入门07_膜蛋白的动力学模拟.md
+biomodel/gromacs/玄月GROMACS入门/GROMACS入门08_使用AMBER进行分子动力学模拟.md
+biomodel/gromacs/玄月GROMACS入门/GROMACS入门12_AMBER高斯加速动力学模拟.md
+biomodel/highfold/富二硫键微型蛋白的从头设计_靶向B类GPCR.md
+biomodel/protein_design/DNA与RNA数据如何输入机器学习模型.md
+biomodel/虚拟细胞/01_虚拟细胞是什么.md
+cs336/blog/CS336_全课博客合集.md
+cs336/blog/Lecture 10 Inference.md
+cs336/blog/Lecture 11 Scaling Laws.md
+cs336/blog/Lecture 13 Data (Sources, Datasets).md
+cs336/blog/Lecture 14 Data.md
+cs336/blog/Lecture 15 Mid-Post-Training.md
+cs336/blog/Lecture 16 Post-Training - RLVR.md
+cs336/blog/Lecture 17 Alignment - Multimodality.md
+cs336/blog/Lecture 18 Guest Lecture Dan Fu.md
+cs336/blog/Lecture 2 PyTorch(einops).md
+cs336/blog/Lecture 5 GPUs, TPUs.md
+cs336/blog/Lecture 6 Kernels, Triton, XLA.md
+cs336/blog/Lecture 7 Parallelism.md
+cs336/blog/Lecture 8 Parallelism.md
+cs336/blog/Lecture 9 Scaling Laws.md
+flash_attention/blog/第03讲_libtorch环境搭建.md
+flash_attention/blog/第09讲_疑惑与思考（请认真听很关键！）.md
+gpu/blog/激活函数的几何学：从ReLU、Sigmoid到神经流形的可视化探索.md
+graph_deep_learning/blog/第03讲_网络嵌入.md
+graph_deep_learning/blog/第05讲_图神经网络的健壮性和可扩展性.md
+graph_deep_learning/blog/第08讲_图深度学习的应用（下）.md
+minimind/blog/第01讲_开篇.md
+minimind/blog/第02讲_前言.md
+minimind/blog/第03讲_必看：前言补充.md
+minimind/blog/第04讲_前置知识.md
+minimind/blog/第06讲_初始化项目.md
+minimind/blog/第19讲_回顾与知识检验.md
+minimind/blog/第20讲_必看：纠错补充.md
+network_mtu/blog/72. 解决RouterOS上的IPSec MTU_MSS问题，你的IPSec能ping不能上网吗？.md
+network_mtu/blog/IPv4分片问题 ｜ MTU和MSS的核心区别.md
+network_mtu/blog/PROOF OF CONCEPT ｜ PMTUD ｜ PATH MTU DISCOVERY.md
+network_mtu/blog/别再查带宽了！VPN连上却卡死的真相：MTU／MSS深度避坑指南.md
+protein_group/protein_interaction/blog/第02讲_Intro to Deep Learning for Protein Design.md
+protein_group/protein_ml_bootcamp/blog/第05讲_Version Control with Git (Mini-session).md
+vllm_group/vllm/blog/第00讲_minivllm项目介绍.md
+vllm_group/vllm/blog/第01讲_minivllm安装&activation.py实现.md
+vllm_group/vllm/blog/第02讲_layernorm.py中的RMSNorm实现.md
+vllm_group/vllm/blog/第04讲_linear.py&MergedColumnParallelLinear&合并线性层张量并行.md
+vllm_group/vllm/blog/第07讲_embedding_head.py&嵌入层并行&VocabParallelEmbedding.md
+vllm_group/vllm/blog/第08讲_embedding_head.py&lm_head&词表列并行.md
+vllm_group/vllm/blog/第09.2讲_FlashAttention&Online Softmax&案例详解.md
+vllm_group/vllm/blog/第12讲_RoPE旋转嵌入.md
+vllm_group/vllm/blog/第13讲_sequence.py序列对象介绍&推理引擎中的序列管理.md
+vllm_group/vllm_class/blog/第01讲_如何在vLLM中接入一个模型.md
+vllm_group/vllm_class/blog/第05讲_Rust前端重构.md
+vllm_group/vllm_class/blog/第06讲_昇腾部署GLM5指南.md
+vllm_group/vllm_class/blog/第08讲_veRL-Omni为vLLM-Omni打造的RL框架.md
+vllm_group/vllm_class/blog/第09讲_当vLLM遇见slime.md
+vllm_group/vllm_class/blog/第11讲_让长序列MoE_RL训练更好调.md
+vllm_group/vllm_class/blog/第13讲_day0_Kimi_K3支持探索智能新前沿的推理边界.md
+vllm_group/vllm_class/blog/第14讲_day0_MiniMax_H3支持探索最强视频生成模型推理的极限.md
+vllm_group/vllm_class/blog/第15讲_将系统效率推向极致_Attention_FFN分离详解.md
+vllm_group/vllm_class/blog/第16讲_Diffusion模型也能continuous_batching.md
+vllm_group/vllm_class/blog/第18讲_基于VeRL-Omni的MiniMax_H3_RL后训练实践.md
+vllm_group/vllm_class/blog/第19讲_AI_Infra新手答疑_vLLM从入门到精通.md
+vllm_group/vllm_class/blog/第20讲_vLLM语义路由器_探索多模型系统只能的边界.md
+vllm_group/vllm_class/blog/第21讲_RL_Kernel_大模型RL后训练中的训推一致性实践.md
+单细胞扰动组学/1.1_细胞、基因与分子基础/1.1.1_细胞的基本组成/细胞中的元素和化合物：组成细胞的分子基础.md
+单细胞扰动组学/1.2_基因表达与调控/1.2.4_细胞信号传导/G蛋白偶联受体通路：七次跨膜受体、G蛋白循环与两条第二信使支路.md
+单细胞扰动组学/1.2_基因表达与调控/1.2.4_细胞信号传导/受体酪氨酸激酶通路：从RTK二聚化到Ras、MAPK与PI3K-Akt.md
+单细胞扰动组学/1.3_细胞类型、细胞状态与异质性/1.3.4_正常、疾病及刺激条件下的细胞变化/肿瘤里的免疫细胞不是一种状态：耗竭、前体与可塑性如何决定免疫治疗成败.md
+单细胞扰动组学/1.4_从群体测量到单细胞测量/1.4.3_单细胞研究的价值与局限/为什么需要单细胞：从qPCR与bulk到百万细胞图谱.md
+单细胞扰动组学/1.4_从群体测量到单细胞测量/1.4.3_单细胞研究的价值与局限/单细胞数据能支撑什么结论：从计数矩阵到可验证的生物学主张.md
+单细胞扰动组学/2.1_单细胞测量技术/2.1.1_单细胞RNA测序（scRNA-seq）/10x单细胞测序的分子原理：Barcode与UMI如何在液滴里写进cDNA.md
+单细胞扰动组学/2.3_数据结构与文件格式/2.3.2_稀疏矩阵与表达数据/CSR压缩稀疏行：values、indices与indptr三个数组.md
+单细胞扰动组学/2.3_数据结构与文件格式/2.3.2_稀疏矩阵与表达数据/稀疏矩阵：把大部分是零的表达矩阵塞进内存.md
+单细胞扰动组学/2.3_数据结构与文件格式/2.3.3_MTX、H5、H5AD/HDF5 文件内部长什么样：组、数据集与自描述属性.md
+单细胞扰动组学/2.3_数据结构与文件格式/2.3.3_MTX、H5、H5AD/同一张表达矩阵的五种落盘方式：rds、h5、mtx、loom、h5ad.md
+单细胞扰动组学/2.3_数据结构与文件格式/2.3.4_AnnData与Seurat/Seurat v5对象结构：assays三层与reductions、graphs槽位.md
+单细胞扰动组学/3.1_细胞扰动的基本原理/3.1.1_Perturbation的定义与研究范式/RNA指纹：用扰动字典把单细胞现象追溯到因果扰动.md
+单细胞扰动组学/3.1_细胞扰动的基本原理/3.1.1_Perturbation的定义与研究范式/从死活到转录组：单细胞读出如何把CRISPR筛选变成扰动组学.md
+单细胞扰动组学/3.1_细胞扰动的基本原理/3.1.2_基因型、环境与细胞表型/细胞可塑性：基因型与环境如何共同决定细胞表型.md
+单细胞扰动组学/3.1_细胞扰动的基本原理/3.1.2_基因型、环境与细胞表型/肺腺癌早期上皮细胞状态图谱：AT2 到肿瘤的可塑性通路.md
+单细胞扰动组学/3.1_细胞扰动的基本原理/3.1.3_对照组与实验组/对照实验的本质是控制无关变量：从溶剂对照到单一变量原则.md
+单细胞扰动组学/3.2_遗传扰动与药物扰动/3.2.2_RNAi与基因敲低/RNA干扰的发现与分子机制：从矮牵牛共抑制到 Dicer-RISC 通路.md
+单细胞扰动组学/3.2_遗传扰动与药物扰动/3.2.2_RNAi与基因敲低/基因敲低怎么实现：siRNA、shRNA 的类型、特点与应用边界.md
+单细胞扰动组学/3.2_遗传扰动与药物扰动/3.2.5_环境刺激与细胞因子处理/细胞如何感知氧气：HIF-1α的降解开关与缺氧扰动.md
+单细胞扰动组学/3.3_单细胞扰动实验技术与设计/3.3.1_Perturb-seq与CROP-seq/单细胞CRISPR筛选：建库方向决定了gRNA怎么被捕获.md
+单细胞扰动组学/3.3_单细胞扰动实验技术与设计/3.3.3_Pooled Screen与Arrayed Screen/PooledScreen设计逻辑：把上万个扰动混进一个细胞池.md
+单细胞扰动组学/3.3_单细胞扰动实验技术与设计/3.3.4_MOI、实验对照与生物学重复/CRISPR筛选的三个关键参数：MOI、对照与重复.md
+单细胞扰动组学/3.3_单细胞扰动实验技术与设计/3.3.5_扰动效率与响应测量/CRISPR敲除效率验证T7E1酶切与Sanger测序.md
+单细胞扰动组学/3.4_从扰动到细胞响应/3.4.2_基因调控与通路变化/谁在指挥：用SCENIC从差异基因反推转录因子活性.md
+单细胞扰动组学/3.4_从扰动到细胞响应/3.4.5_Off-target Effects与实验局限/gRNA设计与脱靶分析：脱靶风险从哪里来，怎么挡在实验之前.md
+单细胞扰动组学/3.4_从扰动到细胞响应/3.4.5_Off-target Effects与实验局限/脱靶检测方法全景：从断裂点捕获到全基因组测序.md
+单细胞扰动组学/4.1_公共单细胞数据资源/4.1.1_GEO与SRA/GEO数据库的四层编号与数据集筛选.md
+单细胞扰动组学/4.1_公共单细胞数据资源/4.1.4_Single_Cell_Portal/Single Cell Portal 基因检索与在线出图：六分钟上手.md
+单细胞扰动组学/4.1_公共单细胞数据资源/4.1.4_Single_Cell_Portal/Single Cell Portal 怎么用：从检索数据集到基因表达可视化的完整走查.md
+单细胞扰动组学/4.1_公共单细胞数据资源/4.1.5_数据检索下载与元数据/SRA数据下载的三条路：迅雷、SRA Toolkit与Aspera.md
+单细胞扰动组学/4.1_公共单细胞数据资源/4.1.5_数据检索下载与元数据/从GEO下载单细胞数据：四种格式的读取与分组信息整理.md
+单细胞扰动组学/4.2_大规模单细胞表达图谱/4.2.2_公共数据收集与统一处理/统一上游流程：用 Cell Ranger 把一批样本跑成可比矩阵.md
+单细胞扰动组学/4.2_大规模单细胞表达图谱/4.2.3_跨组织、跨细胞类型与跨物种数据/泛组织成纤维细胞图谱：同一细胞类型跨组织跨疾病的异质性.md
+单细胞扰动组学/4.2_大规模单细胞表达图谱/4.2.5_基础细胞图谱的研究价值/基础细胞图谱的研究价值：把「正常细胞长什么样」变成可对齐的坐标系.md
+单细胞扰动组学/4.3_遗传扰动数据资源/4.3.1_Perturb-seq代表性研究/全基因组Perturb-seq筛选：从250万个细胞读出基因型与表型的对应关系.md
+单细胞扰动组学/4.3_遗传扰动数据资源/4.3.3_CRISPRi与CRISPRa数据/CRISPRoff与CRISPRon：同一套gRNA沉默数据干净而激活数据更难做.md
+单细胞扰动组学/4.3_遗传扰动数据资源/4.3.3_CRISPRi与CRISPRa数据/阵列CRISPR文库：CRISPRa为什么要把四条gRNA装进一个孔.md
+单细胞扰动组学/4.3_遗传扰动数据资源/4.3.4_不同扰动实验的数据标准化/平铺式sgRNA筛选的扰动效应标准化：z分数、邻域校正与分段.md
+单细胞扰动组学/4.4_药物扰动与多模态数据资源/4.4.2_LINCS药物诱导表达数据/CMap与L1000：978个基因如何刻画药物扰动.md
+单细胞扰动组学/4.4_药物扰动与多模态数据资源/4.4.2_LINCS药物诱导表达数据/CMap查询结果怎么读：CLUE平台的Detailed List与得分列.md
+单细胞扰动组学/4.4_药物扰动与多模态数据资源/4.4.3_Cell Painting细胞形态数据/Cell Painting：六种染料拍一张照片，把细胞变成上百个指标.md
+单细胞扰动组学/4.4_药物扰动与多模态数据资源/4.4.3_Cell Painting细胞形态数据/从一张荧光照片到上千个特征：高内涵成像怎样把细胞形态变成可算的数据.md
+单细胞扰动组学/4.4_药物扰动与多模态数据资源/4.4.4_药物剂量与细胞系信息/细胞系不是一个名字：由来、命名、STR鉴定与交叉污染.md
+单细胞扰动组学/4.4_药物扰动与多模态数据资源/4.4.5_不同数据集之间的比较与整合/scGLUE：把非配对的多组学数据粘到同一个隐空间.md
+单细胞扰动组学/5.2_扰动效应与生物学响应分析/5.2.5_细胞状态变化与异质性分析/非小细胞肺癌新辅助治疗后的五类免疫微环境亚型.md
+单细胞扰动组学/5.3_细胞扰动预测与计算模型/5.3.2_药物诱导表达变化预测/新药可能治什么：用转录组签名做药物重定位的完整链路.md
+单细胞扰动组学/5.3_细胞扰动预测与计算模型/5.3.5_单细胞基础模型/Geneformer把细胞读成一句话：基因排序token、掩码预训练与虚拟敲除.md
+容器技术/5.4_单机网络排障基础/5.4.1_网络命名空间与veth排查/Docker网络原理：容器怎么连上互联网.md
+容器技术/5.4_单机网络排障基础/5.4.1_网络命名空间与veth排查/深入理解docker和kubernetes-10-veth.md
+容器技术/5.4_单机网络排障基础/5.4.2_路由、NAT与连接跟踪排查/Linux traceroute命令使用详解 - 排查网络延迟或路由问题.md
+容器技术/5.4_单机网络排障基础/5.4.2_路由、NAT与连接跟踪排查/双向NAT，NAT回流工作原理解析（抓包分析）.md
+容器技术/5.4_单机网络排障基础/5.4.3_抓包与包路径分析/Linux实用工具之tcpdump网络抓包分析的瑞士军刀.md
+容器技术/5.4_单机网络排障基础/5.4.3_抓包与包路径分析/一个网络包进入Linux内核后经历了什么.md
+容器技术/5.4_单机网络排障基础/5.4.3_抓包与包路径分析/抓包到底抓的是什么？一次性搞懂它.md
+容器技术/5.4_单机网络排障基础/5.4.4_常见单机容器网络故障模式/Docker 容器起不来？90% 是端口问题.md
+容器技术/5.4_单机网络排障基础/5.4.4_常见单机容器网络故障模式/GitLab Docker 容器网络故障排查案例：容器无法访问外网的完整排查步骤.md
+容器技术/5.4_单机网络排障基础/5.4.4_常见单机容器网络故障模式/docker教程：Docker容器内无法访问外网问题十种解决思路.md
+生物信息/1.1_中心法则与信息流/1.1.4_非编码RNA与编码mRNA的区别/五分钟了解所有RNA.md
+生物信息/1.1_中心法则与信息流/1.1.4_非编码RNA与编码mRNA的区别/细胞中的那些非编码RNA.md
+生物信息/1.1_中心法则与信息流/【基因表达】转录·翻译·表观遗传，看这篇就够了！.md
+生物信息/1.1_中心法则与信息流/核酸重难点详解，你的DNA动了么？.md
+生物信息/1.2_蛋白质/1.2.3_序列到结构到功能/蛋白质结构和功能预测.md
+生物信息/1.3_小分子与离子/1.3.3_CCD编码PDB标准配体名/精选！轻松小白到大神PDB数据库的介绍和使用含实操！.md
+生物信息/2.1_序列类格式/2.1.2_多链FASTA约定/3分钟学会AlphaFold3预测蛋白.md
+生物信息/2.1_序列类格式/2.1.2_多链FASTA约定/AlphaFold蛋白蛋白复合物预测及amber分子动力学模拟（一）.md
+生物信息/2.1_序列类格式/fasta格式.md
+生物信息/2.3_比对类格式/2.3.2_A3M格式/alphafold3官方文档讲解：02 输入设置：MSA,模板,共价键,CCD定义.md
+生物信息/2.5_分子输入打包格式/2.5.1_AlphaFoldServerJSON/AlphaFold3实操教程来咯，全新结构预测神器，还不快来跟着教学视频操练一下？.md
+生物信息/2.5_分子输入打包格式/2.5.1_AlphaFoldServerJSON/AlphaFold3零代码使用教程.md
+生物信息/2.5_分子输入打包格式/2.5.1_AlphaFoldServerJSON/从输入到结果，手把手带你用 Protenix 生物分子结构预测模型.md
+生物信息/2.5_分子输入打包格式/2.5.2_OpenFold3NIM_inputsmolecules格式/Deploying OpenFold3 with NVIDIA NIMs on Brev & AWS EC2.md
+生物信息/2.5_分子输入打包格式/2.5.2_OpenFold3NIM_inputsmolecules格式/OpenFold3： A Researcher's Guide To Your First Protein Prediction.md
+生物信息/2.5_分子输入打包格式/2.5.3_Boltz-2polymers格式/To use Boltz-2 for affinity predictions.md
+生物信息/2.5_分子输入打包格式/2.5.3_Boltz-2polymers格式/麻省理工Boltz-2模型：一键预测生物分子3D结构与相互作用.md
+生物信息/2.6_模拟文件族GROMACS/2.6.1_GROMACS模拟文件族/Gromacs入门讲解.md
+生物信息/2.6_模拟文件族GROMACS/2.6.1_GROMACS模拟文件族/Gromacs视频教程-文件格式-gro文件.md
+生物信息/2.7_本体与术语数据OLS/Searching for an Ontology Term using Ontology Lookup Service.md
+生物信息/3.1_结构预测置信度/3.1.1_pLDDT逐残基置信度/Alphafold3输出的结果文件数据解读及复合体预测流程.md
+生物信息/3.1_结构预测置信度/3.1.1_pLDDT逐残基置信度/Interpreting AlphaFold predictions and confidence indicators.md
+生物信息/3.1_结构预测置信度/3.1.2_pTM_ipTM_0-1_全局_界面/AlphaFold Tutorial： Predict Protein Structures & Interpret pLDDT, PAE, pTM and ipTM.md
+生物信息/3.1_结构预测置信度/3.1.2_pTM_ipTM_0-1_全局_界面/Confidence metrics used in the AlphaFold Database multimers.md
+生物信息/3.1_结构预测置信度/3.1.3_confidence_score各模型综合置信度/AlphaFold 3 Explained ｜ Complete Beginner's Guide to Structure Prediction.md
+生物信息/3.1_结构预测置信度/3.1.3_confidence_score各模型综合置信度/Similarity Metrics & Confidence Scores in Protein Structure Prediction ｜ EMBL-EBI Tutorial.md
+生物信息/3.2_能量类/3.2.1_MFE_ΔG_ViennaRNA全系/Secondary structure prediction using mFOLD and Forna｜mRNA structure forecast tools.md
+生物信息/3.2_能量类/3.2.3_ddG突变结合能变化_dyMEAN亲和力优化/Tutorial for Performing In Silico Protein Mutagenesis using Python Wrapper Mutatex employing Foldx.md
+生物信息/3.2_能量类/3.2.3_ddG突变结合能变化_dyMEAN亲和力优化/丙氨酸扫描：如何寻找蛋白质中的关键功能残基？.md
+生物信息/3.4_回归值/3.4.1_pI等电点Tm熔解温度_ABDP/7.生物化学 -- 第二章 -- 氨基酸等电点。-- 上.md
+生物信息/3.4_回归值/3.4.4_NLLscore序列可折叠性_ProteinMPNN/Sequence Design with ProteinMPNN.md
+生物信息/3.4_回归值/3.4.4_NLLscore序列可折叠性_ProteinMPNN/WeMol教程_18｜ 蛋白序列设计ProteinMPNN.md
+生物信息/3.5_生成质量/3.5.1_困惑度ppl_LOGOS/L3.3- 评估准则(perplexity 困惑度等).md
+生物信息/3.5_生成质量/3.5.1_困惑度ppl_LOGOS/PPL 越低，模型越聪明？3 分钟看懂困惑度.md
+生物信息/3.5_生成质量/3.5.1_困惑度ppl_LOGOS/你知道用什么指标评价一个大模型的好坏吗？PPL，MMLU，MATH，GPQA，BBH，IF-EVAL，MMLU-PRO.md
+生物信息/4.1_热力学_动态规划经典/4.1.1_Zuker算法与MFE_RNAfold/RNA二级结构的预测.md
+生物信息/4.1_热力学_动态规划经典/4.1.1_Zuker算法与MFE_RNAfold/【屈婉玲教授 ｜ 算法设计与分析】06-06 RNA二级结构预测.md
+生物信息/4.1_热力学_动态规划经典/4.1.3_Turner能量参数模型/2. Thermodynamics of DNA and RNA.md
+生物信息/4.1_热力学_动态规划经典/4.1.3_Turner能量参数模型/Folding engines, models & thermodynamics.md
+生物信息/4.2_序列语言模型PLM/4.2.1_BERT式掩码预训练_嵌入embedding/Embedding到底是什么？从氨基酸到数字特征｜AI in biology 知其所以然EP02.md
+生物信息/4.2_序列语言模型PLM/4.2.1_BERT式掩码预训练_嵌入embedding/小白也能听懂的 bert模型原理解读 预训练语言模型.md
+生物信息/4.2_序列语言模型PLM/4.2.2_ProtTransAbLang_ABDP底座/Gen AI in Biology. AbLang：An Antibody Sequence Language Model. (Bio LLMs).md
+生物信息/4.2_序列语言模型PLM/4.2.3_ESM2_AMP-Diffusion底座8M参数/ESM-2 Protein Language Model Explained – Architecture & Training.md
+生物信息/4.2_序列语言模型PLM/4.2.4_RNA-FM640维_mRNA-FM1280维密码子分词/DNA、RNA也能有自己的“大模型”？大湾区大学胡智航教授带你走进生命序列大模型，探索AI如何读懂DNA／RNA，解锁生命科学新可能.md
+生物信息/4.2_序列语言模型PLM/4.2.4_RNA-FM640维_mRNA-FM1280维密码子分词/RNA大型语言模型代码教程.md
+生物信息/4.2_序列语言模型PLM/4.2.6_均值池化_逐token嵌入/SBERT（Sentence-BERT）模型介绍.md
+生物信息/4.3_扩散模型diffusion/4.3.3_结构预测扩散Protenix_OpenFold3_Boltz-2/Boltz-2：实现准确高效的结合亲和力预测.md
+生物信息/4.3_扩散模型diffusion/4.3.3_结构预测扩散Protenix_OpenFold3_Boltz-2/【机器学习】AlphaFold 3 论文精讲 + 模型介绍.md
+生物信息/4.3_扩散模型diffusion/4.3.5_对接扩散_DiffDock_DiffPepDock/AI驱动的分子对接新范式：DiffDock云工具.md
+生物信息/4.3_扩散模型diffusion/4.3.5_对接扩散_DiffDock_DiffPepDock/分子对接实例1-小分子和蛋白全盲对接（diffdock-L+vina）.md
+生物信息/4.4_几何图神经网络/4.4.1_图神经网络_消息传递/【中文字幕】science论文-使用鲁棒机器学习ProteinMPNN的蛋白设计.md
+生物信息/4.4_几何图神经网络/4.4.2_等变网络与三角注意力/AlphaFold 3 deep dive.md
+生物信息/4.5_经典机器学习与统计/4.5.1_SVM_SVR回归_ABDP_pI_Tm/支持向量回归（SVR）.md
+生物信息/4.5_经典机器学习与统计/4.5.2_随机森林/【五分钟机器学习】随机森林（RandomForest）：看我以弱搏强.md
+生物信息/4.5_经典机器学习与统计/4.5.3_ensemble_集成_APEX_40_权重/集成算法：bagging和boosting算法简介.md
+生物信息/4.5_经典机器学习与统计/4.5.4_Voronoi镶嵌几何_fpocket/12. Druggability feature predictions ｜ P2Rank, AF2BIND, and Fpocket ｜ BTK inhibitor binding sites.md
+生物信息/4.5_经典机器学习与统计/4.5.4_Voronoi镶嵌几何_fpocket/Protein-ligand Docking Tutorial ： Using AutoDock Vina and fpocket tool.md
+生物信息/4.5_经典机器学习与统计/4.5.5_逆折叠启发式搜索_RNAinverse_ProteinMPNN/RiboDiffusion：基于三级结构的RNA逆折叠生成式扩散模型.md
+生物信息/4.5_经典机器学习与统计/4.5.5_逆折叠启发式搜索_RNAinverse_ProteinMPNN/没有公式！10分钟动画讲清蛋白质设计.md
+生物信息/4.5_经典机器学习与统计/4.5.5_逆折叠启发式搜索_RNAinverse_ProteinMPNN/设计优化蛋白序列，通过ProteinMPNN和alphafold2在线网站的傻瓜操作.md
+生物信息/4.5_经典机器学习与统计/4.5.6_分子力学与数值积分/分子动力学模拟：第06集-能量最小化与NVT·NPT预平衡。GROMACS 教程 06｜能量最小化收敛判断 + NVT 控温 + NPT 控压-含 mdp 要点.md
+生物信息/4.5_经典机器学习与统计/4.5.6_分子力学与数值积分/分子模拟从入门到发文章——3.能量最小化、体系平衡及模拟.md
+生物信息/5.1_结构预测域/5.1.4_AlphaFold2经典单体/AlphaFold2结果解读及可视化 （口齿基本清楚，故未加字幕）.md
+生物信息/5.1_结构预测域/5.1.7_dyMEAN_structure任务_抗体-抗原复合物结构预测/Discovery Studio-抗体、抗原分子对接.md
+生物信息/5.1_结构预测域/5.1.7_dyMEAN_structure任务_抗体-抗原复合物结构预测/xTrimoDock：抗原抗体复合物结构预测.md
+生物信息/5.2_从头设计域/5.2.1b_ProteinMPNN骨架到序列逆折叠/RFDiffusion3 AI蛋白设计 binder设计 上机操作 及 讲解 MPNN部分.md
+生物信息/5.4_性质可开发性域/5.4.2_ABDP_Tm_Prediction_Tm回归/Kaggle Winners Walkthroughs： Novozymes Enzyme Stability Prediction with Muhammad Ahmed.md
+生物信息/5.4_性质可开发性域/5.4.5_BioPhi_OASis人源性_Sapiens人源化/【第三期】理性抗体人源化设计｜Discovery Studio 抗体药物设计与优化.md
+生物信息/5.5_RNA分析域/5.5.3_mRNA-FM密码子分词嵌入/GenSLMs： Genome-scale language models reveal SARS-CoV-2 evolutionary dynamics.md
+生物信息/5.6_物理模拟域/5.6.1_GROMACS_EM_NVT_NPT_pipeline_续跑/Automated GROMACS MD Pipeline.md
+生物信息/5.6_物理模拟域/5.6.1_GROMACS_EM_NVT_NPT_pipeline_续跑/How to stop, continue and extend simulation with gmx convert-tpr.md
+生物信息/5.7_辅助工具域/5.7.1_MSASearch_ColabFold_A3M搜索_结构预测前置/Alphafold 2 Explained：WHY DeepMind had revolutionary results at CASP14.md
+生物信息/5.7_辅助工具域/5.7.1_MSASearch_ColabFold_A3M搜索_结构预测前置/Faster AlphaFold protein structure predictions using ColabFold.md
+生物信息/5.7_辅助工具域/5.7.1_MSASearch_ColabFold_A3M搜索_结构预测前置/【ColabFold実習】構造生物学者が知るべきColabfold活用方法.md
+生物信息/5.7_辅助工具域/5.7.2_Unlimited-OCR_长文档PDF解析/Unlimited OCR：开启单次长序列OCR识别新时代.md
+生物信息/5.7_辅助工具域/5.7.2_Unlimited-OCR_长文档PDF解析/目前最强OCR工具：Unlimited-OCR！连续阅读一本书！.md
+生物信息/5.7_辅助工具域/5.7.3_LocateAnything-3B视觉定位基础模型/LocateAnything on the RTX 4090 — One Model for Detection, Grounding, OCR & GUI Pointing.md
+生物信息/5.7_辅助工具域/5.7.3_LocateAnything-3B视觉定位基础模型/LocateAnything 本地部署实测：目标检测、OCR、GUI 元素定位全测.md
+生物信息/6.1_管线A蛋白Binder设计三部曲闭环/6.1.1_靶标结构获取Protenix预测或PDB下载/How to download the appropriate protein structure from Protein Data Bank.md
+生物信息/6.1_管线A蛋白Binder设计三部曲闭环/6.1.1_靶标结构获取Protenix预测或PDB下载/分子对接 - 怎么从PDB数据库选蛋白结构.md
+生物信息/6.1_管线A蛋白Binder设计三部曲闭环/6.1.2_RFdiffusion生成骨架/Protein Binder Design with RFDiffusion3.md
+生物信息/6.1_管线A蛋白Binder设计三部曲闭环/6.1.3_ProteinMPNN配序列/Learn Protein Design From Theory to Practical - Part 3.md
+生物信息/6.1_管线A蛋白Binder设计三部曲闭环/6.1.3_ProteinMPNN配序列/实操演示：ProteinMPNN定向进化改造蛋白质.md
+生物信息/6.1_管线A蛋白Binder设计三部曲闭环/6.1.4_ProtenixOpenFold3回折验证ipTM判定/BoltzGen：Toward Universal Binder Design.md
+生物信息/6.1_管线A蛋白Binder设计三部曲闭环/6.1.4_ProtenixOpenFold3回折验证ipTM判定/Getting Started with BindCraft：Designing Protein Binders.md
+生物信息/6.2_管线B抗体药物设计/6.2.1_抗原结构Protenix/How to Perform Molecular Docking with AlphaFold3： Protenix.md
+生物信息/6.2_管线B抗体药物设计/6.2.3_序列结构DiffAb_dyMEAN_IgGM含亲和力优化/Nucleotide Context Models Outperform Protein Language Models Predicting Antibody Affinity Maturation.md
+生物信息/6.2_管线B抗体药物设计/6.2.5_可开发性ABDP四件套pI_Tm_聚集_结合/MOE抗体药物设计系列讲座第三讲 - 抗体可开发性预测及优化改造.md
+生物信息/6.2_管线B抗体药物设计/6.2.5_可开发性ABDP四件套pI_Tm_聚集_结合/最前沿 人工智能之深度学习在抗体成药性分析中的应用.md
+生物信息/6.2_管线B抗体药物设计/6.2.6_验证ImmuneBuilder_Protenix/Absci Invites｜Fast, Accurate Antibody Structure Prediction from Deep Learning.md
+生物信息/6.2_管线B抗体药物设计/6.2.6_验证ImmuneBuilder_Protenix/AlphaFold3的突破 - 钟博子韬深度解析AlphaFold3｜钰沐菡公开课.md
+生物信息/6.2_管线B抗体药物设计/6.2.6_验证ImmuneBuilder_Protenix/AlphaFold结构可以直接拿来做分子对接吗？.md
+生物信息/6.3_管线C小分子药物发现/6.3.1_靶标蛋白ProtenixOpenFold3/[OpenFold3] Open-Source Drug Discovery： How OpenFold3 Changes Protein Engineering Structural Biology.md
+生物信息/6.3_管线C小分子药物发现/6.3.4_对接DiffDocknum_poses_position_confidence排序/QureGenAl平台教程：使用DiffDock进行配体和受体.md
+生物信息/6.4_管线D抗菌肽开发/6.4.2_活性筛选APEX34菌种MIC排序/AMPFormer：A Peptide Foundation Model for Antimicrobial Discovery — P. Gawade.md
+生物信息/6.4_管线D抗菌肽开发/6.4.3_实验验证/多肽药物固相合成：第3集-多肽的纯化和冻干.md
+生物信息/6.5_管线ERNA研究双路线互验/6.5.1_热力学路线RNAfold→RNAsubopt→RNAalifold→RNAinverse/Folding engines, models & thermodynamics.md
+生物信息/6.5_管线ERNA研究双路线互验/6.5.1_热力学路线RNAfold→RNAsubopt→RNAalifold→RNAinverse/RNA二级结构的预测.md
+生物信息/6.5_管线ERNA研究双路线互验/6.5.1_热力学路线RNAfold→RNAsubopt→RNAalifold→RNAinverse/【屈婉玲教授 ｜ 算法设计与分析】06-06 RNA二级结构预测.md
+生物信息/6.5_管线ERNA研究双路线互验/6.5.2_深度学习路线RNA-FMembedding_contact_map/赛道解读｜RNA–蛋白复合物结构预测.md
+生物信息/6.5_管线ERNA研究双路线互验/6.5.2_深度学习路线RNA-FMembedding_contact_map/飞桨开发者说-基于深度学习预测RNA二级结构.md
+虚拟细胞/1661-Virtual Cell Challenge 2026.md
+虚拟细胞/What is a virtual cell？Biohub's $1.8 billion data push, and the AI models it is for.md
+虚拟细胞/Yusuf Roohani at ARDD2025：Building a Virtual Cell：an AI platform for engineering cell state.md
+虚拟细胞/sgRNA/blog/基因编辑从零开始（二）：十分钟搞定sgRNA设计.md
+虚拟细胞/sgRNA/blog/第8讲 CRISPR／Cas9基因编辑gRNA的选择及引物设计.md
+虚拟细胞/基因敲除/blog/CRISPR／Cas9基因敲除全过程：带你一起摆平KO单克隆.md
+虚拟细胞/基因敲除/blog/如何进行基因编辑 新生培训（王新栋）.md
+虚拟细胞/文库构建/blog/【零基础入门】CRISPR文库筛选全流程拆解：避雷指南+高效方案大公开.md
+虚拟细胞/文库构建/blog/唯赞学堂｜浅谈NGS文库制备.md
+虚拟细胞/表达载体/blog/玩转慢病毒：从高效载体构建到稳定细胞株构建.md
+虚拟细胞/表达载体/blog/走进CRISPR／Cas9——sgRNA质粒构建.md
