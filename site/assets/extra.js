@@ -779,3 +779,76 @@
     boot();
   }
 })();
+
+/* 侧栏目录：点开一个目录时，自动多展开一级
+   Material 默认只展开直接子项（点一次看一层）。这里在 toggle 变为选中时，
+   把它「直接子目录」的 toggle 一并勾上，于是点一次能看到下面两级，省一次点击。
+   显隐由 CSS 的 .md-nav__toggle:checked ~ .md-nav 控制，所以只需改 checked；
+   aria-expanded 是 Material 在 label 的 click 里写的，程序化勾选不会触发，
+   这里手动同步，保持可访问性。用 document 上的事件委托，navigation.instant
+   换页重渲染导航后无需重新绑定。 */
+(function () {
+  /* 点开后可见的层级数；1 = Material 默认，2 = 多展开一级 */
+  var DEPTH = 2;
+
+  /* toggle 自己所在的 li 里那个直接子 nav */
+  function childNav(toggle) {
+    var li = toggle.parentNode;
+    for (var n = li.firstElementChild; n; n = n.nextElementSibling) {
+      if (n.tagName === "NAV" && n.classList.contains("md-nav")) return n;
+    }
+    return null;
+  }
+
+  /* 该 nav 下、直接子级里的所有嵌套目录 toggle（不递归） */
+  function childToggles(nav) {
+    var out = [];
+    if (!nav) return out;
+    var ul = null;
+    for (var c = nav.firstElementChild; c; c = c.nextElementSibling) {
+      if (c.tagName === "UL" && c.classList.contains("md-nav__list")) {
+        ul = c;
+        break;
+      }
+    }
+    if (!ul) return out;
+    for (var li = ul.firstElementChild; li; li = li.nextElementSibling) {
+      if (li.tagName !== "LI") continue;
+      if (!li.classList.contains("md-nav__item--nested")) continue;
+      for (var t = li.firstElementChild; t; t = t.nextElementSibling) {
+        if (t.tagName === "INPUT" && t.classList.contains("md-nav__toggle")) {
+          out.push(t);
+          break;
+        }
+      }
+    }
+    return out;
+  }
+
+  function syncAria(toggle) {
+    var nav = childNav(toggle);
+    if (nav) nav.setAttribute("aria-expanded", toggle.checked ? "true" : "false");
+  }
+
+  /* level = 还要往下勾几层子目录 */
+  function expand(toggle, level) {
+    if (level <= 0) return;
+    var kids = childToggles(childNav(toggle));
+    for (var i = 0; i < kids.length; i++) {
+      if (!kids[i].checked) {
+        kids[i].checked = true;
+        syncAria(kids[i]);
+      }
+      expand(kids[i], level - 1);
+    }
+  }
+
+  document.addEventListener("change", function (e) {
+    var t = e.target;
+    if (!t || t.tagName !== "INPUT" || t.type !== "checkbox") return;
+    if (!t.classList || !t.classList.contains("md-nav__toggle")) return;
+    if (!t.checked) return; /* 只在展开时动手，收起保持原样 */
+    syncAria(t); /* Material 在 label 的 click 里写 aria，程序化勾选不会触发，这里补上 */
+    expand(t, DEPTH - 1);
+  });
+})();
