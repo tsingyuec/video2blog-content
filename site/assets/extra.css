@@ -300,6 +300,19 @@ body[data-md-color-scheme="slate"] {
 .md-sidebar--primary .md-sidebar__scrollwrap {
   top: calc(var(--np-sidebar-pad-top) + var(--np-toolbar-h));
 }
+/* 桌面端滚动区的高度上限：Material 并不在 CSS 里给 .md-sidebar__scrollwrap 定高，
+   而是由 JS（mountSidebar）在运行时写成行内 style：`height = 主区可视高 - 2×滚动区顶偏移`。
+   这行行内样式在两种情况下会缺席——① bundle 还没挂载（慢网/大页面，实测能拖到几十秒）；
+   ② 组件销毁时 complete() 会把它清空，instant navigation 的竞态下可能不再重写。
+   此时盒子退回 height:auto（= 目录内容高度），于是侧栏「滚不动」，滚轮事件冒泡到
+   document 去滚正文。给一个 max-height 兜底：行内 height 存在时仍以它为准（只在超出
+   上限时压一压），缺席时也能保证侧栏始终可滚。
+   8.2rem ≈ 顶栏 2.7 + main 上边距 1.5 + 侧栏 padding-top 1.2 + 工具条 2.65 + 间隙 0.45。 */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    max-height: calc(100vh - 8.2rem);
+  }
+}
 /* 「文件 / 大纲」各占一半、文字居中；tab 高度止于虚线，激活下划线就压在虚线上 */
 .np-toolbar .np-tab {
   flex: 1 1 0;
