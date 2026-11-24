@@ -27,13 +27,13 @@ map 的正常使用方式一般是这样的：
 
 [【跳转到 01:26】](https://www.bilibili.com/video/BV1NEpRzuE76/?t=86)
 
-![课程目标：内核态捕获进程创建事件，通过以 PID 为 key 的哈希 map 把进程信息交给用户态](assets/【硬核入门5】eBPF 内核态和用户态 map实战/00086.webp)
+![课程目标：内核态捕获进程创建事件，通过以 PID 为 key 的哈希 map 把进程信息交给用户态](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/00086.webp)
 
 一句话分工：**内核态是生产者，用户态是消费者**，map 是两者之间的信箱。
 
-![内核态在 tracepoint 上捕获事件写入 map，用户态再从中读取并上报/展示](assets/【硬核入门5】eBPF 内核态和用户态 map实战/00111.webp)
+![内核态在 tracepoint 上捕获事件写入 map，用户态再从中读取并上报/展示](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/00111.webp)
 
-![用户态程序加载、挂载 eBPF 程序后，周期性读取哈希 map 并打印，支持优雅退出](assets/【硬核入门5】eBPF 内核态和用户态 map实战/00186.webp)
+![用户态程序加载、挂载 eBPF 程序后，周期性读取哈希 map 并打印，支持优雅退出](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/00186.webp)
 
 ---
 
@@ -51,7 +51,7 @@ map 的正常使用方式一般是这样的：
 
 [【跳转到 05:38】](https://www.bilibili.com/video/BV1NEpRzuE76/?t=338)
 
-![程序成功挂载到 tracepoint，监控到一次 SSH 连接产生的 sshd 进程创建事件](assets/【硬核入门5】eBPF 内核态和用户态 map实战/00313.webp)
+![程序成功挂载到 tracepoint，监控到一次 SSH 连接产生的 sshd 进程创建事件](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/00313.webp)
 
 ---
 
@@ -75,7 +75,7 @@ map 的正常使用方式一般是这样的：
 
 [【跳转到 08:01】](https://www.bilibili.com/video/BV1NEpRzuE76/?t=481)
 
-![内核态程序里定义哈希 map：__uint 定 key/value 大小、max_entries 等，__type 用 typeof 取 value 类型](assets/【硬核入门5】eBPF 内核态和用户态 map实战/00431.webp)
+![内核态程序里定义哈希 map：__uint 定 key/value 大小、max_entries 等，__type 用 typeof 取 value 类型](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/00431.webp)
 
 ### 3.2 看 eBPF 代码的方法：分段看结构
 
@@ -98,7 +98,7 @@ map 的正常使用方式一般是这样的：
 
 [【跳转到 12:04】](https://www.bilibili.com/video/BV1NEpRzuE76/?t=724)
 
-![内核态：捕获进程创建时把 PID 和进程名写入哈希 map，进程退出时按 PID 删除对应条目](assets/【硬核入门5】eBPF 内核态和用户态 map实战/00724.webp)
+![内核态：捕获进程创建时把 PID 和进程名写入哈希 map，进程退出时按 PID 删除对应条目](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/00724.webp)
 
 ---
 
@@ -118,7 +118,7 @@ main 函数第一步是**加载**。这里用的是 **libbpf 的 skeleton（骨�
 
 [【跳转到 14:42】](https://www.bilibili.com/video/BV1NEpRzuE76/?t=882)
 
-![用户态采用 libbpf skeleton 框架：open 打开骨架、load 送入内核、attach 挂到 tracepoint](assets/【硬核入门5】eBPF 内核态和用户态 map实战/00882.webp)
+![用户态采用 libbpf skeleton 框架：open 打开骨架、load 送入内核、attach 挂到 tracepoint](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/00882.webp)
 
 ### 4.2 拿到 map 的 FD
 
@@ -134,9 +134,9 @@ main 函数第一步是**加载**。这里用的是 **libbpf 的 skeleton（骨�
 
 [【跳转到 16:33】](https://www.bilibili.com/video/BV1NEpRzuE76/?t=993)
 
-![遍历 map 的 key：bpf_map_get_next_key 逐个拿 key](assets/【硬核入门5】eBPF 内核态和用户态 map实战/00968.webp)
+![遍历 map 的 key：bpf_map_get_next_key 逐个拿 key](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/00968.webp)
 
-![再用 bpf_map_lookup_elem 按 key 取出 value，打印进程信息，然后 sleep 进入下一轮](assets/【硬核入门5】eBPF 内核态和用户态 map实战/00993.webp)
+![再用 bpf_map_lookup_elem 按 key 取出 value，打印进程信息，然后 sleep 进入下一轮](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/00993.webp)
 
 ### 4.4 清理资源
 
@@ -152,7 +152,7 @@ main 函数第一步是**加载**。这里用的是 **libbpf 的 skeleton（骨�
 
 [【跳转到 18:09】](https://www.bilibili.com/video/BV1NEpRzuE76/?t=1089)
 
-![用户态主流程：加载 → 挂载 → 循环遍历 map 打印 → 清理资源](assets/【硬核入门5】eBPF 内核态和用户态 map实战/01089.webp)
+![用户态主流程：加载 → 挂载 → 循环遍历 map 打印 → 清理资源](assets/【硬核入门5】eBPF%20内核态和用户态%20map实战/01089.webp)
 
 演示里重新编译后，再跑一些命令（`top`、`ps`、`cat /etc/issue` 等）就能看到对应的进程创建被捕获——和刚才 SSH 连接的效果一样，说明这个「内核态采集 → 用户态读取」的闭环已经跑通。
 

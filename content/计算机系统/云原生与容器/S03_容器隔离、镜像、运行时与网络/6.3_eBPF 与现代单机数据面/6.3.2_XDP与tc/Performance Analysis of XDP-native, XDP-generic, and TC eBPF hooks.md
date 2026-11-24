@@ -25,7 +25,7 @@
 - **Linux traffic control（TC）钩子**——**入站（ingress）和出站（egress）都有**；
 - **XDP 钩子**——**目前只有入站（ingress）**。
 
-![net device 层可挂载的两类钩子：TC 钩子（ingress+egress）与 XDP 钩子（仅 ingress）](assets/Performance Analysis of XDP-native, XDP-generic, and TC eBPF hooks/00077.webp)
+![net device 层可挂载的两类钩子：TC 钩子（ingress+egress）与 XDP 钩子（仅 ingress）](assets/Performance%20Analysis%20of%20XDP-native,%20XDP-generic,%20and%20TC%20eBPF%20hooks/00077.webp)
 
 XDP 自己又有三种模式：
 
@@ -69,7 +69,7 @@ XDP 自己又有三种模式：
 - **挂上去的程序是「打桩程序」（dummy）——什么都不做，直接放行**。这样量到的就是**「仅仅调用这些程序本身」的开销**：挂这里、挂那里，各自贵多少，一目了然；
 - 每个测试跑 **60 秒、连做 3 次**，取**最好值与平均值**；随机选端口（如 23434），日志重定向到 `/dev/null` 以免日志吃掉 CPU。
 
-![测试拓扑：两台 VM 上跑 iperf3，发送端打满速率，接收端挂打桩 eBPF 程序](assets/Performance Analysis of XDP-native, XDP-generic, and TC eBPF hooks/00227.webp)
+![测试拓扑：两台 VM 上跑 iperf3，发送端打满速率，接收端挂打桩 eBPF 程序](assets/Performance%20Analysis%20of%20XDP-native,%20XDP-generic,%20and%20TC%20eBPF%20hooks/00227.webp)
 
 **采集 CPU 画像**用的是 **`profile-bpfcc`** 工具，跑 **70 秒**——在 iperf 接收端启动之后、发送端启动之前开始采，从而覆盖整段测试；产物是 CPU profile。随后用 **Brendan Gregg 的 FlameGraph** 生成火焰图（`profile.svg`），直观看到 CPU 在忙什么。
 
@@ -120,7 +120,7 @@ XDP 自己又有三种模式：
 
 [【跳转到 08:13】](https://www.youtube.com/watch?v=nuXN5qSvDCw&t=493) / [【跳转到 08:38】](https://www.youtube.com/watch?v=nuXN5qSvDCw&t=518)
 
-![火焰图：XDP generic 一侧的中断/skb 分配路径明显更「胖」，性能开销就在这里](assets/Performance Analysis of XDP-native, XDP-generic, and TC eBPF hooks/00530.webp)
+![火焰图：XDP generic 一侧的中断/skb 分配路径明显更「胖」，性能开销就在这里](assets/Performance%20Analysis%20of%20XDP-native,%20XDP-generic,%20and%20TC%20eBPF%20hooks/00530.webp)
 
 > 一句话记住：**XDP driver 在 `skb` 分配前动手，generic 却在分配后动手**——多出来的正是这份「本来可以省掉的准备工作」。
 

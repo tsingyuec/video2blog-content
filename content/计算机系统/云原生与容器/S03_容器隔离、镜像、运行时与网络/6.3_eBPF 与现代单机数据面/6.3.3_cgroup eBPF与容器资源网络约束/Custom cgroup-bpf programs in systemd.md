@@ -2,7 +2,7 @@
 
 > 本文整理自 All Systems Go! 2019 大会上 Julia Kartseva（Facebook 容器团队，负责网络方向）的演讲《Custom cgroup-bpf programs in systemd》。它讲明白了一件很具体的事：**systemd 里现在也用 BPF 做防火墙和设备的访问控制，但写这些程序只能手写 BPF 微汇编、还得靠「照抄」内核代码**；演讲给出了用 libbpf 把它改造成「用户可自定义、可加载、可编译」的目标与里程碑路线。
 
-![演讲标题页：Custom cgroup-BPF programs in systemd（Julia Kartseva，All Systems Go! 2019，柏林）](<assets/Custom cgroup-bpf programs in systemd/00005.webp>)
+![演讲标题页：Custom cgroup-BPF programs in systemd（Julia Kartseva，All Systems Go! 2019，柏林）](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00005.webp)
 
 ## 本讲要解决的核心问题（SCQA）
 
@@ -20,7 +20,7 @@
 >
 > [【跳转到 00:18】](https://www.youtube.com/watch?v=_U37CMiDFVs&t=18) / [【跳转到 00:43】](https://www.youtube.com/watch?v=_U37CMiDFVs&t=43)
 
-![演讲 Agenda：1) BPF 简介 2) systemd 中 BPF 的现状 3) 本工作的目标与里程碑 4) libbpf：动机与限制](<assets/Custom cgroup-bpf programs in systemd/00018.webp>)
+![演讲 Agenda：1) BPF 简介 2) systemd 中 BPF 的现状 3) 本工作的目标与里程碑 4) libbpf：动机与限制](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00018.webp)
 
 ---
 
@@ -38,7 +38,7 @@
 
 [【跳转到 01:38】](https://www.youtube.com/watch?v=_U37CMiDFVs&t=98)
 
-![BPF overview 幻灯片：一种用来从用户态安全地修改内核行为的技术](<assets/Custom cgroup-bpf programs in systemd/00098.webp>)
+![BPF overview 幻灯片：一种用来从用户态安全地修改内核行为的技术](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00098.webp)
 
 ### 1.1 一个 BPF 程序的「生命周期」
 
@@ -54,7 +54,7 @@
 
 **所以「引用计数（refcount）」是一切的要害：只要还有引用，程序就一直是活的。**
 
-![BPF 程序生命周期：0. 编译 → 1. 加载进内核（refcount=1）→ 2. 挂到 hook 点 → …](<assets/Custom cgroup-bpf programs in systemd/00173.webp>)
+![BPF 程序生命周期：0. 编译 → 1. 加载进内核（refcount=1）→ 2. 挂到 hook 点 → …](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00173.webp)
 
 ### 1.2 用户态 ↔ 内核态：字节码是怎么进去的
 
@@ -68,7 +68,7 @@
 4. **JIT 编译器**：校验器完成工作后，JIT 会**针对当前平台**把程序翻译成机器码；如果平台不被支持也没关系，还有**解释器**可以运行程序。
 5. 程序加载后会被**分配一个文件描述符**，并且**引用计数大于零**——呼应前面那句：只要有引用，程序就处于加载状态。
 
-![BPF 程序加载流程：用户态用 clang/LLVM 生成指令，进入内核后经 verifier 校验、JIT 编译](<assets/Custom cgroup-bpf programs in systemd/00223.webp>)
+![BPF 程序加载流程：用户态用 clang/LLVM 生成指令，进入内核后经 verifier 校验、JIT 编译](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00223.webp)
 
 ---
 
@@ -100,7 +100,7 @@ systemd 里目前有**两个子系统**在用 BPF：
 - **BPF 指令集有十一个寄存器**；
 - 但这样写**既不好维护、也不好读**——演讲人坦言，自己第一次看这段代码时，**特别感谢那位留下注释的人**（注释解释了那些寄存器其实是在当计数器用）。
 
-![systemd 中 BPF 程序的现状：一段手写的 BPF 微汇编（bpf_insn 指令序列）](<assets/Custom cgroup-bpf programs in systemd/00329.webp>)
+![systemd 中 BPF 程序的现状：一段手写的 BPF 微汇编（bpf_insn 指令序列）](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00329.webp)
 
 ### 2.3 已经有的少量自定义支持，以及它的天花板
 
@@ -129,7 +129,7 @@ systemd 里 BPF 的另一个重要部分是 **flows（流）**：现在这套方
 2. **过程要简单、方便**（从用户侧看）；
 3. **systemd 开发者不必为维护 BPF 基础设施头疼**——你不用真的深入去啃 BPF 指令集才能搞懂到底发生了什么。同时还要记住那段**照抄来的代码**，希望**新特性开箱即用**。
 
-![systemd 中 BPF 的目标：改善用户体验、让自定义 BPF 程序易于引入与维护](<assets/Custom cgroup-bpf programs in systemd/00540.webp>)
+![systemd 中 BPF 的目标：改善用户体验、让自定义 BPF 程序易于引入与维护](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00540.webp)
 
 ### 3.2 里程碑：用「生命周期」当刻度
 
@@ -140,7 +140,7 @@ systemd 里 BPF 的另一个重要部分是 **flows（流）**：现在这套方
 - **目前处于里程碑 #1：能挂载（attach）程序**；
 - **一个正在等 review 的 pull request** 把 BPF firewall 扩展到其它 BPF 挂载类型和 flows 上，它会**完成里程碑 #3**。
 
-![里程碑幻灯片：Milestone #0（过去）已有 BPF 指令与有限的 BPF 程序支持，后续里程碑逐步推进](<assets/Custom cgroup-bpf programs in systemd/00599.webp>)
+![里程碑幻灯片：Milestone #0（过去）已有 BPF 指令与有限的 BPF 程序支持，后续里程碑逐步推进](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00599.webp)
 
 [【跳转到 10:49】](https://www.youtube.com/watch?v=_U37CMiDFVs&t=649)
 
@@ -165,7 +165,7 @@ systemd 里 BPF 的另一个重要部分是 **flows（流）**：现在这套方
 
 另一个背景是 **BPF 在内核里是热门话题**，比如有个叫 **CO-RE** 的倡议，目标是 **「compile once, run everywhere（一次编译、到处运行）」**。你要做的是在**你自己平台上编译程序**，libbpf 会提供一定保证，让你的程序也能**加载到其它内核上**；而这个倡议的**基石就是 BTF**。
 
-![libbpf 的动机：以统一的方式、带着前置检查与错误处理来执行系统调用](<assets/Custom cgroup-bpf programs in systemd/00696.webp>)
+![libbpf 的动机：以统一的方式、带着前置检查与错误处理来执行系统调用](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00696.webp)
 
 [【跳转到 12:51】](https://www.youtube.com/watch?v=_U37CMiDFVs&t=771)
 
@@ -182,7 +182,7 @@ systemd 里 BPF 的另一个重要部分是 **flows（流）**：现在这套方
 
 但 **systemd 有一套相当复杂的测试**，submodule 方案**行不通**——因为我们**不得不去改测试**。那只是个权宜之计、周期太长，所以**用打好的包才是更好的做法**。
 
-![libbpf 当前的限制：git submodule（PR12151）暴露出可测试性方面的担忧](<assets/Custom cgroup-bpf programs in systemd/00796.webp>)
+![libbpf 当前的限制：git submodule（PR12151）暴露出可测试性方面的担忧](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00796.webp)
 
 [【跳转到 14:06】](https://www.youtube.com/watch?v=_U37CMiDFVs&t=846)
 
@@ -200,7 +200,7 @@ systemd 里 BPF 的另一个重要部分是 **flows（流）**：现在这套方
 2. 把一些**内核自测移植**进 systemd 自己的测试基础设施；
 3. **打包改为从镜像源**：目前至少 Debian 和 Fedora 都有包，但它们是**直接从内核源码构建**的；如果要做测试，希望它们**从镜像源构建**。
 
-![libbpf 进一步工作：用 QEMU 测试与旧内核的向后兼容性，并移植内核自测](<assets/Custom cgroup-bpf programs in systemd/00896.webp>)
+![libbpf 进一步工作：用 QEMU 测试与旧内核的向后兼容性，并移植内核自测](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00896.webp)
 
 ---
 
@@ -221,7 +221,7 @@ systemd 里 BPF 的另一个重要部分是 **flows（流）**：现在这套方
 
 另外两个好消息：**BPF 支持最近刚被加入 GCC**（非常棒）；虽然不是说马上就能上手，LLVM 那边可能还要再放一阵子，但值得记在心里。
 
-![bytecode vs restricted C source：字节码需手工由 C 程序构建、并在仓库中同时存大端与小端](<assets/Custom cgroup-bpf programs in systemd/00971.webp>)
+![bytecode vs restricted C source：字节码需手工由 C 程序构建、并在仓库中同时存大端与小端](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/00971.webp)
 
 ### 5.1 实现细节：一条 Meson 规则搞定
 
@@ -263,7 +263,7 @@ systemd 里 BPF 的另一个重要部分是 **flows（流）**：现在这套方
 
 回答：**会**。没有严格的截止日期，但目标是**摆脱 BPF 微汇编**，**重写 firewall 和 devices** 那两部分。（现场回应：「那太好了，很期待。」）
 
-![参考资料：BPF 对象生命周期与 BPF/XDP 参考指南等](<assets/Custom cgroup-bpf programs in systemd/01156.webp>)
+![参考资料：BPF 对象生命周期与 BPF/XDP 参考指南等](assets/Custom%20cgroup-bpf%20programs%20in%20systemd/01156.webp)
 
 ---
 

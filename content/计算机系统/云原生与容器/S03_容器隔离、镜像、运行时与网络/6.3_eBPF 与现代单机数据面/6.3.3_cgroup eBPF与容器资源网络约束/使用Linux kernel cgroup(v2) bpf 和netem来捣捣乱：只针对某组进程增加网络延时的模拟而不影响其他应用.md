@@ -30,7 +30,7 @@
 
 那个「特殊分支」里用到的延时模块，就是内核里的 **netem**——它是网络包调度管理的一个功能模块，本身实现挺复杂。所以想加延时的时候，与其自己从头实现一个，不如直接复用 netem：你只要把包导到它这儿，它就替你产生延时、丢包之类的现象。
 
-![qdisc 树的基本结构：根节点下挂着 class，其中产生延时的那一支再挂 netem，最终连到网卡驱动](<assets/使用Linux kernel cgroup(v2) bpf 和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00055.webp>)
+![qdisc 树的基本结构：根节点下挂着 class，其中产生延时的那一支再挂 netem，最终连到网卡驱动](assets/使用Linux%20kernel%20cgroup%28v2%29%20bpf%20和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00055.webp)
 
 ---
 
@@ -91,7 +91,7 @@
 
 [【跳转到 05:55】](https://www.bilibili.com/video/BV1C14y187Wx/?t=355)
 
-![改动后的示意：socket destroy/socket create 一侧写入 1:ffff，包一路向下进入 classid 为 1:ffff 的延时 class](<assets/使用Linux kernel cgroup(v2) bpf 和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00305.webp>)
+![改动后的示意：socket destroy/socket create 一侧写入 1:ffff，包一路向下进入 classid 为 1:ffff 的延时 class](assets/使用Linux%20kernel%20cgroup%28v2%29%20bpf%20和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00305.webp)
 
 ---
 
@@ -114,7 +114,7 @@
 
 > **返回值的小细节**：`return 1` 表示这个操作成功，`return 0` 好像是表示拒绝。（对 `cgroup/sock_create` 这类程序而言，返回值决定放行还是拒绝。）
 
-![cgroup BPF 程序源码：挂在 socket_create 上，修改 socket 的 priority](<assets/使用Linux kernel cgroup(v2) bpf 和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00406.webp>)
+![cgroup BPF 程序源码：挂在 socket_create 上，修改 socket 的 priority](assets/使用Linux%20kernel%20cgroup%28v2%29%20bpf%20和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00406.webp)
 
 ---
 
@@ -139,7 +139,7 @@
 
 挂好之后，这个 cgroup 里就常驻了我的 BPF 程序：**任何在这个 cgroup 内的应用，创建 socket 时都会调用我的程序，从而把 priority 改成一个固定的值**（测试嘛，就写死一个固定值）。
 
-![用 tc 脚本加载 BPF 程序、pin 到文件系统、创建 cgroup 并把程序挂上去的过程](<assets/使用Linux kernel cgroup(v2) bpf 和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00664.webp>)
+![用 tc 脚本加载 BPF 程序、pin 到文件系统、创建 cgroup 并把程序挂上去的过程](assets/使用Linux%20kernel%20cgroup%28v2%29%20bpf%20和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00664.webp)
 
 ---
 
@@ -176,7 +176,7 @@
 
 关键细节：**产生 delay 的那个 class，它的 classid 要设置成 `1:ffff`**，跟 socket_create 里写的值保持一致；然后再往这个 class 里挂上 netem（它负责帮你产生 delay、丢包之类的模拟现象）。这样，这棵树就构建起来了。
 
-![最终完整拓扑：根 qdisc 下分出「延时 class（classid = 1:ffff）」与「正常 class」，延时 class 上挂 netem，最终接到 NIC Driver](<assets/使用Linux kernel cgroup(v2) bpf 和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00887.webp>)
+![最终完整拓扑：根 qdisc 下分出「延时 class（classid = 1:ffff）」与「正常 class」，延时 class 上挂 netem，最终接到 NIC Driver](assets/使用Linux%20kernel%20cgroup%28v2%29%20bpf%20和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00887.webp)
 
 ### 6.4 验证：cgroup 内变慢，cgroup 外不变
 
@@ -191,7 +191,7 @@
 
 这样就实现了「针对某个应用产生 delay」：这个 cgroup 里所有应用只要走这张网卡，就都会产生这类 delay。
 
-![ping 对照：cgroup 外的应用正常，cgroup 内的应用出现明显延时](<assets/使用Linux kernel cgroup(v2) bpf 和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00796.webp>)
+![ping 对照：cgroup 外的应用正常，cgroup 内的应用出现明显延时](assets/使用Linux%20kernel%20cgroup%28v2%29%20bpf%20和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00796.webp)
 
 ### 6.5 一个必须记住的限制：延时挂在「网卡」上
 
@@ -212,7 +212,7 @@
 
 最后要留意一点：**只影响了这一个 cgroup 里的所有应用，其它应用依然走正常路径，并没有产生 delay**；不过它们可能会有**一点点额外的消耗**，因为本来其实不需要走这棵树，现在稍微走了一下这棵树，会有一点开销。
 
-![两个 bash 跑同样的事、只是分属不同 cgroup，分别用 curl 访问时延时表现完全不同](<assets/使用Linux kernel cgroup(v2) bpf 和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00921.webp>)
+![两个 bash 跑同样的事、只是分属不同 cgroup，分别用 curl 访问时延时表现完全不同](assets/使用Linux%20kernel%20cgroup%28v2%29%20bpf%20和netem来捣捣乱：只针对某组进程增加网络延时的模拟而不影响其他应用/00921.webp)
 
 ---
 

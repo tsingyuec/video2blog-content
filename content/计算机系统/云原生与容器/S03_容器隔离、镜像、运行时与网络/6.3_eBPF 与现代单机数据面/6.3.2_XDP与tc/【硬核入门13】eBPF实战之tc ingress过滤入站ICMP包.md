@@ -64,7 +64,7 @@ TC（traffic control）是**内核的流量控制子系统**。eBPF 的 TC 程�
 
 [【跳转到 04:06】](https://www.bilibili.com/video/BV1sMs6ziE1b/?t=246) / [【跳转到 05:42】](https://www.bilibili.com/video/BV1sMs6ziE1b/?t=342)
 
-![数据包的层次结构：以太网头 → IP 头 → ICMP，解析就是把指针逐层往后挪](assets/【硬核入门13】eBPF实战之tc ingress过滤入站ICMP包/00287.webp)
+![数据包的层次结构：以太网头 → IP 头 → ICMP，解析就是把指针逐层往后挪](assets/【硬核入门13】eBPF实战之tc%20ingress过滤入站ICMP包/00287.webp)
 
 **怎么识别 ICMP？** 关键在 IP 头的 **`protocol` 字段**：**`protocol == 1` 就是 ICMP**。
 
@@ -150,7 +150,7 @@ bpf_printk("ICMP %pI4 -> %pI4", &ip->saddr, &ip->daddr);
 
 [【跳转到 20:14】](https://www.bilibili.com/video/BV1sMs6ziE1b/?t=1214) / [【跳转到 20:44】](https://www.bilibili.com/video/BV1sMs6ziE1b/?t=1244) / [【跳转到 21:09】](https://www.bilibili.com/video/BV1sMs6ziE1b/?t=1269)
 
-![为其它项目写 tc_ingress_filter 用户态代码：先声明 bpf_tc_hook，最后多一步 create + attach](assets/【硬核入门13】eBPF实战之tc ingress过滤入站ICMP包/01214.webp)
+![为其它项目写 tc_ingress_filter 用户态代码：先声明 bpf_tc_hook，最后多一步 create + attach](assets/【硬核入门13】eBPF实战之tc%20ingress过滤入站ICMP包/01214.webp)
 
 ---
 
@@ -164,7 +164,7 @@ bpf_printk("ICMP %pI4 -> %pI4", &ip->saddr, &ip->daddr);
 
 [【跳转到 22:30】](https://www.bilibili.com/video/BV1sMs6ziE1b/?t=1350) / [【跳转到 27:31】](https://www.bilibili.com/video/BV1sMs6ziE1b/?t=1651) / [【跳转到 25:42】](https://www.bilibili.com/video/BV1sMs6ziE1b/?t=1542)
 
-![验证器报错 invalid access to packet：读数据包前必须先做越界检查](assets/【硬核入门13】eBPF实战之tc ingress过滤入站ICMP包/01542.webp)
+![验证器报错 invalid access to packet：读数据包前必须先做越界检查](assets/【硬核入门13】eBPF实战之tc%20ingress过滤入站ICMP包/01542.webp)
 
 > **用 AI 辅助排错**：作者也把出错信息交给 Claude Code 帮忙排查，并强调一条学习原则——**先自己优先解决，解决不了再让 AI 辅助排查**，而不是一上来就全靠 AI。
 

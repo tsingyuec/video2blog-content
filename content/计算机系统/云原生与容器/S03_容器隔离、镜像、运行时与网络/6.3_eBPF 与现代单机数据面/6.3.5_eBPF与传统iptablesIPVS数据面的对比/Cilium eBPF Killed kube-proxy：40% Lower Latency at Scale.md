@@ -20,7 +20,7 @@
 
 先看 kube-proxy 是怎么干活的。集群里**每个 Service 都会拿到一个虚拟 IP（VIP）**。数据包进来后先撞上 **`KUBE-SERVICES` 链**，它是整个转发逻辑的入口，**集群里每一个 Service 端口都会在这里占一条规则**。
 
-![kube-proxy 数据面入口：每个 Service 端口都会在 KUBE-SERVICES 链里占一条规则](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00023.webp)
+![kube-proxy 数据面入口：每个 Service 端口都会在 KUBE-SERVICES 链里占一条规则](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00023.webp)
 
 [【跳转到 00:23】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=23)
 
@@ -30,13 +30,13 @@
 2. `KUBE-SVC` 链相当于一个**软件负载均衡器**，规则按该 Service 的每个后端 Pod 端点逐条列出；
 3. 最后由 **`KUBE-SEP` 链执行 DNAT**，把目的 IP 从 Service 的虚拟 IP 改写成真正的后端 Pod IP。
 
-![kube-proxy 的三条链：KUBE-SERVICES 是入口、KUBE-SVC 做后端挑选、KUBE-SEP 执行 DNAT](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00048.webp)
+![kube-proxy 的三条链：KUBE-SERVICES 是入口、KUBE-SVC 做后端挑选、KUBE-SEP 执行 DNAT](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00048.webp)
 
 [【跳转到 00:48】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=48)
 
 **问题就出在「入口是一条从上到下的清单」**。在真实集群上，`KUBE-SERVICES` 链里每条 Service 端口都占一行，**内核每建立一个新连接，都要从清单顶端往下逐条比对，直到命中为止**。量级很容易算：**1,000 个 Service、平均每个 10 个 Pod，NAT 表里就有约 10,000 条规则**，而每个包都要顺着走一遍。
 
-![真实集群里的 KUBE-SERVICES 链：每个连接都要从上往下线性比对](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00073.webp)
+![真实集群里的 KUBE-SERVICES 链：每个连接都要从上往下线性比对](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00073.webp)
 
 [【跳转到 01:13】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=73)
 
@@ -56,7 +56,7 @@
 
 这就是 Cilium 登场的背景。Cilium 是一个**基于 eBPF 的 CNI**，可以**完全替代 kube-proxy**——提供**同样的 Service 抽象，却是一条完全不同的数据面**。它要求 **内核 5.10 或更高**，以及 **Kubernetes 1.31 到 1.34**。
 
-![规模悬崖：超过 1,000 个 Service 后 iptables 线性查找的代价开始显现，Netflix、AWS 都以此为分界](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00126.webp)
+![规模悬崖：超过 1,000 个 Service 后 iptables 线性查找的代价开始显现，Netflix、AWS 都以此为分界](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00126.webp)
 
 [【跳转到 02:06】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=126)
 
@@ -70,7 +70,7 @@ Cilium 不用 iptables 链，改用 **eBPF 哈希表——也就是 BPF map**。
 
 一个关键细节：**查找函数返回的是「指向内核内存中 map 值」的指针，而不是一份拷贝**——这意味着**零分配、零拷贝，只是拿了一个指针去引用**。
 
-![Cilium 用 eBPF 哈希表（BPF map）替代 iptables 链，查找返回指向值的指针、零拷贝](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00150.webp)
+![Cilium 用 eBPF 哈希表（BPF map）替代 iptables 链，查找返回指向值的指针、零拷贝](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00150.webp)
 
 [【跳转到 02:30】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=150)
 
@@ -86,7 +86,7 @@ Cilium 不用 iptables 链，改用 **eBPF 哈希表——也就是 BPF map**。
 
 eBPF 的延迟甚至比 IPVS 还低——**2 到 5 微秒**就完成了整个查找与改写操作。
 
-![实测延迟对照：iptables 50–200µs、IPVS 5–20µs、eBPF 2–5µs](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00200.webp)
+![实测延迟对照：iptables 50–200µs、IPVS 5–20µs、eBPF 2–5µs](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00200.webp)
 
 [【跳转到 03:20】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=200)
 
@@ -100,7 +100,7 @@ Cilium 真正的机制，是把 eBPF 程序**挂到系统调用钩子上**，具
 
 当应用调用 `connect` 去连一个 Service VIP 时，**内核会在 TCP/IP 协议栈合成数据包报头之前，先执行 eBPF 程序**。`connect` 和 `sendmsg` 这两个 BPF 程序会对 **socket 地址结构（socket address structure）做一次正向转换**，这次转换是**基于 socket 结构体**完成的——**这里根本没有「基于包的 NAT」**。
 
-![Cilium 把 eBPF 挂在 connect4 / connect6 / sendmsg 系统调用钩子上，在协议栈生成报头之前改写 socket 地址](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00217.webp)
+![Cilium 把 eBPF 挂在 connect4 / connect6 / sendmsg 系统调用钩子上，在协议栈生成报头之前改写 socket 地址](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00217.webp)
 
 [【跳转到 03:37】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=217)
 
@@ -108,7 +108,7 @@ Cilium 真正的机制，是把 eBPF 程序**挂到系统调用钩子上**，具
 
 对于**同节点内的 Pod↔Pod 流量**，连接建立时间**近乎为零**：因为内核**压根没构造数据包，它只是把两个 socket 直接连起来**。
 
-![socket 在报头生成前就被改写：同节点 Pod↔Pod 流量内核无需构造数据包，直接连两个 socket](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00242.webp)
+![socket 在报头生成前就被改写：同节点 Pod↔Pod 流量内核无需构造数据包，直接连两个 socket](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00242.webp)
 
 [【跳转到 04:02】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=242)
 
@@ -116,7 +116,7 @@ Cilium 真正的机制，是把 eBPF 程序**挂到系统调用钩子上**，具
 
 这套 **socket 级负载均衡（socket LB）依赖 cgroup v2**。当时的现实是 **K8S 的 Pod 还在用 cgroup v1**，但 **Cilium 会自行挂载 cgroup v2，并把 BPF 程序挂到根 cgroup（root cgroup）上**——两者**混合使用也能很好地工作**。
 
-![socket LB 依赖 cgroup v2；K8S Pod 仍用 cgroup v1 时，Cilium 会自行挂载 cgroup v2 并把程序挂到根 cgroup](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00267.webp)
+![socket LB 依赖 cgroup v2；K8S Pod 仍用 cgroup v1 时，Cilium 会自行挂载 cgroup v2 并把程序挂到根 cgroup](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00267.webp)
 
 [【跳转到 04:27】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=267)
 
@@ -128,7 +128,7 @@ Cilium 真正的机制，是把 eBPF 程序**挂到系统调用钩子上**，具
 
 装完后要**验证替代是否生效**：你希望看到 **kube-proxy replacement 已启用、且 mode 为 `strict`**。**strict 模式意味着不再回退到 kube-proxy，是纯 eBPF**。
 
-![安装：一个 Helm 开关启用 kube-proxy 替代，验证时需看到 replacement 已启用且 mode 为 strict](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00292.webp)
+![安装：一个 Helm 开关启用 kube-proxy 替代，验证时需看到 replacement 已启用且 mode 为 strict](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00292.webp)
 
 [【跳转到 04:52】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=292)
 
@@ -138,7 +138,7 @@ Cilium 真正的机制，是把 eBPF 程序**挂到系统调用钩子上**，具
 - 如果是在**尚未承载用户流量的新节点或新集群**上部署，则不存在连接中断问题。
 - **安全的迁移路径是滚动替换节点**：**drain（驱逐）→ delete（删除）→ 用 Cilium 重新拉起节点**。等 Cilium 跑起来后，**删掉 kube-proxy 的 DaemonSet、删掉 kube-proxy 的 ConfigMap，再清理每个节点上的 iptables 规则**。
 
-![迁移窗口：kube-proxy 的 iptables NAT 与 Cilium 的 eBPF NAT 无法在活跃流量上共存，只能滚动替换节点](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00317.webp)
+![迁移窗口：kube-proxy 的 iptables NAT 与 Cilium 的 eBPF NAT 无法在活跃流量上共存，只能滚动替换节点](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00317.webp)
 
 [【跳转到 05:17】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=317)
 
@@ -157,7 +157,7 @@ Cilium 真正的机制，是把 eBPF 程序**挂到系统调用钩子上**，具
 
 DSR 配合 **IPIP 封装**工作时：把**发往后端的负载均衡流量封装进一条 IPIP 隧道**。**原始的客户端数据包变成内层载荷（inner payload）**；Cilium **加一个外层 IP 头**，其**源地址是负载均衡节点、目的地址是选定的后端 Pod IP**。封装后的数据包被路由到承载该 Pod 的节点，由**该节点上的 Cilium 终止隧道并执行 DNAT**。
 
-![DSR + IPIP：原始客户端包作为内层载荷，外层是负载均衡节点到后端 Pod 的 IP 头，后端节点终止隧道并 DNAT](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00389.webp)
+![DSR + IPIP：原始客户端包作为内层载荷，外层是负载均衡节点到后端 Pod 的 IP 头，后端节点终止隧道并 DNAT](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00389.webp)
 
 [【跳转到 06:29】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=389)
 
@@ -175,7 +175,7 @@ DSR **并非没有代价**：**带 IP options 的 DSR 要求 Cilium 以 native r
 
 而**dispatch 模式决定隧道怎么建**：可选 **IP options、IPIP（IP-in-IP 封装）或 Geneve（隧道封装）**，其中 **IPIP 在云环境中是最稳妥的选择**。
 
-![DSR 的坑：需要 native routing 模式，部分公云会丢弃 IP options；IPIP 是云环境里最稳妥的 dispatch 方式](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00462.webp)
+![DSR 的坑：需要 native routing 模式，部分公云会丢弃 IP options；IPIP 是云环境里最稳妥的 dispatch 方式](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00462.webp)
 
 [【跳转到 07:42】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=462)
 
@@ -191,13 +191,13 @@ DSR **并非没有代价**：**带 IP options 的 DSR 要求 Cilium 以 native r
 - 对**短连接**（Serverless 场景常见），**Cilium 的 eBPF 连接跟踪要比 Calico 的 iptables 连接跟踪好 40% 以上**；
 - 相比标准隧道，**P99 延迟下降 30% – 40%，从约 1.2 毫秒降到 0.8 毫秒**。
 
-![CNCF 10,000 Service 集群基准：内核网络 CPU 降 40–60%、P99 延迟降 30–50%，短连接 conntrack 比 Calico 的 iptables 好 40%+](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00414.webp)
+![CNCF 10,000 Service 集群基准：内核网络 CPU 降 40–60%、P99 延迟降 30–50%，短连接 conntrack 比 Calico 的 iptables 好 40%+](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00414.webp)
 
 [【跳转到 06:54】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=414)
 
 还有一个**「反直觉」的结论**：在**现代内核**上，**eBPF 方案甚至能超过「节点到节点」的基线性能**——尽管它多做了不少事（把包转发进容器的网络命名空间、做策略执行）。原因是：**eBPF 有能力绕过节点上的 iptables 层，而那条「节点到节点的基线路径」反而还要走一遍 iptables**。
 
-![反直觉的结论：现代内核上 eBPF 方案能超过「节点到节点」基线，因为基线反而还要过一遍 iptables](assets/Cilium eBPF Killed kube-proxy：40% Lower Latency at Scale/00462.webp)
+![反直觉的结论：现代内核上 eBPF 方案能超过「节点到节点」基线，因为基线反而还要过一遍 iptables](assets/Cilium%20eBPF%20Killed%20kube-proxy：40%%20Lower%20Latency%20at%20Scale/00462.webp)
 
 [【跳转到 07:42】](https://www.youtube.com/watch?v=YeekZ5y_2ps&t=462)
 

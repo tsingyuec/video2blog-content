@@ -14,7 +14,7 @@
 
 [【跳转到 00:00】](https://www.bilibili.com/video/BV1AcH16dEon/?t=0)
 
-![全片路线图：本期分四步走——Kubernetes 的网络模型要求、iptables 与 eBPF 的分叉、Pod 身份如何落到内核、以及组件与代码两张地图](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00030.webp)
+![全片路线图：本期分四步走——Kubernetes 的网络模型要求、iptables 与 eBPF 的分叉、Pod 身份如何落到内核、以及组件与代码两张地图](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00030.webp)
 
 Cilium 是云原生世界里最重要的网络方案之一，也是 CNCF 的毕业项目，GKE、EKS、AKS 这些托管 Kubernetes 服务都把它当作默认或核心的网络与安全底座。它和 Calico、Flannel 有一个根本区别：**Cilium 不在 iptables 里堆规则，而是把网络、安全、可观测三件事全部编译进内核里跑**，这也让它的源码体量惊人——光 Go 代码就有约 91 万行，另加 300 多个 eBPF 的 C 文件。
 
@@ -32,7 +32,7 @@ Cilium 是云原生世界里最重要的网络方案之一，也是 CNCF 的毕�
 
 关键在这三条**只规定了结果，没规定手段**：用什么封装、用什么转发、要不要经过用户态，Kubernetes 一概不管。这个「空白」正是所有 CNI 方案分道扬镳的地方，也是后面每一次对比的基准。
 
-![Kubernetes 网络的三条硬要求：Pod 独立 IP、Pod 间不经 NAT 直接通信、节点间知道彼此的 Pod 网段](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00080.webp)
+![Kubernetes 网络的三条硬要求：Pod 独立 IP、Pod 间不经 NAT 直接通信、节点间知道彼此的 Pod 网段](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00080.webp)
 
 ---
 
@@ -55,7 +55,7 @@ Cilium 是云原生世界里最重要的网络方案之一，也是 CNCF 的毕�
 - 匹配的依据是**身份，不是 IP**；
 - 而且能一路做到**第七层**，HTTP、gRPC 都认可；观测也是**原生内置**的。
 
-![两条路线的分叉：传统方案把规则堆进 iptables、逐个遍历匹配 IP/端口；Cilium 把逻辑编译进 eBPF、用哈希表按身份匹配](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00105.webp)
+![两条路线的分叉：传统方案把规则堆进 iptables、逐个遍历匹配 IP/端口；Cilium 把逻辑编译进 eBPF、用哈希表按身份匹配](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00105.webp)
 
 ### 2.1 eBPF 到底是什么
 
@@ -84,7 +84,7 @@ Cilium 干脆**不用 IP 当身份**，它把一组标签集合映射成一个�
 
 这带来的直接好处是：**Pod 重建了、IP 漂移了，身份没变，策略就不用重写。** 这就是 Cilium 跟所有以 IP 为中心的方案最根本的分野。
 
-![安全身份 identity：把一组标签集合映射成一个数字（如 1..2³²−1），由 ipcache 负责 IP 到身份的翻译，策略匹配只比身份不比 IP](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00202.webp)
+![安全身份 identity：把一组标签集合映射成一个数字（如 1..2³²−1），由 ipcache 负责 IP 到身份的翻译，策略匹配只比身份不比 IP](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00202.webp)
 
 ---
 
@@ -103,7 +103,7 @@ Cilium 的 eBPF 程序不是一个「大文件」，而是**按挂载点分成�
 | `bpf_sock` | socket 层 | 在应用发起连接时就拦截，做 socket 层负载均衡 |
 | `bpf_wireguard` | — | 负责节点之间的流量加密 |
 
-![数据面「六大件」：bpf_xdp / bpf_host / bpf_lxc / bpf_overlay / bpf_sock / bpf_wireguard 分别挂在不同的内核钩子上](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00236.webp)
+![数据面「六大件」：bpf_xdp / bpf_host / bpf_lxc / bpf_overlay / bpf_sock / bpf_wireguard 分别挂在不同的内核钩子上](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00236.webp)
 
 ### 3.1 一个 agent，吃掉四件事
 
@@ -118,7 +118,7 @@ Cilium 的 agent 吃掉四件事：**网络、安全、可观测、服务网格*
 
 **关键不在于功能多，而在于它们共享同一份身份、同一套数据面**——所以策略写完，四件事自动对齐。这是理解 Cilium 为什么能同时干这么多活的钥匙。
 
-![一个 agent 合并了网络、安全、可观测、服务网格四件事，共享同一份身份与数据面](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00290.webp)
+![一个 agent 合并了网络、安全、可观测、服务网格四件事，共享同一份身份与数据面](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00290.webp)
 
 ---
 
@@ -137,7 +137,7 @@ Cilium 的 agent 吃掉四件事：**网络、安全、可观测、服务网格*
 
 要特别注意：**第三步是可选的**——切到 **native routing 模式**就完全不封装、直接靠路由。
 
-![一个包的旅程：从 A 节点 Pod 出发（bpf_lxc → bpf_host → VXLAN 封装），经物理网到 B 节点（bpf_overlay 解封装 → bpf_lxc 入向策略），进入目标 Pod](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00331.webp)
+![一个包的旅程：从 A 节点 Pod 出发（bpf_lxc → bpf_host → VXLAN 封装），经物理网到 B 节点（bpf_overlay 解封装 → bpf_lxc 入向策略），进入目标 Pod](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00331.webp)
 
 ### 4.1 第二条主线：身份从标签落到内核数据面
 
@@ -153,7 +153,7 @@ Cilium 的 agent 吃掉四件事：**网络、安全、可观测、服务网格*
 
 整条链路的因果关系很干净：**地址变了，identity 不变；identity 不变，策略就不用重写。** 这也解释了为什么 Cilium 在 Pod 频繁重建的环境里依然稳。
 
-![身份链路：Pod label → 确定性标签集合 → identity allocator 映射为数字 → ipcache 关联 IP 与 identity → 数据面策略只比 identity](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00405.webp)
+![身份链路：Pod label → 确定性标签集合 → identity allocator 映射为数字 → ipcache 关联 IP 与 identity → 数据面策略只比 identity](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00405.webp)
 
 ---
 
@@ -205,7 +205,7 @@ Cilium 的 agent 吃掉四件事：**网络、安全、可观测、服务网格*
 | ClusterMesh | ~2.1 万行 | 多集群 |
 | `daemon` / `operator` | — | 两大进程的入口，整个程序的启动点 |
 
-![Cilium 的代码地图：bpf 目录（六大件 + 库头文件）、pkg/datapath、policy、hubble、Envoy、loadbalancer、BGP、ClusterMesh，以及 daemon/operator 两个进程入口](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00546.webp)
+![Cilium 的代码地图：bpf 目录（六大件 + 库头文件）、pkg/datapath、policy、hubble、Envoy、loadbalancer、BGP、ClusterMesh，以及 daemon/operator 两个进程入口](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00546.webp)
 
 ### 6.1 第一季的路线
 
@@ -242,7 +242,7 @@ Cilium 换来的东西很实在：
 
 所以记住这句话：**Cilium 复杂，是因为它把要求定得高，你拿到这套能力也要接受它的门槛。**
 
-![Cilium 的取舍：查表代替遍历、身份加七层策略、可观测天生内置、逻辑在内核跑；代价是内核版本要求高、调试门槛高、现场编译、用户态工具看不全](assets/01·Cilium 是什么？把网络、安全、可观测全塞进 eBPF｜Cilium 源码深读/00640.webp)
+![Cilium 的取舍：查表代替遍历、身份加七层策略、可观测天生内置、逻辑在内核跑；代价是内核版本要求高、调试门槛高、现场编译、用户态工具看不全](assets/01·Cilium%20是什么？把网络、安全、可观测全塞进%20eBPF｜Cilium%20源码深读/00640.webp)
 
 ---
 

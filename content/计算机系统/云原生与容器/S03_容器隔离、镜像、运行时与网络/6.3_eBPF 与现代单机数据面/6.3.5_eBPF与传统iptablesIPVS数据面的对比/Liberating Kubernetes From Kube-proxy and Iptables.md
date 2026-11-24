@@ -27,7 +27,7 @@
 
 接下来是最关键的一幕：他去看这台机器上的 iptables 规则，发现**一条都没有**；于是他尝试**手动加一条 iptables 规则**（比如 `iptables -A FORWARD -j DROP`），结果发现**系统里连 iptables 模块都没装**。再查内核配置，发现 **`CONFIG_NETFILTER` 是未设置（not set）**——也就是说，**netfilter 被直接从内核里编译掉了**。
 
-![演示：机器上没有任何 iptables 规则，连 iptables 模块都没装，内核里 CONFIG_NETFILTER 未设置](assets/Liberating Kubernetes From Kube-proxy and Iptables/00060.webp)
+![演示：机器上没有任何 iptables 规则，连 iptables 模块都没装，内核里 CONFIG_NETFILTER 未设置](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00060.webp)
 
 [【跳转到 01:00】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=60)
 
@@ -43,7 +43,7 @@
 
 更值得注意的是：**那个测试集群其实并没有多少 iptables 规则**——它只有一些 **kube-proxy 默认安装的规则**。而且当规则开始**匹配你的流量**时，情况还会更糟。
 
-![内核剖析：IPVLAN 压力测试中，大量包处理时间耗在 iptables / netfilter 模块里](assets/Liberating Kubernetes From Kube-proxy and Iptables/00216.webp)
+![内核剖析：IPVLAN 压力测试中，大量包处理时间耗在 iptables / netfilter 模块里](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00216.webp)
 
 [【跳转到 03:36】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=216)
 
@@ -51,7 +51,7 @@
 
 第二个理由是 **netfilter / iptables 的可靠性**。**很多人可能都踩过这个坑：kube-dns 回一个 DNS 请求要花 5 秒**。这个问题的**元凶是 netfilter 里的一些竞态条件（race condition）**。
 
-![kube-dns 回包要 5 秒：根因是 netfilter 里的竞态条件](assets/Liberating Kubernetes From Kube-proxy and Iptables/00283.webp)
+![kube-dns 回包要 5 秒：根因是 netfilter 里的竞态条件](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00283.webp)
 
 [【跳转到 04:43】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=283)
 
@@ -66,7 +66,7 @@
 
 补丁现在应该已经可用了，但**让它真正可用花了很久**。更有意思的是，主讲人「考古」这个问题时发现：**这个 bug 最早被提及，是在差不多十年前**。
 
-![kube-dns 5 秒之痛：netfilter 的竞态条件，从 2008 年发现根因、2018 年提交补丁到 2019 年合并，拖了近十年](assets/Liberating Kubernetes From Kube-proxy and Iptables/00324.webp)
+![kube-dns 5 秒之痛：netfilter 的竞态条件，从 2008 年发现根因、2018 年提交补丁到 2019 年合并，拖了近十年](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00324.webp)
 
 [【跳转到 05:24】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=324)
 
@@ -79,7 +79,7 @@
 
 更添乱的是：**kube-proxy 会周期性地重置 iptables 的包计数器**——所以「祝你好运」吧。
 
-![可调试性之痛：仅 100 个 Service 生成的 iptables 规则，一张幻灯片都放不下，且 kube-proxy 会周期性重置计数器](assets/Liberating Kubernetes From Kube-proxy and Iptables/00401.webp)
+![可调试性之痛：仅 100 个 Service 生成的 iptables 规则，一张幻灯片都放不下，且 kube-proxy 会周期性重置计数器](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00401.webp)
 
 [【跳转到 06:41】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=401)
 
@@ -95,7 +95,7 @@
 
 **延迟就是从这一遍遍的链遍历中累积出来的。**
 
-![一个包在内核里的处理步骤：分配 skb → 流量控制 → 多条 iptables 链 → FIB 路由查找 → 再进另一个网络命名空间又走一遍](assets/Liberating Kubernetes From Kube-proxy and Iptables/00459.webp)
+![一个包在内核里的处理步骤：分配 skb → 流量控制 → 多条 iptables 链 → FIB 路由查找 → 再进另一个网络命名空间又走一遍](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00459.webp)
 
 [【跳转到 07:39】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=459)
 
@@ -110,7 +110,7 @@
 3. 在这条链里进行**端点选择**：**按概率**挑中 nginx-1 或 nginx-2。
 4. 最后再执行 **DNAT**，把目的 IP 从 **ClusterIP 改成运行 nginx 的 Pod 的真实 IP**。
 
-![kube-proxy 的转发路径：通用规则把流量导入 KUBE-SERVICES 匹配 VIP → 进入 KUBE-SVC-nginx 选端点 → DNAT 改成 Pod IP](assets/Liberating Kubernetes From Kube-proxy and Iptables/00555.webp)
+![kube-proxy 的转发路径：通用规则把流量导入 KUBE-SERVICES 匹配 VIP → 进入 KUBE-SVC-nginx 选端点 → DNAT 改成 Pod IP](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00555.webp)
 
 [【跳转到 09:15】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=555)
 
@@ -118,7 +118,7 @@
 
 **能——靠的就是 eBPF。** 另一种思路是**直接改内核、做一些 Kubernetes 专属的改动**，但主讲人认为**这条路走不通**：**内核社区不会接受这种补丁**。你也可以自己维护一份私有的内核版本，但**他不推荐这么做**。
 
-![eBPF 提供的能力：让包从 TC ingress 直接跳到 TC egress，跳过中间的 netfilter](assets/Liberating Kubernetes From Kube-proxy and Iptables/00655.webp)
+![eBPF 提供的能力：让包从 TC ingress 直接跳到 TC egress，跳过中间的 netfilter](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00655.webp)
 
 [【跳转到 10:55】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=655)
 
@@ -136,13 +136,13 @@
 
 **eBPF 程序的执行是事件驱动的**。举个例子：把一个程序挂在 **`eth0` 设备的 TC ingress** 上，那么当这个网络接口**收到一个包**时，这段程序就会被执行。
 
-![eBPF：内核里的虚拟机，C 子集 → Clang 编译 → 内核验证 → JIT → BPF map 存状态，程序事件驱动执行](assets/Liberating Kubernetes From Kube-proxy and Iptables/00705.webp)
+![eBPF：内核里的虚拟机，C 子集 → Clang 编译 → 内核验证 → JIT → BPF map 存状态，程序事件驱动执行](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00705.webp)
 
 [【跳转到 11:45】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=705)
 
 **一个最小的例子**（用英文伪代码写）：程序检查 TCP 包的**目的端口是否等于 80（HTTP）**——如果是，就把包**重定向到 Pod 的 `lxc0` 接口**；如果不是，就**丢弃**。就这么简单。
 
-![最小例子：TC ingress 上的程序，若 TCP 目的端口等于 80 就把包重定向到 Pod 的 lxc0 接口，否则丢弃](assets/Liberating Kubernetes From Kube-proxy and Iptables/00755.webp)
+![最小例子：TC ingress 上的程序，若 TCP 目的端口等于 80 就把包重定向到 Pod 的 lxc0 接口，否则丢弃](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00755.webp)
 
 [【跳转到 12:35】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=755)
 
@@ -164,7 +164,7 @@
 - **ExternalIP**：和 NodePort 很像，区别在于它**允许从集群外部访问**（并借此规避中间人攻击），访问走的是**用户定义的 IP 地址**。
 - **LoadBalancer**：这一类**我们什么都不用做**，因为它通常由云厂商在**集群之外**完成，而它们用的正是 **ClusterIP / NodePort / ExternalIP** 这些「积木」。
 
-![kube-proxy 支持的四种 Service 类型：ClusterIP、NodePort、ExternalIP、LoadBalancer](assets/Liberating Kubernetes From Kube-proxy and Iptables/00905.webp)
+![kube-proxy 支持的四种 Service 类型：ClusterIP、NodePort、ExternalIP、LoadBalancer](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/00905.webp)
 
 [【跳转到 15:05】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=905)
 
@@ -176,7 +176,7 @@
 
 1. **正向**：客户端 Pod 发请求时，检查**目的 IP 是否属于某个 Service**；如果是，就为它**选一个端点**，然后做 **DNAT**，把目的 IP 从 **ClusterIP（虚拟 IP）改成真实的 Pod IP**。
 
-![ClusterIP 的两件事：正向检查目的 IP 是否属于某 Service 并选端点、DNAT 成 Pod IP](assets/Liberating Kubernetes From Kube-proxy and Iptables/01005.webp)
+![ClusterIP 的两件事：正向检查目的 IP 是否属于某 Service 并选端点、DNAT 成 Pod IP](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/01005.webp)
 
 [【跳转到 16:45】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=1005)
 
@@ -190,7 +190,7 @@
 - 若**找到了这个 Service**，就**为它选一个端点**，把**目的 IP 替换成该端点 IP（即 Pod IP）**；
 - 然后**创建两条连接跟踪（conntrack）条目**——这里有一处关键区别：**除了 netfilter 自己的连接跟踪表，Cilium 还有一张独立的 eBPF 连接跟踪表，同样是一个 eBPF map**。
 
-![ClusterIP 正向：TC ingress 上查 service map，命中后选端点、DNAT 成 Pod IP，并写入 eBPF conntrack map](assets/Liberating Kubernetes From Kube-proxy and Iptables/01080.webp)
+![ClusterIP 正向：TC ingress 上查 service map，命中后选端点、DNAT 成 Pod IP，并写入 eBPF conntrack map](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/01080.webp)
 
 [【跳转到 18:00】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=1080)
 
@@ -207,7 +207,7 @@
 
 **map 的更新其实很简单**：集群**每个节点上跑着一个 Cilium agent**，这些 agent 会**从 Kubernetes API server 收到关于 Service 的通知**——具体而言，我们关心的是 **Service 对象和 Endpoint 对象**。拿到之后**解析它们**，然后**执行 BPF map 更新**（一次带着特定文件描述符的 `syscall`），从而**把 Service 条目填进 map**。
 
-![Cilium agent：每个节点上的 agent 监听 K8S API 的 Service/Endpoint 对象，解析后通过 syscall 更新 BPF map](assets/Liberating Kubernetes From Kube-proxy and Iptables/01130.webp)
+![Cilium agent：每个节点上的 agent 监听 K8S API 的 Service/Endpoint 对象，解析后通过 syscall 更新 BPF map](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/01130.webp)
 
 [【跳转到 18:50】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=1130)
 
@@ -228,7 +228,7 @@
 
 而且**最近这个特性也被用到了「Pod 之间通过 ClusterIP 通信」的场景上**（就是前面那个 pod↔pod 的例子）。**connected UDP 同理；unconnected UDP 也做类似的事，只是对应不同的系统调用。**
 
-![主机进程访问 ClusterIP：在 connect 系统调用处挂 cgroup 钩子，直接改写 socket 地址，负载均衡代价只在首包付一次](assets/Liberating Kubernetes From Kube-proxy and Iptables/01305.webp)
+![主机进程访问 ClusterIP：在 connect 系统调用处挂 cgroup 钩子，直接改写 socket 地址，负载均衡代价只在首包付一次](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/01305.webp)
 
 [【跳转到 21:45】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=1305)
 
@@ -253,7 +253,7 @@
 1. **nginx 看不到客户端的真实 IP**（因为源 IP 被改成了节点 A）；
 2. **多了一跳**：回包要先从节点 B 回到节点 A，而不是从节点 B 直接回给客户端。
 
-![NodePort 两节点转发：客户端 → 节点 A（DNAT 到 B、并 SNAT 成 A 的 IP）→ 节点 B；回程经 A 逆向 SNAT，导致看不到真实源 IP、且多一跳](assets/Liberating Kubernetes From Kube-proxy and Iptables/01430.webp)
+![NodePort 两节点转发：客户端 → 节点 A（DNAT 到 B、并 SNAT 成 A 的 IP）→ 节点 B；回程经 A 逆向 SNAT，导致看不到真实源 IP、且多一跳](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/01430.webp)
 
 [【跳转到 23:50】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=1430)
 
@@ -265,7 +265,7 @@
 
 结果：**客户端的真实 IP 被保留下来**（nginx 能看到真实 IP），**回程时节点 B 把源 IP 改成这个 Service IP，直接重定向给客户端**——于是**两个问题同时被解决**：**源 IP 保留，且省掉了那一跳**。
 
-![DSR 解法：转发给节点 B 时附上 Service 地址，节点 B 回包时用它作为源、直接发给客户端——既保留真实源 IP，又免去那一跳](assets/Liberating Kubernetes From Kube-proxy and Iptables/01580.webp)
+![DSR 解法：转发给节点 B 时附上 Service 地址，节点 B 回包时用它作为源、直接发给客户端——既保留真实源 IP，又免去那一跳](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/01580.webp)
 
 [【跳转到 26:20】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=1580)
 
@@ -281,13 +281,13 @@
 - **随着 Service 数量增多，iptables 的延迟会上升**——原因是开头展示过的 **`KUBE-SERVICES` 链**：规则越加越多，包要**逐条穿过大量规则**，而不是像 eBPF 那样做**基于哈希表的查找**；
 - 一个反直觉的点：**在 Service 数量较少时，iptables 反而比 IPVS 表现更好**。
 
-![TCP_CRR 基准：eBPF 同时胜过 IPVS 与 iptables；iptables 延迟随 Service 数增多而上升，源于 KUBE-SERVICES 链越来越长](assets/Liberating Kubernetes From Kube-proxy and Iptables/01655.webp)
+![TCP_CRR 基准：eBPF 同时胜过 IPVS 与 iptables；iptables 延迟随 Service 数增多而上升，源于 KUBE-SERVICES 链越来越长](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/01655.webp)
 
 [【跳转到 27:35】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=1655)
 
 **第二组：netperf 的 `TCP_RR`**。它**复用同一条已打开的连接**。结果：**eBPF 再次胜过 IPVS 和 iptables**，而且**这一次看不到 iptables 那种「延迟随 Service 数增长」的模式**——因为我们**复用了同一条连接**。**eBPF 的延迟更低**，还得益于它**省掉了前面展示的那一跳**。
 
-![TCP_RR 基准：复用同一连接时 eBPF 依然最优，且看不到 iptables 那种随 Service 数增长的模式，还因省掉那一跳而延迟更低](assets/Liberating Kubernetes From Kube-proxy and Iptables/01705.webp)
+![TCP_RR 基准：复用同一连接时 eBPF 依然最优，且看不到 iptables 那种随 Service 数增长的模式，还因省掉那一跳而延迟更低](assets/Liberating%20Kubernetes%20From%20Kube-proxy%20and%20Iptables/01705.webp)
 
 [【跳转到 28:00】](https://www.youtube.com/watch?v=bIRwSIwNHC0&t=1680)
 
