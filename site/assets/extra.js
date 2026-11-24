@@ -786,10 +786,15 @@
    显隐由 CSS 的 .md-nav__toggle:checked ~ .md-nav 控制，所以只需改 checked；
    aria-expanded 是 Material 在 label 的 click 里写的，程序化勾选不会触发，
    这里手动同步，保持可访问性。用 document 上的事件委托，navigation.instant
-   换页重渲染导航后无需重新绑定。 */
+   换页重渲染导航后无需重新绑定。
+
+   只在桌面（侧栏常驻）生效。移动端目录是抽屉，多展开一级会把抽屉直接推进
+   二级子目录，用户反而找不到上一层，所以窄屏保持 Material 默认的一层。 */
 (function () {
   /* 点开后可见的层级数；1 = Material 默认，2 = 多展开一级 */
   var DEPTH = 2;
+  /* 与 Material 的抽屉断点一致：宽于此才用常驻侧栏 */
+  var DESKTOP = window.matchMedia("(min-width: 76.25em)");
 
   /* toggle 自己所在的 li 里那个直接子 nav */
   function childNav(toggle) {
@@ -844,6 +849,7 @@
   }
 
   document.addEventListener("change", function (e) {
+    if (!DESKTOP.matches) return; /* 移动端（抽屉目录）不自动展开 */
     var t = e.target;
     if (!t || t.tagName !== "INPUT" || t.type !== "checkbox") return;
     if (!t.classList || !t.classList.contains("md-nav__toggle")) return;
