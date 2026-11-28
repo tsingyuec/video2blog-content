@@ -36,23 +36,23 @@
 <a id="s01-1-1"></a>
 ### 1.1 预填充阶段（Prefill Phase）剖析
 
-- 1.1.1 Prompt 并行处理特征：通用矩阵乘法（GEMM）主导的计算模式 <a id="s01-1-1-1"></a> [WAITING]
-- 1.1.2 算子耗时分布：为什么 Prefill 阶段是典型的 Compute-Bound（计算受限） <a id="s01-1-1-2"></a> [WAITING]
-- 1.1.3 超长 Prompt 下的显存峰值管理与中间激活值（Activations）开销 <a id="s01-1-1-3"></a> [WAITING]
+- 1.1.1 Prompt 并行处理特征：通用矩阵乘法（GEMM）主导的计算模式 <a id="s01-1-1-1"></a> [DONE]
+- 1.1.2 算子耗时分布：为什么 Prefill 阶段是典型的 Compute-Bound（计算受限） <a id="s01-1-1-2"></a> [DONE]
+- 1.1.3 超长 Prompt 下的显存峰值管理与中间激活值（Activations）开销 <a id="s01-1-1-3"></a> [DONE]
 
 <a id="s01-1-2"></a>
 ### 1.2 解码阶段（Decode Phase）剖析
 
-- 1.2.1 逐 Token 自回归特征：矩阵-向量乘法（GEMV）主导的计算模式 <a id="s01-1-2-1"></a> [WAITING]
-- 1.2.2 权重重复搬运困境：生成单个 Token 需遍历全量模型权重导致的 Memory-Bound（访存受限） <a id="s01-1-2-2"></a> [WAITING]
-- 1.2.3 GPU 计算单元闲置率分析与提高 Batch Size 转向 GEMM 的必要性 <a id="s01-1-2-3"></a> [WAITING]
+- 1.2.1 逐 Token 自回归特征：矩阵-向量乘法（GEMV）主导的计算模式 <a id="s01-1-2-1"></a> [DONE]
+- 1.2.2 权重重复搬运困境：生成单个 Token 需遍历全量模型权重导致的 Memory-Bound（访存受限） <a id="s01-1-2-2"></a> [DONE]
+- 1.2.3 GPU 计算单元闲置率分析与提高 Batch Size 转向 GEMM 的必要性 <a id="s01-1-2-3"></a> [DONE]
 
 <a id="s01-1-3"></a>
 ### 1.3 键值缓存（KV Cache）深度精算
 
 - 1.3.1 空间换时间：缓存历史 Token 的 K/V 张量如何将单步计算复杂度从 $O(N^2)$ 降至 $O(N)$ <a id="s01-1-3-1"></a> [DONE]
 - 1.3.2 KV Cache 显存占用精确公式推导（含层数、头数、头维度、精度、Batch 与序列长度） <a id="s01-1-3-2"></a> [DONE]
-- 1.3.3 模型权重、KV Cache 与运行时激活值（Activation）三者的显存占比动态变化规律 <a id="s01-1-3-3"></a> [WAITING]
+- 1.3.3 模型权重、KV Cache 与运行时激活值（Activation）三者的显存占比动态变化规律 <a id="s01-1-3-3"></a> [DONE]
 
 <a id="s01-2"></a>
 ## 2 推理系统的核心性能指标与权衡（Trade-offs）
@@ -60,23 +60,23 @@
 <a id="s01-2-1"></a>
 ### 2.1 延迟（Latency）度量体系
 
-- 2.1.1 首字延迟（TTFT, Time To First Token）：决定用户感知响应快慢的 Prefill 指标 <a id="s01-2-1-1"></a> [WAITING]
-- 2.1.2 单 Token 生成延迟（TPOT, Time Per Output Token / ITL）：决定阅读流畅度的 Decode 指标 <a id="s01-2-1-2"></a> [WAITING]
-- 2.1.3 端到端请求延迟（End-to-End Latency）：排队时间 + TTFT + TPOT × 生成长度 <a id="s01-2-1-3"></a> [WAITING]
+- 2.1.1 首字延迟（TTFT, Time To First Token）：决定用户感知响应快慢的 Prefill 指标 <a id="s01-2-1-1"></a> [DONE]
+- 2.1.2 单 Token 生成延迟（TPOT, Time Per Output Token / ITL）：决定阅读流畅度的 Decode 指标 <a id="s01-2-1-2"></a> [DONE]
+- 2.1.3 端到端请求延迟（End-to-End Latency）：排队时间 + TTFT + TPOT × 生成长度 <a id="s01-2-1-3"></a> [DONE]
 
 <a id="s01-2-2"></a>
 ### 2.2 吞吐量（Throughput）与服务质量（SLO）
 
-- 2.2.1 系统吞吐量维度：每秒请求数（QPS/RPS）、每秒输入 Token 数与每秒输出 Token 数 <a id="s01-2-2-1"></a> [WAITING]
-- 2.2.2 有效吞吐量（Goodput）：满足特定 TTFT 与 TPOT 服务等级目标（SLO）前提下的最大吞吐 <a id="s01-2-2-2"></a> [WAITING]
-- 2.2.3 尾部延迟（P90 / P99 Latency）抖动成因与长尾请求治理 <a id="s01-2-2-3"></a> [WAITING]
+- 2.2.1 系统吞吐量维度：每秒请求数（QPS/RPS）、每秒输入 Token 数与每秒输出 Token 数 <a id="s01-2-2-1"></a> [DONE]
+- 2.2.2 有效吞吐量（Goodput）：满足特定 TTFT 与 TPOT 服务等级目标（SLO）前提下的最大吞吐 <a id="s01-2-2-2"></a> [DONE]
+- 2.2.3 尾部延迟（P90 / P99 Latency）抖动成因与长尾请求治理 <a id="s01-2-2-3"></a> [DONE]
 
 <a id="s01-2-3"></a>
 ### 2.3 延迟与吞吐量的帕累托前沿（Pareto Frontier）
 
-- 2.3.1 Batch Size 增大如何提升 Tensor Core 利用率但同时拉长单步 TPOT <a id="s01-2-3-1"></a> [WAITING]
-- 2.3.2 显存容量墙对最大并发 Batch Size 的硬性约束 <a id="s01-2-3-2"></a> [WAITING]
-- 2.3.3 实时交互场景（低延迟优先）与离线批处理场景（高吞吐优先）的参数配置策略 <a id="s01-2-3-3"></a> [WAITING]
+- 2.3.1 Batch Size 增大如何提升 Tensor Core 利用率但同时拉长单步 TPOT <a id="s01-2-3-1"></a> [DONE]
+- 2.3.2 显存容量墙对最大并发 Batch Size 的硬性约束 <a id="s01-2-3-2"></a> [DONE]
+- 2.3.3 实时交互场景（低延迟优先）与离线批处理场景（高吞吐优先）的参数配置策略 <a id="s01-2-3-3"></a> [DONE]
 
 <a id="s01-3"></a>
 ## 3 动态调度与连续批处理（Continuous Batching）
@@ -84,8 +84,8 @@
 <a id="s01-3-1"></a>
 ### 3.1 从静态批处理到迭代级调度
 
-- 3.1.1 静态批处理（Static Batching）的木桶效应：短请求等待长请求生成完毕造成的 GPU 算力空泡（Bubble） <a id="s01-3-1-1"></a> [WAITING]
-- 3.1.2 Orca 迭代级调度（Iteration-Level Scheduling）：以单个 Token 生成步（Step）为粒度的队列状态更新 <a id="s01-3-1-2"></a> [WAITING]
+- 3.1.1 静态批处理（Static Batching）的木桶效应：短请求等待长请求生成完毕造成的 GPU 算力空泡（Bubble） <a id="s01-3-1-1"></a> [PROCESSING]
+- 3.1.2 Orca 迭代级调度（Iteration-Level Scheduling）：以单个 Token 生成步（Step）为粒度的队列状态更新 <a id="s01-3-1-2"></a> [PROCESSING]
 - 3.1.3 异构长度混合执行：Attention 层按请求独立寻址与 Linear 层拼接（Concatenate）为大张量统一计算 <a id="s01-3-1-3"></a> [WAITING]
 
 <a id="s01-3-2"></a>

@@ -34,11 +34,11 @@
 <a id="s02-1-1"></a>
 ### 1.1 现代 GPU 存储层次结构（Memory Hierarchy）
 
-- 1.1.1 高带宽显存（HBM）：容量优势、带宽演进（A100 vs H100）与高访问延迟 <a id="s02-1-1-1"></a> [WAITING]
+- 1.1.1 高带宽显存（HBM）：容量优势、带宽演进（A100 vs H100）与高访问延迟 <a id="s02-1-1-1"></a> [DONE]
   - 学习目标：说明 HBM 的容量/带宽/延迟取舍，能解释为什么 GPU 需要高带宽显存，不展开显存控制器电路。
-- 1.1.2 片上高速缓存：L2 Cache 的全局共享机制与 L1 Cache / Shared Memory（SRAM）的程序员可控性 <a id="s02-1-1-2"></a> [WAITING]
+- 1.1.2 片上高速缓存：L2 Cache 的全局共享机制与 L1 Cache / Shared Memory（SRAM）的程序员可控性 <a id="s02-1-1-2"></a> [DONE]
   - 学习目标：区分 L2 全局共享与 L1/Shared 程序员可控，说明它们对访存延迟和分块策略的影响。
-- 1.1.3 寄存器文件（Register File）：最顶层存储与 Warp 级数据驻留限制 <a id="s02-1-1-3"></a> [WAITING]
+- 1.1.3 寄存器文件（Register File）：最顶层存储与 Warp 级数据驻留限制 <a id="s02-1-1-3"></a> [DONE]
   - 学习目标：说明寄存器是最高层存储，能解释寄存器压力如何限制 occupancy。
 
 <a id="s02-1-2"></a>
@@ -46,19 +46,19 @@
 
 - 1.2.1 流多处理器（SM）内部构造：CUDA Core（标量/向量运算）与 Tensor Core（矩阵乘加 MMA） <a id="s02-1-2-1"></a> [DONE]
   - 学习目标：区分 CUDA Core 与 Tensor Core 的分工，说明一个 SM 内有哪些执行单元。
-- 1.2.2 SIMT（单指令多线程）架构：Thread、Warp（32 线程）、Block 与 Grid 的调度层级 <a id="s02-1-2-2"></a> [WAITING]
+- 1.2.2 SIMT（单指令多线程）架构：Thread、Warp（32 线程）、Block 与 Grid 的调度层级 <a id="s02-1-2-2"></a> [DONE]
   - 学习目标：用 Thread/Warp/Block/Grid 描述 GPU 调度层级，解释 Warp 分歧为什么有代价。
-- 1.2.3 内存合并访问（Memory Coalescing）与 Shared Memory 常见 Bank Conflict 规避 <a id="s02-1-2-3"></a> [WAITING]
+- 1.2.3 内存合并访问（Memory Coalescing）与 Shared Memory 常见 Bank Conflict 规避 <a id="s02-1-2-3"></a> [DONE]
   - 学习目标：判断一次访存是否合并，能给出避免 Bank Conflict 的基本方法。
 
 <a id="s02-1-3"></a>
 ### 1.3 Roofline 性能模型实战
 
-- 1.3.1 算术强度（Arithmetic Intensity, FLOPs/Byte）的定义与物理意义 <a id="s02-1-3-1"></a> [WAITING]
+- 1.3.1 算术强度（Arithmetic Intensity, FLOPs/Byte）的定义与物理意义 <a id="s02-1-3-1"></a> [DONE]
   - 学习目标：定义算术强度，能计算一个算子的 FLOPs/Byte。
-- 1.3.2 硬件屋顶线绘制：峰值算力（Peak TFLOPS）与峰值带宽（Peak GB/s）交汇的拐点计算 <a id="s02-1-3-2"></a> [WAITING]
+- 1.3.2 硬件屋顶线绘制：峰值算力（Peak TFLOPS）与峰值带宽（Peak GB/s）交汇的拐点计算 <a id="s02-1-3-2"></a> [DONE]
   - 学习目标：画出屋顶线，找到算力/带宽拐点，判断算子落在哪一侧。
-- 1.3.3 线性层（Linear）与注意力层（Attention）在不同 Batch Size 和序列长度下的 Roofline 落点推导 <a id="s02-1-3-3"></a> [WAITING]
+- 1.3.3 线性层（Linear）与注意力层（Attention）在不同 Batch Size 和序列长度下的 Roofline 落点推导 <a id="s02-1-3-3"></a> [DONE]
   - 学习目标：推导 Linear/Attention 在不同 batch/seq 下的落点，解释 Prefill 与 Decode 的瓶颈差异。
 
 <a id="s02-2"></a>
@@ -67,11 +67,11 @@
 <a id="s02-2-1"></a>
 ### 2.1 CUDA 执行模型
 
-- 2.1.1 线程、块、网格与 Warp 调度 <a id="s02-2-1-1"></a> [WAITING]
+- 2.1.1 线程、块、网格与 Warp 调度 <a id="s02-2-1-1"></a> [DONE]
   - 学习目标：能写出一个 CUDA kernel 的 grid/block 配置，说明 threadIdx/blockIdx 的映射。
-- 2.1.2 合并访存与共享内存 <a id="s02-2-1-2"></a> [WAITING]
+- 2.1.2 合并访存与共享内存 <a id="s02-2-1-2"></a> [DONE]
   - 学习目标：能用 shared memory 做分块，避免非合并访存。
-- 2.1.3 同步、原子操作与流水线 <a id="s02-2-1-3"></a> [WAITING]
+- 2.1.3 同步、原子操作与流水线 <a id="s02-2-1-3"></a> [DONE]
   - 学习目标：解释 `__syncthreads`、原子操作和流水线的适用场景与代价。
 
 <a id="s02-2-2"></a>
@@ -79,9 +79,9 @@
 
 - 2.2.1 Triton 内核与块级编程 <a id="s02-2-2-1"></a> [DONE]
   - 学习目标：能写一个 Triton kernel，理解 program_id、block 与 tile 的概念。
-- 2.2.2 自动调优与内核参数 <a id="s02-2-2-2"></a> [WAITING]
+- 2.2.2 自动调优与内核参数 <a id="s02-2-2-2"></a> [DONE]
   - 学习目标：能用 `@triton.autotune` 选择 block size、num_warps 等参数。
-- 2.2.3 从 PyTorch 到 Triton 的改写 <a id="s02-2-2-3"></a> [WAITING]
+- 2.2.3 从 PyTorch 到 Triton 的改写 <a id="s02-2-2-3"></a> [DONE]
   - 学习目标：能把一个 PyTorch 算子改写成 Triton，并保持数值一致。
 
 <a id="s02-2-3"></a>
@@ -100,11 +100,11 @@
 <a id="s02-3-1"></a>
 ### 3.1 性能剖析
 
-- 3.1.1 Nsight、CUPTI 与指标解读 <a id="s02-3-1-1"></a> [WAITING]
+- 3.1.1 Nsight、CUPTI 与指标解读 <a id="s02-3-1-1"></a> [DONE]
   - 学习目标：能用 Nsight 采集 kernel 的耗时、吞吐、占用率与访存指标。
-- 3.1.2 常见瓶颈：访存、分支、同步与占用率 <a id="s02-3-1-2"></a> [WAITING]
+- 3.1.2 常见瓶颈：访存、分支、同步与占用率 <a id="s02-3-1-2"></a> [DONE]
   - 学习目标：根据指标判断瓶颈类型，并给出对应的优化方向。
-- 3.1.3 端到端性能回归与基准测试 <a id="s02-3-1-3"></a> [WAITING]
+- 3.1.3 端到端性能回归与基准测试 <a id="s02-3-1-3"></a> [DONE]
   - 学习目标：设计端到端基准，避免只看单 kernel 或单次运行的误导。
 
 <a id="s02-4"></a>
@@ -133,7 +133,7 @@
 
 - 4.3.1 CUDA 算子解析：grid/block 划分、SRAM 分块与状态量写回 <a id="s02-4-3-1"></a> [DONE]
   - 学习目标：读懂一个最小 FlashAttention CUDA kernel 的 grid/block 配置和内外层循环。
-- 4.3.2 FlashAttention-2/3：循环顺序、Warp 切分、TMA 与 WGMMA <a id="s02-4-3-2"></a> [WAITING]
+- 4.3.2 FlashAttention-2/3：循环顺序、Warp 切分、TMA 与 WGMMA <a id="s02-4-3-2"></a> [DONE]
   - 学习目标：说明 FA2 的循环顺序/Warp 切分和 FA3 的 TMA/WGMMA 各自优化了什么。
 
 <a id="s02-5"></a>
@@ -142,19 +142,19 @@
 <a id="s02-5-1"></a>
 ### 5.1 解码阶段专用注意力内核
 
-- 5.1.1 Decode 阶段 Query 长度为 1 导致的并行度问题 <a id="s02-5-1-1"></a> [WAITING]
+- 5.1.1 Decode 阶段 Query 长度为 1 导致的并行度问题 <a id="s02-5-1-1"></a> [DONE]
   - 学习目标：解释 Query 长度为 1 时为什么 SM 线程块并行度不足。
-- 5.1.2 FlashDecoding：Split-K 切分 KV 序列与局部 Softmax 归约 <a id="s02-5-1-2"></a> [WAITING]
+- 5.1.2 FlashDecoding：Split-K 切分 KV 序列与局部 Softmax 归约 <a id="s02-5-1-2"></a> [DONE]
   - 学习目标：说明 Split-K 如何切分 KV 并归约局部 softmax 结果。
-- 5.1.3 FlashInfer：块稀疏存储、负载均衡调度与 JIT 编译 <a id="s02-5-1-3"></a> [WAITING]
+- 5.1.3 FlashInfer：块稀疏存储、负载均衡调度与 JIT 编译 <a id="s02-5-1-3"></a> [DONE]
   - 学习目标：说明块稀疏格式、负载均衡和 JIT 在 FlashInfer 中的作用。
 
 <a id="s02-5-2"></a>
 ### 5.2 算子融合与 CUDA Graph
 
-- 5.2.1 常见融合模式：QKV 投影合并、RoPE + Attention、Add + RMSNorm、Gate + Up 投影 <a id="s02-5-2-1"></a> [WAITING]
+- 5.2.1 常见融合模式：QKV 投影合并、RoPE + Attention、Add + RMSNorm、Gate + Up 投影 <a id="s02-5-2-1"></a> [DONE]
   - 学习目标：列举四种融合模式，说明各自减少了哪些读写或启动开销。
-- 5.2.2 CUDA Graph 与内核启动开销：录制静态图、动态 Shape 补齐与显存池绑定 <a id="s02-5-2-2"></a> [WAITING]
+- 5.2.2 CUDA Graph 与内核启动开销：录制静态图、动态 Shape 补齐与显存池绑定 <a id="s02-5-2-2"></a> [DONE]
   - 学习目标：解释 CUDA Graph 如何降低 launch overhead，以及动态 shape 带来的限制。
 
 <a id="s02-6"></a>
@@ -163,11 +163,11 @@
 <a id="s02-6-1"></a>
 ### 6.1 编译器与图优化
 
-- 6.1.1 XLA、TorchInductor 与 TVM：三种编译器的定位与输入 <a id="s02-6-1-1"></a> [WAITING]
+- 6.1.1 XLA、TorchInductor 与 TVM：三种编译器的定位与输入 <a id="s02-6-1-1"></a> [DONE]
   - 学习目标：比较 XLA、TorchInductor、TVM 的定位、输入图与适用场景。
-- 6.1.2 图融合、布局与内存规划 <a id="s02-6-1-2"></a> [WAITING]
+- 6.1.2 图融合、布局与内存规划 <a id="s02-6-1-2"></a> [DONE]
   - 学习目标：说明图融合、布局选择和内存规划如何影响端到端性能。
-- 6.1.3 自定义算子与后端集成 <a id="s02-6-1-3"></a> [WAITING]
+- 6.1.3 自定义算子与后端集成 <a id="s02-6-1-3"></a> [DONE]
   - 学习目标：说明如何把自定义 CUDA/Triton 内核接入编译器或推理后端。
 
 ## 学习出口
